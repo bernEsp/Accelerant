@@ -1,0 +1,41 @@
+<% form_for @user do |f| %>
+<p>
+	Name:<br/>
+	<%= f.text_field :name %>
+</p>
+
+<p>
+	Email Address:<br/>
+	<%= f.text_field :email %>
+</p>
+
+<p>
+	Login Name:<br/>
+	<%= f.text_field :login %>
+</p>
+
+<p>
+	Reset Password:<br/>
+	<%= f.password_field :password %>
+</p>
+
+<p>
+	Confirm Reset Password:<br/>
+	<%= f.password_field :password_confirmation %>
+</p>
+
+<p>
+	Admin?:<br/>
+	<select name="user[admin]">
+		<option><%= @user.admin %></option>
+		<option>true</option>
+		<option>false</option>
+	</select>
+
+</p>
+
+<p>
+	<%= submit_tag 'Update' %>
+<p/>
+
+<% end %>

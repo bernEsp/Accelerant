@@ -1,0 +1,17 @@
+<h3>Comments</h3>
+<%= link_to 'Add New Comment', {:controller => 'comment', :action => 'new'} %>
+<table>
+  <tr>
+	<th>Title</th>
+	<th>Comment</th>
+	<th>URL</th>
+  </tr>
+
+<% for comment in @comment %>
+  <tr >
+    <td><%=h comment.title %></td>
+	  <td><%=h comment.comment %></td>
+	  <td><%=h comment.url %></td>
+  </tr>
+<% end %>
+</table>

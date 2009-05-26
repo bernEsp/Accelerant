@@ -1,0 +1,23 @@
+<h1>Enter a new comment</h1>
+
+<% remote_form_for :comments, @comments,
+:update => "rightColumn",
+:complete => "new Effect.Fade('rightColumn', { duration: 8.0 })",
+:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
+
+<p><%= label_tag 'Comment' %><br/>
+<%= f.text_area :comment, :size => "100 x 15", :class => 'rich_text_editor'%>
+
+<%#= fckeditor_textarea("object", "comment", :toolbarSet => 'Simple', :width => '100%', :height => '100px') %>
+
+</p>
+
+
+<% if logged_in? %>
+<%= f.hidden_field :user_id, :value => self.current_user.id %>
+<% end %>
+
+  
+<p><%= submit_tag 'Enter' %></p>
+<% end -%>
+
