@@ -1,0 +1,5 @@
+<div id="countblock">
+	<% comment_count = Comment.count(:conditions => {:assignment_id => params[:id]} ) %>
+<p align="right">Displaying <%=h comment_count %> of <%=h comment_count %> Comments<br />
+  - <a href="#">View All</a></p>
+</div>

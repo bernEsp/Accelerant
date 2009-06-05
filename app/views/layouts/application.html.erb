@@ -56,8 +56,11 @@
 	<% if @assignment %>
 	<% for this_assignment in @assignment %>
 	<% comment_count = Comment.count(:conditions => {:assignment_id => this_assignment.id} ) %>
+	<div id="countblock">
     <p align="right">Displaying <%=h comment_count %> of <%=h comment_count %> Comments<br />
       - <a href="#">View All</a></p>
+	</div>
+	<%= periodically_call_remote(:url => {:controller => 'plain', :action => 'update_count', :id => this_assignment.id}, :frequency => '30', :update => 'countblock')%>
 	<% end %>
 	<% else %>
 	<p></p>
