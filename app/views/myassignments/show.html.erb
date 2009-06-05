@@ -1,0 +1,6 @@
+<h4>Your Assignments:</h4>
+<% for assignments in @your_assignments %>
+	<% #puts assignments.assignment_id %>
+	<% assignment_detail = Assignment.find(:last, :conditions => {:id => assignments.assignment_id}, :limit => 1) %>
+	<%= link_to assignment_detail.title, {:controller => 'assignment', :action => 'show', :id => assignments.assignment_id }%><br/>
+<% end %>

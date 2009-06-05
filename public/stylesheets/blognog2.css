@@ -201,8 +201,8 @@ img {
 	width:520px;
 	padding:10px 0;
 	display:inline;
-	float:left;
-	margin:0 0 1px 60px;
+	float:right;
+	margin:0 10px 1px 60px;
 	background:#cdd7de;
 }
 .clientSubCommentText {

@@ -48,14 +48,17 @@
 		<li class="last"><%= link_to 'Comments', {:controller => 'comments', :action => 'index'} %></li>
 	<% end %>
 	<% if self.current_user.participant? %>
-      <li><a href="#">View My Projects</a></li>
-      <li class="last"><a href="#">View My Posts</a></li>
+      <li><%= link_to 'My Assignments', {:controller => 'myassignments', :action => 'show'}%></li>
+      <li class="last"><%= link_to 'My Posts', {:controller => 'myposts', :action => 'show'}%></li>
 	<% end %>
 	<% end %>
     </ul>
 	<% if @assignment %>
-    <p align="right">Displaying 0 of 0 Comments<br />
+	<% for this_assignment in @assignment %>
+	<% comment_count = Comment.count(:conditions => {:assignment_id => this_assignment.id} ) %>
+    <p align="right">Displaying <%=h comment_count %> of <%=h comment_count %> Comments<br />
       - <a href="#">View All</a></p>
+	<% end %>
 	<% else %>
 	<p></p>
 	<% end %>

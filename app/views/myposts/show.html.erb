@@ -1,0 +1,11 @@
+<h4>Your Comments</h4>
+<div id="responses">
+<% for comments in @mycomments %>
+
+	<div class="clientSubComment">
+      <div class="subCommentAvatar"><img src="../../images/clientAvatar.png" width="50" height="50" /></div>
+      <div class="clientSubCommentText">
+    <%=h comments.comment %> <span>- Posted on <%=h comments.created_at.strftime("%Y-%m-%d at %H:%M:%S") %></span></div>
+</div>
+<% end %>
+</div>

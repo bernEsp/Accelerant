@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
         redirect_to "/comments"
       end
       if user.participant?
-        redirect_to  "/comment/new"
+        redirect_to  "/myassignments/show"
       end
       #flash[:notice] = "Logged in successfully"
     else
