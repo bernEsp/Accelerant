@@ -38,10 +38,11 @@
     
 		
 		<% for comment in @latest_postings %>
+		<% posting_user = User.find(:last, :conditions => {:id => comment.user_id})%>
 		<div class="clientSubComment">
 	      <div class="subCommentAvatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
 	      <div class="clientSubCommentText">
-		 <h1>Client 1</h1>
+		 <h1><%=h posting_user.name %></h1>
 		<%=h comment.comment %><span>- Posted on <%=h comment.created_at%></span></div>
     </div>
 <% end %>
