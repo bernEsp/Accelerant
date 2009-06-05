@@ -6,7 +6,7 @@ set :port, 30000
 set :deploy_to, "/home/chazzer/public_html/#{application}"
  
 default_run_options[:pty] = true
-set :repository,  "git://github.com/chazzerguy/Accelerant.git"
+set :repository,  "git://github.com/chazzerguy/accelerant.git"
  
  
 # If you aren't deploying to /u/apps/#{application} on the target
