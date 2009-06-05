@@ -24,15 +24,17 @@
 	<%= f.password_field :password_confirmation %>
 </p>
 
-<p>
-	Admin?:<br/>
-	<select name="user[admin]">
-		<option><%= @user.admin %></option>
-		<option>true</option>
-		<option>false</option>
-	</select>
+<fieldset style="width:30%;clear:both;">
+<legend>User Type</legend>
 
+<p>
+	<%= check_box("user", "admin", {}, "true", "false") %>Admin<br/>
+	<%= check_box("user", "moderator", {}, "true", "false") %>Moderator<br/>
+	<%= check_box("user", "client", {}, "true", "false") %>Client<br/>
+	<%= check_box("user", "participant", {}, "true", "false") %>Participant<br/>
 </p>
+
+</fieldset>
 
 <p>
 	<%= submit_tag 'Update' %>

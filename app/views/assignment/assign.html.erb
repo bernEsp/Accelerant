@@ -1,0 +1,7 @@
+<% form_for :user_assignments, :url => { :controller => "user_assignments", :action => "assign", :id => params[:id] } do |f| %>
+<% for user in @users %>
+	<%= check_box("user_assignment", user.id, {}, "#{user.id}") %>  <%= h user.name %><br/>
+<% end %>
+
+<%= submit_tag 'Assign' %>
+<% end %>

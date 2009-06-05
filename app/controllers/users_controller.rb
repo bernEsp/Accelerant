@@ -42,6 +42,26 @@ class UsersController < ApplicationController
     end  
     @user = User.new(params[:user])
     success = @user && @user.save
+    if @user.participant?
+      @participant = Participant.new
+      @participant.update_attribute :id, @user.id
+      @participant.save
+    end
+    if @user.admin?
+      @admin = Admin.new
+      @admin.update_attribute :id, @user.id
+      @admin.save
+    end
+    if @user.client?
+      @client = Client.new
+      @client.update_attribute :id, @user.id
+      @client.save
+    end
+    if @user.moderator?
+      @moderator = Moderator.new
+      @moderator.update_attribute :id, @user.id
+      @moderator.save
+    end
     if success && @user.errors.empty?
       if logged_in?
       if !self.current_user.admin

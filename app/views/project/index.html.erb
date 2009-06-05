@@ -1,0 +1,17 @@
+<%= link_to 'Add Project', {:controller => 'project', :action => 'new'} %>
+
+<table>
+  <tr>
+	<th>Title</th>
+	<th>Description</th>
+	<th></th>
+  </tr>
+
+<% for project in @project %>
+  <tr >
+    <td><%=h project.title %></td>
+	<td><%=h project.description %></td>
+	<td><%= link_to 'Delete', :controller => 'project', :action => 'drop',:id => project.id%></td>
+  </tr>
+<% end %>
+</table>

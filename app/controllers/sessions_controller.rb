@@ -20,10 +20,17 @@ class SessionsController < ApplicationController
       handle_remember_cookie! new_cookie_flag
       if user.admin?
         redirect_to  "/users"
-      else
+      end
+      if user.moderator?
+        redirect_to "/comments"
+      end
+      if user.client?
+        redirect_to "/comments"
+      end
+      if user.participant?
         redirect_to  "/comment/new"
       end
-      flash[:notice] = "Logged in successfully"
+      #flash[:notice] = "Logged in successfully"
     else
       note_failed_signin
       @login       = params[:login]

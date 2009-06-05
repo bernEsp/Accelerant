@@ -3,8 +3,12 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
+  map.plain '/plain', :controller => 'plain', :action => 'showlatest'
   map.resources :users, :has_many => :comments
   map.resources :comments, :belongs_to => :users
+  map.resources :client, :has_many => :projects
+  map.resources :project, :has_many => :assignments
+  map.resources :assignment, :has_many => :participants
   map.comment '/comment', :controller => 'comment', :action => 'show'
   map.resources :users
 

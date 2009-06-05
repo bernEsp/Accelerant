@@ -1,7 +1,8 @@
 class CommentController < ApplicationController
   uses_yui_editor
   def index
-      @comment = Comment.find(:all)
+    user_id = self.current_user.id
+    @comment = Comment.find(:all, :conditions => { :user_id => user_id})
   end
   
   def show
@@ -10,15 +11,19 @@ class CommentController < ApplicationController
   end
 
   def new
-    @comment = Comment.find(:all)
-    @comment = Comment.new
+    user_id = self.current_user.id
+    #@comment = Comment.find(:all)
+    #@comment = Comment.new
+    #@latest_postings = Comment.find(:all, :limit => 20, :order => "id DESC")
+    @your_assignments = UserAssignments.find(:all, :conditions => { :user_id => user_id})
   end
 
   def create
+    puts "Updating..."
     @comment = Comment.new(params[:comment])
     @comment.save
     #redirect_to  "/comment/new"
-    render :text => "Comment Logged"
+    render :text => @comment.comment
   end
   def destroy
     @comment = Comment.find(params[:id])

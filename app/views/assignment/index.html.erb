@@ -1,0 +1,19 @@
+<%= link_to 'Add Assignment', {:controller => 'assignment', :action => 'new'} %>
+
+<table>
+  <tr>
+	<th>Title</th>
+	<th>Description</th>
+	<th></th>
+	<th></th>
+  </tr>
+
+<% for assignment in @assignment %>
+  <tr >
+    <td><%=h assignment.title %></td>
+	<td><%=h assignment.description %></td>
+	<td><%= link_to 'Assign Participants', :controller => 'assignment', :action => 'assign',:id => assignment.id%></td>
+	<td><%= link_to 'Delete', :controller => 'assignment', :action => 'drop',:id => assignment.id%></td>
+  </tr>
+<% end %>
+</table>

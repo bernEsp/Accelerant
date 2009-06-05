@@ -9,7 +9,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090507180104) do
+ActiveRecord::Schema.define(:version => 20090604173210) do
+
+  create_table "admins", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assignments", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clients", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", :force => true do |t|
     t.string   "title"
@@ -17,6 +37,35 @@ ActiveRecord::Schema.define(:version => 20090507180104) do
     t.text     "comment"
     t.string   "upload"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "assignment_id"
+    t.binary   "data",          :limit => 1048576
+  end
+
+  create_table "moderators", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "participants", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "assignment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,6 +81,9 @@ ActiveRecord::Schema.define(:version => 20090507180104) do
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
     t.boolean  "admin",                                    :default => false
+    t.boolean  "participant",                              :default => false
+    t.boolean  "client",                                   :default => false
+    t.boolean  "moderator",                                :default => false
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

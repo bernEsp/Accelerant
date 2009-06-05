@@ -1,0 +1,55 @@
+
+<% #for this_assignment in @assignment %>
+	<%#= h this_assignment.title %><br/>
+	
+		<%#= h this_assignment.description %>
+	
+<% #end %>
+
+<div id="rightColumn">
+    <div id="topResponse">
+      	<% remote_form_for :comments,
+		:update => "latestresponse",
+		:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
+		:html => {:multipart => true},
+		#:before => fckeditor_before_js("note", 'text'),
+		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
+        <div class="avatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
+        <div class="topResponseBox">
+          <h1>Post Your Response:</h1>
+          <div class="responseWidget">
+          	<%= f.text_area :comment, :size => "65 x 5", :onfocus => "this.value='';"%><br/>
+			<%= f.file_field ("uploaded_picture") %>
+			<% if logged_in? %>
+			<%= f.hidden_field :user_id, :value => self.current_user.id %>
+			<% end %>
+			<%= f.hidden_field :assignment_id, :value => params[:id] %>
+          </div>
+          <div class="postButton">
+            <input type="image" src="../images/btn_post.gif" />
+          </div>
+        </div>
+      <% end -%>
+    </div>
+	<div id="responses">
+    <div class="clientMainEntry" id="latestresponse">
+      
+      </div>
+    
+		
+		<% for comment in @latest_postings %>
+		<div class="clientSubComment">
+	      <div class="subCommentAvatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
+	      <div class="clientSubCommentText">
+		 <h1>Client 1</h1>
+		<%=h comment.comment %><span>- Posted on <%=h comment.created_at%></span></div>
+    </div>
+<% end %>
+</div>
+<hr noshade="noshade"/>
+	</div> <!-- responses -->
+   
+ 
+	      <div class="viewAll">- <a href="#">View All Comments</a></div>
+ 
+<%= periodically_call_remote(:url => {:controller => 'plain', :action => 'showlatest', :id => params[:id]}, :frequency => '30', :update => 'responses')%>

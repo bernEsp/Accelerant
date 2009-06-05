@@ -21,15 +21,17 @@
 <p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
 <%= f.password_field :password_confirmation %></p>
 
-<p>
-	Admin?:<br/>
-	<select name="user[admin]">
-		<option>Select...</option>
-		<option>true</option>
-		<option>false</option>
-	</select>
+<fieldset style="width:30%;clear:both;">
+<legend>User Type</legend>
 
+<p>
+	<%= check_box("user", "admin", {}, "true", "false") %>Admin<br/>
+	<%= check_box("user", "moderator", {}, "true", "false") %>Moderator<br/>
+	<%= check_box("user", "client", {}, "true", "false") %>Client<br/>
+	<%= check_box("user", "participant", {}, "true", "false") %>Participant<br/>
 </p>
 
-<p><%= submit_tag 'Create' %></p>
+</fieldset>
+
+<p style="clear:both;"><%= submit_tag 'Create' %></p>
 <% end %>

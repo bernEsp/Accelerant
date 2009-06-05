@@ -1,0 +1,15 @@
+<div id="responses">
+	<div id="latestresponse">
+
+	</div>
+	<% for latest in @latest_postings %>
+	<% posting_user = User.find(:last, :conditions => {:id => latest.user_id})%>		
+		<div class="clientSubComment">
+	      <div class="subCommentAvatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
+	      <div class="clientSubCommentText">
+	        <h1><%= posting_user.name%></h1>
+	        <%=h latest.comment %> <span>- Posted on <%=h latest.created_at.strftime("%Y-%m-%d at %H:%M:%S") %></span></div>
+	    </div>
+	<% end %>
+
+</div>
