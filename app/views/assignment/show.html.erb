@@ -4,16 +4,16 @@
       	<% remote_form_for :comments,
 		:update => "latestresponse",
 		:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
-		:html => {:multipart => true},
+		#:html => {:multipart => true},
 		#:before => fckeditor_before_js("note", 'text'),
 		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
         <div class="avatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "65 x 5", :onfocus => "this.value='';"%><br/>
+          	<%= f.text_area :comment, :size => "65 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>
 			<%#= fckeditor_textarea('object', 'comment', :toolbarSet => 'Simple', :width => '100%', :height => '200px') %>
-			<%= f.file_field ("uploaded_picture") %>
+			<%#= f.file_field ("uploaded_picture") %>
 			<% if logged_in? %>
 			<%= f.hidden_field :user_id, :value => self.current_user.id %>
 			<% end %>
@@ -28,7 +28,7 @@
 	<div id="responses">
     <div class="clientMainEntry" id="latestresponse">
       
-      </div>
+    </div>
     
 		
 		<% for comment in @latest_postings %>
@@ -37,7 +37,7 @@
 	      <div class="subCommentAvatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
 	      <div class="clientSubCommentText">
 		 <h1><%=h posting_user.name %></h1>
-		<%=h comment.comment %><span>- Posted on <%=h comment.created_at%></span></div>
+		<%=comment.comment %><span>- Posted on <%=h comment.created_at%></span></div>
     </div>
 <% end %>
 </div>

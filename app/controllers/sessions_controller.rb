@@ -22,10 +22,10 @@ class SessionsController < ApplicationController
         redirect_to  "/users"
       end
       if user.moderator?
-        redirect_to "/comments"
+        redirect_to "/moderator"
       end
       if user.client?
-        redirect_to "/comments"
+        redirect_to "/client"
       end
       if user.participant?
         redirect_to  "/myassignments/show"

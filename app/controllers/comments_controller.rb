@@ -29,8 +29,8 @@ class CommentsController < ApplicationController
     #else
      # render(:action => :get)
     #end
-    render :text => @comment.comment
-    #redirect_to "/assignment/#{@comment.assignment_id}"
+    #render :text => @comment.comment
+    redirect_to "/assignment/#{@comment.assignment_id}"
   end
   
   def destroy
