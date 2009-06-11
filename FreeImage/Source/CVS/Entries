@@ -1,8 +1,17 @@
-/CacheFile.h/1.4/Sun Feb 12 16:41:34 2006//D2007.01.01.05.00.00
-/FreeImage.h/1.65/Sun Nov 19 15:21:54 2006//D2007.01.01.05.00.00
-/FreeImageIO.h/1.4/Tue Jul 20 18:35:06 2004//D2007.01.01.05.00.00
-/Plugin.h/1.10/Sun Feb 26 17:55:16 2006//D2007.01.01.05.00.00
-/Quantizers.h/1.8/Fri Oct 27 20:32:24 2006//D2007.01.01.05.00.00
-/ToneMapping.h/1.1/Tue May  3 18:18:11 2005//D2007.01.01.05.00.00
-/Utilities.h/1.13/Mon Feb 27 19:53:12 2006//D2007.01.01.05.00.00
-D
+D/DeprecationManager////
+D/FreeImage////
+D/FreeImageLib////
+D/FreeImageToolkit////
+D/LibJPEG////
+D/LibMNG////
+D/LibPNG////
+D/LibTIFF////
+D/Metadata////
+D/ZLib////
+/CacheFile.h/1.4/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/FreeImage.h/1.65/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/FreeImageIO.h/1.4/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/Plugin.h/1.10/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/Quantizers.h/1.8/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/ToneMapping.h/1.1/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/Utilities.h/1.13/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00

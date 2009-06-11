@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
   has_many :comments
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
@@ -25,7 +26,7 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :name, :password, :password_confirmation,
-  :admin, :client, :moderator, :participant
+  :admin, :client, :moderator, :participant, :avatar, :avatar_file_name, :avatar_content_type, :avatar_file_size, :avatar_updated_at
 
 
 
@@ -48,7 +49,7 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
-
+  
   protected
     
 

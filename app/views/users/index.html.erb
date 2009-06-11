@@ -7,6 +7,7 @@
     <th>Name</th>
     <th></th>
 	<th></th>
+	<th></th>
   </tr>
 
 <% for user in @users %>
@@ -30,6 +31,7 @@
 		<%= link_to 'Show Comments', {:controller => 'comment', :action => 'show', :id => user.id} %>
 		<% end %>
 	</td>
+	<td><%= image_tag user.avatar.url(:thumb) %></td>
   </tr>
 <% end %>
 </table>

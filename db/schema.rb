@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090604173210) do
+ActiveRecord::Schema.define(:version => 20090611195444) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -70,6 +70,20 @@ ActiveRecord::Schema.define(:version => 20090604173210) do
     t.datetime "updated_at"
   end
 
+  create_table "user_images", :force => true do |t|
+    t.integer  "user_id"
+    t.boolean  "primary"
+    t.datetime "created_at"
+    t.string   "filename"
+    t.string   "path"
+    t.string   "content_type"
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "parent_id"
+    t.string   "thumbnail"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
     t.string   "name",                      :limit => 100, :default => ""
@@ -84,6 +98,10 @@ ActiveRecord::Schema.define(:version => 20090604173210) do
     t.boolean  "participant",                              :default => false
     t.boolean  "client",                                   :default => false
     t.boolean  "moderator",                                :default => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

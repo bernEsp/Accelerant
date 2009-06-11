@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
+  
   def update
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
@@ -19,8 +20,10 @@ class UsersController < ApplicationController
     else
       flash[:notice] = "Update Failed"
     end
-     redirect_to users_path
+     #redirect_to users_path
+     redirect_to '/users'
   end
+  
   def destroy
     @user = User.find(params[:id])
     @user.destroy
@@ -104,8 +107,9 @@ class UsersController < ApplicationController
     end
   end
   # render new.rhtml
-  def new
-    @user = User.new
+  
+  def rock_n_roll
   end
+  
  
 end

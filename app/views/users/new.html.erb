@@ -21,6 +21,11 @@
 <p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
 <%= f.password_field :password_confirmation %></p>
 
+<p>
+	Upload Avatar:<br/>
+	<%= f.file_field :avatar %>
+</p>
+
 <fieldset style="width:30%;clear:both;">
 <legend>User Type</legend>
 

@@ -1,7 +1,7 @@
 
 <div id="rightColumn">
     <div id="topResponse">
-      	<% remote_form_for :comments,
+      	<% form_for :comments,
 		:update => "latestresponse",
 		:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
 		#:html => {:multipart => true},
@@ -12,8 +12,7 @@
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
           	<%= f.text_area :comment, :size => "65 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>
-			<%#= fckeditor_textarea('object', 'comment', :toolbarSet => 'Simple', :width => '100%', :height => '200px') %>
-			<%#= f.file_field ("uploaded_picture") %>
+			<%#= f.file_field :uploaded_data %>
 			<% if logged_in? %>
 			<%= f.hidden_field :user_id, :value => self.current_user.id %>
 			<% end %>

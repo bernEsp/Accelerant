@@ -36,7 +36,6 @@ editor_config_javascript: "
                         { text: 'Verdana' }
                     ]
                 },
-                { type: 'spin', label: '13', value: 'fontsize', range: [ 9, 75 ], disabled: true }
             ]
         },
         { type: 'separator' },

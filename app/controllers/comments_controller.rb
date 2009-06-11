@@ -23,11 +23,13 @@ class CommentsController < ApplicationController
     #@object_comment = Object.new(params[:object])
     #@comment.update_attribute :comment, params[:object][:comment]
     #comment.title = params[:title][:thefieldiwanttouse].to_s
+    #@attachable_file = AttachmentMetadataModel.new(params[:comments])
     @comment.save
     #if @comment.save
-     # render :text => @comment.comment
+      #render :text => @comment.comment
+      #redirect_to "/assignment/#{@comment.assignment_id}"
     #else
-     # render(:action => :get)
+      #render(:action => :get)
     #end
     #render :text => @comment.comment
     redirect_to "/assignment/#{@comment.assignment_id}"
@@ -39,11 +41,4 @@ class CommentsController < ApplicationController
     #render :text => "Removed"
   end
   
-  def picture
-    @picture = Comment.find(params[:id])
-    send_data(@picture.data,
-              :filename => @picture.name,
-              :type => @picture.content_type,
-              :disposition => "inline")
-  end
 end
