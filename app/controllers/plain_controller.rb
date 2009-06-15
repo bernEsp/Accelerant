@@ -14,4 +14,8 @@ class PlainController < ApplicationController
     comment_count = Comment.count(:conditions => {:assignment_id => params[:id]} )
   end
   
+  def sub_comment_form
+    render :partial => "sub_form"
+  end
+  
 end

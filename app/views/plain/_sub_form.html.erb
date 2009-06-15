@@ -1,0 +1,20 @@
+<%#= include_yui_editor_if_used %>
+<div id="subCommentForm">
+<% remote_form_for :reply,
+:update => "subCommentForm",
+:complete => "new Effect.Highlight('subCommentForm', { duration: .5 })",
+:url =>{:controller => 'replies', :action => 'create' } do |f| -%>
+
+<%= f.text_area :content, :size => "55 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>
+
+<div class="postButton">
+  <input type="image" src="../images/btn_post.gif" />
+</div>
+
+<%= f.hidden_field :comment_id, :value => params[:id] %>
+
+<%= f.hidden_field :user_id, :value => self.current_user.id %>
+
+<% end -%>
+
+</div>

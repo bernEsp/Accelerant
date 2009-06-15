@@ -2,8 +2,8 @@
 <div id="rightColumn">
     <div id="topResponse">
       	<% form_for :comments,
-		:update => "latestresponse",
-		:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
+		#:update => "latestresponse",
+		#:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
 		#:html => {:multipart => true},
 		#:before => fckeditor_before_js("note", 'text'),
 		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
@@ -29,14 +29,30 @@
       
     </div>
     
-		
+		<% first = true %>
 		<% for comment in @latest_postings %>
 		<% posting_user = User.find(:last, :conditions => {:id => comment.user_id})%>
 		<div class="clientSubComment">
 	      <div class="subCommentAvatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
 	      <div class="clientSubCommentText">
 		 <h1><%=h posting_user.name %></h1>
-		<%=comment.comment %><span>- Posted on <%=h comment.created_at%></span></div>
+		<p><%=comment.comment %><span>- Posted on <%=h comment.created_at%></span></p>
+		<% if !first %>
+			<% first = false %>
+		<% else %>
+			<% first = false %>
+			<p align="right">- <%= link_to_remote 'Add Comment',
+			:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
+			:complete => "new Effect.SlideDown('subCommentForm', { duration: .5 })",
+			:update => "subCommentForm" %></p>
+		<% end %>
+		<div id="subCommentForm"></div>
+		<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC") %>
+		<% for replies in @replies %>
+		<p><%= replies.content %></p>
+		<% end %>
+		
+		</div>
     </div>
 <% end %>
 </div>
@@ -46,4 +62,4 @@
  
 	      <div class="viewAll">- <a href="#">View All Comments</a></div>
  
-<%= periodically_call_remote(:url => {:controller => 'plain', :action => 'showlatest', :id => params[:id]}, :frequency => '30', :update => 'responses')%>
+<%#= periodically_call_remote(:url => {:controller => 'plain', :action => 'showlatest', :id => params[:id]}, :frequency => '30', :update => 'responses')%>

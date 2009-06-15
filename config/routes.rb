@@ -5,7 +5,8 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.plain '/plain', :controller => 'plain', :action => 'showlatest'
   map.resources :users, :has_many => :comments
-  map.resources :comments, :belongs_to => :users
+  map.resources :comments, :belongs_to => :users, :has_many => :subcomments
+  map.resources :subcomments, :belongs_to => :comments
   map.resources :client, :has_many => :projects
   map.resources :project, :has_many => :assignments
   map.resources :assignment, :has_many => :participants

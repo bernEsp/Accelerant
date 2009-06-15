@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090611195444) do
+ActiveRecord::Schema.define(:version => 20090615194420) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -59,6 +59,43 @@ ActiveRecord::Schema.define(:version => 20090611195444) do
     t.string   "title"
     t.text     "description"
     t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "replies", :force => true do |t|
+    t.text     "content"
+    t.integer  "comment_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reponses", :force => true do |t|
+    t.text     "content"
+    t.integer  "comment_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "responses", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sub_comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "comment_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subcomments", :force => true do |t|
+    t.text     "content"
+    t.integer  "comment_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

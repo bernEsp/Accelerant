@@ -14,4 +14,5 @@ class Comment < ActiveRecord::Base
   def base_part_of(file_name)
     File.basename(file_name).gsub(/[^\w._-]/, '')
   end
+  
 end

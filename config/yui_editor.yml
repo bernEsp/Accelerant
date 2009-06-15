@@ -21,24 +21,6 @@ editor_config_javascript: "
     draggable: false,
     buttonType: 'advanced',
     buttons: [
-        { group: 'fontstyle', label: '',
-            buttons: [
-                { type: 'select', label: 'Arial', value: 'fontname', disabled: true,
-                    menu: [
-                        { text: 'Arial', checked: true },
-                        { text: 'Arial Black' },
-                        { text: 'Comic Sans MS' },
-                        { text: 'Courier New' },
-                        { text: 'Lucida Console' },
-                        { text: 'Tahoma' },
-                        { text: 'Times New Roman' },
-                        { text: 'Trebuchet MS' },
-                        { text: 'Verdana' }
-                    ]
-                },
-            ]
-        },
-        { type: 'separator' },
         { group: 'textstyle', label: '',
             buttons: [
                 { type: 'push', label: 'Bold CTRL + SHIFT + B', value: 'bold' },
@@ -58,8 +40,6 @@ editor_config_javascript: "
         { type: 'separator' },
         { group: 'indentlist', label: '',
             buttons: [
-                { type: 'push', label: 'Indent', value: 'indent', disabled: true },
-                { type: 'push', label: 'Outdent', value: 'outdent', disabled: true },
                 { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' },
                 { type: 'push', label: 'Create an Ordered List', value: 'insertorderedlist' }
             ]
