@@ -1,0 +1,38 @@
+
+<% form_for @user, :html => { :multipart => true } do |f| -%>
+<p>
+	Name:<br/>
+	<%= f.text_field :name %>
+</p>
+
+<p>
+	Email Address:<br/>
+	<%= f.text_field :email %>
+</p>
+
+<p>
+	Login Name:<br/>
+	<%= f.text_field :login %>
+</p>
+
+<p>
+	Reset Password:<br/>
+	<%= f.password_field :password %>
+</p>
+
+<p>
+	Confirm Reset Password:<br/>
+	<%= f.password_field :password_confirmation %>
+</p>
+
+<p>
+	<%= image_tag @user.avatar.url(:thumb) %>
+	Upload Avatar:<br/>
+	<%= f.file_field :avatar %>
+</p>
+
+<p>
+	<%= submit_tag 'Update' %>
+<p/>
+
+<% end %>

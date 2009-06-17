@@ -12,7 +12,7 @@
 <div id="wrapper">
   <div id="banner">
     <div id="topNavLeft"><a href="#">Home</a></div>
-    <div id="topNavRight"><a href="#">Manage Account</a><a href="#">Support</a><% if logged_in? %><%= link_to "Log Out", logout_path %><% end %></div>
+    <div id="topNavRight"><%= link_to "Manage Account", :controller => "myaccount", :action => "edit" %><a href="#">Support</a><% if logged_in? %><%= link_to "Log Out", logout_path %><% end %></div>
   </div>
   <div id="container">
   <div id="assignmentBox">
@@ -67,7 +67,7 @@
 	<% end %>
   </div>
 <!-- Yield starts here -->
-
+<%= flash[:notice] %>
 <%= yield  %>
 
   
