@@ -2,7 +2,7 @@
 <div id="subCommentForm">
 <% remote_form_for :reply,
 :update => "subCommentForm",
-:complete => "new Effect.Highlight('subCommentForm', { duration: .5 })",
+:complete => "new Effect.Highlight('subCommentForm#{params[:id]}', { duration: .5 })",
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
 
 <%= f.text_area :content, :size => "55 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>

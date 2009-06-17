@@ -11,7 +11,7 @@
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "65 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>
+          	<%= f.text_area :comment, :size => "60 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>
 			<%#= f.file_field :uploaded_data %>
 			<% if logged_in? %>
 			<%= f.hidden_field :user_id, :value => self.current_user.id %>
@@ -29,7 +29,6 @@
       
     </div>
     
-		<% first = true %>
 		<% for comment in @latest_postings %>
 		<% posting_user = User.find(:last, :conditions => {:id => comment.user_id})%>
 		<div class="clientSubComment">
@@ -37,19 +36,20 @@
 	      <div class="clientSubCommentText">
 		 <h1><%=h posting_user.name %></h1>
 		<p><%=comment.comment %><span>- Posted on <%=h comment.created_at%></span></p>
-		<% if !first %>
-			<% first = false %>
-		<% else %>
-			<% first = false %>
 			<p align="right">- <%= link_to_remote 'Add Comment',
 			:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
-			:complete => "new Effect.SlideDown('subCommentForm', { duration: .5 })",
-			:update => "subCommentForm" %></p>
-		<% end %>
-		<div id="subCommentForm"></div>
+			:complete => "new Effect.SlideDown('subCommentForm#{dom_id(comment)}', { duration: .5 })",
+			:update => "subCommentForm#{dom_id(comment)}" %></p>
+		<div id="subCommentForm<%= dom_id(comment) %>"></div>
 		<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC") %>
-		<% for replies in @replies %>
-		<p><%= replies.content %></p>
+		<% reply_count = Replies.count(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC") %>
+		<% if reply_count > 0 %>
+			<p align="right"><%= link_to_remote "#{reply_count} Replies",
+			:url => { :controller => 'plain', :action => 'show_comments', :id => comment.id},
+			:complete => "new Effect.SlideDown('#{dom_id(comment)}', { duration: .5 })",
+			:update => "#{dom_id(comment)}" %></p>
+			<div id="<%=dom_id(comment)%>">
+			</div>
 		<% end %>
 		
 		</div>

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
   has_many :comments
+  has_many :replies
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
   validates_presence_of     :login

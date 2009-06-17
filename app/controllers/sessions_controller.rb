@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
       if user.admin?
-        redirect_to  "/users"
+        redirect_to  "/assignment"
       end
       if user.moderator?
         redirect_to "/moderator"

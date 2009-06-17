@@ -53,7 +53,7 @@
 	<% end %>
 	<% end %>
     </ul>
-	<% if @assignment %>
+	<% if @assignment && self.current_user.participant? %>
 	<% for this_assignment in @assignment %>
 	<% comment_count = Comment.count(:conditions => {:assignment_id => this_assignment.id} ) %>
 	<div id="countblock">
@@ -74,7 +74,7 @@
 <!-- Yield ends here -->
 
     <div id="footer">
-      <div class="copyright">&copy; Copyright <%= Time.now.strftime("%Y") %> Blognog.com</div>
+      <div class="copyright">&copy; Copyright <%= Time.now.strftime("%Y") %> BlogNogResearch.com</div>
     </div>
   </div>
 </div>
