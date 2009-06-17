@@ -7,7 +7,7 @@
 		#:html => {:multipart => true},
 		#:before => fckeditor_before_js("note", 'text'),
 		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
-        <div class="avatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
+        <div class="avatar"><img src="../images/gravatar-50.png" /></div>
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
@@ -32,7 +32,7 @@
 		<% for comment in @latest_postings %>
 		<% posting_user = User.find(:last, :conditions => {:id => comment.user_id})%>
 		<div class="clientSubComment">
-	      <div class="subCommentAvatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
+	      <div class="subCommentAvatar"><img src="../images/gravatar-40.png" /></div>
 	      <div class="clientSubCommentText">
 		 <h1><%=h posting_user.name %></h1>
 		<p><%=comment.comment %><span>- Posted on <%=h comment.created_at%></span></p>
