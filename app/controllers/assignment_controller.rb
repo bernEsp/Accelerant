@@ -16,6 +16,16 @@ class AssignmentController < ApplicationController
     render :text => "Assignment Created!"
   end
   
+  def edit
+     @assignment = Assignment.find(params[:id])
+   end
+
+   def update
+     @assignment = Assignment.find(params[:id])
+     @assignment.update_attributes(params[:assignment])
+    redirect_to "/assignment"
+   end
+  
   def drop
     @assignment = Assignment.find(params[:id])
     @assignment.destroy

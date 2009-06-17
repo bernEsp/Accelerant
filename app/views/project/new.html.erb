@@ -12,6 +12,10 @@
 <%= f.text_area :description %>
 </p>
 
+<p>
+	Client:<br/>
+	<%=  select("projects", "client_id", User.find(:all, :conditions => { :client => true}).collect {|p| [ p.name, p.id ] }, {:include_blank => 'Select...'}) %>
+</p>
   
 <p><%= submit_tag 'Enter' %></p>
 <% end -%>

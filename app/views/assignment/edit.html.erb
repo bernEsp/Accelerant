@@ -1,0 +1,18 @@
+<% form_for @assignment do |f| -%>
+
+<p><%= label_tag 'Assignment title:' %><br/>
+<%= f.text_field :title %>
+</p>
+
+<p><%= label_tag 'Description:' %><br/>
+<%= f.text_area :description %>
+</p>
+
+<p>
+	Project:<br/>
+	<%=  select("assignment", "project_id", Project.find(:all, :order => "title ASC").collect {|p| [ p.title, p.id ] }, {:include_blank => 'Select...'}) %>
+</p>
+
+  
+<p><%= submit_tag 'Enter' %></p>
+<% end -%>

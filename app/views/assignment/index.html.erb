@@ -3,7 +3,7 @@
 <table>
   <tr>
 	<th>Title</th>
-	<th>Description</th>
+	<th></th>
 	<th></th>
 	<th></th>
   </tr>
@@ -11,7 +11,7 @@
 <% for assignment in @assignment %>
   <tr >
     <td><%= link_to assignment.title, :controller => 'assignment', :action => "show", :id => assignment.id  %></td>
-	<td><%=h assignment.description %></td>
+	<td><%= link_to 'Edit', :controller => 'assignment', :action => 'edit',:id => assignment.id%></td>
 	<td><%= link_to 'Assign Participants', :controller => 'assignment', :action => 'assign',:id => assignment.id%></td>
 	<td><%= link_to 'Delete', :controller => 'assignment', :action => 'drop',:id => assignment.id%></td>
   </tr>

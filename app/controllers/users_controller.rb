@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Update Failed"
     end
      #redirect_to users_path
-     redirect_to '/users'
+     redirect_to '/myaccount/edit'
   end
   
   def destroy
