@@ -108,8 +108,6 @@ class UsersController < ApplicationController
   end
   # render new.rhtml
   
-  def rock_n_roll
-  end
   
  
 end

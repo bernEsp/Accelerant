@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090615194420) do
+ActiveRecord::Schema.define(:version => 20090617213224) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -40,7 +40,11 @@ ActiveRecord::Schema.define(:version => 20090615194420) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "assignment_id"
-    t.binary   "data",          :limit => 1048576
+    t.binary   "data",               :limit => 1048576
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "moderators", :force => true do |t|
