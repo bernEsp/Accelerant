@@ -7,7 +7,11 @@
 		:html => {:multipart => true},
 		#:before => fckeditor_before_js("note", 'text'),
 		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
-        <div class="avatar"><%= image_tag self.current_user.avatar.url(:small) %></div>
+        <div class="avatar">
+			<% if self.current_user.avatar_file_name %>
+			<%= image_tag self.current_user.avatar.url(:small) %>
+			<% end %>
+		</div>
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
@@ -33,7 +37,11 @@
 		<% for comment in @latest_postings %>
 		<% posting_user = User.find(:last, :conditions => {:id => comment.user_id})%>
 		<div class="clientSubComment">
-	      <div class="subCommentAvatar"><%= image_tag posting_user.avatar.url(:small) %></div>
+	      <div class="subCommentAvatar">
+			<% if posting_user.avatar_file_name %>
+				<%= image_tag posting_user.avatar.url(:small) %>
+			<% end %>
+		</div>
 	      <div class="clientSubCommentText">
 		 <h1><%=h posting_user.name %></h1>
 		<p><%=comment.comment %>
@@ -65,6 +73,6 @@
 	</div> <!-- responses -->
    
  
-	      <div class="viewAll">- <a href="#">View All Comments</a></div>
+	      <!-- <div class="viewAll">- <a href="#">View All Comments</a></div> -->
  
 <%#= periodically_call_remote(:url => {:controller => 'plain', :action => 'showlatest', :id => params[:id]}, :frequency => '30', :update => 'responses')%>

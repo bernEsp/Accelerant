@@ -21,6 +21,8 @@ a:hover {
 	text-decoration:none;
 }
 
+form p {padding:5px;}
+
 #banner {
 	width:800px;
 	float:left;

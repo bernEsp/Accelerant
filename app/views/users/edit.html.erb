@@ -26,7 +26,9 @@
 </p>
 
 <p>
+	<% if @user.avatar_file_name %>
 	<%= image_tag @user.avatar.url(:thumb) %>
+	<% end %>
 	Upload Avatar:<br/>
 	<%= f.file_field :avatar %>
 </p>
