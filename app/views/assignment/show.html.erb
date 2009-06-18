@@ -53,9 +53,9 @@
 		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
 			| <%= link_to_remote 'Add Comment',
 			:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
-			:complete => "new Effect.SlideDown('subCommentForm#{dom_id(comment)}', { duration: .5 })",
+			:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
 			:onclick => '',
-			:update => "subCommentForm#{dom_id(comment)}" %> 
+			:update => "subCommentForm#{comment.id}" %> 
 			<% if (comment.user_id == self.current_user.id) || self.current_user.admin? %>
 				| <%= link_to_remote "Delete", 
 				:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
@@ -63,12 +63,19 @@
 				:update => "commentSub#{comment.id}" %>
 			<% end %>
 			</p>
-		<div id="subCommentForm<%= dom_id(comment) %>"></div>
+		<div id="subCommentForm<%= comment.id %>"></div>
+		<div id="reclaimer<%= comment.id %>"></div>
 		<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC") %>
 		<% for replies in @replies %>
 			<% user = User.find(:last, :conditions => {:id => replies.user_id}) %>
 			<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>"><%= image_tag user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= replies.content %><br/>
-				posted by <%= user.name%>  <%= time_ago_in_words(replies.created_at) %> ago
+				posted by 
+				<% if user.name == self.current_user.name %>
+					you 
+				<% else %>
+					<%= user.name%>  
+				<% end %>
+				<%= time_ago_in_words(replies.created_at) %> ago
 				<% if (replies.user_id == self.current_user.id) || self.current_user.admin? %>
 					| <%= link_to_remote "Delete", 
 					:url => {:controller => 'plain', :action => 'drop_reply', :id => replies.id},

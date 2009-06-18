@@ -1,5 +1,7 @@
 <div id="thisForm<%= params[:id]%>">
 <% remote_form_for :reply,
+#:update => "reclaimer#{params[:id]}",
+#:complete => "new Effect.Highlight('reclaimer#{params[:id]}', { duration: .5 })",
 :update => "thisForm#{params[:id]}",
 :complete => "new Effect.Highlight('thisForm#{params[:id]}', { duration: .5 })",
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
