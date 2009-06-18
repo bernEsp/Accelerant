@@ -44,11 +44,11 @@
 		</div>
 	      <div class="clientSubCommentText" >
 		 <p>	
-		<% if comment.photo_file_name %>
-			<a href='<%=comment.photo.url%>' target="_blank"><%= image_tag comment.photo.url(:thumb), :style => "float:right;margin-left:10px;margin-right:50px;" %></a>
-		<% end %>
+
 			<strong><%=h posting_user.name %></strong>
-		<%=comment.comment %><br/>
+		<%=comment.comment %>
+
+		<br/>
 
 		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
 			| <%= link_to_remote 'Add Comment',
@@ -61,6 +61,11 @@
 				:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
 				:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
 				:update => "commentSub#{comment.id}" %>
+			<% end %>
+			<% if comment.photo_file_name %>
+				<a href='<%=comment.photo.url%>' target="_blank">
+				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
+				</a>
 			<% end %>
 			</p>
 		<div id="subCommentForm<%= comment.id %>"></div>
