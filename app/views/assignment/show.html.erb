@@ -54,6 +54,7 @@
 			| <%= link_to_remote 'Add Comment',
 			:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
 			:complete => "new Effect.SlideDown('subCommentForm#{dom_id(comment)}', { duration: .5 })",
+			:onclick => '',
 			:update => "subCommentForm#{dom_id(comment)}" %> 
 			<% if (comment.user_id == self.current_user.id) || self.current_user.admin? %>
 				| <%= link_to_remote "Delete", 
