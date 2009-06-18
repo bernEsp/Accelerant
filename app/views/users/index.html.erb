@@ -4,7 +4,7 @@
 
 <% for user in @users %>
   <tr id="<%= dom_id(user) %>">
-	<td><%= image_tag user.avatar.url(:thumb) %></td>
+	<td><%= image_tag user.avatar.url(:small) %></td>
     <td><%=h user.login %></td>
     <td><%=h user.name %></td>
     <td>
