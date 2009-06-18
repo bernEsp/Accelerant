@@ -37,7 +37,7 @@
 	<% for this_assignment in @assignment %>
     <h1><%=h this_assignment.title %></h1>
     <h2>Assignment:</h2>
-    <p><%=h this_assignment.description %></p>
+    <p><%=this_assignment.description %></p>
     <div id="searchBox">
       <form method="post" action="#">
         <input type="image" id="searchButton" src="../images/btn_search.gif" onClick="this.submit();" />
