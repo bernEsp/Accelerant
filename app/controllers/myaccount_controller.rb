@@ -16,7 +16,7 @@ class MyaccountController < ApplicationController
     else
       flash[:notice] = "Update Failed"
     end
-     redirect_to users_path
+     redirect_to "/myaccount/edit"
   end
   
 end

@@ -12,8 +12,8 @@ class AssignmentController < ApplicationController
   def create
     @new_assignment = Assignment.new(params[:assignments])
     @new_assignment.save
-    #redirect_to  "/comment/new"
-    render :text => "Assignment Created!"
+    redirect_to "/project"
+    #render :text => "Assignment Created!"
   end
   
   def edit

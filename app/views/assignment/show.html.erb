@@ -39,7 +39,7 @@
 		<div class="clientSubComment" id="commentSub<%= comment.id%>">
 	      <div class="subCommentAvatar">
 			<% if posting_user.avatar_file_name %>
-				<%= image_tag posting_user.avatar.url(:smaller) %>
+				<%= image_tag posting_user.avatar.url(:small) %>
 			<% end %>
 		</div>
 	      <div class="clientSubCommentText" >
@@ -79,8 +79,9 @@
 			<div id="<%=dom_id(comment)%>">
 			</div>
 		</div>
+		<hr noshade="noshade"/>
     </div>
-	<hr noshade="noshade"/>
+	
 <% end %>
 </div>
 </div> <!-- responses -->

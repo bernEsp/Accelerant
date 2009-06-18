@@ -17,7 +17,7 @@ class RepliesController < ApplicationController
     @reply = Replies.new(params[:reply])
     @reply.save
     @assignment = Comment.find(:last, :conditions => {:id => params[:reply][:comment_id]})
-    #redirect_to "/assignment/#{@assignment.assignment_id}"
-    render :text => @reply.content
+    redirect_to "/assignment/#{@assignment.assignment_id}"
+    #render :text => @reply.content
   end
 end

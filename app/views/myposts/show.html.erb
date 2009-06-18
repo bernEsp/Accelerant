@@ -9,7 +9,10 @@
 			<% end %>
       </div>
       <div class="clientSubCommentText">
-    <%=comments.comment %> <span>- Posted <%=time_ago_in_words(comments.created_at) %> ago</span></div>
+    <%=comments.comment %> 	<% if comments.photo_file_name %>
+			<a href='<%=comments.photo.url%>' target="_blank"><%= image_tag comments.photo.url(:thumb), :style => "float:right;margin-left:10px;margin-right:50px;" %></a>
+		<% end %><br/>
+<span> - Posted <%=time_ago_in_words(comments.created_at) %> ago</span></div>
 </div>
 <% end %>
 </div>

@@ -4,7 +4,7 @@
 
 
 <% for project in @project %>
-<div class="infoBox">
+<div>
     <p>
 	<strong><%=project.title %></strong><br/>
 	<%=project.description %> |
@@ -12,14 +12,17 @@
 	<%= link_to 'Delete', :controller => 'project', :action => 'drop',:id => project.id%></p>
 	<% @assignment_list = Assignment.find(:all, :conditions => {:project_id => project.id})%>
 	<% if @assignment_list %>
-	<p><strong>This project contains the following assignments:</strong></p>
+	<p><strong>This project contains the following assignments:</strong> | <%= link_to 'Add Assignment', {:controller => 'assignment', :action => 'new', :id => project.id} %></p>
 	<% end %>
 	<% for assignment in @assignment_list %>
-		<p><strong><%= link_to assignment.title, :controller => "assignment", :action => "show", :id => assignment.id %> | 
+	<div class="infoBoxTight">
+		<strong><%= link_to assignment.title, :controller => "assignment", :action => "show", :id => assignment.id %> | 
 			<%= link_to 'Edit', :controller => 'assignment', :action => 'edit',:id => assignment.id%> | 
-			<%= link_to 'Assign Participants', :controller => 'assignment', :action => 'assign',:id => assignment.id%>
+			<%= link_to 'Assign Participants', :controller => 'assignment', :action => 'assign',:id => assignment.id%> | 
 			<%= link_to 'Delete', :controller => 'assignment', :action => 'drop',:id => assignment.id%>
-			</strong></p>
+			</strong>
+	</div>
 	<% end %>
 </div>
+<hr noshade="noshade"/>
 <% end %>

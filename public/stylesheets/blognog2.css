@@ -267,3 +267,5 @@ img {
 }
 
 .infoBox	{background:#cdd7de;margin:5px;padding:5px;float:right;width:600px;}
+
+.infoBoxTight	{background:#cdd7de;margin:2px 2px 2px 200px;padding:2px;width:500px;}
