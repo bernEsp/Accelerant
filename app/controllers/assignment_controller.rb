@@ -1,17 +1,17 @@
 class AssignmentController < ApplicationController
   
   def index
-    @assignment = Assignment.find(:all)
+    @all_assignment = Assignment.find(:all)
   end
   
   def new
-    @assignment = Assignment.find(:all)
-    @assignment = Assignment.new
+    @new_assignment = Assignment.find(:all)
+    @new_assignment = Assignment.new
   end
   
   def create
-    @assignment = Assignment.new(params[:assignments])
-    @assignment.save
+    @new_assignment = Assignment.new(params[:assignments])
+    @new_assignment.save
     #redirect_to  "/comment/new"
     render :text => "Assignment Created!"
   end

@@ -8,7 +8,7 @@
 	<th></th>
   </tr>
 
-<% for assignment in @assignment %>
+<% for assignment in @all_assignment %>
   <tr >
     <td><%= link_to assignment.title, :controller => 'assignment', :action => "show", :id => assignment.id  %></td>
 	<td><%= link_to 'Edit', :controller => 'assignment', :action => 'edit',:id => assignment.id%></td>
