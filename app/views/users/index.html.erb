@@ -1,37 +1,26 @@
-<h1>Users</h1>
+<h1 class="lower">Users</h1>
 <%= link_to 'Add New User', {:controller => 'users', :action => 'new'} %>
-<table>
-  <tr>
-    <th>Username</th>
-    <th>Email</th>
-    <th>Name</th>
-    <th></th>
-	<th></th>
-	<th></th>
-  </tr>
+<table cellpadding="10">
 
 <% for user in @users %>
   <tr id="<%= dom_id(user) %>">
+	<td><%= image_tag user.avatar.url(:thumb) %></td>
     <td><%=h user.login %></td>
-    <td><%=h user.email %></td>
     <td><%=h user.name %></td>
     <td>
 
-    <td><%= link_to 'Edit', {:controller => 'users', :action => 'edit', :id => user.id} %></td>
-	<td><% if !user.admin? %>
+    <td><%= link_to 'Edit', {:controller => 'users', :action => 'edit', :id => user.id} %> | 
+<% if !user.admin? %>
+		<%= link_to 'Show Comments', {:controller => 'comment', :action => 'show', :id => user.id} %> | 
+		<% end %>
+
+<% if !user.admin? %>
 		<%= link_to_remote 'Delete',
 		:update => "#{dom_id(user)}",
 		:complete => "new Effect.Fade('#{dom_id(user)}', { duration: 8.0 })",
 		:url =>{:controller => 'users', :action => 'dump_this',:id => user.id }%>
-		<% else%>
-		<strong>&lt;&lt;-- ADMIN</strong>
 		<% end %>
 	</td>
-	<td><% if !user.admin? %>
-		<%= link_to 'Show Comments', {:controller => 'comment', :action => 'show', :id => user.id} %>
-		<% end %>
-	</td>
-	<td><%= image_tag user.avatar.url(:thumb) %></td>
   </tr>
 <% end %>
 </table>

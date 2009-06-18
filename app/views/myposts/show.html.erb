@@ -3,9 +3,13 @@
 <% for comments in @mycomments %>
 
 	<div class="clientSubComment">
-      <div class="subCommentAvatar"><img src="../../images/clientAvatar.png" width="50" height="50" /></div>
+      <div class="subCommentAvatar">
+      		<% if self.current_user.avatar_file_name %>
+			<%= image_tag self.current_user.avatar.url(:thumb) %>
+			<% end %>
+      </div>
       <div class="clientSubCommentText">
-    <%=h comments.comment %> <span>- Posted on <%=h comments.created_at.strftime("%Y-%m-%d at %H:%M:%S") %></span></div>
+    <%=comments.comment %> <span>- Posted <%=time_ago_in_words(comments.created_at) %> ago</span></div>
 </div>
 <% end %>
 </div>

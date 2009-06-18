@@ -31,8 +31,9 @@
     <div id="topNavRight"><%= link_to "Manage Account", :controller => "myaccount", :action => "edit" %><a href="#">Support</a><% if logged_in? %><%= link_to "Log Out", logout_path %><% end %></div>
   </div>
   <div id="container">
-  <div id="assignmentBox">
-	<% if @assignment && self.current_user.participant? %>
+
+	<% if @assignment && (self.current_user.participant? || self.current_user.admin) %>
+	<div id="assignmentBox">
 	<% for this_assignment in @assignment %>
     <h1><%=h this_assignment.title %></h1>
     <h2>Assignment:</h2>
@@ -44,8 +45,8 @@
       </form>
     </div>
 	<% end %>
+	</div>
 	<% end %>
-  </div>
   <div id="leftColumn">
 	<% if @assignment && self.current_user.participant? %>
 	<% for this_assignment in @assignment %>
@@ -59,9 +60,8 @@
 	<% if logged_in? %>
 	<% if self.current_user.admin? %>
     	<li><%= link_to 'Users', {:controller => 'users', :action => 'index'} %></li>
-		<li><%= link_to 'Projects', {:controller => 'project', :action => 'index'} %></li>
-		<li><%= link_to 'Assignments', {:controller => 'assignment', :action => 'index'} %></li>
-		<li class="last"><%= link_to 'Comments', {:controller => 'comments', :action => 'index'} %></li>
+		<li class="last"><%= link_to 'Projects', {:controller => 'project', :action => 'index'} %></li>
+		<%#= link_to 'Assignments', {:controller => 'assignment', :action => 'index'} %>
 	<% end %>
 	<% if self.current_user.participant? %>
       <li><%= link_to 'My Assignments', {:controller => 'myassignments', :action => 'show'}%></li>

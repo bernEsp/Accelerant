@@ -8,6 +8,8 @@ body,form,img,p,h1,h2,h3,ul,ol,li,input,div {
 	margin:0px;
 	padding:0px;
 }
+
+h1.lower, h4	{margin-top:40px;}
 body {
 	text-align:center;
 	font:11px Arial, Helvetica, sans-serif;
@@ -26,9 +28,9 @@ form p {padding:5px;}
 #banner {
 	width:800px;
 	float:left;
-	height:29px;
+	height:27px;
 	line-height:25px;
-	background:url("../images/bg_banner.gif") no-repeat top left;
+	/*background:url("../images/bg_banner.gif") no-repeat top left;*/
 }
 #banner a {
 	text-decoration:none;
@@ -175,7 +177,7 @@ img {
 .topResponseBox {
 	width:520px;
 	float:left;
-	background:#cdd7de;
+/*	background:#cdd7de;*/
 	padding:10px 0;
 	margin:0 0 0 10px;
 }
@@ -206,7 +208,8 @@ img {
 	display:inline;
 	float:right;
 	margin:0 10px 1px 60px;
-	background:#cdd7de;
+	/*background:#cdd7de;*/
+	
 }
 .clientSubCommentText {
 	margin-left:10px;
@@ -252,7 +255,7 @@ img {
 	float:left;
 	width:800px;
 	clear:both;
-	background:url("../images/bg_footer.gif") no-repeat center bottom;
+	/*background:url("../images/bg_footer.gif") no-repeat center bottom;*/
 }
 .copyright {
 	float:right;
@@ -261,3 +264,5 @@ img {
 	line-height:39px;
 	color:#4491c3;
 }
+
+.infoBox	{background:#eef;margin:5px;padding:5px;float:right;width:600px;}

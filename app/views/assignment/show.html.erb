@@ -5,18 +5,17 @@
 		#:update => "latestresponse",
 		#:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
 		:html => {:multipart => true},
-		#:before => fckeditor_before_js("note", 'text'),
 		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
         <div class="avatar">
 			<% if self.current_user.avatar_file_name %>
-			<%= image_tag self.current_user.avatar.url(:small) %>
+			<%= image_tag self.current_user.avatar.url(:thumb) %>
 			<% end %>
 		</div>
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "60 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>
-				Add a photo:<br/>
+          	<%= f.text_area :comment, :size => "60 x 5", :onfocus => "this.value='';" %><br/>
+				Upload a photo or file:<br/>
 			<%= f.file_field :photo %>
 			<% if logged_in? %>
 			<%= f.hidden_field :user_id, :value => self.current_user.id %>
@@ -24,7 +23,8 @@
 			<%= f.hidden_field :assignment_id, :value => params[:id] %>
           </div>
           <div class="postButton">
-            <input type="image" src="../images/btn_post.gif" />
+            <!-- <input type="image" src="../images/btn_post.gif" /> -->
+			<%= submit_tag "Post", :style => "margin-right:50px;" %>
           </div>
         </div>
       <% end -%>
@@ -36,35 +36,41 @@
     
 		<% for comment in @latest_postings %>
 		<% posting_user = User.find(:last, :conditions => {:id => comment.user_id})%>
-		<div class="clientSubComment">
+		<div class="clientSubComment" id="commentSub<%= comment.id%>">
 	      <div class="subCommentAvatar">
 			<% if posting_user.avatar_file_name %>
 				<%= image_tag posting_user.avatar.url(:small) %>
 			<% end %>
 		</div>
-	      <div class="clientSubCommentText">
-		 <h1><%=h posting_user.name %></h1>
-		<p><%=comment.comment %>
+	      <div class="clientSubCommentText" >
+		 <p>	
 		<% if comment.photo_file_name %>
-			<%= image_tag comment.photo.url(:small) %>
+			<a href='<%=comment.photo.url%>' target="_blank"><%= image_tag comment.photo.url(:thumb), :style => "float:left;margin-right:10px;" %></a>
 		<% end %>
-		<span>- Posted on <%=h comment.created_at%></span></p>
-			<p align="right">- <%= link_to_remote 'Add Comment',
+			<strong><%=h posting_user.name %></strong>
+		<%=comment.comment %><br/>
+
+		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
+			| <%= link_to_remote 'Add Comment',
 			:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
 			:complete => "new Effect.SlideDown('subCommentForm#{dom_id(comment)}', { duration: .5 })",
-			:update => "subCommentForm#{dom_id(comment)}" %></p>
+			:update => "subCommentForm#{dom_id(comment)}" %> 
+			<% if (comment.user_id == self.current_user.id) || self.current_user.admin? %>
+				| <%= link_to_remote "Delete", 
+				:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
+				:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
+				:update => "commentSub#{comment.id}" %>
+			<% end %>
+			</p>
 		<div id="subCommentForm<%= dom_id(comment) %>"></div>
 		<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC") %>
-		<% reply_count = Replies.count(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC") %>
-		<% if reply_count > 0 %>
-			<p align="right"><%= link_to_remote "#{reply_count} Replies",
-			:url => { :controller => 'plain', :action => 'show_comments', :id => comment.id},
-			:complete => "new Effect.SlideDown('#{dom_id(comment)}', { duration: .5 })",
-			:update => "#{dom_id(comment)}" %></p>
+		<% for replies in @replies %>
+			<% user = User.find(:last, :conditions => {:id => replies.user_id}) %>
+			<p style="background-color:#eef;margin:8px;padding:2px;"><%= image_tag user.avatar.url(:small) %>&nbsp;&nbsp;<%= replies.content %><br/>
+				posted by <%= user.name%>  <%= time_ago_in_words(replies.created_at) %> ago</p>
+		<% end %>
 			<div id="<%=dom_id(comment)%>">
 			</div>
-		<% end %>
-		
 		</div>
     </div>
 <% end %>

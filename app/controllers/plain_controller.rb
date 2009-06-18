@@ -22,4 +22,10 @@ class PlainController < ApplicationController
     @replies = Replies.find(:all, :conditions => { :comment_id => params[:id]}, :order => "id DESC")
   end
   
+  def drop_comment
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    render :text => "Deleted"
+  end
+  
 end

@@ -1,7 +1,16 @@
+
+<h1 class="lower">Assign Participants</h1>
+<p>&nbsp;</p>
+<% assignment = Assignment.find(params[:id])%>
+<h4><%= assignment.title %></h4>
+<p><%= assignment.description %></p>
+
+<div style="padding-top:20px">
 <% form_for :user_assignments, :url => { :controller => "user_assignments", :action => "assign", :id => params[:id] } do |f| %>
 <% for user in @users %>
 	<%= check_box("user_assignment", user.id, {}, "#{user.id}") %>  <%= h user.name %><br/>
 <% end %>
 
-<%= submit_tag 'Assign' %>
+<%= submit_tag 'Assign', :style => "margin-top:20px;" %>
 <% end %>
+</div?>

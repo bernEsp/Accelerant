@@ -1,19 +1,21 @@
+<h1 class="lower">Projects</h1>
+<p>&nbsp;</p>
 <%= link_to 'Add Project', {:controller => 'project', :action => 'new'} %>
 
-<table>
-  <tr>
-	<th>Title</th>
-	<th>Description</th>
-	<th></th>
-	<th></th>
-  </tr>
 
 <% for project in @project %>
-  <tr >
-    <td><%=h project.title %></td>
-	<td><%=h project.description %></td>
-	<td><%= link_to 'Edit', :controller => 'project', :action => 'edit',:id => project.id%></td>
-	<td><%= link_to 'Delete', :controller => 'project', :action => 'drop',:id => project.id%></td>
-  </tr>
+<div class="infoBox">
+    <p>
+	<strong><%=project.title %></strong><br/>
+	<%=project.description %> |
+	<%= link_to 'Edit', :controller => 'project', :action => 'edit',:id => project.id%> |
+	<%= link_to 'Delete', :controller => 'project', :action => 'drop',:id => project.id%></p>
+	<% @assignment_list = Assignment.find(:all, :conditions => {:project_id => project.id})%>
+	<% if @assignment_list %>
+	<p><strong>This project contains the following assignments:</strong></p>
+	<% end %>
+	<% for assignment in @assignment_list %>
+		<p><strong><%= link_to assignment.title, :controller => "assignment", :action => "show", :id => assignment.id %></strong> - <%= assignment.description %></p>
+	<% end %>
+</div>
 <% end %>
-</table>
