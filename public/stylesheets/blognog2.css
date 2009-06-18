@@ -16,6 +16,7 @@ body {
 	line-height:16px;
 	background:url("../images/bg_body.gif") repeat-x top left #07395a;
 }
+
 a {
 	color:#07395a;
 }
@@ -265,4 +266,4 @@ img {
 	color:#4491c3;
 }
 
-.infoBox	{background:#eef;margin:5px;padding:5px;float:right;width:600px;}
+.infoBox	{background:#cdd7de;margin:5px;padding:5px;float:right;width:600px;}

@@ -5,10 +5,10 @@
 :complete => "new Effect.Highlight('subCommentForm#{params[:id]}', { duration: .5 })",
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
 
-<%= f.text_area :content, :size => "55 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>
+<%= f.text_area :content, :size => "50 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>
 
 <div class="postButton">
-  <input type="image" src="../images/btn_post.gif" />
+  <%= submit_tag "Post Response", :style => "margin-right:50px;" %>
 </div>
 
 <%= f.hidden_field :comment_id, :value => params[:id] %>

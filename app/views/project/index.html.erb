@@ -15,7 +15,11 @@
 	<p><strong>This project contains the following assignments:</strong></p>
 	<% end %>
 	<% for assignment in @assignment_list %>
-		<p><strong><%= link_to assignment.title, :controller => "assignment", :action => "show", :id => assignment.id %></strong> - <%= assignment.description %></p>
+		<p><strong><%= link_to assignment.title, :controller => "assignment", :action => "show", :id => assignment.id %> | 
+			<%= link_to 'Edit', :controller => 'assignment', :action => 'edit',:id => assignment.id%> | 
+			<%= link_to 'Assign Participants', :controller => 'assignment', :action => 'assign',:id => assignment.id%>
+			<%= link_to 'Delete', :controller => 'assignment', :action => 'drop',:id => assignment.id%>
+			</strong></p>
 	<% end %>
 </div>
 <% end %>

@@ -28,4 +28,10 @@ class PlainController < ApplicationController
     render :text => "Deleted"
   end
   
+  def drop_reply
+    @reply = Replies.find(params[:id])
+    @reply.destroy
+    render :text => "Deleted"
+  end
+  
 end

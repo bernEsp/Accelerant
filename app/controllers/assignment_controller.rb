@@ -17,13 +17,13 @@ class AssignmentController < ApplicationController
   end
   
   def edit
-     @assignment = Assignment.find(params[:id])
+     @assignment_edit = Assignment.find(params[:id])
    end
 
    def update
-     @assignment = Assignment.find(params[:id])
-     @assignment.update_attributes(params[:assignment])
-    redirect_to "/assignment"
+     @assignment_edit = Assignment.find(params[:id])
+     @assignment_edit.update_attributes(params[:assignment])
+    redirect_to "/project"
    end
   
   def drop

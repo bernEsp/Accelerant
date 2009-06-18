@@ -1,4 +1,6 @@
-<% form_for @assignment do |f| -%>
+<h1 class="lower">Edit Assignment</h1>
+
+<% form_for @assignment_edit do |f| -%>
 
 <p><%= label_tag 'Assignment title:' %><br/>
 <%= f.text_field :title %>
@@ -10,7 +12,7 @@
 
 <p>
 	Project:<br/>
-	<%=  select("assignment", "project_id", Project.find(:all, :order => "title ASC").collect {|p| [ p.title, p.id ] }, {:include_blank => 'Select...'}) %>
+	<%=  select("assignment_edit", "project_id", Project.find(:all, :order => "title ASC").collect {|p| [ p.title, p.id ] }, {:include_blank => 'Select...'}) %>
 </p>
 
   

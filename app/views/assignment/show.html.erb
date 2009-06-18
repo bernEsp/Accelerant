@@ -8,7 +8,7 @@
 		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
         <div class="avatar">
 			<% if self.current_user.avatar_file_name %>
-			<%= image_tag self.current_user.avatar.url(:thumb) %>
+			<%= image_tag self.current_user.avatar.url(:small) %>
 			<% end %>
 		</div>
         <div class="topResponseBox">
@@ -22,9 +22,9 @@
 			<% end %>
 			<%= f.hidden_field :assignment_id, :value => params[:id] %>
           </div>
-          <div class="postButton">
+          <div class="postButton" style="margin-top:-20px;">
             <!-- <input type="image" src="../images/btn_post.gif" /> -->
-			<%= submit_tag "Post", :style => "margin-right:50px;" %>
+			<%= submit_tag "Post Your Comment", :style => "margin-right:50px;" %>
           </div>
         </div>
       <% end -%>
@@ -39,13 +39,13 @@
 		<div class="clientSubComment" id="commentSub<%= comment.id%>">
 	      <div class="subCommentAvatar">
 			<% if posting_user.avatar_file_name %>
-				<%= image_tag posting_user.avatar.url(:small) %>
+				<%= image_tag posting_user.avatar.url(:smaller) %>
 			<% end %>
 		</div>
 	      <div class="clientSubCommentText" >
 		 <p>	
 		<% if comment.photo_file_name %>
-			<a href='<%=comment.photo.url%>' target="_blank"><%= image_tag comment.photo.url(:thumb), :style => "float:left;margin-right:10px;" %></a>
+			<a href='<%=comment.photo.url%>' target="_blank"><%= image_tag comment.photo.url(:thumb), :style => "float:right;margin-left:10px;margin-right:50px;" %></a>
 		<% end %>
 			<strong><%=h posting_user.name %></strong>
 		<%=comment.comment %><br/>
@@ -66,17 +66,24 @@
 		<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC") %>
 		<% for replies in @replies %>
 			<% user = User.find(:last, :conditions => {:id => replies.user_id}) %>
-			<p style="background-color:#eef;margin:8px;padding:2px;"><%= image_tag user.avatar.url(:small) %>&nbsp;&nbsp;<%= replies.content %><br/>
-				posted by <%= user.name%>  <%= time_ago_in_words(replies.created_at) %> ago</p>
+			<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>"><%= image_tag user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= replies.content %><br/>
+				posted by <%= user.name%>  <%= time_ago_in_words(replies.created_at) %> ago
+				<% if (replies.user_id == self.current_user.id) || self.current_user.admin? %>
+					| <%= link_to_remote "Delete", 
+					:url => {:controller => 'plain', :action => 'drop_reply', :id => replies.id},
+					:complete => "new Effect.Fade('reply#{replies.id}', { duration: 2 })",
+					:update => "reply#{replies.id}" %>
+				<% end %>
+				</p>
 		<% end %>
 			<div id="<%=dom_id(comment)%>">
 			</div>
 		</div>
     </div>
+	<hr noshade="noshade"/>
 <% end %>
 </div>
-<hr noshade="noshade"/>
-	</div> <!-- responses -->
+</div> <!-- responses -->
    
  
 	      <!-- <div class="viewAll">- <a href="#">View All Comments</a></div> -->
