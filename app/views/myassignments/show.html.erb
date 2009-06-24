@@ -1,8 +1,10 @@
 <h1 class="lower">Your Assignments:</h1>
 <% for assignment in @your_assignments %>
-	<% assignment_detail = Assignment.find(:last, :conditions => {:id => assignment.id}, :limit => 1) %>
+	<% if assignment %>
+	<% assignment_detail = Project.find(:last, :conditions => {:id => assignment.project_id}, :limit => 1) %>
 	<% if !assignment_detail %>
 	<% else %>
-	<%= link_to assignment_detail.title, {:controller => 'assignment', :action => 'show', :id => assignment.id }%><br/>
+	<%= link_to assignment_detail.title, {:controller => 'assignment', :action => 'show', :id => assignment.project_id }%><br/>
+	<% end %>
 	<% end %>
 <% end %>

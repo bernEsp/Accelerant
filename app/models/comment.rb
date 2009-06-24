@@ -1,5 +1,7 @@
 class Comment < ActiveRecord::Base
   belongs_to :user
+  belongs_to :project
+  belongs_to :comment_assignment
   
   has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>", :small => "50x50>", :tiny => "20x20>" }
   

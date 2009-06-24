@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.find(:all)
     @comment = Comment.new
+    @comment_assignment = CommentAssignments.new
   end
   
   def get
@@ -20,19 +21,18 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(params[:comments])
-    #@object_comment = Object.new(params[:object])
-    #@comment.update_attribute :comment, params[:object][:comment]
-    #comment.title = params[:title][:thefieldiwanttouse].to_s
-    #@attachable_file = AttachmentMetadataModel.new(params[:comments])
     @comment.save
-    #if @comment.save
-      #render :text => @comment.comment
-      #redirect_to "/assignment/#{@comment.assignment_id}"
-    #else
-      #render(:action => :get)
-    #end
-    #render :text => @comment.comment
-    redirect_to "/assignment/#{@comment.assignment_id}"
+    #new stuff
+      @user_assignments = params[:comment_assignment]
+      @these_keys = @user_assignments.keys
+      @user_assignments.each do |key, value|
+        if value=="0"
+          @comment_assignment = CommentAssignments.new
+          @comment_assignment.update_attributes(:user_id => key, :comment_id => @comment.id)
+          @comment_assignment.save
+        end
+      end
+    redirect_to "/assignment/#{@comment.project_id}"
   end
   
   def destroy

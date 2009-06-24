@@ -1,4 +1,6 @@
-<% form_for @project do |f| -%>
+<h1 class="lower">Edit this Project</h1>
+<% form_for @this_project,
+:html => { :multipart => true } do |f| -%>
 
 <p><%= label_tag 'Project title:' %><br/>
 <%= f.text_field :title %>
@@ -9,8 +11,16 @@
 </p>
 
 <p>
+	<% if @this_project.photo_file_name %>
+		<%= image_tag @this_project.photo.url(:small) %>
+	<% end %>
+	Upload File:<br/>
+	<%= f.file_field :photo %>
+</p>
+
+<p>
 	Client:<br/>
-	<%=  select("project", "client_id", User.find(:all, :conditions => { :client => true}).collect {|p| [ p.name, p.id ] }, {:include_blank => 'Select...'}) %>
+	<%=  select("this_project", "client_id", User.find(:all, :conditions => { :client => true}).collect {|p| [ p.name, p.id ] }, {:include_blank => 'Select...'}) %>
 </p>
   
 <p><%= submit_tag 'Enter' %></p>

@@ -1,7 +1,7 @@
 class AssignmentController < ApplicationController
   
   def index
-    @all_assignment = Assignment.find(:all)
+    @all_assignment = Project.find(:all)
   end
   
   def new
@@ -46,11 +46,11 @@ class AssignmentController < ApplicationController
   end
   
   def show
-    @assignment = Assignment.find(:all, :conditions => {:id => params[:id]})
-    #user_id = self.current_user.id
-    #@comment = Comment.find(:all)
-    #@comment = Comment.new
-    @latest_postings = Comment.find(:all, :conditions => {:assignment_id => params[:id] }, :limit => 20, :order => "id DESC")
+    @project_members = UserAssignments.find(:all, :conditions => {:project_id => params[:id]}, :include => :user)
+    @project = Project.find(:all, :conditions => {:id => params[:id]})
+    @latest_postings = Comment.find(:all, :conditions => {:project_id => params[:id] }, :limit => 20, :order => "id DESC", :include => :user)
   end
+  
+
   
 end

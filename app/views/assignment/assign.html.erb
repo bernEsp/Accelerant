@@ -1,9 +1,9 @@
 
-<h1 class="lower">Assign Participants</h1>
+<h1 class="lower">Assign Participants to this Project</h1>
 <p>&nbsp;</p>
-<% assignment = Assignment.find(params[:id])%>
-<h4><%= assignment.title %></h4>
-<p><%= assignment.description %></p>
+<% project = Project.find(params[:id])%>
+<h4><%= project.title %></h4>
+<p><%= project.description %></p>
 
 <div style="padding-top:20px">
 <% form_for :user_assignments, :url => { :controller => "user_assignments", :action => "assign", :id => params[:id] } do |f| %>
@@ -13,4 +13,4 @@
 
 <%= submit_tag 'Assign', :style => "margin-top:20px;" %>
 <% end %>
-</div?>
+</div>

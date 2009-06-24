@@ -1,34 +1,34 @@
 class ProjectController < ApplicationController
   
   def index
-    @project = Project.find(:all)
+    @these_projects = Project.find(:all)
   end
   
   def new
-    @project = Project.find(:all)
-    @project = Project.new
+    @this_project = Project.find(:all)
+    @this_project = Project.new
   end
   
   def create
-    @project = Project.new(params[:projects])
-    @project.save
-    #redirect_to  "/comment/new"
-    render :text => "Project Created!"
+    @this_project = Project.new(params[:projects])
+    @this_project.save
+    redirect_to  "/project"
+    #render :text => "Project Created!"
   end
   
   def edit
-    @project = Project.find(params[:id])
+    @this_project = Project.find(params[:id])
   end
   
   def update
-    @project = Project.find(params[:id])
-    @project.update_attributes(params[:project])
+    @this_project = Project.find(params[:id])
+    @this_project.update_attributes(params[:project])
     redirect_to "/project"
   end
   
   def drop
-    @project = Project.find(params[:id])
-    @project.destroy
+    @this_project = Project.find(params[:id])
+    @this_project.destroy
     redirect_to "/project"
   end
 

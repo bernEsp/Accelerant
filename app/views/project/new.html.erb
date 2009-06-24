@@ -1,7 +1,7 @@
+<h1 class="lower">Create a New Project</h1>
 
-<% remote_form_for :projects, @project,
-:update => "rightColumn",
-:complete => "new Effect.Highlight('rightColumn', { duration: 1.0 })",
+<% form_for :projects, @this_project,
+:html => { :multipart => true },
 :url =>{:controller => 'project', :action => 'create' } do |f| -%>
 
 <p><%= label_tag 'Project title:' %><br/>
@@ -10,6 +10,11 @@
 
 <p><%= label_tag 'Description:' %><br/>
 <%= f.text_area :description %>
+</p>
+
+<p>
+	Upload File:<br/>
+	<%= f.file_field :photo %>
 </p>
 
 <p>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090617213224) do
+ActiveRecord::Schema.define(:version => 20090624191821) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(:version => 20090617213224) do
     t.datetime "updated_at"
   end
 
+  create_table "comment_assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "comments", :force => true do |t|
     t.string   "title"
     t.string   "url"
@@ -45,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20090617213224) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "project_id"
   end
 
   create_table "moderators", :force => true do |t|
@@ -65,6 +73,10 @@ ActiveRecord::Schema.define(:version => 20090617213224) do
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "replies", :force => true do |t|
@@ -109,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20090617213224) do
     t.integer  "assignment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "user_images", :force => true do |t|

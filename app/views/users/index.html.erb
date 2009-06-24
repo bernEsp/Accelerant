@@ -16,6 +16,7 @@
 
 <% if !user.admin? %>
 		<%= link_to_remote 'Delete',
+		:confirm => "Are you sure you want to delete this user?",
 		:update => "#{dom_id(user)}",
 		:complete => "new Effect.Fade('#{dom_id(user)}', { duration: 8.0 })",
 		:url =>{:controller => 'users', :action => 'dump_this',:id => user.id }%>
