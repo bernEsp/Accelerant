@@ -6,8 +6,8 @@ class CommentController < ApplicationController
   end
   
   def show
-    #user_id = self.current_user.id
-    @comments = Comment.find(:all, :conditions => { :user_id => params[:id]}, :order => "id DESC")
+    @user_data = User.find(params[:id])
+    @comments = Comment.find(:all, :conditions => ["project_id is NOT NULL and user_id = ?", params[:id]], :order => "project_id DESC, id DESC", :include => :project)
   end
 
   def new
@@ -25,9 +25,17 @@ class CommentController < ApplicationController
     #redirect_to  "/comment/new"
     render :text => @comment.comment
   end
+  
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
     #render :text => "Removed"
   end
+  
+  def csv_dump
+    respond_to do |format|
+      format.csv { render :csv => Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user) }
+    end
+  end
+  
 end

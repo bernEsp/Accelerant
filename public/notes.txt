@@ -1,0 +1,8 @@
+omnifroodle: the other option is named scopes, which are nice if you'll be 'limiting' by that a lot
+[3:14pm] omnifroodle: in your model you'd do
+[3:15pm] omnifroodle: named_scope :project_not_nil, :conditions => 'project_id IS NOT NULL'
+[3:15pm] omnifroodle: and
+[3:16pm] omnifroodle: actually that's all
+[3:16pm] omnifroodle: then you could do a
+[3:16pm] omnifroodle: Thing.project_not_nul.find_by_user_id(whatever.id)
+[3:16pm] omnifroodle: in your controller
