@@ -6,6 +6,13 @@
 <div class="infoBox">
 <h3>Project: <em><%= project_info.title %></em></h3>
 <strong>Posted <%=distance_of_time_in_words_to_now(comment.created_at)%> ago</strong><br/>
-<p><%= comment.comment %></p>
+<p>
+	<%= comment.comment %>
+	<% if comment.photo_file_name %>
+		<a href='<%=comment.photo.url%>' target="_blank">
+		<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
+		</a>
+	<% end %>
+</p>
 </div>
 <% end %>
