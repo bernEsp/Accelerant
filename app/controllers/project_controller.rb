@@ -23,6 +23,7 @@ class ProjectController < ApplicationController
   def update
     @this_project = Project.find(params[:id])
     @this_project.update_attributes(params[:project])
+    @this_project.update_attributes(params[:this_project])
     redirect_to "/project"
   end
   
