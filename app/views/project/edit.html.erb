@@ -19,6 +19,10 @@
 </p>
 
 <p>
+	<%= f.check_box :one_to_one %> This project is "one-to-one"
+</p>
+
+<p>
 	Client:<br/>
 	<%=  select("this_project", "client_id", User.find(:all, :conditions => { :client => true}).collect {|p| [ p.name, p.id ] }, {:include_blank => 'Select...'}) %>
 </p>

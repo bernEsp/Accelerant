@@ -57,7 +57,14 @@
 
 			<strong><%=h comment.user.name %></strong>
 		<%=comment.comment %>
-
+		<% if comment.photo_content_type =~ /image.*/  %>
+			<a href='<%=comment.photo.url%>' target="_blank">
+			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
+			</a>
+		<% end %>
+		<% if comment.photo_content_type =~ /audio.*/  %>
+			<p><a href='<%=comment.photo.url%>' target="_blank">View video here.</a></p>
+		<% end %>
 		<br/>
 
 		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
@@ -73,14 +80,7 @@
 				:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
 				:update => "commentSub#{comment.id}" %>
 			<% end %>
-			<% if comment.photo_content_type == "image/gif" || comment.photo_content_type == "image/jpg" || comment.photo_content_type == "image/png" %>
-				<a href='<%=comment.photo.url%>' target="_blank">
-				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
-				</a>
-			<% end %>
-			<% if comment.photo_content_type == "audio/x-m4a" %>
-				<a href='<%=comment.photo.url%>' target="_blank">Link</a>
-			<% end %>
+			
 			</p>
 		<div id="subCommentForm<%= comment.id %>"></div>
 		<div id="reclaimer<%= comment.id %>"></div>
