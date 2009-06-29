@@ -3,7 +3,10 @@ class Comment < ActiveRecord::Base
   belongs_to :project
   belongs_to :comment_assignment
   
-  has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>", :small => "50x50>", :tiny => "20x20>" }
+  has_attached_file :photo, 
+  :styles => { :medium => "300x300>", :thumb => "100x100>", :small => "50x50>", :tiny => "20x20>" }, 
+  :whiny => false,
+  :whiny_thumbnails => false
   
   comma do
 

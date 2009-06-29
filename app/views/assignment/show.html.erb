@@ -14,7 +14,7 @@
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "60 x 5", :onfocus => "this.value='';" %><br/>
+          	<%= f.text_area :comment, :size => "60 x 5" %><br/>
 				Upload a photo or file:<br/>
 			<%= f.file_field :photo %>
 			<% if logged_in? %>
@@ -73,10 +73,13 @@
 				:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
 				:update => "commentSub#{comment.id}" %>
 			<% end %>
-			<% if comment.photo_file_name %>
+			<% if comment.photo_content_type == "image/gif" || comment.photo_content_type == "image/jpg" || comment.photo_content_type == "image/png" %>
 				<a href='<%=comment.photo.url%>' target="_blank">
 				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 				</a>
+			<% end %>
+			<% if comment.photo_content_type == "audio/x-m4a" %>
+				<a href='<%=comment.photo.url%>' target="_blank">Link</a>
 			<% end %>
 			</p>
 		<div id="subCommentForm<%= comment.id %>"></div>
