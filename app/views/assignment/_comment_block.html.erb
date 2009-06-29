@@ -1,0 +1,65 @@
+	<div class="clientSubComment" id="commentSub<%= comment.id%>">
+      <div class="subCommentAvatar">
+		<% if comment.user.avatar_file_name %>
+			<%= image_tag comment.user.avatar.url(:small) %>
+		<% end %>
+		</div>
+     <div class="clientSubCommentText" >
+	 <p>	
+
+		<strong><%=h comment.user.name %></strong>
+	<%=comment.comment %>
+	<% if comment.photo_content_type =~ /image.*/  %>
+		<a href='<%=comment.photo.url%>' target="_blank">
+		<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
+		</a>
+	<% end %>
+	<% if comment.photo_content_type =~ /audio.*/  %>
+		<p><a href='<%=comment.photo.url%>' target="_blank">View video here.</a></p>
+	<% end %>
+	<br/>
+
+	<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
+		| <%= link_to_remote 'Add Comment',
+		:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
+		:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
+		:onclick => '',
+		:update => "subCommentForm#{comment.id}" %> 
+		<% if (comment.user_id == self.current_user.id) || self.current_user.admin? %>
+			| <%= link_to_remote "Delete", 
+			:confirm => "Are you sure you want to delete this?",
+			:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
+			:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
+			:update => "commentSub#{comment.id}" %>
+		<% end %>
+		
+		</p>
+		
+		
+	<div id="subCommentForm<%= comment.id %>"></div>
+	<div id="reclaimer<%= comment.id %>"></div>
+	<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
+	<% for replies in @replies %>
+		<% #user = User.find(:last, :conditions => {:id => replies.user_id}) %>
+		<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>"><%= image_tag replies.user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= replies.content %><br/>
+			posted by 
+			<% if replies.user.name == self.current_user.name %>
+				you 
+			<% else %>
+				<%= replies.user.name%>  
+			<% end %>
+			<%= time_ago_in_words(replies.created_at) %> ago
+			<% if (replies.user_id == self.current_user.id) || self.current_user.admin? %>
+				| <%= link_to_remote "Delete", 
+				:confirm => "Are you sure you want to delete this?",
+				:url => {:controller => 'plain', :action => 'drop_reply', :id => replies.id},
+				:complete => "new Effect.Fade('reply#{replies.id}', { duration: 2 })",
+				:update => "reply#{replies.id}" %>
+			<% end %>
+			</p>
+	<% end %>
+		<div id="<%=dom_id(comment)%>">
+		</div>
+	</div>
+	<hr noshade="noshade"/>
+</div>
