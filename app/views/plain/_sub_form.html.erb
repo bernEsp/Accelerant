@@ -1,12 +1,14 @@
 <div id="thisForm<%= params[:id]%>">
-<% remote_form_for :reply,
+<% form_for :reply,
+:html => {:id => "this_form", :multipart => true},
 #:update => "reclaimer#{params[:id]}",
 #:complete => "new Effect.Highlight('reclaimer#{params[:id]}', { duration: .5 })",
-:update => "thisForm#{params[:id]}",
-:complete => "new Effect.Highlight('thisForm#{params[:id]}', { duration: .5 })",
+#:update => "thisForm#{params[:id]}",
+#:complete => "new Effect.Highlight('thisForm#{params[:id]}', { duration: .5 })",
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
 
-<%= f.text_area :content, :size => "50 x 5", :onfocus => "this.value='';", :class => "rich_text_editor" %><br/>
+<%= f.text_area :content, :size => "50 x 5" %><br/>
+<%= f.file_field :media %><br/>
 
 <div class="postButton">
   <%= submit_tag "Post Response", :style => "margin-right:50px;" %>

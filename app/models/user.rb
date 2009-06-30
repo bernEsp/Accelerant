@@ -6,7 +6,10 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
   has_many :comments
   has_many :replies
-  has_attached_file :avatar, :styles => { :large => "300x300>",:medium => "100x100>", :thumb => "80x80>", :small => "50x50>", :smaller => "30x30>", :tiny => "20x20>" }
+  has_attached_file :avatar, 
+  :whiny => false, 
+  :whiny_thumbnails => false,
+  :styles => { :large => "300x300>",:medium => "100x100>", :thumb => "80x80>", :small => "50x50>", :smaller => "30x30>", :tiny => "20x20>" }
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
