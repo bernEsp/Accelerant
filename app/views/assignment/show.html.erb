@@ -63,7 +63,7 @@
 			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 			</a>
 		<% else %>
-			<p><a href='<%=comment.photo.url%>' target="_blank">View multimedia file here.</a></p>
+			<p><a href='<%=comment.photo.url%>' target="_blank">View multimedia file here.</a><%= image_tag "download.png"%></p>
 		<% end %>
 		<br/>
 
@@ -130,7 +130,7 @@
 				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 				</a>
 			<% else %>
-				<p><a href='<%=comment.photo.url%>' target="_blank">View multimedia file here.</a></p>
+				<p><a href='<%=comment.photo.url%>' target="_blank">View multimedia file here.</a><%= image_tag "download.png"%></p>
 			<% end %>
 			<br/>
 
@@ -161,7 +161,7 @@
 						<% if replies.media_content_type =~ /image.*/  %>
 							<%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %>
 						<% else %>
-							<a href='<%=replies.media.url%>' target="_blank">View multimedia file here.</a>
+							<a href='<%=replies.media.url%>' target="_blank">View multimedia file here.</a><%= image_tag "download.png"%>
 						<% end %>
 					<% end %>
 		
