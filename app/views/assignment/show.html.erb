@@ -156,8 +156,8 @@
 			<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
 			<% for replies in @replies %>
 				<% if replies.user_id = self.current_user.id || (replies.user.admin || replies.user.moderator) %>
-				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>"><%= image_tag replies.user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= replies.content %><%#= replies.media_file_name %>
-					<% if replies.media.url %>
+				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>"><%= image_tag replies.user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= replies.content %> - <%= replies.media_file_name %>
+					<% if replies.media_file_name %>
 						<% if replies.media_content_type =~ /image.*/  %>
 							<%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %>
 						<% else %>
