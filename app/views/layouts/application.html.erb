@@ -38,12 +38,15 @@
     <h1><%=h this_assignment.title %></h1>
     <h2>Project Overview:</h2>
     <p>
-		<% if this_assignment.photo_file_name %>
-			<a href='<%=this_assignment.photo.url%>' target="_blank">
-			<%= image_tag this_assignment.photo.url(:medium), :style => "margin-right:10px;" %>
-			</a>
-		<% end %>
 	<%=this_assignment.description %>
+		<% if this_assignment.photo_file_name %>
+			<% if this_assignment.photo_content_type =~ /image.*/  %>
+				<a href='<%=this_assignment.photo.url%>' target="_blank"></a>
+				<%= image_tag this_assignment.photo.url(:medium), :style => "margin-right:10px;" %>
+			<% else %>
+				<a href='<%=this_assignment.photo.url%>' target="_blank" style="color:#fff;">Multimedia file included.  Click here.</a>
+			<% end %>
+		<% end %>
 
 	</p>
     <div id="searchBox">

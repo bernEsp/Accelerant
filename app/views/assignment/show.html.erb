@@ -62,9 +62,8 @@
 			<a href='<%=comment.photo.url%>' target="_blank">
 			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 			</a>
-		<% end %>
-		<% if comment.photo_content_type =~ /audio.*/  %>
-			<p><a href='<%=comment.photo.url%>' target="_blank">View video here.</a></p>
+		<% else %>
+			<p><a href='<%=comment.photo.url%>' target="_blank">View multimedia file here.</a></p>
 		<% end %>
 		<br/>
 
@@ -130,9 +129,8 @@
 				<a href='<%=comment.photo.url%>' target="_blank">
 				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 				</a>
-			<% end %>
-			<% if comment.photo_content_type =~ /audio.*/  %>
-				<p><a href='<%=comment.photo.url%>' target="_blank">View video here.</a></p>
+			<% else %>
+				<p><a href='<%=comment.photo.url%>' target="_blank">View multimedia file here.</a></p>
 			<% end %>
 			<br/>
 
@@ -160,8 +158,13 @@
 				<% if replies.user_id = self.current_user.id || (replies.user.admin || replies.user.moderator) %>
 				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>"><%= image_tag replies.user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= replies.content %>
 					<% if replies.media_file_name %>
-						<%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %>
+						<% if replies.media_content_type =~ /image.*/  %>
+							<%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %>
+						<% else %>
+							<a href='<%=replies.media.url%>' target="_blank">View multimedia file here.</a>
+						<% end %>
 					<% end %>
+		
 					<br/>
 					posted by 
 					<% if replies.user.name == self.current_user.name %>
