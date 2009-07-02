@@ -1,6 +1,6 @@
 <div id="thisForm<%= params[:id]%>">
 <% form_for :reply,
-:html => {:id => "this_form", :multipart => true},
+:html => { :multipart => true},
 #:update => "reclaimer#{params[:id]}",
 #:complete => "new Effect.Highlight('reclaimer#{params[:id]}', { duration: .5 })",
 #:update => "thisForm#{params[:id]}",
@@ -11,7 +11,7 @@
 <%= f.file_field :media %><br/>
 
 <div class="postButton">
-  <%= submit_tag "Post Response", :style => "margin-right:50px;" %>
+  <%= submit_tag "Post Reply", :style => "margin-right:50px;" %>
 </div>
 
 <%= f.hidden_field :comment_id, :value => params[:id] %>
