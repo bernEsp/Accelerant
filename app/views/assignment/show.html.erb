@@ -92,7 +92,7 @@
 			<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>"><%= image_tag replies.user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= replies.content %>
 				<% if replies.media_file_name %>
 					<% if replies.media_content_type =~ /image.*/  %>
-						<%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %>
+						<a href='<%=replies.media.url%>' target="_blank"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
 					<% else %>
 						<a href='<%=replies.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 					<% end %>
@@ -166,7 +166,7 @@
 				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>"><%= image_tag replies.user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= replies.content %>
 					<% if replies.media_file_name %>
 						<% if replies.media_content_type =~ /image.*/  %>
-							<%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %>
+							<a href='<%=replies.media.url%>' target="_blank"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
 						<% else %>
 							<a href='<%=replies.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 						<% end %>
