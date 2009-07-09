@@ -15,13 +15,43 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
+    if params[:user_type] == "admin"
+      @user.admin = true
+      @user.moderator = false
+      @user.client = false
+      @user.participant = false
+    end
+    if params[:user_type] == "moderator"
+      @user.admin = false
+      @user.moderator = true
+      @user.client = false
+      @user.participant = false
+    end
+    if params[:user_type] == "client"
+      @user.admin = false
+      @user.moderator = false
+      @user.client = true
+      @user.participant = false
+    end
+    if params[:user_type] == "participant"
+      @user.admin = false
+      @user.moderator = false
+      @user.client = false
+      @user.participant = true
+    end
+    @user.save
     if @user.errors.empty?
       flash[:notice] = "Updated!"
     else
       flash[:notice] = "Update Failed"
     end
      #redirect_to users_path
-     redirect_to '/myaccount/edit'
+    if self.current_user.participant || self.current_user.client || self.current_user.moderator
+       redirect_to '/myaccount/edit'
+    end
+    if self.current_user.admin
+      redirect_to users_path
+    end
   end
   
   def destroy
@@ -44,27 +74,51 @@ class UsersController < ApplicationController
       logout_keeping_session!
     end  
     @user = User.new(params[:user])
+    if params[:user_type] == "admin"
+      @user.admin = true
+      @user.moderator = false
+      @user.client = false
+      @user.participant = false
+    end
+    if params[:user_type] == "moderator"
+      @user.admin = false
+      @user.moderator = true
+      @user.client = false
+      @user.participant = false
+    end
+    if params[:user_type] == "client"
+      @user.admin = false
+      @user.moderator = false
+      @user.client = true
+      @user.participant = false
+    end
+    if params[:user_type] == "participant"
+      @user.admin = false
+      @user.moderator = false
+      @user.client = false
+      @user.participant = true
+    end
     success = @user && @user.save
-    if @user.participant?
-      @participant = Participant.new
-      @participant.update_attribute :id, @user.id
-      @participant.save
-    end
-    if @user.admin?
-      @admin = Admin.new
-      @admin.update_attribute :id, @user.id
-      @admin.save
-    end
-    if @user.client?
-      @client = Client.new
-      @client.update_attribute :id, @user.id
-      @client.save
-    end
-    if @user.moderator?
-      @moderator = Moderator.new
-      @moderator.update_attribute :id, @user.id
-      @moderator.save
-    end
+    #if @user.participant?
+     # @participant = Participant.new
+      #@participant.update_attribute :id, @user.id
+      #@participant.save
+    #end
+    #if @user.admin?
+     # @admin = Admin.new
+    #  @admin.update_attribute :id, @user.id
+     # @admin.save
+    #end
+    #if @user.client?
+     # @client = Client.new
+     # @client.update_attribute :id, @user.id
+    #  @client.save
+    #end
+    #if @user.moderator?
+     # @moderator = Moderator.new
+      #@moderator.update_attribute :id, @user.id
+      #@moderator.save
+    #end
     if success && @user.errors.empty?
       if logged_in?
       if !self.current_user.admin

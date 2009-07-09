@@ -30,10 +30,10 @@
 <legend>User Type</legend>
 
 <p>
-	<%= check_box("user", "admin", {}, "true", "false") %>Admin<br/>
-	<%= check_box("user", "moderator", {}, "true", "false") %>Moderator<br/>
-	<%= check_box("user", "client", {}, "true", "false") %>Client<br/>
-	<%= check_box("user", "participant", {}, "true", "false") %>Participant<br/>
+	<%= radio_button_tag("user_type", "admin", checked=false)%> Admin
+	<%= radio_button_tag("user_type", "moderator", checked=false)%> Moderator
+	<%= radio_button_tag("user_type", "client", checked=false)%> Client
+	<%= radio_button_tag("user_type", "participant", checked=false)%> Participant
 </p>
 
 </fieldset>
