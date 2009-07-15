@@ -162,7 +162,7 @@
 			<div id="reclaimer<%= comment.id %>"></div>
 			<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
 			<% for this_reply in @replies %>
-				<% if this_reply.user_id == self.current_user.id || (this_reply.user.admin || this_reply.user.moderator) %>
+				<% if this_reply.user.id == self.current_user.id || (this_reply.user.admin || this_reply.user.moderator) %>
 				
 				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>"><%= image_tag this_reply.user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= this_reply.content %>
 					<% if this_reply.media_file_name %>
@@ -181,7 +181,7 @@
 						<%= this_reply.user.name%>  
 					<% end %>
 					<%= time_ago_in_words(this_reply.created_at) %> ago
-					<% if (this_reply.user_id == self.current_user.id) || self.current_user.admin %>
+					<% if (this_reply.user.id == self.current_user.id) || self.current_user.admin %>
 						| <%= link_to_remote "Delete", 
 						:confirm => "Are you sure you want to delete this?",
 						:url => {:controller => 'plain', :action => 'drop_reply', :id => this_reply.id},
