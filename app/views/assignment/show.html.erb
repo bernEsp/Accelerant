@@ -162,7 +162,7 @@
 			<div id="reclaimer<%= comment.id %>"></div>
 			<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
 			<% for this_reply in @replies %>
-				<% if this_reply.user.id == self.current_user.id || (this_reply.user.admin || this_reply.user.moderator) %>
+				<% if (this_reply.user.id == self.current_user.id) || (this_reply.user.admin || this_reply.user.moderator) || self.current_user.admin || self.current_user.moderator %>
 				
 				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>"><%= image_tag this_reply.user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= this_reply.content %>
 					<% if this_reply.media_file_name %>
