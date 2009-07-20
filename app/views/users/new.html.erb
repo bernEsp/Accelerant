@@ -21,10 +21,10 @@
 <p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
 <%= f.password_field :password_confirmation %></p>
 
-<p>
-	Upload Avatar:<br/>
-	<%= f.file_field :avatar %>
-</p>
+<!-- <p>
+	Upload Avatar:<br/> -->
+	<%#= f.file_field :avatar %>
+<!-- </p> -->
 
 <fieldset style="width:30%;">
 <legend>User Type</legend>
@@ -33,7 +33,7 @@
 	<%= radio_button_tag("user_type", "admin", checked=false)%> Admin
 	<%= radio_button_tag("user_type", "moderator", checked=false)%> Moderator
 	<%= radio_button_tag("user_type", "client", checked=false)%> Client
-	<%= radio_button_tag("user_type", "participant", checked=false)%> Participant
+	<%= radio_button_tag("user_type", "participant", checked=true)%> Participant
 </p>
 
 </fieldset>

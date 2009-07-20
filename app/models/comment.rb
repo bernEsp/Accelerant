@@ -9,17 +9,10 @@ class Comment < ActiveRecord::Base
   :styles => { :medium => "300x300>", :thumb => "100x100>", :small => "50x50>", :tiny => "20x20>" }
   
   comma do
-
       project :title
       comment
       user :name
       created_at
-
-      #pages :size => 'Pages'
-      #publisher :name
-      #isbn :number_10 => 'ISBN-10', :number_13 => 'ISBN-13'
-      #blurb 'Summary'
-
     end
   
   #validates_format_of :content_type,

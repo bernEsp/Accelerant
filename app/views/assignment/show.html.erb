@@ -14,7 +14,7 @@
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "60 x 5" %><br/>
+          	<%= f.text_area :comment, :size => "60 x 5", :class => 'rich_text_editor' %><br/>
 				Upload a photo or file:<br/>
 			<%= f.file_field :photo %>
 			<% if logged_in? %>
@@ -58,12 +58,14 @@
 
 			<strong><%=h comment.user.name %></strong>
 		<%=comment.comment %>
+		<% if comment.photo_content_type %>
 		<% if comment.photo_content_type =~ /image.*/  %>
 			<a href='<%=comment.photo.url%>' target="_blank">
 			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 			</a>
 		<% else %>
 			<p><a href='<%=comment.photo.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
+		<% end %>
 		<% end %>
 		<br/>
 
@@ -132,12 +134,14 @@
 
 				<strong><%=h comment.user.name %></strong>
 			<%=comment.comment %>
+			<% if comment.photo_content_type %>
 			<% if comment.photo_content_type =~ /image.*/  %>
 				<a href='<%=comment.photo.url%>' target="_blank">
 				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 				</a>
 			<% else %>
 				<p><a href='<%=comment.photo.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
+			<% end %>
 			<% end %>
 			<br/>
 
@@ -203,7 +207,7 @@
 </div>
 </div> <!-- responses -->
  	<% if self.current_user.admin %>
-	<%= link_to "CSV", :controller => 'comment', :action => 'csv_dump', :id => params[:id], :format => 'csv' %>
+	<%= link_to "CSV", :controller => 'comment', :action => 'export_to_csv', :id => params[:id], :format => 'csv' %>
 	<% end %>  
  
 	      <!-- <div class="viewAll">- <a href="#">View All Comments</a></div> -->
