@@ -23,6 +23,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comments])
     @comment.save
     #new stuff
+      if self.current_user.admin
       @user_assignments = params[:comment_assignment]
       @these_keys = @user_assignments.keys
       @user_assignments.each do |key, value|
@@ -32,6 +33,7 @@ class CommentsController < ApplicationController
           @comment_assignment.save
         end
       end
+    end
     redirect_to "/assignment/#{@comment.project_id}"
   end
   
