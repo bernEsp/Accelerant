@@ -42,6 +42,13 @@
     </div>
 <% end %>
 <% end %>
+
+<% for comment in @latest_postings %>
+  <% if comment.user.moderator || comment.user.admin %>
+  <a href="#<%= comment.id %>"><%= comment.comment %></a><br/>
+<% end  %>
+
+<% end  %>
 	<div id="responses">
     <div class="clientMainEntry" id="latestresponse">
       
@@ -51,7 +58,7 @@
 		<% not_visible = CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id, :comment_id => comment.id })%>
 		<% my_project = Project.find(:last, :conditions => {:id => params[:id]}) %>
 		<% if (!not_visible && !my_project.one_to_one)  %>
-		<div class="clientSubComment" id="commentSub<%= comment.id%>">
+		<div class="clientSubComment" id="commentSub<%= comment.id%>"><a name="#<%=comment.id%>"></a>
 	      <div class="subCommentAvatar">
 			<% if comment.user.avatar_file_name %>
 				<%= image_tag comment.user.avatar.url(:small) %>
@@ -127,7 +134,7 @@
     </div>
 	<% else %>
 		<% if (my_project.one_to_one) && (comment.user.id == self.current_user.id || comment.user.admin || comment.user.moderator) %>
-			<div class="clientSubComment" id="commentSub<%= comment.id%>">
+			<div class="clientSubComment" id="commentSub<%= comment.id%>"><a name="<%=comment.id%>"></a>
 		      <div class="subCommentAvatar">
 				<% if comment.user.avatar_file_name %>
 					<%= image_tag comment.user.avatar.url(:small) %>

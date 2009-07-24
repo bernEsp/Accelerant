@@ -2,6 +2,9 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
   belongs_to :comment_assignment
+
+  named_scope :is_moderator, :joins => :users, :conditions => ['user.moderator = ?', true]
+  named_scope :is_admin, :joins => :users, :conditions => ['user.admin = ?', true]
   
   has_attached_file :photo, 
   :whiny => false, 

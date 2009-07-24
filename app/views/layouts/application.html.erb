@@ -84,8 +84,8 @@
 	<% for this_assignment in @project %>
 	<% comment_count = Comment.count(:conditions => {:project_id => this_assignment.id} ) %>
 	<div id="countblock">
-    <p align="right"><%=h comment_count %> Comments<br />
-    </p>
+    <!-- <p align="right"><%#=h comment_count %> Comments<br />
+    </p> -->
 	</div>
 	<%#= periodically_call_remote(:url => {:controller => 'plain', :action => 'update_count', :id => this_assignment.id}, :frequency => '30', :update => 'countblock')%>
 	<% end %>
