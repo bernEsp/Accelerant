@@ -23,6 +23,10 @@
 </p>
 
 <p>
+	<%= f.check_box :response_box %> The "response box" is visible
+</p>
+
+<p>
 	Client:<br/>
 	<%=  select("this_project", "client_id", User.find(:all, :conditions => { :client => true}).collect {|p| [ p.name, p.id ] }, {:include_blank => 'Select...'}) %>
 </p>

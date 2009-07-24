@@ -1,5 +1,7 @@
 
 <div id="rightColumn">
+	<% for this_assignment in @project %>
+	<% if this_assignment.response_box || self.current_user.moderator || self.current_user.admin %>
     <div id="topResponse">
       	<% form_for :comments,
 		#:update => "latestresponse",
@@ -38,6 +40,8 @@
         </div>
       <% end -%>
     </div>
+<% end %>
+<% end %>
 	<div id="responses">
     <div class="clientMainEntry" id="latestresponse">
       

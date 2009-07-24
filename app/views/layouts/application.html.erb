@@ -35,7 +35,7 @@
 	<% if @project && (self.current_user.participant? || self.current_user.admin) %>
 	<div id="assignmentBox">
 	<% for this_assignment in @project %>
-    <h1><%=h this_assignment.title %></h1>
+    <h1><%= this_assignment.title %></h1>
     <h2>Project Overview:</h2>
     <p>
 	<%=this_assignment.description %>
@@ -50,10 +50,10 @@
 
 	</p>
     <div id="searchBox">
-      <form method="post" action="#">
+      <!-- ><form method="post" action="#">
         <input type="image" id="searchButton" src="../images/btn_search.gif" onClick="this.submit();" />
         <input type="text" name="searchField" id="searchField" />
-      </form>
+      </form> -->
     </div>
 	<% end %>
 	</div>
