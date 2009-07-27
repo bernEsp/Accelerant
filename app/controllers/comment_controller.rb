@@ -56,9 +56,8 @@ class CommentController < ApplicationController
        #send_data(report.read,:type=>'text/csv;charset=iso-8859-1;
        #header=present',:filename=>'report.csv',
        #:disposition =>'attachment', :encoding => 'utf8')
-       send_data(report.read,:type=>'text/csv;charset=iso-8859-1;
-       header=present',:filename=>'report.csv',
-       :disposition =>'attachment')
+       send_data(report.read,:type=>'text/csv;charset=iso-8859-1;',:filename=>'report.csv',
+       :disposition =>'inline')
     end
   
 end
