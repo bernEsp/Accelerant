@@ -53,9 +53,12 @@ class CommentController < ApplicationController
           end
         end
        report.rewind
+       #send_data(report.read,:type=>'text/csv;charset=iso-8859-1;
+       #header=present',:filename=>'report.csv',
+       #:disposition =>'attachment', :encoding => 'utf8')
        send_data(report.read,:type=>'text/csv;charset=iso-8859-1;
        header=present',:filename=>'report.csv',
-       :disposition =>'attachment', :encoding => 'utf8')
+       :disposition =>'attachment')
     end
   
 end

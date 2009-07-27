@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :replies
 
-  named_scope :is_moderator, :joins => :users, :conditions => ['user.moderator = ?', true]
-  named_scope :is_admin, :joins => :users, :conditions => ['user.admin = ?', true]
+  named_scope :is_moderator, :conditions => {:moderator => true}
+  named_scope :is_admin, :conditions => {:admin => true}
 
   has_attached_file :avatar, 
   :whiny => false, 
