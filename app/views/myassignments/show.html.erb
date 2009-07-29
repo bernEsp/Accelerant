@@ -1,4 +1,5 @@
 <h1 class="lower">Your Assignments:</h1>
+<p>&nbsp;</p>
 <% for assignment in @your_assignments %>
 	<% if assignment %>
 	<% assignment_detail = Project.find(:last, :conditions => {:id => assignment.project_id}, :limit => 1) %>

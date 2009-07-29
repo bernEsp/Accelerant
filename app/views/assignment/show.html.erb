@@ -42,14 +42,6 @@
     </div>
 <% end %>
 <% end %>
-<% i = 0 %>
-<% for comment in @latest_postings %>
-  <% if comment.user.moderator || comment.user.admin %>
-  <% i = i+1 %>
-  <a href="#<%= comment.id %>">Comment #<%= i %></a><br/>
-<% end  %>
-
-<% end  %>
 	<div id="responses">
     <div class="clientMainEntry" id="latestresponse">
       
