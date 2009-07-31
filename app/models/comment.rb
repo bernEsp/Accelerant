@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
   belongs_to :user
-  belongs_to :project
+  belongs_to :discussion
   belongs_to :comment_assignment
 
   named_scope :is_moderator, :joins => :users, :conditions => ['user.moderator = ?', true]

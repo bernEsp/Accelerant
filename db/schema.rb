@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090724143732) do
+ActiveRecord::Schema.define(:version => 20090729181111) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20090724143732) do
     t.integer  "comment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "discussion_id"
   end
 
   create_table "comments", :force => true do |t|
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20090724143732) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "project_id"
+    t.integer  "discussion_id"
   end
 
   create_table "companies", :force => true do |t|
@@ -64,6 +66,14 @@ ActiveRecord::Schema.define(:version => 20090724143732) do
     t.string   "country",    :limit => 2,  :default => "US"
     t.string   "phone",      :limit => 20
     t.string   "fax",        :limit => 20
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "discussions", :force => true do |t|
+    t.text     "title"
+    t.text     "content"
+    t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

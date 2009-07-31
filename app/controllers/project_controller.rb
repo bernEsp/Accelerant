@@ -1,4 +1,5 @@
 class ProjectController < ApplicationController
+
   
   def index
     @these_projects = Project.find(:all)

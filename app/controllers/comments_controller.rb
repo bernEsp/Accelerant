@@ -16,24 +16,24 @@ class CommentsController < ApplicationController
   end
   
   def get
-    @comment = Coment.new
+    @comment = Comment.new
   end
 
   def create
     @comment = Comment.new(params[:comments])
     @comment.save
     #new stuff
-      if self.current_user.admin
-      @user_assignments = params[:comment_assignment]
-      @these_keys = @user_assignments.keys
-      @user_assignments.each do |key, value|
-        if value=="0"
-          @comment_assignment = CommentAssignments.new
-          @comment_assignment.update_attributes(:user_id => key, :comment_id => @comment.id)
-          @comment_assignment.save
-        end
-      end
-    end
+      #if self.current_user.admin
+      #@user_assignments = params[:comment_assignment]
+      #@these_keys = @user_assignments.keys
+      #@user_assignments.each do |key, value|
+        #if value=="0"
+          #@comment_assignment = CommentAssignments.new
+          #@comment_assignment.update_attributes(:user_id => key, :comment_id => @comment.id)
+          #@comment_assignment.save
+        #end
+      #end
+    #end
     redirect_to "/assignment/#{@comment.project_id}"
   end
   

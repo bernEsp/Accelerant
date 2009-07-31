@@ -46,6 +46,7 @@ doc\:plugins\:comma=Generate documentation for the comma plugin
 doc\:plugins\:fckeditor=Generate documentation for the fckeditor plugin
 doc\:plugins\:paperclip=Generate documentation for the paperclip plugin
 doc\:plugins\:restful-authentication=Generate documentation for the restful-authentication plugin
+doc\:plugins\:ssl_requirement=Generate documentation for the ssl_requirement plugin
 doc\:plugins\:svn=Generate documentation for the svn plugin
 doc\:plugins\:yui_editor=Generate documentation for the yui_editor plugin
 doc\:rails=Build the rails HTML Files
