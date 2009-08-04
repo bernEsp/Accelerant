@@ -1,11 +1,12 @@
-  <!-- Discussion form -->
+  <!-- Discussion form  (Admin Mod posts new discussion)-->
   <% if self.current_user.moderator? || self.current_user.admin? %>
-  <div id="discussion_form" style="margin-left:100px;">
+  <a href="#" onclick ="Effect.SlideDown('discussion_form');">Add a discussion topic</a><br/>
+  <div id="discussion_form" style="margin-left:100px;display:none;">
   <% form_for :discussion,
             :html => {:id => "top_form"},
             :url => {:controller => 'discussion', :action => 'create'} do |f|%>
   Discussion Title: <%= f.text_field :title %><br/>
-  <%= f.text_area :content, :size => "60x5" %>
+  <%= f.text_area :content, :size => "60x5", :class => 'rich_text_editor' %>
 
 			<fieldset style="margin-top:15px;">
 				<input id="check_all" name="check_all" type="checkbox" onclick="Form.getInputs('top_form', 'checkbox').each(function(box){box.checked = $('check_all').checked})" /> <strong>Select All</strong><br/><br/>
@@ -14,6 +15,7 @@
 				<% end %>
 			</fieldset>
 <%= f.hidden_field :project_id, :value => params[:id] %>
+  <%= f.hidden_field :user_id, :value => self.current_user.id %>
   <%= submit_tag "Post Discussion", :style => "margin-right:50px;" %>
   <% end  %>
   </div>

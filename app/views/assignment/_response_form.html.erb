@@ -8,11 +8,11 @@
 			<% if self.current_user.avatar_file_name %>
 			<%= image_tag self.current_user.avatar.url(:small) %>
 			<% end %>
-		</div>
+	</div>
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "60 x 5", :class => 'rich_text_editor' %><br/>
+          	<%= f.text_area :comment, :size => "60 x 5" %><br/>
 				Upload a photo or file:<br/>
 			<%= f.file_field :photo %>
 			<% if logged_in? %>
@@ -23,7 +23,7 @@
 			<div class="postButton" style="margin-top:-20px;">
             <!-- <input type="image" src="../images/btn_post.gif" /> -->
 			<%= submit_tag "Post Your Comment", :style => "margin-right:50px;" %>
-          </div>
+                        </div>
           </div>
 
 

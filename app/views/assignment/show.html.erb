@@ -4,28 +4,81 @@
   <%= render :partial => 'discussion_form' %>
 
 
-  <!-- Start Discussion Topics -->
+  <!-- Start Discussion Topic links -->
   <% talk_count = Discussion.count(:all, :conditions => {:project_id => params[:id]}) %>
   <%if talk_count > 1 %>
-  <fieldset>
+  <fieldset style="background-color:#e9e9e9;border:none;">
     <legend>Jump to discussion topic</legend>
   <% for discussion in @discussions %>
-  <a href='#<%= discussion.id %>'><%= discussion.title %></a><br/>
+    <a href='#<%= discussion.id %>' 
+       onclick="Effect.SlideDown('discussion<%= discussion.id %>');return false;"
+       style="font-size:18px;font-weight:bold;color:#000;line-height:24px;">
+      <%= discussion.title %>
+    </a><br/>
   <% end %>
   </fieldset>
   <% end  %>
 
-  <!-- End Discussion Topics -->
+  <!-- End Discussion Topic links -->
+
+
+  <% this_is_first = "" %>
 
   <% for discussion in @discussions_desc %>
-  <a name="<%= discussion.id %>"></a>
-  <h4><%= discussion.title %></h4>
-  <p><%= discussion.content %></p>
-  <% if discussion.id == Discussion.maximum(:id) %>
-          <div id="topResponse">
-              <%= render :partial => 'response_form' %>
+  <% if this_is_first == "" %>
+  <%  this_is_first = true %>
+  <% else %>
+  <% this_is_first = false %>
+  <% end  %>
+  <div id="discussion<%= discussion.id %>" <%unless this_is_first %> style='display:none;clear:both;' <% end %> >
+  <a name="<%= discussion.id %>"></a><br/>
+  <div class="topResponseBox" style="background-color:#f8f8f8;">
+    <h1><%= discussion.title %></h1>
+  <div class="avatar">
+          <% if discussion.user %>
+            <%= image_tag discussion.user.avatar.url(:small) %>
+          <% else %>
+            &nbsp;
+          <% end %>
+  </div>
+  <div class="responseWidget" style="padding-top:15px;"><p><%= discussion.content %></p></div>
+  </div>
+          <div id="topResponse<%= discussion.id %>" style="padding-top:15px;clear:both;" >
+              <% form_for :comments,
+		#:update => "latestresponse",
+		#:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
+		:html => {:id => "my_form", :multipart => true},
+		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
+        <div class="avatar">
+          <% if self.current_user.avatar_file_name %>
+          <%= image_tag self.current_user.avatar.url(:small) %>
+          <% end %>
+	</div>
+        <div class="topResponseBox">
+          <h1>Post Your Response:</h1>
+          <div class="responseWidget">
+          	<%= f.text_area :comment, :size => "60 x 10" %><br/>
+				Upload a photo or file:<br/>
+			<%= f.file_field :photo %>
+			<% if logged_in? %>
+			<%= f.hidden_field :user_id, :value => self.current_user.id %>
+			<% end %>
+			<%= f.hidden_field :project_id, :value => params[:id] %>
+                        <%= f.hidden_field :discussion_id, :value => discussion.id %>
+			<div class="postButton" style="margin-top:-20px;">
+			<%= submit_tag "Post Your Comment", :style => "margin-right:50px;" %>
+                        </div>
           </div>
-  <% end %>
+
+
+        </div>
+
+
+      <% end -%><!-- form for -->
+  </div>
+  
+          
+  
   
     <div id="responses">
     <div class="clientMainEntry" id="latestresponse"></div>
@@ -71,7 +124,7 @@
 				:update => "commentSub#{comment.id}" %>
 			<% end %>
 			
-			</p>
+			
 			
 			
 		<div id="subCommentForm<%= comment.id %>"></div>
@@ -147,7 +200,7 @@
 					:update => "commentSub#{comment.id}" %>
 				<% end %>
 
-				</p>
+				
 
 
 			<div id="subCommentForm<%= comment.id %>"></div>
@@ -189,12 +242,15 @@
 			<hr noshade="noshade"/>
 	    </div>
 		
-		<% end %>
 	<% end %>
+  <% end %>
 <% end %>
-</div><!-- responses -->
+    </div><!-- responses -->
+</div>
 <% end %>
-</div> 
+  
+
+</div> <!-- right column -->
  	<% if self.current_user.admin %>
 	<%= link_to "CSV", :controller => 'comment', :action => 'export_to_csv', :id => params[:id], :format => 'csv' %>
 	<% end %>  
