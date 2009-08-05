@@ -8,12 +8,13 @@
   Discussion Title: <%= f.text_field :title %><br/>
   <%= f.text_area :content, :size => "60x5", :class => 'rich_text_editor' %>
 
-			<fieldset style="margin-top:15px;">
-				<input id="check_all" name="check_all" type="checkbox" onclick="Form.getInputs('top_form', 'checkbox').each(function(box){box.checked = $('check_all').checked})" /> <strong>Select All</strong><br/><br/>
-				<% for participant in @project_members %>
-					<%= check_box("comment_assignment", participant.user.id, {}, "#{participant.user.id}") %>  <%= participant.user.name %><br/>
-				<% end %>
-			</fieldset>
+<fieldset style="margin-top:15px;">
+  <legend>Send to:</legend>
+	<input id="check_all" name="check_all" type="checkbox" onclick="Form.getInputs('top_form', 'checkbox').each(function(box){box.checked = $('check_all').checked})" /> <strong>Select All</strong><br/><br/>
+	<% for participant in @project_members %>
+		<div style="float:left;"><%= check_box("comment_assignment", participant.user.id, {}, "#{participant.user.id}") %>  <%= participant.user.name %>&nbsp;&nbsp;</div>
+	<% end %>
+</fieldset>
 <%= f.hidden_field :project_id, :value => params[:id] %>
   <%= f.hidden_field :user_id, :value => self.current_user.id %>
   <%= submit_tag "Post Discussion", :style => "margin-right:50px;" %>
