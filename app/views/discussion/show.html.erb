@@ -1,21 +1,12 @@
-
+<!-- discussion/show -->
 <div id="rightColumn">
-
-  <%= render :partial => 'discussion_form' %>
-
-
-  <!-- Start Discussion Topic links -->
-  <% talk_count = Discussion.count(:all, :conditions => {:project_id => params[:id]}) %>
+<!-- Start Discussion Topic links -->
+  <% talk_count = Discussion.count(:all, :conditions => {:project_id => params[:project_id]}) %>
   <%if talk_count > 1 %>
   <fieldset style="background-color:#e9e9e9;border:none;">
     <legend>Jump to discussion topic</legend>
   <% for discussion in @discussions %>
-    <!-- <a href='#<%= discussion.id %>'
-       onclick="Effect.SlideDown('discussion<%= discussion.id %>');return false;"
-       style="font-size:18px;font-weight:bold;color:#000;line-height:24px;">
-      <%#= discussion.title %>
-    </a> -->
-  <%= link_to discussion.title,
+      <%= link_to discussion.title,
     {:controller => "discussion", :id => discussion.id, :action => 'show', :project_id => discussion.project_id},
     :class => 'discussion_links'%><br/>
   <% end %>
@@ -23,30 +14,23 @@
   <% end  %>
 
   <!-- End Discussion Topic links -->
-
-
-  <% this_is_first = "" %>
-
-  <% for discussion in @discussions_desc %>
-  <% if this_is_first == "" %>
-  <%  this_is_first = true %>
-  <% else %>
-  <% this_is_first = false %>
-  <% end  %>
-  <div id="discussion<%= discussion.id %>" <%unless this_is_first %> style='display:none;clear:both;' <% end %> >
-  <a name="<%= discussion.id %>"></a><br/>
+<hr/>
+  
   <div class="topResponseBox" style="background-color:#f8f8f8;">
-    <h1><%= discussion.title %></h1>
+    <h1><%= @discussion.title %></h1>
   <div class="avatar">
-          <% if discussion.user %>
-            <%= image_tag discussion.user.avatar.url(:small) %>
+          <% if @discussion.user %>
+            <%= image_tag @discussion.user.avatar.url(:small) %>
           <% else %>
             &nbsp;
           <% end %>
   </div>
-  <div class="responseWidget" style="padding-top:15px;"><p><%= discussion.content %></p></div>
+  <div class="discussionWidget" style="padding-top:15px;"><p><%= @discussion.content %></p></div>
   </div>
-          <div id="topResponse<%= discussion.id %>" style="padding-top:15px;clear:both;" >
+  
+  <!-- Response form starts here -->
+
+          <div id="topResponse<%= @discussion.id %>" style="padding-top:15px;clear:both;" >
               <% form_for :comments,
 		#:update => "latestresponse",
 		#:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
@@ -66,8 +50,8 @@
 			<% if logged_in? %>
 			<%= f.hidden_field :user_id, :value => self.current_user.id %>
 			<% end %>
-			<%= f.hidden_field :project_id, :value => params[:id] %>
-                        <%= f.hidden_field :discussion_id, :value => discussion.id %>
+			<%= f.hidden_field :project_id, :value => params[:project_id] %>
+                        <%= f.hidden_field :discussion_id, :value => @discussion.id %>
 			<div class="postButton" style="margin-top:-20px;">
 			<%= submit_tag "Post Your Comment", :style => "margin-right:50px;" %>
                         </div>
@@ -78,18 +62,15 @@
 
 
       <% end -%><!-- form for -->
-  </div>
-  
-          
-  
-  
-    <div id="responses">
+          </div>
+
+      <div id="responses">
     <div class="clientMainEntry" id="latestresponse"></div>
     	<!-- Start comments -->
-        <% @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :limit => 20, :order => "id DESC", :include => :user)  %>
+        <% @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => @discussion.id }, :limit => 20, :order => "id DESC", :include => :user)  %>
 		<% for comment in @latest_postings_redux %>
 		<% not_visible = CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id, :comment_id => comment.id })%>
-		<% my_project = Project.find(:last, :conditions => {:id => params[:id]}) %>
+		<% my_project = Project.find(:last, :conditions => {:id => params[:project_id]}) %>
 		<% if (!not_visible && !my_project.one_to_one)  %>
 		<div class="clientSubComment" id="commentSub<%= comment.id%>"><a name="#<%=comment.id%>"></a>
 	      <div class="subCommentAvatar">
@@ -98,7 +79,7 @@
 			<% end %>
 			</div>
 	     <div class="clientSubCommentText" >
-		 <p>	
+		 <p>
 
 			<strong><%=h comment.user.name %></strong>
 		<%=comment.comment %>
@@ -118,18 +99,18 @@
 			:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
 			:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
 			:onclick => '',
-			:update => "subCommentForm#{comment.id}" %> 
+			:update => "subCommentForm#{comment.id}" %>
 			<% if (comment.user.id == self.current_user.id) || self.current_user.admin %>
-				| <%= link_to_remote "Delete", 
+				| <%= link_to_remote "Delete",
 				:confirm => "Are you sure you want to delete this?",
 				:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
 				:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
 				:update => "commentSub#{comment.id}" %>
 			<% end %>
-			
-			
-			
-			
+
+
+
+
 		<div id="subCommentForm<%= comment.id %>"></div>
 		<div id="reclaimer<%= comment.id %>"></div>
 		<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
@@ -143,16 +124,16 @@
 						<a href='<%=replies.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 					<% end %>
 				<% end %>
-				posted by 
+				posted by
 				<% if replies.user.name == self.current_user.name %>
-					you 
+					you
 				<% else %>
-					<%= replies.user.name%>  
+					<%= replies.user.name%>
 				<% end %>
 				<%= time_ago_in_words(replies.created_at) %> ago
 				<% if (replies.user.id == self.current_user.id) || self.current_user.admin %>
 
-					| <%= link_to_remote "Delete", 
+					| <%= link_to_remote "Delete",
 					:confirm => "Are you sure you want to delete this?",
 					:url => {:controller => 'plain', :action => 'drop_reply', :id => replies.id},
 					:complete => "new Effect.Fade('reply#{replies.id}', { duration: 2 })",
@@ -174,7 +155,7 @@
 				<% end %>
 				</div>
 		     <div class="clientSubCommentText" >
-			 <p>	
+			 <p>
 
 				<strong><%=h comment.user.name %></strong>
 			<%=comment.comment %>
@@ -191,19 +172,19 @@
 
 			<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
 				| <%= link_to_remote 'Add Comment',
-				:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
+				:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id, :project_id => params[:project_id]},
 				:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
 				:onclick => '',
-				:update => "subCommentForm#{comment.id}" %> 
+				:update => "subCommentForm#{comment.id}" %>
 				<% if (comment.user.id == self.current_user.id) || self.current_user.admin %>
-					| <%= link_to_remote "Delete", 
+					| <%= link_to_remote "Delete",
 					:confirm => "Are you sure you want to delete this?",
 					:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
 					:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
 					:update => "commentSub#{comment.id}" %>
 				<% end %>
 
-				
+
 
 
 			<div id="subCommentForm<%= comment.id %>"></div>
@@ -211,7 +192,7 @@
 			<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
 			<% for this_reply in @replies %>
 				<% if (this_reply.user.id == self.current_user.id) || (this_reply.user.admin || this_reply.user.moderator) || self.current_user.admin || self.current_user.moderator %>
-				
+
 				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>"><%= image_tag this_reply.user.avatar.url(:smaller) %>&nbsp;&nbsp;<%= this_reply.content %>
 					<% if this_reply.media_file_name %>
 						<% if this_reply.media_content_type =~ /image.*/  %>
@@ -220,17 +201,17 @@
 							<a href='<%=this_reply.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 						<% end %>
 					<% end %>
-		
+
 					<br/>
-					posted by 
+					posted by
 					<% if this_reply.user.name == self.current_user.name %>
-						you 
+						you
 					<% else %>
-						<%= this_reply.user.name%>  
+						<%= this_reply.user.name%>
 					<% end %>
 					<%= time_ago_in_words(this_reply.created_at) %> ago
 					<% if (this_reply.user.id == self.current_user.id) || self.current_user.admin %>
-						| <%= link_to_remote "Delete", 
+						| <%= link_to_remote "Delete",
 						:confirm => "Are you sure you want to delete this?",
 						:url => {:controller => 'plain', :action => 'drop_reply', :id => this_reply.id},
 						:complete => "new Effect.Fade('reply#{this_reply.id}', { duration: 2 })",
@@ -244,20 +225,10 @@
 			</div>
 			<hr noshade="noshade"/>
 	    </div>
-		
+
 	<% end %>
   <% end %>
 <% end %>
     </div><!-- responses -->
-</div>
-<% end %>
   
-
-</div> <!-- right column -->
- 	<% if self.current_user.admin %>
-	<%= link_to "CSV", :controller => 'comment', :action => 'export_to_csv', :id => params[:id], :format => 'csv' %>
-	<% end %>  
- 
-	      <!-- <div class="viewAll">- <a href="#">View All Comments</a></div> -->
- 
-<%#= periodically_call_remote(:url => {:controller => 'plain', :action => 'showlatest', :id => params[:id]}, :frequency => '30', :update => 'responses')%>
+</div>

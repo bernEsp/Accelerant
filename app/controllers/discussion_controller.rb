@@ -22,4 +22,11 @@ class DiscussionController < ApplicationController
     redirect_to "/assignment/#{@discussion.project_id}"
   end
 
+  def show
+    @project_members = UserAssignments.find(:all, :conditions => {:project_id => params[:project_id]}, :include => :user)
+    @project = Project.find(:all, :conditions => {:id => params[:project_id]})
+    @discussions = Discussion.find(:all, :conditions => {:project_id => params[:project_id]})
+    @discussion = Discussion.find(params[:id])
+  end
+
 end

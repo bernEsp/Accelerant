@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
         #end
       #end
     #end
-    redirect_to "/assignment/#{@comment.project_id}"
+    redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}"
   end
   
   def destroy

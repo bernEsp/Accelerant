@@ -16,6 +16,8 @@ Upload a photo or file:<br/>
 </div>
 
 <%= f.hidden_field :comment_id, :value => params[:id] %>
+<%= hidden_field :project_id, :value => params[:project_id] %>
+<input type="hidden" name="project_id" value="<%= params[:project_id] %>" >
 
 <%= f.hidden_field :user_id, :value => self.current_user.id %>
 
