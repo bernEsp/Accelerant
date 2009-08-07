@@ -24,16 +24,9 @@
 
   <!-- End Discussion Topic links -->
 
+  <% discussion = @discussions_desc %>
 
-  <% this_is_first = "" %>
-
-  <% for discussion in @discussions_desc %>
-  <% if this_is_first == "" %>
-  <%  this_is_first = true %>
-  <% else %>
-  <% this_is_first = false %>
-  <% end  %>
-  <div id="discussion<%= discussion.id %>" <%unless this_is_first %> style='display:none;clear:both;' <% end %> >
+  <div id="discussion<%= discussion.id %>"  >
   <a name="<%= discussion.id %>"></a><br/>
   <div class="topResponseBox" style="background-color:#f8f8f8;">
     <h1><%= discussion.title %></h1>
@@ -60,7 +53,7 @@
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
           <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "60 x 10" %><br/>
+          	<%= f.text_area :comment, :size => "60 x 10", :class => 'rich_text_editor' %><br/>
 				Upload a photo or file:<br/>
 			<%= f.file_field :photo %>
 			<% if logged_in? %>
@@ -250,7 +243,7 @@
 <% end %>
     </div><!-- responses -->
 </div>
-<% end %>
+
   
 
 </div> <!-- right column -->

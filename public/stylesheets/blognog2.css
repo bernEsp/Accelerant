@@ -277,3 +277,38 @@ img {
 .infoBoxTight	{background:#cdd7de;margin:2px 2px 2px 200px;padding:2px;width:500px;}
 
 .discussion_links {font-size:18px;font-weight:bold;color:#000;line-height:24px;}
+
+.cellClass15	{
+	display:inline-block;
+	width:15%;
+	font-size: 12px;
+	margin: 0 10px;
+}
+
+.cellClass50	{
+	display:inline-block;
+	width:50px;
+	font-size: 12px;
+	margin: 0 0px;
+}
+
+.cellClass150	{
+	display:inline-block;
+	width:150px;
+	float:left;
+	margin: 0 0px;
+}
+
+.cellClass30	{
+	display:inline-block;
+	width:30%;
+	font-size: 12px;
+	margin: 0 10px;
+}
+
+.cellClass40	{
+	display:inline-block;
+	width:40%;
+	font-size: 12px;
+	margin: 0 10px;
+}
