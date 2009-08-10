@@ -3,6 +3,9 @@ class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
+  #ssl_required :create, :update, :new, :edit, :sign_in
+  ssl_allowed :create
+
   # render new.rhtml
   def new
   end
