@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   include AuthenticatedSystem
 
   ssl_required :create
-  ssl_allowed :create
+  #ssl_allowed :create
 
   # render new.rhtml
   def new
