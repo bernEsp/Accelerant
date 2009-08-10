@@ -1,5 +1,6 @@
 class MyaccountController < ApplicationController
   before_filter :login_required
+  ssl_allowed :index, :edit, :update
   def index
     @user = User.find(:last, :conditions => { :id => self.current_user.id})
   end
