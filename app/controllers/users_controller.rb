@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
+  ssl_allowed :index, :show, :update, :new, :create
   
   def index
     @users = User.find(:all)
