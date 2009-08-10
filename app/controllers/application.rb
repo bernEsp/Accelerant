@@ -14,6 +14,6 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   include AuthenticatedSystem
   include SslRequirement
-  
+  ssl_required
   uses_yui_editor
 end
