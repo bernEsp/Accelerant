@@ -37,7 +37,7 @@
             &nbsp;
           <% end %>
   </div>
-  <div class="responseWidget" style="padding-top:15px;"><%= discussion.content %></div>
+  <div class="responseWidget" style="padding-top:15px;"><%=h discussion.content %></div>
   </div>
           <div id="topResponse<%= discussion.id %>" style="padding-top:15px;clear:both;" >
               <% form_for :comments,
