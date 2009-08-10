@@ -1,5 +1,6 @@
 class ProjectController < ApplicationController
 
+  ssl_required :index, :new, :create, :edit, :update, :drop
   
   def index
     @these_projects = Project.find(:all)
