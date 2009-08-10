@@ -1,4 +1,5 @@
 <h1 class="lower">Edit this Project</h1>
+<div style="width:400px;float:left;">
 <% form_for @this_project,
 :html => { :multipart => true } do |f| -%>
 
@@ -18,13 +19,13 @@
 	<%= f.file_field :photo %>
 </p>
 
-<p>
-	<%= f.check_box :one_to_one %> This project is "one-to-one"
-</p>
 
-<p>
-	<%= f.check_box :response_box %> Show "response box"
-</p>
+<%= f.check_box :one_to_one %> This project is "one-to-one" <br/>
+
+
+
+<%= f.check_box :response_box %> Show "response box"<br/>
+
 
 <p>
 	Client:<br/>
@@ -33,3 +34,4 @@
   
 <p><%= submit_tag 'Enter' %></p>
 <% end -%>
+</div>

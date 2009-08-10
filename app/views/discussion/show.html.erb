@@ -22,7 +22,7 @@
           <% if @discussion.user %>
             <%= image_tag @discussion.user.avatar.url(:small) %>
           <% else %>
-            &nbsp;
+            <%= image_tag "gravatar-40.png" %>
           <% end %>
   </div>
   <div class="discussionWidget" style="padding-top:15px;"><p><%= @discussion.content %></p></div>
@@ -39,6 +39,8 @@
         <div class="avatar">
           <% if self.current_user.avatar_file_name %>
           <%= image_tag self.current_user.avatar.url(:small) %>
+          <% else %>
+            <%= image_tag "gravatar-40.png" %>
           <% end %>
 	</div>
         <div class="topResponseBox">
@@ -76,6 +78,8 @@
 	      <div class="subCommentAvatar">
 			<% if comment.user.avatar_file_name %>
 				<%= image_tag comment.user.avatar.url(:small) %>
+                        <% else %>
+                            <%= image_tag "gravatar-20.png" %>
 			<% end %>
 			</div>
 	     <div class="clientSubCommentText" >
@@ -152,6 +156,8 @@
 		      <div class="subCommentAvatar">
 				<% if comment.user.avatar_file_name %>
 					<%= image_tag comment.user.avatar.url(:small) %>
+                                       <% else %>
+                                       <%= image_tag "gravatar-20.png" %>
 				<% end %>
 				</div>
 		     <div class="clientSubCommentText" >

@@ -1,5 +1,5 @@
 <h1 class="lower">Create a New Project</h1>
-
+<div style="width:400px;float:left;">
 <% form_for :projects, @this_project,
 :html => { :multipart => true },
 :url =>{:controller => 'project', :action => 'create' } do |f| -%>
@@ -32,3 +32,4 @@
   
 <p><%= submit_tag 'Enter' %></p>
 <% end -%>
+</div>

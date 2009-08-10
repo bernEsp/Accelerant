@@ -268,8 +268,9 @@ img {
 	float:right;
 	display:inline;
 	margin-right:30px;
-	line-height:39px;
+	line-height:20px;
 	color:#4491c3;
+        text-align:right;
 }
 
 .infoBox	{background:#cdd7de;margin:5px;padding:5px;float:right;width:600px;}

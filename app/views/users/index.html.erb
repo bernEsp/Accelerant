@@ -4,7 +4,13 @@
 
 <% for user in @users %>
   <tr id="<%= dom_id(user) %>">
-	<td><%if user.avatar.url %><%= image_tag user.avatar.url(:small) %><% end %></td>
+	<td>
+<%if user.avatar_file_name %>
+  <%= image_tag user.avatar.url(:small) %>
+<% else  %>
+  <%= image_tag "gravatar-40.png" %>
+  <% end %>
+        </td>
     <td><%=h user.login %></td>
     <td><%=h user.name %></td>
     <td>

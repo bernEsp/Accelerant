@@ -25,7 +25,7 @@
   <!-- End Discussion Topic links -->
 
   <% discussion = @discussions_desc %>
-
+  <% if discussion %>
   <div id="discussion<%= discussion.id %>"  >
   <a name="<%= discussion.id %>"></a><br/>
   <div class="topResponseBox" style="background-color:#f8f8f8;">
@@ -48,6 +48,8 @@
         <div class="avatar">
           <% if self.current_user.avatar_file_name %>
           <%= image_tag self.current_user.avatar.url(:small) %>
+          <% else %>
+          <%= image_tag "gravatar-40.png" %>
           <% end %>
 	</div>
         <div class="topResponseBox">
@@ -88,7 +90,9 @@
 	      <div class="subCommentAvatar">
 			<% if comment.user.avatar_file_name %>
 				<%= image_tag comment.user.avatar.url(:small) %>
-			<% end %>
+                        <% else %>
+                          <%= image_tag "gravatar-40.png" %>
+                        <% end %>
 			</div>
 	     <div class="clientSubCommentText" >
 		 <p>	
@@ -164,6 +168,8 @@
 		      <div class="subCommentAvatar">
 				<% if comment.user.avatar_file_name %>
 					<%= image_tag comment.user.avatar.url(:small) %>
+                                <% else %>
+                                    <%= image_tag "gravatar-20.png" %>
 				<% end %>
 				</div>
 		     <div class="clientSubCommentText" >
@@ -243,7 +249,7 @@
 <% end %>
     </div><!-- responses -->
 </div>
-
+<% end  %>
   
 
 </div> <!-- right column -->

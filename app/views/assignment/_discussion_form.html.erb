@@ -1,12 +1,12 @@
   <!-- Discussion form  (Admin Mod posts new discussion)-->
   <% if self.current_user.moderator? || self.current_user.admin? %>
   <a href="#" onclick ="Effect.SlideDown('discussion_form');">Add a discussion topic</a><br/>
-  <div id="discussion_form" style="margin-left:100px;display:none;">
+  <div id="discussion_form" style="float:left;display:none;">
   <% form_for :discussion,
             :html => {:id => "top_form"},
             :url => {:controller => 'discussion', :action => 'create'} do |f|%>
   Discussion Title: <%= f.text_field :title %><br/>
-  <%= f.text_area :content, :size => "60x5", :class => 'rich_text_editor' %>
+  <%= f.text_area :content, :size => "60x10", :class => 'rich_text_editor' %>
 
 <fieldset style="margin-top:15px;">
   <legend>Send to:</legend>

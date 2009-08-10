@@ -34,9 +34,11 @@
 
 	<% if @project && (self.current_user.participant? || self.current_user.admin) %>
 	<div id="assignmentBox">
+          <a href='http://www.BlogNogResearch.com'><%= image_tag "BlogNog.png", :style => "float:right;" %></a>
 	<% for this_assignment in @project %>
     <h1><%= this_assignment.title %></h1>
     <h2>Project Overview:</h2>
+    
     <p>
 	<%=this_assignment.description %>
 		<% if this_assignment.photo_file_name %>
@@ -103,10 +105,9 @@
 <!-- Yield ends here -->
 
     <div id="footer">
-      <a href='http://www.BlogNogResearch.com'><%= image_tag "BlogNog.png" %></a>
-      Brought to you by:
-      <a href='http://www.AccelerantResearch.com' target="_blank"><%= image_tag "Logo_final.png" %></a>
-      <div class="copyright">&copy; Copyright <%= Time.now.strftime("%Y") %> BlogNogResearch.com</div>
+      <div class="copyright"><a href='http://www.AccelerantResearch.com' target="_blank"><%= image_tag "Logo_final2.png" %></a>
+        <br/>
+        &copy; Copyright <%= Time.now.strftime("%Y") %> BlogNogResearch.com</div>
     </div>
   </div>
 </div>
