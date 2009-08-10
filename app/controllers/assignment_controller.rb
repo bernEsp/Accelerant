@@ -1,6 +1,6 @@
 class AssignmentController < ApplicationController
 
-  ssl_allowed :index, :new, :create, :edit, :update, :drop, :assign, :show
+  ssl_required :index, :new, :create, :edit, :update, :drop, :assign, :show
   
   def index
     @all_assignment = Project.find(:all)
