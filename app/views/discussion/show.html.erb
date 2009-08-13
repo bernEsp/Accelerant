@@ -3,21 +3,22 @@
 <!-- Start Discussion Topic links -->
   <% talk_count = Discussion.count(:all, :conditions => {:project_id => params[:project_id]}) %>
   <%if talk_count > 1 %>
-  <fieldset style="background-color:#e9e9e9;border:none;">
-    <legend>Jump to discussion topic</legend>
+  <fieldset class="discussionLinks">
+    <legend>Jump to discussion topic:</legend>
+    <p>&nbsp;</p>
   <% for discussion in @discussions %>
-      <%= link_to discussion.title,
+      <p><%= link_to discussion.title,
     {:controller => "discussion", :id => discussion.id, :action => 'show', :project_id => discussion.project_id},
-    :class => 'discussion_links'%><br/>
+    :class => 'discussion_links'%></p>
   <% end %>
   </fieldset>
   <% end  %>
 
   <!-- End Discussion Topic links -->
-<hr/>
   
-  <div class="topResponseBox" style="background-color:#f8f8f8;">
-    <h1><%= @discussion.title %></h1>
+  <fieldset class="discussionLinks" >
+    <legend><%= @discussion.title %></legend>
+    <p>&nbsp;</p>
   <div class="avatar">
           <% if @discussion.user %>
             <%= image_tag @discussion.user.avatar.url(:small) %>
@@ -25,12 +26,22 @@
             <%= image_tag "gravatar-40.png" %>
           <% end %>
   </div>
-  <div class="discussionWidget" style="padding-top:15px;"><p><%= @discussion.content %></p></div>
+  <div class="discussionWidget" style="padding-top:15px;"><p><%= @discussion.content %></p>
+  <% if @discussion.media_content_type %>
+		<% if @discussion.media_content_type =~ /image.*/  %>
+			<a href='<%=@discussion.media.url%>' target="_blank">
+			<%= image_tag @discussion.media.url(:small), :style => "margin-left:40px;" %>
+			</a>
+		<% else %>
+			<p><a href='<%=@discussion.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
+		<% end %>
+		<% end %>
   </div>
+  </fieldset>
   
   <!-- Response form starts here -->
 
-          <div id="topResponse<%= @discussion.id %>" style="padding-top:15px;clear:both;" >
+          <div style="padding-top:15px;clear:both;" >
               <% form_for :comments,
 		#:update => "latestresponse",
 		#:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
@@ -55,7 +66,7 @@
 			<%= f.hidden_field :project_id, :value => params[:project_id] %>
                         <%= f.hidden_field :discussion_id, :value => @discussion.id %>
 			<div class="postButton" style="margin-top:-20px;">
-			<%= submit_tag "Post Your Comment", :style => "margin-right:50px;" %>
+			<%= submit_tag "Share", :style => "margin-right:10px;" %>
                         </div>
           </div>
 

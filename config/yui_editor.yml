@@ -43,14 +43,7 @@ editor_config_javascript: "
                 { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' },
                 { type: 'push', label: 'Create an Ordered List', value: 'insertorderedlist' }
             ]
-        },
-        { type: 'separator' },
-        { group: 'insertitem', label: '',
-            buttons: [
-                { type: 'push', label: 'HTML Link CTRL + SHIFT + L', value: 'createlink', disabled: true },
-                { type: 'push', label: 'Insert Image', value: 'insertimage' }
-            ]
-        }
+        }  
     ]
   }
 }"

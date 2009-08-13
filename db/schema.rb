@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090804202213) do
+ActiveRecord::Schema.define(:version => 20090813192556) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -77,6 +77,10 @@ ActiveRecord::Schema.define(:version => 20090804202213) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "media_file_name"
+    t.string   "media_content_type"
+    t.integer  "media_file_size"
+    t.datetime "media_updated_at"
   end
 
   create_table "moderators", :force => true do |t|

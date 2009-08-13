@@ -178,9 +178,13 @@ img {
 .topResponseBox {
 	width:520px;
 	float:left;
-/*	background:#cdd7de;*/
+	background:#f2f2f2;
 	padding:10px 0;
 	margin:0 0 0 10px;
+}
+
+.topResponseBox h1  {
+    margin-bottom:15px;
 }
 .responseWidget {
 	margin:0 0 0 10px;
@@ -268,7 +272,7 @@ img {
 	float:right;
 	display:inline;
 	margin-right:30px;
-	line-height:20px;
+	line-height:40px;
 	color:#4491c3;
         text-align:right;
 }
@@ -312,4 +316,38 @@ img {
 	width:40%;
 	font-size: 12px;
 	margin: 0 10px;
+}
+
+.BlogNogLogo {
+    margin: 10px 15px 0 0;
+}
+
+.discussionLinks {
+    background-color:#f2f2f2;
+    border:#cbcbcb solid 1px;
+    border-top:#919191 solid 2px;
+    clear:left;
+}
+
+.discussionLinks legend {
+    font-size:14px;
+    color:#000;
+}
+
+.discussionLinks a {
+    line-height:25px;
+    margin-left:15px;
+}
+
+.discussionLinksInner   {
+    margin-left:10px;
+}
+
+.adminFlyout {
+    background-color:#f2f2f2;
+    border:#cbcbcb solid 1px;
+    border-top:#919191 solid 2px;
+    clear:left;
+    width:99%;
+    float:left;
 }
