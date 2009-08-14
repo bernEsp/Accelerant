@@ -1,82 +1,11 @@
 <!-- discussion/show -->
 <div id="rightColumn">
-<!-- Start Discussion Topic links -->
-  <% talk_count = Discussion.count(:all, :conditions => {:project_id => params[:project_id]}) %>
-  <%if talk_count > 1 %>
-  <fieldset class="discussionLinks">
-    <legend>Jump to discussion topic:</legend>
-    <p>&nbsp;</p>
-  <% for discussion in @discussions %>
-      <p><%= link_to discussion.title,
-    {:controller => "discussion", :id => discussion.id, :action => 'show', :project_id => discussion.project_id},
-    :class => 'discussion_links'%></p>
-  <% end %>
-  </fieldset>
-  <% end  %>
+  <%= render :partial => 'assignment/discussion_links', :locals => {:discussions => @discussions, :project_id => params[:id]} %>
 
-  <!-- End Discussion Topic links -->
+  <%= render :partial => 'assignment/discussion_display', :locals => {:discussions => @discussion} %>
+
+  <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id]} %>
   
-  <fieldset class="discussionLinks" >
-    <legend><%= @discussion.title %></legend>
-    <p>&nbsp;</p>
-  <div class="avatar">
-          <% if @discussion.user %>
-            <%= image_tag @discussion.user.avatar.url(:small) %>
-          <% else %>
-            <%= image_tag "gravatar-40.png" %>
-          <% end %>
-  </div>
-  <div class="discussionWidget" style="padding-top:15px;"><p><%= @discussion.content %></p>
-  <% if @discussion.media_content_type %>
-		<% if @discussion.media_content_type =~ /image.*/  %>
-			<a href='<%=@discussion.media.url%>' target="_blank">
-			<%= image_tag @discussion.media.url(:small), :style => "margin-left:40px;" %>
-			</a>
-		<% else %>
-			<p><a href='<%=@discussion.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
-		<% end %>
-		<% end %>
-  </div>
-  </fieldset>
-  
-  <!-- Response form starts here -->
-
-          <div style="padding-top:15px;clear:both;" >
-              <% form_for :comments,
-		#:update => "latestresponse",
-		#:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
-		:html => {:id => "my_form", :multipart => true},
-		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
-        <div class="avatar">
-          <% if self.current_user.avatar_file_name %>
-          <%= image_tag self.current_user.avatar.url(:small) %>
-          <% else %>
-            <%= image_tag "gravatar-40.png" %>
-          <% end %>
-	</div>
-        <div class="topResponseBox">
-          <h1>Post Your Response:</h1>
-          <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "60 x 10", :class => 'rich_text_editor' %><br/>
-				Upload a photo or file:<br/>
-			<%= f.file_field :photo %>
-			<% if logged_in? %>
-			<%= f.hidden_field :user_id, :value => self.current_user.id %>
-			<% end %>
-			<%= f.hidden_field :project_id, :value => params[:project_id] %>
-                        <%= f.hidden_field :discussion_id, :value => @discussion.id %>
-			<div class="postButton" style="margin-top:-20px;">
-			<%= submit_tag "Share", :style => "margin-right:10px;" %>
-                        </div>
-          </div>
-
-
-        </div>
-
-
-      <% end -%><!-- form for -->
-          </div>
-
       <div id="responses">
     <div class="clientMainEntry" id="latestresponse"></div>
     	<!-- Start comments -->

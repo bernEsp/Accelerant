@@ -1,0 +1,22 @@
+<fieldset class="discussionLinks" >
+    <legend><%= discussions.title %></legend>
+    <p>&nbsp;</p>
+  <div class="avatar">
+          <% if discussions.user %>
+            <%= image_tag discussions.user.avatar.url(:small) %>
+          <% else %>
+            <%= image_tag "gravatar-40.png" %>
+          <% end %>
+  </div>
+  <div class="discussionWidget" style="padding-top:15px;"><p><%= discussions.content %></p>
+  <% if discussions.media_content_type %>
+		<% if discussions.media_content_type =~ /image.*/  %>
+			<a href='<%=discussions.media.url%>' target="_blank">
+			<%= image_tag discussions.media.url(:small), :style => "margin-left:40px;" %>
+			</a>
+		<% else %>
+			<p><a href='<%=discussions.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
+		<% end %>
+		<% end %>
+  </div>
+  </fieldset>

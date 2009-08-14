@@ -2,92 +2,18 @@
 <div id="rightColumn">
 
   <%= render :partial => 'discussion_form' %>
-
-
-  <!-- Start Discussion Topic links -->
-  <% talk_count = Discussion.count(:all, :conditions => {:project_id => params[:id]}) %>
-  <%if talk_count > 1 %>
-  <fieldset class="discussionLinks">
-    <legend>Jump to discussion topic:</legend>
-    <p>&nbsp;</p>
-  <% for discussion in @discussions %>
-  <p><%= link_to discussion.title,
-    {:controller => "discussion", :id => discussion.id, :action => 'show', :project_id => discussion.project_id},
-    :class => 'discussion_links'%></p>
-  <% end %>
-  </fieldset>
-  <% end  %>
-
-  <!-- End Discussion Topic links -->
+  
+  <%= render :partial => 'discussion_links', :locals => {:discussions => @discussions, :project_id => params[:id]} %>
 
   <% discussion = @discussions_desc %>
   <% if discussion %>
   <div id="discussion<%= discussion.id %>"  ><br/>
   
-  <fieldset class="discussionLinks" >
-    <legend><%= discussion.title %></legend>
-    <div class="discussionLinksInner">
-    <p>&nbsp;</p>
-  <div class="avatar">
-          <% if discussion.user %>
-            <%= image_tag discussion.user.avatar.url(:small) %>
-          <% else %>
-            <%= image_tag "gravatar-40.png" %>
-          <% end %>
-  </div>
-  <div class="responseWidget" style="padding-top:15px;">
-<%= discussion.content %><br/>
-  <% if discussion.media_content_type %>
-		<% if discussion.media_content_type =~ /image.*/  %>
-			<a href='<%=discussion.media.url%>' target="_blank">
-			<%= image_tag discussion.media.url(:small), :style => "margin-left:40px;" %>
-			</a>
-		<% else %>
-			<p><a href='<%=discussion.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
-		<% end %>
-		<% end %>
-  </div>
-    </div>
-  </fieldset>
+  <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
 
-    <!-- Response Form Starts -->
-          <div style="padding-top:15px;clear:both;"  >
-              <% form_for :comments,
-		:html => {:id => "my_form", :multipart => true},
-		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
-        <div class="avatar">
-          <% if self.current_user.avatar_file_name %>
-          <%= image_tag self.current_user.avatar.url(:small) %>
-          <% else %>
-          <%= image_tag "gravatar-40.png" %>
-          <% end %>
-	</div>
-        <div class="topResponseBox">
-          <h1>Post Your Response:</h1>
-          <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "60 x 10", :class => 'rich_text_editor' %><br/>
-				Upload a photo or file:<br/>
-			<%= f.file_field :photo %>
-			<% if logged_in? %>
-			<%= f.hidden_field :user_id, :value => self.current_user.id %>
-			<% end %>
-			<%= f.hidden_field :project_id, :value => params[:id] %>
-                        <%= f.hidden_field :discussion_id, :value => discussion.id %>
-			<div class="postButton" style="margin-top:-20px;">
-			<%= submit_tag "Share", :style => "margin-right:10px;" %>
-                        </div>
-          </div>
+  <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
 
 
-        </div>
-
-
-      <% end -%><!-- form for -->
-  </div>
-  
-          
-  
-  
     <div id="responses">
     <div class="clientMainEntry" id="latestresponse"></div>
     	<!-- Start comments -->
@@ -263,10 +189,7 @@
   
 
 </div> <!-- right column -->
- 	<% if self.current_user.admin %>
-	<%= link_to "CSV", :controller => 'comment', :action => 'export_to_csv', :id => params[:id], :format => 'csv' %>
-	<% end %>  
+<% if self.current_user.admin %>
+<%= link_to "CSV", :controller => 'comment', :action => 'export_to_csv', :id => params[:id], :format => 'csv' %>
+<% end %>  
  
-	      <!-- <div class="viewAll">- <a href="#">View All Comments</a></div> -->
- 
-<%#= periodically_call_remote(:url => {:controller => 'plain', :action => 'showlatest', :id => params[:id]}, :frequency => '30', :update => 'responses')%>
