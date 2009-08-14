@@ -46,8 +46,8 @@
 	<%=this_assignment.description %>
 		<% if this_assignment.photo_file_name %>
 			<% if this_assignment.photo_content_type =~ /image.*/  %>
-				<a href='<%=this_assignment.photo.url%>' target="_blank"></a>
-				<%= image_tag this_assignment.photo.url(:medium), :style => "margin-right:10px;" %>
+				<a href='<%=this_assignment.photo.url%>' target="_blank">
+				<%= image_tag this_assignment.photo.url(:medium), :style => "margin-right:10px;" %></a>
 			<% else %>
 				&nbsp;&nbsp;<%= image_tag "download.png"%><a href='<%=this_assignment.photo.url%>' target="_blank" style="color:#fff;">Multimedia file included.  Click here.</a>
 			<% end %>
