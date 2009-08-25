@@ -1,6 +1,5 @@
   <!-- Start Discussion Topic links -->
   <% talk_count = Discussion.count(:all, :conditions => {:project_id => params[:id]}) %>
-  Project: <%= params[:id] %>
   <%if talk_count > 1 %>
   <fieldset class="discussionLinks">
     <legend>Jump to discussion topic:</legend>
