@@ -3,7 +3,7 @@
 
   <%= render :partial => 'discussion_form' %>
   
-  <%= render :partial => 'discussion_links', :locals => {:discussions => @discussions, :project_id => params[:id]} %>
+  <%= render :partial => 'discussion_links', :locals => {:discussions => @discussions, :id => params[:id]} %>
 
   <% discussion = @discussions_desc %>
   <% if discussion %>

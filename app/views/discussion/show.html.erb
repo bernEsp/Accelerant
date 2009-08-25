@@ -1,6 +1,6 @@
 <!-- discussion/show -->
 <div id="rightColumn">
-  <%= render :partial => 'assignment/discussion_links', :locals => {:discussions => @discussions, :project_id => params[:id]} %>
+  <%= render :partial => 'discussion_links', :locals => {:discussions => @discussions} %>
 
   <%= render :partial => 'assignment/discussion_display', :locals => {:discussions => @discussion} %>
 
