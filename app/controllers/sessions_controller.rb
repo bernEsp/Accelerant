@@ -3,8 +3,9 @@ class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
-  #ssl_required :create, :destroy
-  ssl_allowed :create
+  if ENV['RAILS_ENV'] == 'production'
+    ssl_allowed :create
+  end
 
   # render new.rhtml
   def new

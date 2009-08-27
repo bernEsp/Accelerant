@@ -1,6 +1,8 @@
 class ProjectController < ApplicationController
 
-  #ssl_required :index, :new, :create, :edit, :update, :drop
+  if ENV['RAILS_ENV'] == 'production'
+    ssl_required :index, :new, :create, :edit, :update, :drop
+  end
   
   def index
     @these_projects = Project.find(:all)

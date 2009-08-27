@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
-  ssl_allowed :index, :show, :update, :new, :create
-  
+  if ENV['RAILS_ENV'] == 'production'
+    ssl_required :index, :show, :update, :new, :create
+  end
+
   def index
     @users = User.find(:all)
   end
