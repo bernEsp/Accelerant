@@ -1,4 +1,9 @@
 class DiscussionController < ApplicationController
+
+  if ENV['RAILS_ENV'] == 'production'
+    ssl_required :index, :show, :new, :create
+  end
+
   def new
     @discussion = Discussion.new
     @comment_assignment = CommentAssignments.new
