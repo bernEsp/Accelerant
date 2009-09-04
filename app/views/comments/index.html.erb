@@ -5,10 +5,10 @@
 <% user = User.find(:last, :conditions => {:id => comment.user_id})%>
 <% if user %>
 <% if !user.admin? %>
-<h3><%=h comment.title %></h3>
+<h3><%= comment.title %></h3>
 <strong>Posted <%=distance_of_time_in_words_to_now(h comment.created_at)%> ago by <em><%= user.name %></em></strong><br/>
-<p><%=h comment.comment %></p>
-<p><a href='<%=h comment.url %>' target='_blank'><%=h comment.url %></a><br/></p>
+<p><%= comment.comment %></p>
+<p><a href='<%= comment.url %>' target='_blank'><%= comment.url %></a><br/></p>
 <% end %>
 <% end %>
 <% end %>
