@@ -1,11 +1,11 @@
 <!-- Response form starts here -->
 
           <div style="padding-top:15px;clear:both;" >
-              <% form_for :comment,
+              <% form_for :comments,
 		#:update => "latestresponse",
 		#:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
 		:html => {:id => "my_form", :multipart => true},
-		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
+		:url =>{:controller => 'comments', :method => 'create' } do |f| -%>
         <div class="avatar">
           <% if self.current_user.avatar_file_name %>
           <%= image_tag self.current_user.avatar.url(:small) %>
