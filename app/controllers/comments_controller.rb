@@ -38,6 +38,26 @@ class CommentsController < ApplicationController
     #end
     redirect_to "/discussion/show/#{discussion_id}?project_id=#{project_id}"
   end
+
+    def add_new
+    @comment = Comment.new(params[:comments])
+    discussion.id = params[:comments][:discussion_id]
+    project.id = params[:comments][:project_id]
+    @comment.save
+    #new stuff
+      #if self.current_user.admin
+      #@user_assignments = params[:comment_assignment]
+      #@these_keys = @user_assignments.keys
+      #@user_assignments.each do |key, value|
+        #if value=="0"
+          #@comment_assignment = CommentAssignments.new
+          #@comment_assignment.update_attributes(:user_id => key, :comment_id => @comment.id)
+          #@comment_assignment.save
+        #end
+      #end
+    #end
+    redirect_to "/discussion/show/#{discussion_id}?project_id=#{project_id}"
+  end
   
   def destroy
     @comment = Comment.find(params[:id])
