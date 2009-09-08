@@ -21,6 +21,8 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(params[:comments])
+    discussion.id = params[:comments][:discussion_id]
+    project.id = params[:comments][:project_id]
     @comment.save
     #new stuff
       #if self.current_user.admin
@@ -34,7 +36,7 @@ class CommentsController < ApplicationController
         #end
       #end
     #end
-    redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}"
+    redirect_to "/discussion/show/#{discussion_id}?project_id=#{project_id}"
   end
   
   def destroy
