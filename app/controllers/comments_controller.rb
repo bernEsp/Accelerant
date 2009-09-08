@@ -1,4 +1,9 @@
 class CommentsController < ApplicationController
+
+  if ENV['RAILS_ENV'] == 'production'
+    ssl_required :index, :show, :update, :new, :create
+  end
+  
   def index
     user_id = self.current_user.id
     @comments = Comment.find(:all,:conditions => { :user_id => user_id})
