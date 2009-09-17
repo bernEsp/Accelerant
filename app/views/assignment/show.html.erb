@@ -99,7 +99,7 @@
 		<hr noshade="noshade"/>
     </div>
 	<% else %>
-		<% if (my_project.one_to_one?) && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator?) %>
+		<% if (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator?)) %>
 			<div class="clientSubComment" id="commentSub<%= comment.id%>"><a name="<%=comment.id%>"></a>
 		      <div class="subCommentAvatar">
 				<% if comment.user.avatar_file_name %>
