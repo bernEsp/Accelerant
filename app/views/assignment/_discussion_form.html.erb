@@ -14,6 +14,7 @@
   <br/>
 	<input id="check_all" name="check_all" type="checkbox" onclick="Form.getInputs('top_form', 'checkbox').each(function(box){box.checked = $('check_all').checked})" /> <strong>Select All</strong><br/><br/>
 	<% for participant in @project_members %>
+        <% if participant.user %>
 		<div class="cellClass150"><%= check_box("comment_assignment", participant.user.id, {}, "#{participant.user.id}") %>  
                 <% if !participant.user %>
                   &nbsp;
@@ -21,6 +22,7 @@
                   <%= participant.user.name %>
                 <% end %>
                 &nbsp;&nbsp;</div>
+        <% end  %>
 	<% end %>
 
 <%= f.hidden_field :project_id, :value => params[:id] %>
