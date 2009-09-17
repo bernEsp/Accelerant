@@ -48,7 +48,7 @@
 
 		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
 			| <%= link_to_remote 'Add Comment',
-			:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
+			:url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
 			:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
 			:onclick => '',
 			:update => "subCommentForm#{comment.id}" %> 
@@ -126,7 +126,7 @@
 
 			<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
 				| <%= link_to_remote 'Add Comment',
-				:url => { :controller => 'plain', :action => 'sub_comment_form', :id => comment.id},
+				:url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
 				:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
 				:onclick => '',
 				:update => "subCommentForm#{comment.id}" %> 

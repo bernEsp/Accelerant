@@ -17,6 +17,10 @@ class PlainController < ApplicationController
   def sub_comment_form
     render :partial => "sub_form"
   end
+
+  def sub_form
+    render :partial => "sub_form"
+  end
   
   def show_comments
     @replies = Replies.find(:all, :conditions => { :comment_id => params[:id]}, :order => "id DESC")
