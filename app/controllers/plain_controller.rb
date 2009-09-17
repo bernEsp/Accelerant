@@ -1,5 +1,9 @@
 class PlainController < ApplicationController
   layout 'plain'
+
+  if ENV['RAILS_ENV'] == 'production'
+    ssl_required :index, :show, :showlatest, :update_count, :sub_comment_form, :sub_form, :show_comments, :drop_comment, :drop_reply
+  end
   
   def index
      @latest_postings = Comment.find(:all, :conditions => {:assignment_id => params[:id] }, :limit => 5, :order => "id DESC")
