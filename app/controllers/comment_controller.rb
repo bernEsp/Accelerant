@@ -1,6 +1,11 @@
 class CommentController < ApplicationController
   uses_yui_editor
   require 'csv'
+
+  if ENV['RAILS_ENV'] == 'production'
+    ssl_required :index, :new, :create, :edit, :update, :drop, :assign, :show, :destroy, :csv_dump, :export_to_csv
+  end
+
   def index
     user_id = self.current_user.id
     @comment = Comment.find(:all, :conditions => { :user_id => user_id})

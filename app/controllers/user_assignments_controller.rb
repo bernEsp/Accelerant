@@ -1,5 +1,9 @@
 class UserAssignmentsController < ApplicationController
-  
+
+  if ENV['RAILS_ENV'] == 'production'
+    ssl_required :index, :new, :create, :edit, :update, :drop, :assign, :show
+  end
+
   def new
     @user_assignment = UserAssignments.new
   end
