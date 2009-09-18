@@ -1,5 +1,5 @@
   <!-- Discussion form  (Admin Mod posts new discussion)-->
-  <% if self.current_user.moderator? || self.current_user.admin? || self.current_user.client? %>
+  <% if self.current_user.moderator? || self.current_user.admin? %>
   <a href="#" onclick ="Effect.SlideDown('discussion_form');">Add a discussion topic</a><br/>
   <div id="discussion_form" class="adminFlyout" style="display:none;">
     
