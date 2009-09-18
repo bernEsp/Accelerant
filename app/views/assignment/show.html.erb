@@ -10,9 +10,9 @@
   <div id="discussion<%= discussion.id %>"  ><br/>
   
   <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
-
-  <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
-
+  <% if !self.current_user.client %>
+    <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
+  <% end  %>
 
     <div id="responses">
     <div class="clientMainEntry" id="latestresponse"></div>
@@ -47,11 +47,13 @@
 		<br/>
 
 		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
-			| <%= link_to_remote 'Add Comment',
+			<% if !self.current_user.client %>
+                | <%= link_to_remote 'Add Comment',
 			:url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
 			:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
 			:onclick => '',
-			:update => "subCommentForm#{comment.id}" %> 
+			:update => "subCommentForm#{comment.id}" %>
+                <% end %>
 			<% if (comment.user.id == self.current_user.id) || self.current_user.admin %>
 				| <%= link_to_remote "Delete", 
 				:confirm => "Are you sure you want to delete this?",
@@ -125,11 +127,13 @@
 			<br/>
 
 			<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
-				| <%= link_to_remote 'Add Comment',
+				<% if !self.current_user.client %>
+                        | <%= link_to_remote 'Add Comment',
 				:url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
 				:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
 				:onclick => '',
-				:update => "subCommentForm#{comment.id}" %> 
+				:update => "subCommentForm#{comment.id}" %>
+                        <% end  %>
 				<% if (comment.user.id == self.current_user.id) || self.current_user.admin %>
 					| <%= link_to_remote "Delete", 
 					:confirm => "Are you sure you want to delete this?",
