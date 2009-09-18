@@ -1,4 +1,9 @@
 class RepliesController < ApplicationController
+
+  if ENV['RAILS_ENV'] == 'production'
+    ssl_required :index, :show, :get, :update, :new, :create
+  end
+
   def index
     user_id = self.current_user.id
     @replies = Reply.find(:all,:conditions => { :user_id => user_id})
