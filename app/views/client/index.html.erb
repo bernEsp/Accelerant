@@ -1,5 +1,5 @@
 
-<h1 class="lower">Your Projects and Assignments</h1>
+<h1 class="lower">Your Projects</h1>
 <br/><br/>
 <% for project in @projects %>
 	<% assignment_detail = Assignment.find(:last, :conditions => {:project_id => project.id}, :limit => 1) %>
