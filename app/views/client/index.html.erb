@@ -4,8 +4,8 @@
 <% for project in @projects %>
 	<% assignment_detail = Assignment.find(:last, :conditions => {:project_id => project.id}, :limit => 1) %>
 	<% if !assignment_detail %>
-          &gt;&nbsp;&nbsp;<%= link_to project.title, {:controller => 'assignment', :action => 'show', :id => assignment_detail.id }%><br/>
+          &gt;&nbsp;&nbsp;<%= link_to project.title, {:controller => 'assignment', :action => 'show', :id => project.id }%><br/>
 	<% else %>
-	&gt;&nbsp;&nbsp;<%= link_to assignment_detail.title, {:controller => 'assignment', :action => 'show', :id => assignment_detail.id }%><br/>
+	&gt;&nbsp;&nbsp;<%= link_to assignment_detail.title, {:controller => 'assignment', :action => 'show', :id => project.id }%><br/>
 	<% end %>
 <% end %>
