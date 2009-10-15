@@ -3,6 +3,8 @@ class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
 
+  layout 'login'
+
   if ENV['RAILS_ENV'] == 'production'
     ssl_allowed :create
   end
