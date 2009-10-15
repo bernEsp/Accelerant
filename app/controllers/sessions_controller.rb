@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   layout 'login'
 
   if ENV['RAILS_ENV'] == 'production'
-    ssl_allowed :create
+    ssl_required :create
   end
 
   # render new.rhtml
