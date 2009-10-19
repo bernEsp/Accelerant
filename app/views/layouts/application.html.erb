@@ -37,7 +37,7 @@
 
 	<% if @project && (self.current_user.participant? || self.current_user.admin || self.current_user.client?) %>
 	<div id="assignmentBox">
-          <%= image_tag "BlogNog.png", :style => "float:right;", :class => "BlogNogLogo" %>
+          <%= image_tag "BlogNog2.png", :style => "float:right;", :class => "BlogNogLogo" %>
 	<% for this_assignment in @project %>
     <h1><%= this_assignment.title %></h1>
     <h2>Project Overview:</h2>
