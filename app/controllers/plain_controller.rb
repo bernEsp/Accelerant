@@ -11,7 +11,7 @@ class PlainController < ApplicationController
   
   def showlatest
     #this one is the refresher
-     @latest_postings = Comment.find(:all, :conditions => {:assignment_id => params[:id] }, :limit => 10, :order => "id DESC")
+     @latest_postings = Comment.find(:all, :conditions => {:assignment_id => params[:id] }, :order => "id DESC")
   end
   
   def update_count
