@@ -9,7 +9,7 @@
       <div id="responses">
     <div class="clientMainEntry" id="latestresponse"></div>
     	<!-- Start comments -->
-        <% @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => @discussion.id }, :limit => 20, :order => "id DESC", :include => :user)  %>
+        <% @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => @discussion.id }, :order => "id DESC", :include => :user)  %>
 		<% for comment in @latest_postings_redux %>
 		<% not_visible = CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id, :comment_id => comment.id })%>
 		<% my_project = Project.find(:last, :conditions => {:id => params[:project_id]}) %>
