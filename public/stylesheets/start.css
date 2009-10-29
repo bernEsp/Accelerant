@@ -163,6 +163,7 @@ ul {
 	margin-top:10px;
 	padding:0;
 }
+#bottomRight .formStyle    {display:inline-block;min-width:100px;}
 #footer {
 	width:100%;
 	float:left;
