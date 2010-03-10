@@ -1,4 +1,6 @@
 class UserMailer < ActionMailer::Base
+  
+  require 'net/imap'
 
   def welcome_email(user)
     recipients    user.email
@@ -32,6 +34,21 @@ class UserMailer < ActionMailer::Base
         })
       end
     end
+  end
+
+  def self.check_mail
+    imap = Net::IMAP.new('localhost')
+    imap.authenticate('LOGIN', 'username', 'password')
+    imap.select('INBOX')
+    imap.search(['ALL']).each do |message_id|
+      msg = imap.fetch(message_id,'RFC822')[0].attr['RFC822']
+
+      MailReader.receive(msg)
+      #Mark message as deleted and it will be removed from storage when user session closd
+      imap.store(message_id, "+FLAGS", [:Deleted])
+    end
+    # tell server to permanently remove all messages flagged as :Deleted
+    imap.expunge()
   end
 
 end
