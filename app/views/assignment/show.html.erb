@@ -37,7 +37,7 @@
 		<%=comment.comment %>
 		<% if comment.photo_content_type %>
 		<% if comment.photo_content_type =~ /image.*/  %>
-			<a href='<%=comment.photo.url%>' class="MagicThumb">
+			<a href='<%=comment.photo.url%>' class="MagicThumb" rel="buttons:hide">
 			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 			</a>
 		<% else %>
@@ -79,7 +79,7 @@
                           &nbsp;&nbsp;<%= replies.content %>
 				<% if replies.media_file_name %>
 					<% if replies.media_content_type =~ /image.*/  %>
-						<a href="<%=replies.media.url%>" class="MagicThumb"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
+						<a href="<%=replies.media.url%>" class="MagicThumb" rel="buttons:hide"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
 					<% else %>
 						<a href='<%=replies.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 					<% end %>
@@ -123,7 +123,7 @@
 			<%=comment.comment %>
 			<% if comment.photo_content_type %>
 			<% if comment.photo_content_type =~ /image.*/  %>
-				<a href='<%=comment.photo.url%>' class="MagicThumb">
+				<a href='<%=comment.photo.url%>' class="MagicThumb" rel="buttons:hide">
 				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 				</a>
 			<% else %>
@@ -166,7 +166,7 @@
             &nbsp;&nbsp;<%= this_reply.content %>
 					<% if this_reply.media_file_name %>
 						<% if this_reply.media_content_type =~ /image.*/  %>
-							<a href="<%=this_reply.media.url%>" class="MagicThumb"><%= image_tag this_reply.media.url(:small), :style => "margin-left:40px;" %></a>
+							<a href="<%=this_reply.media.url%>" class="MagicThumb" rel="buttons:hide"><%= image_tag this_reply.media.url(:small), :style => "margin-left:40px;" %></a>
 						<% else %>
 							<a href='<%=this_reply.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 						<% end %>
