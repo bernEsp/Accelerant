@@ -69,7 +69,7 @@
 		<div id="reclaimer<%= comment.id %>"></div>
 		<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
 		<% for replies in @replies %>
-			<% #user = User.find(:last, :conditions => {:id => replies.user_id}) %>
+	
 			<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>">
         <% if replies.user.avatar_file_name %>                
         <%= image_tag replies.user.avatar.url(:smaller) %>
@@ -79,7 +79,7 @@
                           &nbsp;&nbsp;<%= replies.content %>
 				<% if replies.media_file_name %>
 					<% if replies.media_content_type =~ /image.*/  %>
-						<a href='<%=replies.media.url%>' target="_blank"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
+						<a href="<%=replies.media.url%>" class="MagicThumb"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
 					<% else %>
 						<a href='<%=replies.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 					<% end %>
@@ -166,7 +166,7 @@
             &nbsp;&nbsp;<%= this_reply.content %>
 					<% if this_reply.media_file_name %>
 						<% if this_reply.media_content_type =~ /image.*/  %>
-							<a href='<%=this_reply.media.url%>' target="_blank"><%= image_tag this_reply.media.url(:small), :style => "margin-left:40px;" %></a>
+							<a href="<%=replies.media.url%>" class="MagicThumb"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
 						<% else %>
 							<a href='<%=this_reply.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 						<% end %>
