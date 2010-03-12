@@ -166,7 +166,7 @@
             &nbsp;&nbsp;<%= this_reply.content %>
 					<% if this_reply.media_file_name %>
 						<% if this_reply.media_content_type =~ /image.*/  %>
-							<a href="<%=replies.media.url%>" class="MagicThumb"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
+							<a href="<%=this_reply.media.url%>" class="MagicThumb"><%= image_tag this_reply.media.url(:small), :style => "margin-left:40px;" %></a>
 						<% else %>
 							<a href='<%=this_reply.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 						<% end %>
