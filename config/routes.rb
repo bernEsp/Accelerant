@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :project, :has_many => :assignments
   map.resources :assignment, :has_many => :participants
   map.comment '/comment', :controller => 'comment', :action => 'show'
+  map.importer '/importer', :controller => 'importer', :action => 'index'
   map.resources :users
 
   map.resource :session
