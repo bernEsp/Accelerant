@@ -15,10 +15,9 @@ class ImporterController < ApplicationController
      @user.name = row[0]
      @user.login = row[1]
      @user.email = row[2]
-     @user.password = 'changeme'
-     @user.password_confirmation = 'changeme'
+     @user.password = row[3]
+     @user.password_confirmation = row[3]
      @user.participant = true
-     #user.activate!
      if @user.save
       n=n+1
       GC.start if n%50==0
