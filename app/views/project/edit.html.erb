@@ -11,6 +11,10 @@
 <%= f.text_area :description, :size => "60 x 20", :class => 'rich_text_editor' %>
 </p>
 
+<p><%= label_tag 'Minimum Number of Characters for Comments/Responses (0 for no minimum):' %><br/>
+<%= f.text_field :character_minimum %>
+</p>
+
 <p>
 	<% if @this_project.photo_file_name %>
 		<%= image_tag @this_project.photo.url(:small) %>

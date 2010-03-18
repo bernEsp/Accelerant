@@ -2,8 +2,6 @@
 
           <div style="padding-top:15px;clear:both;" >
               <% form_for :comments,
-		#:update => "latestresponse",
-		#:complete => "new Effect.Highlight('latestresponse', { duration: .5 })",
 		:html => {:id => "my_form", :multipart => true},
 		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
         <div class="avatar">

@@ -2,10 +2,6 @@
 <%  comment_num = Comment.find(params[:id])%>
 <% form_for :reply,
 :html => { :multipart => true},
-#:update => "reclaimer#{params[:id]}",
-#:complete => "new Effect.Highlight('reclaimer#{params[:id]}', { duration: .5 })",
-#:update => "thisForm#{params[:id]}",
-#:complete => "new Effect.Highlight('thisForm#{params[:id]}', { duration: .5 })",
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
 
 <%= f.text_area :content, :size => "50 x 10" %><br/>
@@ -17,7 +13,7 @@ Upload a photo or file:<br/>
 </div>
 
 <%= f.hidden_field :comment_id, :value => params[:id] %>
-<%#= hidden_field :project_id, :value => params[:project_id] %>
+
 <input type="hidden" name="project_id" value="<%= comment_num.project_id %>" >
 
 <%= f.hidden_field :user_id, :value => self.current_user.id %>

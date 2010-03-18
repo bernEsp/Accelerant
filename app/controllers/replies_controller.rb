@@ -19,17 +19,16 @@ class RepliesController < ApplicationController
   end
 
   def create
-    @reply = Replies.new(params[:reply])
-    @reply.save
-    @comment = Comment.find(@reply.comment_id)
-    @discussion = Discussion.find(@comment.discussion_id)
     @project = Project.find(params[:project_id])
-    @assignment = Comment.find(:last, :conditions => {:id => params[:reply][:comment_id]})
-    #user = User.find(:last, :conditions => {:id => self.current_user.id})
-    #redirect_to "/assignment/#{@assignment.project_id}"
-    redirect_to "/discussion/show/#{@discussion.id}?project_id=#{@project.id}"
-    #render :text => @reply.content
-    #puts params[:reply][:comment_id]
-    #render :text => "<div id='subCommentForm#{params[:reply][:comment_id]}'></div><p style='background-color:#cdd7de;margin:8px;padding:2px;' id='reply#{@reply.id}'><img src='#{user.avatar.url(:smaller)}'%>&nbsp;&nbsp;&nbsp;&nbsp;#{@reply.content}<br/></p>"
+    if (@project.character_minimum != 0) && (params[:reply][:content].length >= @project.character_minimum)
+      @reply = Replies.new(params[:reply])
+      @reply.save
+      @comment = Comment.find(@reply.comment_id)
+      @discussion = Discussion.find(@comment.discussion_id)
+      @assignment = Comment.find(:last, :conditions => {:id => params[:reply][:comment_id]})
+      redirect_to "/discussion/show/#{@discussion.id}?project_id=#{@project.id}"
+    else
+      render :text => "Response is too short.  Must be #{@project.character_minimum} characters minimum."
+    end
   end
 end

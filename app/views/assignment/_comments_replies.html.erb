@@ -1,0 +1,190 @@
+<div id="responses">
+    <div class="clientMainEntry" id="latestresponse"></div>
+    	<!-- Start comments -->
+        <% @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "id DESC", :include => :user)  %>
+		<% for comment in @latest_postings_redux %>
+		<% not_visible = CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id, :comment_id => comment.id })%>
+		<% my_project = Project.find(:last, :conditions => {:id => project_id}) %>
+		<% if (!not_visible && !my_project.one_to_one)  %>
+		<div class="clientSubComment" id="commentSub<%= comment.id%>"><a name="#<%=comment.id%>"></a>
+	      <div class="subCommentAvatar">
+			<% if comment.user.avatar_file_name %>
+				<%= image_tag comment.user.avatar.url(:small) %>
+                        <% else %>
+                          <%= image_tag "gravatar-40.png" %>
+                        <% end %>
+			</div>
+	     <div class="clientSubCommentText" >
+		 <p>
+
+			<strong><%=h comment.user.name %></strong>
+		<%=comment.comment %>
+		<% if comment.photo_content_type %>
+		<% if comment.photo_content_type =~ /image.*/  %>
+			<a href='<%=comment.photo.url%>' class="MagicThumb" rel="buttons:hide">
+			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
+			</a>
+		<% else %>
+			<p><a href='<%=comment.photo.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
+		<% end %>
+		<% end %>
+		<br/>
+
+		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
+			<% if !self.current_user.client %>
+                | <%= link_to_remote 'Add Comment',
+			:url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
+			:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
+			:onclick => '',
+			:update => "subCommentForm#{comment.id}" %>
+                <% end %>
+			<% if (comment.user.id == self.current_user.id) || self.current_user.admin || self.current_user.client %>
+				| <%= link_to_remote "Delete",
+				:confirm => "Are you sure you want to delete this?",
+				:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
+				:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
+				:update => "commentSub#{comment.id}" %>
+			<% end %>
+
+
+
+
+		<div id="subCommentForm<%= comment.id %>"></div>
+		<div id="reclaimer<%= comment.id %>"></div>
+		<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
+		<% for replies in @replies %>
+
+			<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>">
+        <% if replies.user.avatar_file_name %>
+        <%= image_tag replies.user.avatar.url(:smaller) %>
+        <% else %>
+        <%= image_tag "gravatar-20.png" %>
+        <% end %>
+                          &nbsp;&nbsp;<%= replies.content %>
+				<% if replies.media_file_name %>
+					<% if replies.media_content_type =~ /image.*/  %>
+						<a href="<%=replies.media.url%>" class="MagicThumb" rel="buttons:hide"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
+					<% else %>
+						<a href='<%=replies.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+					<% end %>
+				<% end %>
+				posted by
+				<% if replies.user.name == self.current_user.name %>
+					you
+				<% else %>
+					<%= replies.user.name%>
+				<% end %>
+				<%= time_ago_in_words(replies.created_at) %> ago
+				<% if (replies.user.id == self.current_user.id) || self.current_user.admin || self.current_user.client %>
+
+					| <%= link_to_remote "Delete",
+					:confirm => "Are you sure you want to delete this?",
+					:url => {:controller => 'plain', :action => 'drop_reply', :id => replies.id},
+					:complete => "new Effect.Fade('reply#{replies.id}', { duration: 2 })",
+					:update => "reply#{replies.id}" %>
+				<% end %>
+				</p>
+		<% end %>
+			<div id="<%=dom_id(comment)%>">
+			</div>
+		</div>
+		<hr noshade="noshade"/>
+    </div>
+
+
+	<% else %>
+
+
+		<% if (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? )) %>
+			<div class="clientSubComment" id="commentSub<%= comment.id%>"><a name="<%=comment.id%>"></a>
+		      <div class="subCommentAvatar">
+				<% if comment.user.avatar_file_name %>
+					<%= image_tag comment.user.avatar.url(:small) %>
+                                <% else %>
+                                    <%= image_tag "gravatar-20.png" %>
+				<% end %>
+				</div>
+		     <div class="clientSubCommentText" >
+			 <p>
+
+				<strong><%=h comment.user.name %></strong>
+			<%=comment.comment %>
+			<% if comment.photo_content_type %>
+			<% if comment.photo_content_type =~ /image.*/  %>
+				<a href='<%=comment.photo.url%>' class="MagicThumb" rel="buttons:hide">
+				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
+				</a>
+			<% else %>
+				<p><a href='<%=comment.photo.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
+			<% end %>
+			<% end %>
+			<br/>
+
+			<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
+				<% if !self.current_user.client %>
+                        | <%= link_to_remote 'Add Comment',
+				:url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
+				:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
+				:onclick => '',
+				:update => "subCommentForm#{comment.id}" %>
+                        <% end  %>
+				<% if (comment.user.id == self.current_user.id) || self.current_user.admin %>
+					| <%= link_to_remote "Delete",
+					:confirm => "Are you sure you want to delete this?",
+					:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
+					:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
+					:update => "commentSub#{comment.id}" %>
+				<% end %>
+
+
+
+
+			<div id="subCommentForm<%= comment.id %>"></div>
+			<div id="reclaimer<%= comment.id %>"></div>
+			<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
+			<% for this_reply in @replies %>
+				<% if (this_reply.user.id == self.current_user.id) || (this_reply.user.admin || this_reply.user.moderator) || self.current_user.admin || self.current_user.moderator || self.current_user.client %>
+
+				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>">
+<% if this_reply.user.avatar_file_name %>
+        <%= image_tag this_reply.user.avatar.url(:smaller) %>
+        <% else %>
+        <%= image_tag "gravatar-20.png" %>
+        <% end %>
+            &nbsp;&nbsp;<%= this_reply.content %>
+					<% if this_reply.media_file_name %>
+						<% if this_reply.media_content_type =~ /image.*/  %>
+							<a href="<%=this_reply.media.url%>" class="MagicThumb" rel="buttons:hide"><%= image_tag this_reply.media.url(:small), :style => "margin-left:40px;" %></a>
+						<% else %>
+							<a href='<%=this_reply.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+						<% end %>
+					<% end %>
+
+					<br/>
+					posted by
+					<% if this_reply.user.name == self.current_user.name %>
+						you
+					<% else %>
+						<%= this_reply.user.name%>
+					<% end %>
+					<%= time_ago_in_words(this_reply.created_at) %> ago
+					<% if (this_reply.user.id == self.current_user.id) || self.current_user.admin %>
+						| <%= link_to_remote "Delete",
+						:confirm => "Are you sure you want to delete this?",
+						:url => {:controller => 'plain', :action => 'drop_reply', :id => this_reply.id},
+						:complete => "new Effect.Fade('reply#{this_reply.id}', { duration: 2 })",
+						:update => "reply#{this_reply.id}" %>
+					<% end %>
+					</p>
+					<% end %>
+			<% end %>
+				<div id="<%=dom_id(comment)%>">
+				</div>
+			</div>
+			<hr noshade="noshade"/>
+	    </div>
+
+	<% end %>
+  <% end %>
+<% end %>
+    </div><!-- responses -->
