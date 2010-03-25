@@ -1,0 +1,28 @@
+
+<br/><br/>
+<h2><%= @this_user.name %></h2>
+
+<div class="clientSubComment">
+
+<%= render_avatar(@this_user) %>
+			
+<br/>
+  <div style="clear:both;float:right;margin-right:100px;">
+Username: <%= @this_user.login %><br/>
+Email: <%= @this_user.email %><br/>
+<% unless @assignments.nil? %>
+<h4>Member of:</h4>
+<% for assignment in @assignments %>
+  <% unless assignment.project_id.nil? %>
+    <% if Project.last(:conditions => {:id => assignment.project_id}) %>
+      <%= Project.last(:conditions => {:id => assignment.project_id}).title %><br/>
+    <% end %>
+  <% end %>
+<% end %>
+<% end %>
+</div>
+<div>
+  <%= link_to "Show Comments", :controller => 'comment', :action => 'by_user', :id => params[:id] %>
+</div>
+</div>
+

@@ -64,5 +64,13 @@ class CommentController < ApplicationController
        send_data(report.read,:type=>'text/csv;charset=iso-8859-1;',:filename=>'report.csv',
        :disposition =>'attachment', :encoding => 'utf8')
     end
+
+  def by_user
+    @these_comments = Comment.belongs_to_discussion.find(:all, :conditions => { :user_id => params[:id]})
+  end
+
+  def emailed
+    @emailed_comments = Comment.unassigned.find(:all, :conditions => { :user_id => params[:id]})
+  end
   
 end

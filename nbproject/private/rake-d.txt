@@ -45,6 +45,7 @@ doc\:plugins\:attachment_fu=Generate documentation for the attachment_fu plugin
 doc\:plugins\:comma=Generate documentation for the comma plugin
 doc\:plugins\:fckeditor=Generate documentation for the fckeditor plugin
 doc\:plugins\:paperclip=Generate documentation for the paperclip plugin
+doc\:plugins\:paperclippolymorph=Generate documentation for the paperclippolymorph plugin
 doc\:plugins\:restful-authentication=Generate documentation for the restful-authentication plugin
 doc\:plugins\:ssl_requirement=Generate documentation for the ssl_requirement plugin
 doc\:plugins\:svn=Generate documentation for the svn plugin

@@ -1,20 +1,22 @@
 <div id="responses">
     <div class="clientMainEntry" id="latestresponse"></div>
     	<!-- Start comments -->
-        <% @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "id DESC", :include => :user)  %>
+        <%
+          unless params[:sort] == "by_user"
+            @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "user_id ASC, id ASC", :include => :user)
+          else
+            @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "id ASC", :include => :user)
+          end
+        %>
 		<% for comment in @latest_postings_redux %>
 		<% not_visible = CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id, :comment_id => comment.id })%>
 		<% my_project = Project.find(:last, :conditions => {:id => project_id}) %>
-		<% if (!not_visible && !my_project.one_to_one)  %>
+
+                <% if (!not_visible && !my_project.one_to_one)  %>
 		<div class="clientSubComment" id="commentSub<%= comment.id%>"><a name="#<%=comment.id%>"></a>
-	      <div class="subCommentAvatar">
-			<% if comment.user.avatar_file_name %>
-				<%= image_tag comment.user.avatar.url(:small) %>
-                        <% else %>
-                          <%= image_tag "gravatar-40.png" %>
-                        <% end %>
-			</div>
-	     <div class="clientSubCommentText" >
+	      <div class="subCommentAvatar"><%= render_avatar(comment.user) %></div>
+
+              <div class="clientSubCommentText" >
 		 <p>
 
 			<strong><%=h comment.user.name %></strong>
@@ -98,11 +100,7 @@
 		<% if (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? )) %>
 			<div class="clientSubComment" id="commentSub<%= comment.id%>"><a name="<%=comment.id%>"></a>
 		      <div class="subCommentAvatar">
-				<% if comment.user.avatar_file_name %>
-					<%= image_tag comment.user.avatar.url(:small) %>
-                                <% else %>
-                                    <%= image_tag "gravatar-20.png" %>
-				<% end %>
+				<%= link_to render_avatar(comment.user) %>
 				</div>
 		     <div class="clientSubCommentText" >
 			 <p>
@@ -188,3 +186,4 @@
   <% end %>
 <% end %>
     </div><!-- responses -->
+    <a id="bottom" ></a>

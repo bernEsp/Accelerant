@@ -33,7 +33,11 @@ class DiscussionController < ApplicationController
     @project_members = UserAssignments.find(:all, :conditions => {:project_id => params[:project_id]}, :include => :user)
     @project = Project.find(:all, :conditions => {:id => params[:project_id]})
     @discussions = Discussion.find(:all, :conditions => {:project_id => params[:project_id]})
-    @discussion = Discussion.find(params[:id])
+    unless params[:sort] == "by_user"
+      @discussion = Discussion.find(params[:id])
+    else
+      @discussion = Discussion.find(params[:id])
+    end
   end
 
 end

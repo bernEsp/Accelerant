@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100318200410) do
+ActiveRecord::Schema.define(:version => 20100322191241) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(:version => 20100318200410) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
+  end
+
+  add_index "attachments", ["comment_id"], :name => "index_attachments_on_comment_id"
 
   create_table "clients", :force => true do |t|
     t.integer  "user_id"

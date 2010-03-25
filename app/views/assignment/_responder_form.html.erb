@@ -17,6 +17,10 @@
           	<%= f.text_area :comment, :size => "60 x 10", :class => 'rich_text_editor' %><br/>
 				Upload a photo or file:<br/>
 			<%= f.file_field :photo %>
+
+                                  
+
+                                
 			<% if logged_in? %>
 			<%= f.hidden_field :user_id, :value => self.current_user.id %>
 			<% end %>

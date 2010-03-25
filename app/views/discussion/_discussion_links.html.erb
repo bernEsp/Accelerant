@@ -6,7 +6,7 @@
     <p>&nbsp;</p>
   <% for discussion in discussions %>
   <p><%= link_to discussion.title,
-    {:controller => "discussion", :id => discussion.id, :action => 'show', :project_id => discussion.project_id},
+    {:controller => "discussion", :id => discussion.id, :action => 'show', :project_id => discussion.project_id, :sort => params[:sort]},
     :class => 'discussion_links'%></p>
   <% end %>
   </fieldset>

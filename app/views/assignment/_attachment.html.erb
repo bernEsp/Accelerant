@@ -1,0 +1,11 @@
+
+
+<div class="attachment">
+<% fields_for "comment[attachment_attributes][]", attachment do |p| %>
+  <p>
+    <%= p.label :Attachment %><br />
+    <%= p.file_field :data, :index => nil %>
+    <%= link_to_function "delete", "remove_field($(this), ('.photo'))" %>
+  </p>
+<% end %>
+</div>

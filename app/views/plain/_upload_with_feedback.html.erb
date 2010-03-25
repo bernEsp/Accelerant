@@ -1,0 +1,28 @@
+<% javascript_tag do %>
+    $(document).ready(function() {
+      $("#file_uploader").fileUpload({
+      	'uploader': '/javascripts/uploadify.swf',
+      	'script': '/javascripts/uploadify.php',
+      	'scriptData': { 'format': 'json', 'authenticity_token': encodeURIComponent('<%= form_authenticity_token if protect_against_forgery? %>'), '<%= Rails.configuration.action_controller.session[:session_key]%>': '<%= u session.session_id %>' },
+      	'fileDataName': $('#file_uploader input:file')[0].name, // Extract correct name of upload field from form field
+      	//'scriptAccess': 'always', // Incomment this, if for some reason it doesn't work
+      	'multi': <%= allow_multiple_files %>,
+      	'auto': true,
+      	'fileDesc': '<%= dialog_file_description %> (<%= allowed_extensions.collect { |ext| "*.#{ext}" }.join(';') %>)',
+      	'fileExt': '<%= allowed_extensions.collect { |ext| "*.#{ext}" }.join(';') %>',
+      	'sizeLimit': <%= max_size %>,
+      	'simUploadLimit': 1,
+      	'buttonImg': '/javascripts/button-fixed.png',
+      	'width': 120,
+      	'height': 24,
+      	'cancelImg': '/javascripts/cancel.png',
+      	'onComplete': function(event, data) { $.getScript(location.href) }, // We assume that we can refresh the list by doing a js get on the current page
+    		'displayData': 'speed'
+      });
+    });
+  <% end %>
+
+    <div id="file_uploader">
+  <p><%= f.file_field :uploaded_data %></p>
+  <div class="submitbutton"><%= submit_tag "Upload" %></div>
+</div>

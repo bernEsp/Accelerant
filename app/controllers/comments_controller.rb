@@ -15,9 +15,9 @@ class CommentsController < ApplicationController
   end
 
   def new
-    @comment = Comment.find(:all)
+    #@comment = Comment.find(:all)
     @comment = Comment.new
-    @comment_assignment = CommentAssignments.new
+   
   end
   
   def get
@@ -26,10 +26,10 @@ class CommentsController < ApplicationController
 
   def create
     @project = Project.find(params[:comments][:project_id])
-    if (@project.character_minimum != 0) && (params[:comments][:comment].length >= @project.character_minimum)
+    if (@project.character_minimum == 0 || (@project.character_minimum != 0) && (params[:comments][:comment].length >= @project.character_minimum))
       @comment = Comment.new(params[:comments])
       @comment.save
-      redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}"
+      redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}#bottom"
     else
       render :text => "Response is too short.  Must be #{@project.character_minimum} characters minimum."
     end
@@ -53,5 +53,6 @@ class CommentsController < ApplicationController
     @comment.destroy
     #render :text => "Removed"
   end
+
   
 end

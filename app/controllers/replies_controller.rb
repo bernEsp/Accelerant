@@ -26,7 +26,7 @@ class RepliesController < ApplicationController
       @comment = Comment.find(@reply.comment_id)
       @discussion = Discussion.find(@comment.discussion_id)
       @assignment = Comment.find(:last, :conditions => {:id => params[:reply][:comment_id]})
-      redirect_to "/discussion/show/#{@discussion.id}?project_id=#{@project.id}"
+      redirect_to "/discussion/show/#{@discussion.id}?project_id=#{@project.id}#bottom"
     else
       render :text => "Response is too short.  Must be #{@project.character_minimum} characters minimum."
     end

@@ -145,6 +145,14 @@ class UsersController < ApplicationController
   end
   # render new.rhtml
   
-  
+  def detail
+    :login_required
+    :admin_required || :client_required
+    @this_user = User.find(:last, :conditions => {:id => params[:id] })
+    @assignments = UserAssignments.find(:all, :conditions => {:user_id => params[:id]})
+    #unless @assignments.nil?
+      #@projects = Project.find(:last, :conditions => {:id => @assignments.project_id})
+    #end
+  end
  
 end

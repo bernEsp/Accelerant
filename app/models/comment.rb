@@ -3,9 +3,17 @@ class Comment < ActiveRecord::Base
   belongs_to :discussion
   belongs_to :comment_assignment
 
+  # for paperclip (polymorphic)
+  #acts_as_polymorphic_paperclip
+
   named_scope :is_moderator, :joins => :users, :conditions => ['user.moderator = ?', true]
   named_scope :is_admin, :joins => :users, :conditions => ['user.admin = ?', true]
-  
+  named_scope :belongs_to_discussion, :conditions => ['discussion_id IS NOT NULL']
+  named_scope :unassigned, :conditions => ['discussion_id IS NULL']
+
+  #has_many :attachings, :dependent => :destroy
+  #has_many :attachments
+
   has_attached_file :photo, 
   :whiny => false, 
   :whiny_thumbnails => false, 
