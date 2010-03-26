@@ -1,7 +1,7 @@
 class ProjectController < ApplicationController
 
   if ENV['RAILS_ENV'] == 'production'
-    #ssl_required :index, :new, :create, :edit, :update, :drop
+    ssl_required :index, :new, :create, :edit, :update, :drop
   end
   
   def index
