@@ -17,4 +17,14 @@ class ApplicationController < ActionController::Base
   include SslRequirement
   
   uses_yui_editor
+
+  #http://www.ruby-forum.com/topic/204710#new
+
+ rescue_from ActionController::InvalidAuthenticityToken, :with =>
+:handle_token_issues
+
+def handle_token_issues
+  redirect_to('cookies') #redirect to page for handling this issue
+end
+
 end

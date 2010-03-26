@@ -31,4 +31,9 @@ class RepliesController < ApplicationController
       render :text => "Response is too short.  Must be #{@project.character_minimum} characters minimum."
     end
   end
+
+  def by_user
+    @these_replies = Replies.find(:all, :conditions => { :user_id => params[:id]})
+  end
+
 end

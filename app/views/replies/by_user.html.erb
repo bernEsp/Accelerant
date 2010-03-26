@@ -1,0 +1,43 @@
+<div id="rightColumn">
+
+<% for comment in @these_replies do %>
+
+<div class="clientSubCommentText" >
+		 <p>
+
+		<%=comment.content %>
+		<% if comment.media_content_type %>
+		<% if comment.media_content_type =~ /image.*/  %>
+			<a href='<%=comment.media.url%>' class="MagicThumb" rel="buttons:hide">
+			<%= image_tag comment.media.url(:thumb), :style => "margin-left:40px;" %>
+			</a>
+		<% else %>
+			<a href='<%=comment.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+		<% end %>
+		<% end %>
+		<br/>
+
+		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
+
+              </p>
+              <% if Comment.last(comment.comment_id) %>
+              <p>
+                <strong>In response to...</strong><br/>
+                <%=Comment.find(comment.comment_id).comment%>
+                <%=Discussion.find(comment.discussion_id).title%>
+
+              </p>
+              <% end %>
+
+</div>
+  <hr/>
+  <% end %>
+
+
+</div> <!-- right column -->
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+
+<%= "by_user.html" %>
