@@ -37,8 +37,8 @@ class UserMailer < ActionMailer::Base
   end
 
   def self.check_mail
-    imap = Net::IMAP.new('localhost')
-    imap.authenticate('LOGIN', 'username', 'password')
+    imap = Net::IMAP.new('secure.emailsrvr.com')
+    imap.authenticate('LOGIN', 'study@blognogresearch.com', 'masterkey')
     imap.select('INBOX')
     imap.search(['ALL']).each do |message_id|
       msg = imap.fetch(message_id,'RFC822')[0].attr['RFC822']
