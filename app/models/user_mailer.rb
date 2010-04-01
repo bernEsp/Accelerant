@@ -1,6 +1,7 @@
 class UserMailer < ActionMailer::Base
   
   require 'net/imap'
+  require 'tmail'
 
   def welcome_email(user)
     recipients    user.email
@@ -37,18 +38,21 @@ class UserMailer < ActionMailer::Base
   end
 
   def self.check_mail
-    imap = Net::IMAP.new('secure.emailsrvr.com')
-    imap.authenticate('LOGIN', 'study@blognogresearch.com', 'masterkey')
-    imap.select('INBOX')
-    imap.search(['ALL']).each do |message_id|
-      msg = imap.fetch(message_id,'RFC822')[0].attr['RFC822']
 
-      MailReader.receive(msg)
-      #Mark message as deleted and it will be removed from storage when user session closd
-      imap.store(message_id, "+FLAGS", [:Deleted])
-    end
-    # tell server to permanently remove all messages flagged as :Deleted
-    imap.expunge()
+    imap = Net::IMAP.new('secure.emailsrvr.com')
+imap.login('study@blognogresearch.com', 'masterkey')
+imap.select('INBOX')
+imap.search(["NOT", "DELETED"]).each do |message_id|
+  msg = imap.fetch(message_id,'RFC822')[0].attr['RFC822']
+  #UserMailer.receive(msg)
+  #@body = msg.body
+  #@subject = msg.subject
+  #@from = msg.from
+  imap.store(message_id, "+FLAGS", [:Deleted])
+end
+imap.expunge()
+#imap.logout()
+#imap.disconnect()
   end
 
 end

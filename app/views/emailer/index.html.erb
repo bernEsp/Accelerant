@@ -1,6 +1,28 @@
-<%#
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
+<%
+
+#UserMailer.check_mail
+    #UserMailer.deliver_test_email()
+    imap = Net::IMAP.new('secure.emailsrvr.com')
+imap.login('study@blognogresearch.com', 'masterkey')
+imap.select('INBOX')
+imap.search(["NOT", "DELETED"]).each do |message_id|
+  msg = imap.fetch(message_id,'RFC822')[0].attr['RFC822']
+mail = TMail::Mail.parse(msg)
+body = mail.body
+
+  %>
+
+To: <%= mail.to  %><br/>
+From: <%= mail.from  %><br/>
+
+<%= body  %><br/>
+
+<%
+  imap.store(message_id, "+FLAGS", [:Deleted])
+end
+imap.expunge()
+
 %>
 
-<%= "index.html" %>
+
+
