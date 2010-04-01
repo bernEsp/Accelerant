@@ -62,7 +62,7 @@
         <% else %>
         <%= image_tag "gravatar-20.png" %>
         <% end %>
-                          <%= render_avatar(replies.user) %>
+                          <%= render_small_avatar(replies.user) %>
                           &nbsp;&nbsp;<%= replies.content %>
 				<% if replies.media_file_name %>
 					<% if replies.media_content_type =~ /image.*/  %>
@@ -150,7 +150,7 @@
         <% else %>
         <%= image_tag "gravatar-20.png" %>
         <% end %>
-                                  <%= render_avatar(this_reply.user) %>
+                                  <%= render_small_avatar(this_reply.user) %>
             &nbsp;&nbsp;<%= this_reply.content %>
 					<% if this_reply.media_file_name %>
 						<% if this_reply.media_content_type =~ /image.*/  %>
