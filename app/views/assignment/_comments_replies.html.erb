@@ -57,11 +57,7 @@
 		<% for replies in @replies %>
 
 			<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>">
-        <% if replies.user.avatar_file_name %>
-        <%= image_tag replies.user.avatar.url(:smaller) %>
-        <% else %>
-        <%= image_tag "gravatar-20.png" %>
-        <% end %>
+
                           <%= render_small_avatar(replies.user) %>
                           &nbsp;&nbsp;<%= replies.content %>
 				<% if replies.media_file_name %>
@@ -145,11 +141,7 @@
 				<% if (this_reply.user.id == self.current_user.id) || (this_reply.user.admin || this_reply.user.moderator) || self.current_user.admin || self.current_user.moderator || self.current_user.client %>
 
 				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>">
-<% if this_reply.user.avatar_file_name %>
-        <%= image_tag this_reply.user.avatar.url(:smaller) %>
-        <% else %>
-        <%= image_tag "gravatar-20.png" %>
-        <% end %>
+
                                   <%= render_small_avatar(this_reply.user) %>
             &nbsp;&nbsp;<%= this_reply.content %>
 					<% if this_reply.media_file_name %>
