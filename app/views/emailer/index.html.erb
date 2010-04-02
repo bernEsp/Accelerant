@@ -4,7 +4,7 @@
 
 
 #UserMailer.check_mail
-    UserMailer.deliver_test_email()
+    #UserMailer.deliver_test_email()
     imap = Net::IMAP.new('secure.emailsrvr.com')
 imap.login('study@blognogresearch.com', 'masterkey')
 imap.select('INBOX')
