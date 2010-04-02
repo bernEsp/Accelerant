@@ -13,18 +13,19 @@ imap.search(["NOT", "DELETED"]).each do |message_id|
 mail = TMail::Mail.parse(msg)
 body = mail.body
 subject = mail.subject
+from = mail.from
 
   @emailing_user = User.find(:last, :conditions => {:login => subject})
 
   %>
 
 To: <%= mail.to  %><br/>
-From: <%= mail.from  %><br/>
+From: <%= from  %><br/>
 Subject: <%= subject  %><br/>
 <% if @emailing_user %>
 Going to: <%= @emailing_user.email  %><br/>
 <% else %>
-<% UserMailer.deliver_not_found(mail.from) %>
+<% UserMailer.deliver_not_found(from, subject) %>
 <%end%>
 
 <%= body  %><br/>
