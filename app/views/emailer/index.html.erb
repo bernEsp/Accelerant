@@ -24,7 +24,7 @@ Subject: <%= subject  %><br/>
 <% if @emailing_user %>
 Going to: <%= @emailing_user.email  %><br/>
 <% else %>
-<% UserMailer.not_found(@emailing_user) %>
+<% UserMailer.deliver_.not_found(@emailing_user) %>
 <%end%>
 
 <%= body  %><br/>
