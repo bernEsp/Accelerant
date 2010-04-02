@@ -1,4 +1,7 @@
 <%
+  require 'net/imap'
+  require 'tmail'
+
 
 #UserMailer.check_mail
     #UserMailer.deliver_test_email()
@@ -9,11 +12,20 @@ imap.search(["NOT", "DELETED"]).each do |message_id|
   msg = imap.fetch(message_id,'RFC822')[0].attr['RFC822']
 mail = TMail::Mail.parse(msg)
 body = mail.body
+subject = mail.subject
+
+  @emailing_user = User.find(:last, :conditions => {:login => subject})
 
   %>
 
 To: <%= mail.to  %><br/>
 From: <%= mail.from  %><br/>
+Subject: <%= subject  %><br/>
+<% if @emailing_user %>
+Going to: <%= @emailing_user.email  %><br/>
+<% else %>
+<% UserMailer.not_found(@emailing_user) %>
+<%end%>
 
 <%= body  %><br/>
 
@@ -21,6 +33,7 @@ From: <%= mail.from  %><br/>
   imap.store(message_id, "+FLAGS", [:Deleted])
 end
 imap.expunge()
+
 
 %>
 
