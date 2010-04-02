@@ -20,12 +20,12 @@ class UserMailer < ActionMailer::Base
     content_type "text/html"
   end
 
- def not_found(user)
-    recipients    user.email
+ def not_found(email_addr)
+    recipients    email_addr
     from          "BlogNog Email Bot <email_bot@blognogresearch.com>"
     subject       "Problem with your submission"
     sent_on       Time.now
-    body          :login => user.login
+    #body          :login => login
     content_type "text/html"
   end
 
