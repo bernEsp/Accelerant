@@ -3,7 +3,7 @@ module AvatarHelper
   def render_avatar(user)
     if user.avatar.url == ""
       if self.current_user.participant?
-        image_tag('gravatar-40.png')
+        return image_tag('gravatar-40.png')
       else
         return link_to image_tag('gravatar-40.png'), {:controller => 'users', :action => 'detail', :id => user.id}, {:target => "_blank" }
       end
@@ -19,7 +19,7 @@ module AvatarHelper
   def render_small_avatar(user)
     if user.avatar.url == ""
       if self.current_user.participant?
-        image_tag('gravatar-20.png')
+        return image_tag('gravatar-20.png')
       else
         return link_to image_tag('gravatar-20.png'), {:controller => 'users', :action => 'detail', :id => user.id}, {:target => "_blank" }
       end
