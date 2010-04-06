@@ -67,6 +67,7 @@ class CommentController < ApplicationController
 
   def by_user
     @these_comments = Comment.belongs_to_discussion.find(:all, :conditions => { :user_id => params[:id]})
+    @these_replies = Replies.find(:all, :conditions => {:user_id => params[:id]})
   end
 
   def emailed
