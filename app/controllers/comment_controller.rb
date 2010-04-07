@@ -3,7 +3,7 @@ class CommentController < ApplicationController
   require 'csv'
 
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :new, :create, :edit, :update, :drop, :assign, :show, :destroy, :csv_dump, :export_to_csv
+    ssl_required :index, :new, :create, :edit, :update, :drop, :assign, :show, :destroy, :csv_dump, :export_to_csv, :by_user
   end
 
   def index
@@ -71,7 +71,7 @@ class CommentController < ApplicationController
   end
 
   def emailed
-    @emailed_comments = Comment.unassigned.find(:all, :conditions => { :user_id => params[:id]})
+    @emailed_comments = Comment.unassigned.find(:all, :conditions => { :user_id => self.current_user.id})
   end
   
 end

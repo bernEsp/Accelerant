@@ -84,7 +84,7 @@
 	<% end %>
 	<% if self.current_user.participant? %>
       <li ><%= link_to 'My Assignments', {:controller => 'myassignments', :action => 'show'}%></li>
-      <li class="last"><%= link_to 'My Emails', {:controller => 'comment', :action => 'emailed'} %></li>
+      <li class="last"><%= link_to 'My Emails' , {:controller => 'comment', :action => 'emailed'} %></li>
       
 	<% end %>
 	<% end %>
