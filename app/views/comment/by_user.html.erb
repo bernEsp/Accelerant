@@ -41,7 +41,7 @@
 		<% if reply.media_content_type %>
 		<% if reply.media_content_type =~ /image.*/  %>
 			<a href='<%=reply.media.url%>' class="MagicThumb" rel="buttons:hide">
-			<%= image_tag reply.media.url(:thumb), :style => "margin-left:40px;" %>
+			<%= image_tag reply.media.url(:small), :style => "margin-left:40px;" %>
 			</a>
 		<% else %>
 			<a href='<%=reply.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
