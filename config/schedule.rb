@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, "~/public_html/acceclerant.log/cron_log.log"
+set :output, "~/public_html/acceclerant/log/cron_log.log"
 
 every 2.minutes do
   runner "email_parser.check_inbound"
