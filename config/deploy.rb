@@ -37,3 +37,12 @@ namespace :deploy do
     #nothing -- need to override default cap start task when using passenger
   end
 end
+
+after "deploy:symlink", "deploy:update_crontab"
+
+namespace :deploy do
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :db do
+    run "cd #{release_path} && whenever --update-crontab #{application}"
+  end
+end

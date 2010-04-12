@@ -1,0 +1,2 @@
+class EmailParserController < ApplicationController
+end

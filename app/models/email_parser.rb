@@ -1,10 +1,11 @@
-# To change this template, choose Tools | Templates
+class EmailParser < ActiveRecord::Base
+  # To change this template, choose Tools | Templates
 # and open the template in the editor.
 
 require 'net/imap'
 require 'tmail'
 
-def check_inbound
+def self.check_inbound
 #UserMailer.check_mail
 #UserMailer.deliver_test_email()
 imap = Net::IMAP.new('secure.emailsrvr.com')
@@ -40,4 +41,6 @@ imap.store(message_id, "+FLAGS", [:Deleted])
 end
 imap.expunge()
 
+puts "email checked!"
+end
 end
