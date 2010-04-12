@@ -72,6 +72,7 @@ class CommentController < ApplicationController
 
   def emailed
     @emailed_comments = Comment.unassigned.find(:all, :conditions => { :user_id => self.current_user.id})
+    @discussions = Discussion.find(:last)
   end
   
 end

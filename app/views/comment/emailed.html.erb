@@ -1,11 +1,13 @@
-<%#
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-%>
+
+<h1 class="lower">Your emailed comments...</h1>
+
+<p>Here are emails we have received for you.  Please take a moment and assign them to the appropriate discsuuion.</p>
+
+<br/><br/>
 
 <% for comment in @emailed_comments  %>
 
-<div class="emailedComments" >
+<div class="emailedComments" id="commentSub<%= comment.id%>">
 		 <p>
 
 		<%=comment.comment %>
@@ -21,9 +23,16 @@
 		<br/>
 
 		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
+                | <%= link_to_remote "Delete",
+				:confirm => "Are you sure you want to delete this?",
+				:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
+				:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
+				:update => "commentSub#{comment.id}" %>
 
               </p>
-
+              <% form_for @discussions do |f| %>
+              <%=  select("discussion", "discussion_id", Discussion.find(:all).collect {|p| [ p.title, p.id ] }, {:include_blank => 'Select...'}) %>
+              <% end %>
 </div>
   
 

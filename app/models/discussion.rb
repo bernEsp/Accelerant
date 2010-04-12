@@ -4,6 +4,7 @@ class Discussion < ActiveRecord::Base
   
   #named_scope :is_last, :conditions => {:is_published => true}
 
+
   has_attached_file :media,
   :whiny => false,
   :whiny_thumbnails => false,
