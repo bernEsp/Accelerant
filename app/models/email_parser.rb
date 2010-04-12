@@ -23,6 +23,7 @@ from = mail.from
 
 if @emailing_user
 
+
   comment = Comment.new()
   comment.comment = body
   comment.user_id = @emailing_user.id
@@ -41,6 +42,5 @@ imap.store(message_id, "+FLAGS", [:Deleted])
 end
 imap.expunge()
 
-puts "email checked!"
 end
 end
