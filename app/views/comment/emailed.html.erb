@@ -23,12 +23,6 @@
 		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
 
               </p>
-<% if Discussion.exists?(comment.discussion_id) %>
-              <p>
-                <strong>In response to...</strong><br/>
-                <%=Discussion.find(comment.discussion_id).title%>
-
-              </p>
 <% end %>
 
 </div>
