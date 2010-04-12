@@ -22,5 +22,5 @@
 set :output, "~/public_html/acceclerant/log/cron_log.log"
 
 every 2.minutes do
-  runner "email_parser.check_inbound"
+  runner "EmailParser.check_inbound"
 end
