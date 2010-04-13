@@ -8,11 +8,11 @@
 		<%=comment.comment %>
 		<% if comment.photo_content_type %>
 		<% if comment.photo_content_type =~ /image.*/  %>
-			<a href='<%=comment.photo.url%>' class="MagicThumb" rel="buttons:hide">
+			<a href="<%=comment.photo.url%>" class="MagicThumb" rel="buttons:hide">
 			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 			</a>
 		<% else %>
-			<a href='<%=comment.photo.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+			<a href="<%=comment.photo.url%>" target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 		<% end %>
 		<% end %>
 		<br/>
@@ -40,11 +40,11 @@
 		<%=reply.content %>
 		<% if reply.media_content_type %>
 		<% if reply.media_content_type =~ /image.*/  %>
-			<a href='<%=reply.media.url%>' class="MagicThumb" rel="buttons:hide">
+			<a href="<%=reply.media.url%>" class="MagicThumb" rel="buttons:hide">
 			<%= image_tag reply.media.url(:small), :style => "margin-left:40px;" %>
 			</a>
 		<% else %>
-			<a href='<%=reply.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+			<a href="<%=reply.media.url%>" target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 		<% end %>
 		<% end %>
 		<br/>
