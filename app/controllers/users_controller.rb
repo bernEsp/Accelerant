@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, :activate
+    ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, :activate, :detail
   end
 
   def index
