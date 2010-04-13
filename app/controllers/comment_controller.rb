@@ -71,8 +71,20 @@ class CommentController < ApplicationController
   end
 
   def emailed
+    @your_assignment = UserAssignments.find(:last, :conditions => { :user_id => self.current_user.id})
+    @this_assignment = Project.find(:last, :conditions => {:id => @your_assignment.project_id})
+    puts "shit"
+    puts @your_assignment.project_id
     @emailed_comments = Comment.unassigned.find(:all, :conditions => { :user_id => self.current_user.id})
-    @discussions = Discussion.find(:last)
+  end
+
+  def email_assign
+
+    @comment = Comment.find(params[:comment][:id])
+    @discussion = Discussion.find(params[:discussion][:discussion_id])
+    @comment.discussion_id = @discussion.id
+    @comment.save
+    render :text => "Comment has been assigned!"
   end
   
 end

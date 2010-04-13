@@ -1,7 +1,7 @@
 
 <h1 class="lower">Your emailed comments...</h1>
 
-<p>Here are emails we have received for you.  Please take a moment and assign them to the appropriate discsuuion.</p>
+<p>Here are emails we have received for you.  Please take a moment and assign them to the appropriate discussion.</p>
 
 <br/><br/>
 
@@ -30,9 +30,18 @@
 				:update => "commentSub#{comment.id}" %>
 
               </p>
-              <% form_for @discussions do |f| %>
-              <%=  select("discussion", "discussion_id", Discussion.find(:all).collect {|p| [ p.title, p.id ] }, {:include_blank => 'Select...'}) %>
+
+              <p>
+              <% @indy_comment = Comment.find(comment.id)%>
+              <% remote_form_for :comment, @indy_comment,
+                :url => { :action => "email_assign" },
+                :update => "commentSub#{comment.id}" do |f| %>
+                
+              <%=  select("discussion", "discussion_id", Discussion.find(:all, :conditions => {:project_id => @this_assignment.id}).collect {|p| [ p.title, p.id ] }, {:include_blank => 'Select...'}) %>
+              <%= hidden_field(:comment, :id, :value => comment.id)   %>
+              <%= submit_tag 'Assign' %>
               <% end %>
+              </p>
 </div>
   
 
