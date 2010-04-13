@@ -11,7 +11,7 @@
 
 /* Style of the small image link */
 .MagicThumb, .MagicThumb:hover {
-cursor: url(../images/graphics/zoomin.cur), pointer;
+cursor: url(https://www.blognogresearch.com/images/graphics/zoomin.cur), pointer;
 outline: 0 !important;
 }
 
@@ -33,7 +33,7 @@ outline: 0;
 
 /* Style of the expanded image */
 .MagicThumb-expanded {
-cursor: url(../images/graphics/zoomout.cur), pointer;
+cursor: url(https://www.blognogresearch.com/images/graphics/zoomout.cur), pointer;
 background: transparent;
 border: 1px solid #ccc;
 outline: 0;
@@ -53,7 +53,7 @@ outline: 0 !important;
 
 /* Style of the close/next/previous buttons */
 .MagicThumb-buttons {
-background: transparent url(../images/graphics/buttons1.png) no-repeat 0 0;
+background: transparent url(https://www.blognogresearch.com/images/graphics/buttons1.png) no-repeat 0 0;
 height: 24px;
 display: block;
 }
@@ -69,7 +69,7 @@ overflow: hidden;
 .MagicThumb-loader {
 font: normal 12pt sans-serif;
 border: 1px solid #000;
-background: #fff url(../images/graphics/loader.gif) no-repeat 2px 50%;
+background: #fff url(https://www.blognogresearch.com/images/graphics/loader.gif) no-repeat 2px 50%;
 padding: 2px 2px 2px 22px;
 margin: 0;
 text-decoration: none;
