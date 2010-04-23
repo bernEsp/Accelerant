@@ -23,8 +23,8 @@
 		<%=comment.comment %>
 		<% if comment.photo_content_type %>
 		<% if comment.photo_content_type =~ /image.*/  %>
-			<a href='<%=comment.photo.url%>' class="MagicThumb" rel="buttons:hide">
-			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
+			<a href="<%=comment.photo.url%>" class="MagicThumb" rel="expand-speed:300; group:speed">
+<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %><span>&nbsp;</span>
 			</a>
 		<% else %>
 			<p><a href='<%=comment.photo.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
@@ -62,7 +62,8 @@
                           &nbsp;&nbsp;<%= replies.content %>
 				<% if replies.media_file_name %>
 					<% if replies.media_content_type =~ /image.*/  %>
-						<a href="<%=replies.media.url%>" class="MagicThumb" rel="buttons:hide"><%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
+						<a href="<%=replies.media.url%>" class="MagicThumb" rel="buttons:hide; expand-speed:300; expand-effect:bounce; image-size:original">
+                                                <%= image_tag replies.media.url(:small), :style => "margin-left:40px;" %></a>
 					<% else %>
 						<a href='<%=replies.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 					<% end %>

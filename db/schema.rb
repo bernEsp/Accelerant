@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100322191241) do
+ActiveRecord::Schema.define(:version => 20100423145436) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -24,18 +24,6 @@ ActiveRecord::Schema.define(:version => 20100322191241) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "attachments", :force => true do |t|
-    t.integer  "comment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "data_file_name"
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.datetime "data_updated_at"
-  end
-
-  add_index "attachments", ["comment_id"], :name => "index_attachments_on_comment_id"
 
   create_table "clients", :force => true do |t|
     t.integer  "user_id"
@@ -93,6 +81,12 @@ ActiveRecord::Schema.define(:version => 20100322191241) do
     t.string   "media_content_type"
     t.integer  "media_file_size"
     t.datetime "media_updated_at"
+    t.integer  "character_minimum",  :default => 0
+  end
+
+  create_table "email_parsers", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "moderators", :force => true do |t|
@@ -119,7 +113,6 @@ ActiveRecord::Schema.define(:version => 20100322191241) do
     t.datetime "photo_updated_at"
     t.boolean  "one_to_one",         :default => false
     t.boolean  "response_box",       :default => true
-    t.integer  "character_minimum",  :default => 0
   end
 
   create_table "replies", :force => true do |t|

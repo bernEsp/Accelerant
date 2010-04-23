@@ -10,19 +10,75 @@
   <div style="clear:both;float:right;margin-right:100px;">
 Username: <%= @this_user.login %><br/>
 Email: <%= @this_user.email %><br/>
-<% unless @assignments.nil? %>
-<h4>Member of:</h4>
-<% for assignment in @assignments %>
-  <% unless assignment.project_id.nil? %>
-    <% if Project.last(:conditions => {:id => assignment.project_id}) %>
-      <%= Project.last(:conditions => {:id => assignment.project_id}).title %><br/>
-    <% end %>
+
+</div>
+</div>
+
+<div id="rightColumn">
+
+<% for comment in @these_comments do %>
+
+<div class="clientSubCommentText" >
+		 <p>
+
+		<%=comment.comment %>
+		<% if comment.photo_content_type %>
+		<% if comment.photo_content_type =~ /image.*/  %>
+			<a href="<%=comment.photo.url%>" class="MagicThumb" rel="buttons:hide">
+			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
+			</a>
+		<% else %>
+			<a href="<%=comment.photo.url%>" target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+		<% end %>
+		<% end %>
+		<br/>
+
+		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
+
+              </p>
+<% if Discussion.exists?(comment.discussion_id) %>
+              <p>
+                <strong>In response to...</strong><br/>
+                <%=Discussion.find(comment.discussion_id).title%>
+
+              </p>
+<% end %>
+
+</div>
+  <hr/>
   <% end %>
-<% end %>
-<% end %>
+
+  <% for reply in @these_replies do %>
+
+  <div class="clientSubCommentText" >
+		 <p>
+
+		<%=reply.content %>
+		<% if reply.media_content_type %>
+		<% if reply.media_content_type =~ /image.*/  %>
+			<a href="<%=reply.media.url%>" class="MagicThumb" rel="buttons:hide">
+			<%= image_tag reply.media.url(:small), :style => "margin-left:40px;" %>
+			</a>
+		<% else %>
+			<a href="<%=reply.media.url%>" target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+		<% end %>
+		<% end %>
+		<br/>
+
+		<span>- Posted <%= time_ago_in_words(reply.created_at)%> ago </span>
+
+              </p>
+              <% if Comment.exists?(reply.comment_id) %>
+              <p>
+                <strong>In response to...</strong><br/>
+                <%=Comment.find(reply.comment_id).comment%>
+
+              </p>
+              <% end %>
 </div>
-<div>
-  <%= link_to "Show Comments", :controller => 'comment', :action => 'by_user', :id => params[:id] %>
-</div>
-</div>
+  <hr/>
+
+  <% end %>
+
+</div> <!-- right column -->
 

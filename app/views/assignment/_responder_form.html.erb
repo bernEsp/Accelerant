@@ -1,6 +1,6 @@
 <!-- Response form starts here -->
 <%
-@project_dis = Project.find(project_id)
+@discussion_dis = Discussion.find(discussions.id)
 %>
           <div style="padding-top:15px;clear:both;" >
               <% form_for :comments,
@@ -11,8 +11,8 @@
 	</div>
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
-          <% if @project_dis.character_minimum > 0 %>
-          <p><%=@project_dis.character_minimum%> characters MINIMUM</p>
+          <% if @discussion_dis.character_minimum > 0 %>
+          <p><%=@discussion_dis.character_minimum%> characters MINIMUM</p>
           <% end %>
           <div class="responseWidget">
           	<%= f.text_area :comment, :size => "60 x 10", :class => 'rich_text_editor' %><br/>

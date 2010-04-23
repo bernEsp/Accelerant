@@ -1,0 +1,17 @@
+<div id="rightColumn">
+
+
+  <% discussion = @discussions_desc %>
+  <% if discussion %>
+  <div id="discussion<%= discussion.id %>"  ><br/>
+
+
+
+    <%= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
+
+
+</div>
+<% end  %>
+
+
+</div> <!-- right column -->
