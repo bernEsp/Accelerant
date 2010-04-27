@@ -56,7 +56,7 @@ Email: <%= @this_user.email %><br/>
 		<%=reply.content %>
 		<% if reply.media_content_type %>
 		<% if reply.media_content_type =~ /image.*/  %>
-			<a href="<%=reply.media.url%>" class="MagicThumb" rel="buttons:hide">
+			<a href="<%=reply.media.url%>" class="MagicThumb" rel="buttons:hide"
 			<%= image_tag reply.media.url(:small), :style => "margin-left:40px;" %>
 			</a>
 		<% else %>

@@ -38,7 +38,7 @@ form p {padding:5px;}
 }
 img {
 	border: none;
-	behavior:url("pngbehavior.htc");
+	/*behavior:url("pngbehavior.htc");*/
 }
 #wrapper {
 	margin:0 auto;
