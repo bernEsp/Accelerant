@@ -5,7 +5,11 @@
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
 
 <%= f.text_area :content, :size => "50 x 10" %><br/>
-<%= check_box("reply", "private", {}, :true )  %> Private?<br/>
+
+<% #if self.current_user.admin || self.current_user.moderator %>
+<% # =check_box("reply", "private", {}, :true )  %>
+<%  #end %>
+
 Upload a photo or file:<br/>
 <%= f.file_field :media %><br/>
 

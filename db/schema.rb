@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100505123236) do
+ActiveRecord::Schema.define(:version => 20100505134849) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -89,6 +89,15 @@ ActiveRecord::Schema.define(:version => 20100505123236) do
     t.datetime "updated_at"
   end
 
+  create_table "follow_ups", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "reply_id"
+    t.integer  "reply_belongs_to"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "moderators", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at"
@@ -113,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20100505123236) do
     t.datetime "photo_updated_at"
     t.boolean  "one_to_one",         :default => false
     t.boolean  "response_box",       :default => true
+    t.integer  "moderator_id"
   end
 
   create_table "replies", :force => true do |t|

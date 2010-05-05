@@ -1,0 +1,22 @@
+<div id="thisForm<%= params[:id]%>">
+<%  reply = Replies.find(params[:id])%>
+<% remote_form_for :follow_up,
+  :update => "reply#{reply.id}", 
+:url =>{:controller => 'follow_ups', :action => 'create' } do |f| -%>
+
+<%= f.text_area :content, :size => "50 x 10" %><br/>
+
+
+<div class="postButton">
+  <%= submit_tag "Post Follow Up", :style => "margin-right:50px;" %>
+</div>
+
+<%= f.hidden_field :reply_belongs_to, :value => reply.user_id %>
+<%= f.hidden_field :reply_id, :value => reply.id %>
+
+
+<%= f.hidden_field :user_id, :value => self.current_user.id %>
+
+<% end -%>
+
+</div>

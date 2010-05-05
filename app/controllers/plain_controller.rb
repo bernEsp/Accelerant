@@ -41,5 +41,9 @@ class PlainController < ApplicationController
     @reply.destroy
     render :text => "Deleted"
   end
+
+  def follow_up
+    render :partial => "follow_up_form"
+  end
   
 end

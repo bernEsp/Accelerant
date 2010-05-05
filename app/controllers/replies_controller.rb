@@ -20,8 +20,10 @@ class RepliesController < ApplicationController
 
   def create
     @discussion = Discussion.find(params[:reply][:discussion_id])
-    puts params[:reply][:discussion_id]
-    if (@discussion.character_minimum != 0) && (params[:reply][:content].length >= @discussion.character_minimum)
+    puts params[:reply][:content].length
+    puts (@discussion.character_minimum != 0)
+    puts (params[:reply][:content].length >= @discussion.character_minimum)
+    if (@discussion.character_minimum == 0) || ((@discussion.character_minimum != 0 && params[:reply][:content].length >= @discussion.character_minimum))
       @reply = Replies.new(params[:reply])
       @reply.save
       @comment = Comment.find(@reply.comment_id)

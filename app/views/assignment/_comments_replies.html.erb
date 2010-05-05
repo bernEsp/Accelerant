@@ -84,7 +84,28 @@
 					:complete => "new Effect.Fade('reply#{replies.id}', { duration: 2 })",
 					:update => "reply#{replies.id}" %>
 				<% end %>
+                                <% if (self.current_user.admin || self.current_user.moderator) %>
+                                          | <%= link_to_remote "Follow Up",
+					:url => {:controller => 'plain', :action => 'follow_up', :id => replies.id},
+					:update => "reply#{replies.id}" %>
+                                <% end %>
+                            <% if (self.current_user.admin || self.current_user.moderator || (self.current_user.id == replies.user_id) ) %>
+                      <% @follows = FollowUps.find(:all, :conditions => {:reply_id => replies.id}, :order => "id ASC") %>
+                    <% else %>
+                      <% @follows = FollowUps.find(:all, :conditions => "1 = 0") %>
+                    <% end %>
+                    <% for follows in @follows %>
+                        <br/><br/><em><%=User.find(follows.user_id).name %> followed up with: </em><%=follows.content%><br/>
+                        
+                    <%= link_to_remote "Follow Up",
+					:url => {:controller => 'plain', :action => 'follow_up', :id => replies.id},
+					:update => "reply#{replies.id}" %>
+                        
+                      <% end %>
+
+                        <br/><br/>
 				</p>
+
 		<% end %>
 			<div id="<%=dom_id(comment)%>">
 			</div>
@@ -136,6 +157,7 @@
 
 
 
+
 			<div id="subCommentForm<%= comment.id %>"></div>
 			<div id="reclaimer<%= comment.id %>"></div>
 			<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
@@ -169,8 +191,26 @@
 						:complete => "new Effect.Fade('reply#{this_reply.id}', { duration: 2 })",
 						:update => "reply#{this_reply.id}" %>
 					<% end %>
+                                        <% if (self.current_user.admin || self.current_user.moderator) %>
+                                          | <%= link_to_remote "Follow Up",
+					:url => {:controller => 'plain', :action => 'follow_up', :id => this_reply.id},
+					:update => "reply#{this_reply.id}" %>
+                                        <% end %>
+                    <% if (self.current_user.admin || self.current_user.moderator || (self.current_user.id == this_reply.user_id) ) %>
+                      <% @follows = FollowUps.find(:all, :conditions => {:reply_id => this_reply.id}, :order => "id ASC") %>
+                    <% else %>
+                      <% @follows = FollowUps.find(:all, :conditions => "1 = 0") %>
+                    <% end %>
+                    <% for follows in @follows %>
+                        <br/><br/><em><%=User.find(follows.user_id).name %> followed up with: </em><%=follows.content%><br/>
+                        <%= link_to_remote "Follow Up",
+					:url => {:controller => 'plain', :action => 'follow_up', :id => this_reply.id},
+					:update => "reply#{this_reply.id}" %>
+                      <% end %>
+                        <br/><br/>
 					</p>
-					<% end %>
+
+                        <% end %>
 			<% end %>
 				<div id="<%=dom_id(comment)%>">
 				</div>
