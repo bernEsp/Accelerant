@@ -5,6 +5,7 @@
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
 
 <%= f.text_area :content, :size => "50 x 10" %><br/>
+<%= check_box("reply", "private", {}, :true )  %> Private?<br/>
 Upload a photo or file:<br/>
 <%= f.file_field :media %><br/>
 
@@ -13,6 +14,7 @@ Upload a photo or file:<br/>
 </div>
 
 <%= f.hidden_field :comment_id, :value => params[:id] %>
+<%= f.hidden_field :discussion_id, :value => comment_num.discussion_id %>
 
 <input type="hidden" name="project_id" value="<%= comment_num.project_id %>" >
 

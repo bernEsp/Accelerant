@@ -1,6 +1,7 @@
 class Replies < ActiveRecord::Base
   belongs_to :comments
   belongs_to :user
+  belongs_to :discussion
 
   
   has_attached_file :media, 

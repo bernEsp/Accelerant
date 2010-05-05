@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100504210348) do
+ActiveRecord::Schema.define(:version => 20100505123236) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20100504210348) do
     t.integer  "media_file_size"
     t.datetime "media_updated_at"
     t.boolean  "private",            :default => false
+    t.integer  "discussion_id"
   end
 
   create_table "reponses", :force => true do |t|

@@ -19,16 +19,17 @@ class RepliesController < ApplicationController
   end
 
   def create
-    @project = Project.find(params[:project_id])
-    if (@project.character_minimum != 0) && (params[:reply][:content].length >= @project.character_minimum)
+    @discussion = Discussion.find(params[:reply][:discussion_id])
+    puts params[:reply][:discussion_id]
+    if (@discussion.character_minimum != 0) && (params[:reply][:content].length >= @discussion.character_minimum)
       @reply = Replies.new(params[:reply])
       @reply.save
       @comment = Comment.find(@reply.comment_id)
-      @discussion = Discussion.find(@comment.discussion_id)
+      @discussion = Discussion.find(params[:reply][:discussion_id])
       @assignment = Comment.find(:last, :conditions => {:id => params[:reply][:comment_id]})
-      redirect_to "/discussion/show/#{@discussion.id}?project_id=#{@project.id}#bottom"
+      redirect_to "/discussion/show/#{@discussion.id}?project_id=#{@discussion.project_id}#bottom"
     else
-      render :text => "Response is too short.  Must be #{@project.character_minimum} characters minimum."
+      render :text => "Response is too short.  Must be #{@discussion.character_minimum} characters minimum."
     end
   end
 
