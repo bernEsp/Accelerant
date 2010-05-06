@@ -60,7 +60,7 @@
 			<p >
                        
                           <%= render_small_avatar(replies.user) %>
-                          &nbsp;&nbsp;<%= replies.content %>
+                          &nbsp;&nbsp;<%= simple_format(replies.content) %>
 				<% if replies.media_file_name %>
 					<% if replies.media_content_type =~ /image.*/  %>
 						<a href="<%=replies.media.url%>" class="MagicThumb" rel="buttons:hide" >
@@ -91,16 +91,18 @@
                                 <% end %>
                             <% if (self.current_user.admin || self.current_user.moderator || (self.current_user.id == replies.user_id) ) %>
                       <% @follows = FollowUps.find(:all, :conditions => {:reply_id => replies.id}, :order => "id ASC") %>
+                      <% @follows_last = FollowUps.find(:last, :conditions => {:reply_id => replies.id}, :order => "id ASC") %>
                     <% else %>
                       <% @follows = FollowUps.find(:all, :conditions => "1 = 0") %>
                     <% end %>
                     <% for follows in @follows %>
-                        <br/><br/><em><%=User.find(follows.user_id).name %> followed up with: </em><%=follows.content%><br/>
-                        
+                        <br/><br/><em><%=User.find(follows.user_id).name %> followed up with: </em><%=simple_format(follows.content) %><br/>
+                     <%  if (follows.id == @follows_last.id) %>
+                        <br/>
                     <%= link_to_remote "Follow Up",
 					:url => {:controller => 'plain', :action => 'follow_up', :id => replies.id},
 					:update => "reply#{replies.id}" %>
-                        
+                        <% end %>
                       <% end %>
 
                         <br/><br/>
@@ -168,7 +170,7 @@
 				<div style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>">
                                   <p>
                                   <%= render_small_avatar(this_reply.user) %>
-            &nbsp;&nbsp;<%= this_reply.content %>
+            &nbsp;&nbsp;<%= simple_format(this_reply.content) %>
 					<% if this_reply.media_file_name %>
 						<% if this_reply.media_content_type =~ /image.*/  %>
 							<a href="<%=this_reply.media.url%>" class="MagicThumb" rel="buttons:hide" ><%= image_tag this_reply.media.url(:small), :style => "margin-left:40px;" %></a>
@@ -199,14 +201,18 @@
                                         <% end %>
                     <% if (self.current_user.admin || self.current_user.moderator || (self.current_user.id == this_reply.user_id) ) %>
                       <% @follows = FollowUps.find(:all, :conditions => {:reply_id => this_reply.id}, :order => "id ASC") %>
+                      <% @follows_last = FollowUps.find(:last, :conditions => {:reply_id => this_reply.id}, :order => "id ASC") %>
                     <% else %>
                       <% @follows = FollowUps.find(:all, :conditions => "1 = 0") %>
                     <% end %>
                     <% for follows in @follows %>
-                        <br/><br/><em><%=User.find(follows.user_id).name %> followed up with: </em><%=follows.content%><br/>
+                        <br/><br/><em><%=User.find(follows.user_id).name %> followed up with: </em><%=simple_format(follows.content)%><br/>
+                    <% if follows.id == @follows_last.id %>
+                        <br/>
                         <%= link_to_remote "Follow Up",
 					:url => {:controller => 'plain', :action => 'follow_up', :id => this_reply.id},
 					:update => "reply#{this_reply.id}" %>
+                      <% end %>
                       <% end %>
                         <br/><br/>
 					</p>
