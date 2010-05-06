@@ -2,7 +2,8 @@ class PlainController < ApplicationController
   layout 'plain'
 
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :showlatest, :update_count, :sub_comment_form, :sub_form, :show_comments, :drop_comment, :drop_reply
+    ssl_required :index, :show, :showlatest, :update_count, :sub_comment_form, 
+      :sub_form, :show_comments, :drop_comment, :drop_reply, :follow_up_form
   end
   
   def index
