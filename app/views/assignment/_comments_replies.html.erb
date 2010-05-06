@@ -56,9 +56,9 @@
 		<div id="reclaimer<%= comment.id %>"></div>
 		<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
 		<% for replies in @replies %>
-
-			<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= replies.id%>">
-
+                <div id="reply<%= replies.id%>" style="background-color:#cdd7de;margin:8px;padding:2px;">
+			<p >
+                       
                           <%= render_small_avatar(replies.user) %>
                           &nbsp;&nbsp;<%= replies.content %>
 				<% if replies.media_file_name %>
@@ -85,7 +85,7 @@
 					:update => "reply#{replies.id}" %>
 				<% end %>
                                 <% if (self.current_user.admin || self.current_user.moderator) %>
-                                          | <%= link_to_remote "Follow Up",
+                                          | <%= link_to_remote "Probe",
 					:url => {:controller => 'plain', :action => 'follow_up', :id => replies.id},
 					:update => "reply#{replies.id}" %>
                                 <% end %>
@@ -104,8 +104,9 @@
                       <% end %>
 
                         <br/><br/>
+                        
 				</p>
-
+                </div>
 		<% end %>
 			<div id="<%=dom_id(comment)%>">
 			</div>
@@ -164,8 +165,8 @@
 			<% for this_reply in @replies %>
 				<% if (this_reply.user.id == self.current_user.id) || (this_reply.user.admin || this_reply.user.moderator) || self.current_user.admin || self.current_user.moderator || self.current_user.client %>
 
-				<p style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>">
-
+				<div style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>">
+                                  <p>
                                   <%= render_small_avatar(this_reply.user) %>
             &nbsp;&nbsp;<%= this_reply.content %>
 					<% if this_reply.media_file_name %>
@@ -192,7 +193,7 @@
 						:update => "reply#{this_reply.id}" %>
 					<% end %>
                                         <% if (self.current_user.admin || self.current_user.moderator) %>
-                                          | <%= link_to_remote "Follow Up",
+                                          | <%= link_to_remote "Probe",
 					:url => {:controller => 'plain', :action => 'follow_up', :id => this_reply.id},
 					:update => "reply#{this_reply.id}" %>
                                         <% end %>
@@ -209,6 +210,7 @@
                       <% end %>
                         <br/><br/>
 					</p>
+                                </div>
 
                         <% end %>
 			<% end %>
