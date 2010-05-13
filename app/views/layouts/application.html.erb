@@ -82,8 +82,9 @@
 	<% if logged_in? %>
 	<% if self.current_user.admin? %>
     	<li><%= link_to 'Users', {:controller => 'users', :action => 'index'} %></li>
-		<li class="last"><%= link_to 'Projects', {:controller => 'project', :action => 'index'} %></li>
-		<%#= link_to 'Assignments', {:controller => 'assignment', :action => 'index'} %>
+		<li ><%= link_to 'Projects', {:controller => 'project', :action => 'index'} %></li>
+                <li class="last"><%= link_to 'Themes', {:controller => 'themes', :action => 'index'} %></li>
+		
 	<% end %>
 	<% if self.current_user.participant? %>
       <li ><%= link_to 'My Assignments', {:controller => 'myassignments', :action => 'show'}%></li>

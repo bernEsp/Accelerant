@@ -1,0 +1,22 @@
+<h1 class="lower">Edit Theme</h1>
+
+<% form_for @theme, :url =>{:controller => 'themes', :action => 'update', :id => @theme.id }, :html => { :multipart => true } do |f| -%>
+
+<p>
+	Name:<br/>
+	<%= f.text_field :name %>
+</p>
+
+<p>
+	<% if @theme.logo_file_name %>
+	<%= image_tag @theme.logo.url(:size50) %>
+	<% end %>
+	Upload Logo:<br/>
+	<%= f.file_field :logo %>
+</p>
+
+<p>
+	<%= submit_tag 'Update' %>
+<p/>
+
+<% end -%>

@@ -1,0 +1,17 @@
+<h1 class="lower">Create a new theme</h1>
+
+<% form_for :theme, 
+  :url =>{:controller => 'themes', :action => 'create' },
+  :html => { :multipart => true, :id => "this_form" }  do |f| -%>
+
+<p><%= label_tag 'name' %><br/>
+<%= f.text_field :name %></p>
+
+<p>
+	Upload logo:<br/>
+	<%= f.file_field :logo %>
+</p>
+
+
+<p ><%= submit_tag 'Create' %></p>
+<% end %>

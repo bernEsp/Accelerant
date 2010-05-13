@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
   map.comment '/comment', :controller => 'comment', :action => 'show'
   map.importer '/importer', :controller => 'importer', :action => 'index'
   map.resources :users
+  map.resources :themes, :belongs_to => :project
 
   map.resource :session
   
