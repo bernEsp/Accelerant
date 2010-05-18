@@ -1,5 +1,17 @@
 <h1 class="lower">Create a new theme</h1>
 
+<font style="color:#f00">
+
+<%= error_messages_for :theme %>
+
+</font>
+
+<p>
+  Create a new THEME by uploading a client logo.  Theme name must be alphanumeric and may not contain any spaces or
+  special characters (/&amp;$"'\ etc.).
+
+</p>
+
 <% form_for :theme, 
   :url =>{:controller => 'themes', :action => 'create' },
   :html => { :multipart => true, :id => "this_form" }  do |f| -%>

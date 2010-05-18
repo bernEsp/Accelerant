@@ -14,8 +14,13 @@ class ThemesController < ApplicationController
 
   def create
     @theme = Themes.new(params[:theme])
-    @theme.save
-    redirect_to '/themes'
+    success = @theme && @theme.save
+    if success
+      redirect_to '/themes'
+    else
+      flash[:error]  = @theme.errors
+      render :action => 'new'
+    end
   end
 
   def edit
@@ -25,8 +30,13 @@ class ThemesController < ApplicationController
   def update
      @theme = Themes.find(params[:id])
      @theme.update_attributes(params[:themes])
-     @theme.save
-    redirect_to "/themes"
+     success = @theme && @theme.save
+     if success
+      redirect_to '/themes'
+     else
+      flash[:error]  = @theme.errors
+      render :action => 'edit'
+    end
   end
 
   def show

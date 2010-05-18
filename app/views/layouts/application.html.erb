@@ -43,8 +43,14 @@
 
 	<% if @project && (self.current_user.participant? || self.current_user.admin || self.current_user.client?|| self.current_user.moderator?) %>
 	<div id="assignmentBox">
-          <%= image_tag "logo2.jpg", :style => "float:right;", :class => "BlogNogLogo" %>
-	<% for this_assignment in @project %>
+        <% for this_assignment in @project %>
+          <%if this_assignment.theme == 1 %>
+            <%= image_tag "logo2.jpg", :style => "float:right;", :class => "BlogNogLogo" %>
+          <% else %>
+          <% puts this_assignment.theme %>
+            <%= image_tag Themes.find(this_assignment.theme).logo.url(:size100), :style => "float:right;", :class => "BlogNogLogo" %>
+          <% end %>
+	
     <h1><%= this_assignment.title %></h1>
     <h2>Project Overview:</h2>
     

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100512195647) do
+ActiveRecord::Schema.define(:version => 20100518124116) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(:version => 20100512195647) do
     t.boolean  "one_to_one",         :default => false
     t.boolean  "response_box",       :default => true
     t.integer  "moderator_id"
+    t.integer  "theme",              :default => 1
   end
 
   create_table "replies", :force => true do |t|

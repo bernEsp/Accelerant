@@ -37,6 +37,11 @@
 	Client:<br/>
 	<%=  select("this_project", "client_id", User.find(:all, :conditions => { :client => true}).collect {|p| [ p.name, p.id ] }, {:include_blank => 'Select...'}) %>
 </p>
+
+<p>
+	Theme:<br/>
+	<%=  select("this_project", "theme", Themes.find(:all).collect {|p| [ p.name, p.id ] }, {:include_blank => 'Select...'}) %>
+</p>
   
 <p><%= submit_tag 'Enter' %></p>
 <% end -%>

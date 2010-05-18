@@ -1,5 +1,11 @@
 <h1 class="lower">Edit Theme</h1>
 
+<font style="color:#f00">
+
+<%= error_messages_for :theme %>
+
+</font>
+
 <% form_for @theme, :url =>{:controller => 'themes', :action => 'update', :id => @theme.id }, :html => { :multipart => true } do |f| -%>
 
 <p>
