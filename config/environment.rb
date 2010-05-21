@@ -61,7 +61,7 @@ Rails::Initializer.run do |config|
     :secret      => '8942cc24d1a1068feafe25bb96f0c6b4daf54f6857d5bdad7aa724eb85b0c6df2491161da9f9916fc72d0a969ed8c340746966a17061319b5e6ad09ccf4d92a0'
   }
 
-  ENV["RAILS_ASSET_ID"] = ""
+  #ENV["RAILS_ASSET_ID"] = ""
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
