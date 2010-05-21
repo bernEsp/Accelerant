@@ -46,6 +46,13 @@ position:relative;
 margin:auto;
 }
 
+#bottom_generic {width:900px;
+min-height:350px;
+background:url("../images/login4.jpg") no-repeat top left #07395a;
+position:relative;
+margin:auto;
+}
+
 #leftStuff  {text-align:center;width:450px;height:200px;float:left;}
 
 #secure {

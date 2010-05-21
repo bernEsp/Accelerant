@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
 
   # render new.rhtml
   def new
+    @theme = Themes.find_by_name(params["id"])
   end
 
   def create

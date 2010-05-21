@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%
+
+%>
 <title>blognog</title>
   <%= stylesheet_link_tag 'login'%>
 <!--[if IE 6]>
@@ -14,6 +17,7 @@
   <div id="content">
   <div id="topper"></div>
   <div id="yellowBar"></div>
+  <% if @theme.nil? %>
   <div id="bottom">
     <div id="leftStuff">
       <div id="secure">Secure Login</div>
@@ -25,7 +29,16 @@
         -->
       </div>
     </div>
-    
+    <% else %>
+    <div id="bottom_generic">
+      <div id="leftStuff">
+      <%= image_tag @theme.logo.url(:size300), :style => "margin:30px 0 0 40px;" %>
+      <div id="secure">Secure Login</div>
+      <div id="links">
+        
+      </div>
+    </div>
+    <% end %>
     <div id="formBlock">
       <%=yield%>
     </div>
