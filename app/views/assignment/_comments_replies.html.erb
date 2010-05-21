@@ -24,7 +24,7 @@
 		<%=comment.comment %>
 		<% if comment.photo_content_type %>
 		<% if comment.photo_content_type =~ /image.*/  %>
-			<a href="<%=comment.photo.url%>" class="MagicThumb" rel="buttons:hide" >
+			<a href="<%=comment.photo.url%>" class="MagicThumb" rel="buttons:hide" target="_blank" >
                           <%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %><span>&nbsp;</span>
 			</a>
 		<% else %>
@@ -132,7 +132,7 @@
 			<%=comment.comment %>
 			<% if comment.photo_content_type %>
 			<% if comment.photo_content_type =~ /image.*/  %>
-				<a href='<%=comment.photo.url%>' class="MagicThumb" rel="buttons:hide" >
+				<a href='<%=comment.photo.url%>' class="MagicThumb" rel="buttons:hide" target="_blank" >
 				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
 				</a>
 			<% else %>
