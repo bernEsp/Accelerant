@@ -30,7 +30,6 @@ class ImporterController < ApplicationController
       @user=User.new
       @attribute=Attributes.new
       @user.name = column[0]
-      puts column[0]
       @user.login = column[1]
       @user.email = column[2]
       @user.password = column[3]
