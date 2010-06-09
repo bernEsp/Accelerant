@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100518124116) do
+ActiveRecord::Schema.define(:version => 20100608174416) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +20,39 @@ ActiveRecord::Schema.define(:version => 20100518124116) do
   create_table "assignments", :force => true do |t|
     t.string   "title"
     t.text     "description"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attribute_tags", :force => true do |t|
+    t.string   "field_1"
+    t.string   "field_2"
+    t.string   "field_3"
+    t.string   "field_4"
+    t.string   "field_5"
+    t.string   "field_6"
+    t.string   "field_7"
+    t.string   "field_8"
+    t.string   "field_9"
+    t.string   "field_10"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attributes", :force => true do |t|
+    t.string   "field_1"
+    t.string   "field_2"
+    t.string   "field_3"
+    t.string   "field_4"
+    t.string   "field_5"
+    t.string   "field_6"
+    t.string   "field_7"
+    t.string   "field_8"
+    t.string   "field_9"
+    t.string   "field_10"
+    t.integer  "user_id"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -220,6 +253,16 @@ ActiveRecord::Schema.define(:version => 20100518124116) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "company_id",                               :default => 0
+    t.string   "field_1"
+    t.string   "field_2"
+    t.string   "field_3"
+    t.string   "field_4"
+    t.string   "field_5"
+    t.string   "field_6"
+    t.string   "field_7"
+    t.string   "field_8"
+    t.string   "field_9"
+    t.string   "field_10"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

@@ -5,11 +5,19 @@
    <tr>
      <td>
       <label for="dump_file">
-        Select a CSV File :
+        Select a CSV File:
       </label>
      </td>
      <td >
        <%= f.file_field :file -%>
+     </td>
+   </tr>
+   <tr><td>
+       <label for="dump_file">
+        Select project:
+      </label>
+     </td><td>
+       <%=  select("dump", "project_id", Project.find(:all).collect {|p| [ p.title, p.id ] }) %>
      </td>
    </tr>
    <tr>
