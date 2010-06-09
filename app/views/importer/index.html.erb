@@ -17,7 +17,7 @@
         Select project:
       </label>
      </td><td>
-       <%=  select("dump", "project_id", Project.find(:all).collect {|p| [ p.title, p.id ] }) %>
+       <%=  select("dump", "project_id", Project.find(:all, :order => "id DESC").collect {|p| [ p.title, p.id ] }) %>
      </td>
    </tr>
    <tr>
