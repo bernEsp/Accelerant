@@ -38,12 +38,6 @@ class ImporterController < ApplicationController
       if @this_user.nil?
         
         @user=User.new
-        @user.name = column[0]
-        @user.login = column[1]
-        @user.email = column[2]
-        @user.password = column[3]
-        @user.password_confirmation = column[3]
-        @user.participant = true
         @attribute = Attributes.new
         @user_assignment = UserAssignments.new
       else
@@ -54,6 +48,12 @@ class ImporterController < ApplicationController
       end
       
       #additional fields
+      @user.name = column[0]
+      @user.login = column[1]
+      @user.email = column[2]
+      @user.password = column[3]
+      @user.password_confirmation = column[3]
+      @user.participant = true
       @user.field_1 = column[4]
       @user.field_2 = column[5]
       @user.field_3 = column[6]

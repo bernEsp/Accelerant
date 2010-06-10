@@ -1,7 +1,22 @@
 
+<%
+@project = Project.find(project.id)
+category = AttributeTags.find_by_project_id(@project.id)
+%>
 
-<%= "_filter.html" %>
 
-  <p>
-  <%= item.title %>
-  </p>
+  <% unless category.nil? %>
+  
+  <h5><%= category.field_1 %></h5>
+  <h5><%= category.field_2 %></h5>
+  <h5><%= category.field_3 %></h5>
+  <h5><%= category.field_4 %></h5>
+  <h5><%= category.field_5 %></h5>
+  <h5><%= category.field_6 %></h5>
+  <h5><%= category.field_7 %></h5>
+  <h5><%= category.field_8 %></h5>
+  <h5><%= category.field_9 %></h5>
+  <h5><%= category.field_10 %></h5>
+  <% else %>
+  <h5>No categories for filter</h5>
+  <% end %>
