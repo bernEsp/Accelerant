@@ -34,6 +34,7 @@ class ImporterController < ApplicationController
      else
       @this_user = User.find_last_by_email(column[2])
       if @this_user.nil?
+        puts "new user"
         @user=User.new
         @user.name = column[0]
         @user.login = column[1]
@@ -41,9 +42,10 @@ class ImporterController < ApplicationController
         @user.password = column[3]
         @user.password_confirmation = column[3]
         @user.participant = true
-        @attribute=Attributes.new
+        @attribute = Attributes.new
         @user_assignment = UserAssignments.new
       else
+        puts "existing user"
         @user = User.find_last_by_email(column[2])
         @attribute = Attributes.find_last_by_user_id(@user.id)
         @user_assignment = UserAssignments.find_last_by_user_id(@user.id)
@@ -62,7 +64,7 @@ class ImporterController < ApplicationController
       @user.field_10 = column[13]
 
       if @attribute.nil?
-        @attibute=Attributes.new
+        @attibute = Attributes.new
       end
       @attribute.field_1 = column[4]
       @attribute.field_2 = column[5]
