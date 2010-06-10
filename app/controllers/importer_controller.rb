@@ -86,7 +86,8 @@ class ImporterController < ApplicationController
         GC.start if n%50==0
         @attribute.user_id = @user.id
         @attribute.save
-        @user_assignment.update_attributes(:user_id => @user.id, :project_id => params[:dump][:project_id])
+        @user_assignment.user_id = @user.id
+        @user_assignment.project_id = params[:dump][:project_id]
         @user_assignment.save
       end
      end
