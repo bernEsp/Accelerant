@@ -66,8 +66,9 @@ class ImporterController < ApplicationController
       @user.field_10 = column[13]
 
       if @attribute.nil?
-        @attibute = Attributes.new
+        @attribute = Attributes.new
       end
+
       @attribute.field_1 = column[4]
       @attribute.field_2 = column[5]
       @attribute.field_3 = column[6]
