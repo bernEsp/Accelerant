@@ -17,6 +17,7 @@ class ImporterController < ApplicationController
      n=0
      @parsed_file.each  do |column|
      if n == 0
+      puts "this is an attribute header"
       @tag = AttributeTags.new
       @tag.field_1 = column[4]
       @tag.field_2 = column[5]
@@ -32,6 +33,7 @@ class ImporterController < ApplicationController
       @tag.save
       n=1
      else
+      puts "this is a USER"
       @this_user = User.find_last_by_email(column[2])
       if @this_user.nil?
         puts "new user"
