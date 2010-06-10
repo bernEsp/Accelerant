@@ -9,7 +9,7 @@ category = AttributeTags.find_by_project_id(@project.id)
   <% unless category.nil? %>
   
   <%  unless category.field_1.nil? %>
-<label onclick="Effect.toggle('field_1','slide'); return false;"><%= category.field_1 %></label><br/>
+  <label onclick="Effect.toggle('field_1','slide'); return false;"><%= category.field_1 %></label><br/>
   <div id="field_1" style="display:none">
   <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_1) %>
     <% for attribute in attributes %>
