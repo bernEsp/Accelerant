@@ -1,10 +1,11 @@
 class ImporterController < ApplicationController
 
-  require 'csv'
-
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :csv_import
   end
+
+  require 'csv'
+
 
   def index
 
