@@ -6,108 +6,24 @@ category = AttributeTags.find_by_project_id(@project.id)
 %>
 
 
-  <% unless category.nil? %>
-  
-  <%  unless category.field_1.nil? %>
-  <label onclick="Effect.toggle('field_1','slide'); return false;"><%= category.field_1 %></label><br/>
-  <div id="field_1" style="display:none">
-  <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_1) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_1 %><br/>
-    <% end %>
-  </div>
-  <% end %>
+<% unless category.nil? %>
 
-  <% unless category.field_2.nil? %>
-  <label onclick="Effect.toggle('field_2','slide'); return false;"><%= category.field_2 %></label><br/>
-  <div id="field_2" style="display:none">
-      <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_2) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_2 %><br/>
-    <% end %>
-  </div>
-  <% end %>
+  <% form_for :filter, :url => { :action => "create" } do |f| %>
 
-  <% unless category.field_3.nil? %>
-  <label onclick="Effect.toggle('field_3','slide'); return false;"><%= category.field_3 %></label><br/>
-  <div id="field_3" style="display:none">
-      <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_3) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_3 %><br/>
-    <% end %>
-  </div>
-  <% end %>
+    <% 1.upto(10) { |i|
+      field_name = "field_#{i}" -%>
+      <% unless category.send(field_name).nil? %>
+        <label onclick="Effect.toggle('<%= field_name %>', 'slide'); return false;"><strong><%= category.send(field_name) %></strong></label><br/>
+        <div id="<%= field_name %>" style="display:none">
+        <% attributes = Attributes.find(:all, :conditions => { :project_id => @project.id }, :group => field_name) %>
+        <% for attribute in attributes %>
+          <%=  check_box('filter', attribute.send(field_name))%><%= attribute.send(field_name) %><br/>
+        <% end %>
+      </div>
+      <% end %>
+    <% }%>
+<% end %>
 
-  <% unless category.field_4.nil? %>
-  <label onclick="Effect.toggle('field_4','slide'); return false;"><%= category.field_4 %></label><br/>
-  <div id="field_4" style="display:none">
-      <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_4) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_4 %><br/>
-    <% end %>
-  </div>
-  <% end %>
-
-  <% unless category.field_5.nil? %>
-  <label onclick="Effect.toggle('field_5','slide'); return false;"><%= category.field_5 %></label><br/>
-  <div id="field_5" style="display:none">
-      <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_5) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_5 %><br/>
-    <% end %>
-  </div>
-  <% end %>
-
-  <% unless category.field_6.nil? %>
-  <label onclick="Effect.toggle('field_6','slide'); return false;"><%= category.field_6 %></label><br/>
-  <div id="field_6" style="display:none">
-      <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_6) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_6 %><br/>
-    <% end %>
-  </div>
-  <% end %>
-
-  <% unless category.field_7.nil? %>
-  <label onclick="Effect.toggle('field_7','slide'); return false;"><%= category.field_7 %></label><br/>
-  <div id="field_7" style="display:none">
-      <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_7) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_7 %><br/>
-    <% end %>
-  </div>
-  <% end %>
-
-  <% unless category.field_8.nil? %>
-  <label onclick="Effect.toggle('field_8','slide'); return false;"><%= category.field_8 %></label><br/>
-  <div id="field_8" style="display:none">
-      <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_8) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_8 %><br/>
-    <% end %>
-  </div>
-  <% end %>
-
-  <% unless category.field_9.nil? %>
-  <label onclick="Effect.toggle('field_9','slide'); return false;"><%= category.field_9 %></label><br/>
-  <div id="field_9" style="display:none">
-      <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_9) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_9 %><br/>
-    <% end %>
-  </div>
-  <% end %>
-
-  <% unless category.field_10.nil? %>
-  <label onclick="Effect.toggle('field_10','slide'); return false;"><%= category.field_10 %></label><br/>
-  <div id="field_10" style="display:none">
-      <% attributes = Attributes.find(:all, :conditions =>{:project_id => @project.id}, :group => :field_10) %>
-    <% for attribute in attributes %>
-      <%= attribute.field_10 %><br/>
-    <% end %>
-  </div>
-  <% end %>
-
-  <% else %>
+<% else %>
   <h5>No categories for filter</h5>
-  <% end %>
+<% end %>
