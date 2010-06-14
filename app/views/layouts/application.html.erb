@@ -101,7 +101,7 @@
     </ul>
 
         <% if @project && (self.current_user.admin || self.current_user.moderator?) %>
-        <%#= render :partial => 'filter/filter', :collection => @project, :as => :project, :layout => 'layouts/filter' %>
+        <%= render :partial => 'filter/filter', :collection => @project, :as => :project, :layout => 'layouts/filter' %>
         <% end %>
   </div>
 <!-- Yield starts here -->
