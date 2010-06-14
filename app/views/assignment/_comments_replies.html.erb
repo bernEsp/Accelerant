@@ -41,7 +41,7 @@
 			:onclick => '',
 			:update => "subCommentForm#{comment.id}" %>
                 <% end %>
-			<% if (comment.user.id == self.current_user.id) || self.current_user.admin || self.current_user.client %>
+			<% if (comment.user.id == self.current_user.id) || self.current_user.admin %>
 				| <%= link_to_remote "Delete",
 				:confirm => "Are you sure you want to delete this?",
 				:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
@@ -76,7 +76,7 @@
 					<%= replies.user.name%>
 				<% end %>
 				<%= time_ago_in_words(replies.created_at) %> ago
-				<% if (replies.user.id == self.current_user.id) || self.current_user.admin || self.current_user.client %>
+				<% if (replies.user.id == self.current_user.id) || self.current_user.admin  %>
 
 					| <%= link_to_remote "Delete",
 					:confirm => "Are you sure you want to delete this?",

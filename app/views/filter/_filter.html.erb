@@ -1,7 +1,7 @@
 
 <%
 @project = Project.find(project.id)
-category = AttributeTags.find_by_project_id(@project.id)
+category = AttributeTags.find_last_by_project_id(@project.id)
 
 %>
 
