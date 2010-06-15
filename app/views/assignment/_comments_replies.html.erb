@@ -182,6 +182,22 @@
 			<div id="reclaimer<%= comment.id %>"></div>
 			<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
 			<% for this_reply in @replies %>
+                                        <%
+                displayFlag = true
+                if cookies[:filter] == "yes"
+                    displayFlag = false
+                    cookies.to_hash.each_pair do |k, v|
+                      if cookies[k.to_sym].split('_')[0] == "field"
+                        #puts cookies[k.to_sym]
+                        #puts k
+                        if this_reply.user.send(cookies[k.to_sym]) == k
+                          displayFlag = true
+                        end
+                      end
+                    end
+                end
+                %>
+                <% if displayFlag %>
 				<% if (this_reply.user.id == self.current_user.id) || (this_reply.user.admin || this_reply.user.moderator) || self.current_user.admin || self.current_user.moderator || self.current_user.client %>
 
 				<div style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>">
@@ -235,6 +251,7 @@
 					</p>
                                 </div>
 
+                        <% end %>
                         <% end %>
 			<% end %>
 				<div id="<%=dom_id(comment)%>">
