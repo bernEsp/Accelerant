@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :replies
 
+
   named_scope :is_moderator, :conditions => {:moderator => true}
   named_scope :is_admin, :conditions => {:admin => true}
 

@@ -11,7 +11,7 @@
 	</div>
         <div class="topResponseBox">
           <h1>Post Your Response:</h1>
-          <% if @discussion_dis.character_minimum > 0 %>
+          <% if !@discussion_dis.character_minimum.nil? && @discussion_dis.character_minimum > 0 %>
           <p><%=@discussion_dis.character_minimum%> characters MINIMUM</p>
           <% end %>
           <div class="responseWidget">

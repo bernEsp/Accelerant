@@ -11,11 +11,11 @@ class FilterController < ApplicationController
           if params["field_#{n}"][name] == "1"
             #puts "#{field_name} from field_#{n}"
             cookies[field_name] = { :value => "field_#{n}", :expires => Time.now + 3600}
+            cookies[:filter] = {:value => "yes", :expires => Time.now + 3600}
           end
         end
       end
     }
-    
     render :text => "Filter set"
   end
 
@@ -25,6 +25,7 @@ class FilterController < ApplicationController
         cookies.delete(k.to_sym)
       end
     end
+    cookies.delete(:filter)
     render :text => "Filter cleared"
   end
   
