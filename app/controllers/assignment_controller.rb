@@ -50,6 +50,11 @@ class AssignmentController < ApplicationController
   end
   
   def show
+    cookies.to_hash.each_pair do |k, v|
+      if cookies[k.to_sym].split('_')[0] == "field"
+        #cookies.delete(k.to_sym)
+      end
+    end
     @project_members = UserAssignments.find(:all, :conditions => {:project_id => params[:id]}, :include => :user)
     @project = Project.find(:all, :conditions => {:id => params[:id]})
     @latest_postings = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user)

@@ -20,7 +20,14 @@ category = AttributeTags.find_last_by_project_id(@project.id)
         <div id="<%= field_name %>" style="display:none">
         <% attributes = Attributes.find(:all, :conditions => { :project_id => @project.id }, :group => field_name) %>
         <% for attribute in attributes %>
-          <%=  check_box(field_name, attribute.send(field_name))%><%#= f.check_box(field_name) %><%= attribute.send(field_name) %>
+          <%
+            unless cookies[attribute.send(field_name)]
+              checked = ""
+            else
+              checked = "checked"
+            end
+          %>
+          <%=  check_box(field_name, attribute.send(field_name),{ :checked => checked })%><%= attribute.send(field_name) %>
           <br/>
         <% end %>
       </div>
@@ -29,6 +36,9 @@ category = AttributeTags.find_last_by_project_id(@project.id)
 
         <p>
           <%= submit_tag "Set Filter" %>
+          <%= link_to_remote "Clear", :complete => "new Effect.BlindUp('filterStatus', { duration: .5 })",
+          :url => {:controller => 'filter', :action => 'filter_clear'},
+          :update => 'filterStatus' %>
         </p>
 
             <%= f.hidden_field("project_id", :value=> @project.id) %>
