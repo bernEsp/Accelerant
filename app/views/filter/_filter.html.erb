@@ -8,7 +8,10 @@ category = AttributeTags.find_last_by_project_id(@project.id)
 
 <% unless category.nil? %>
 
-  <% form_for :filter, :url => { :action => "create" } do |f| %>
+  <% remote_form_for :filter, :complete => "new Effect.BlindDown('filterStatus', { duration: .5 })",
+    :url => { :controller=> 'filter', :action => "filter_set" },
+    :update => 'filterStatus' do |f| %>
+    
 
     <% 1.upto(10) { |i|
       field_name = "field_#{i}" -%>
@@ -17,13 +20,22 @@ category = AttributeTags.find_last_by_project_id(@project.id)
         <div id="<%= field_name %>" style="display:none">
         <% attributes = Attributes.find(:all, :conditions => { :project_id => @project.id }, :group => field_name) %>
         <% for attribute in attributes %>
-          <%=  check_box('filter', attribute.send(field_name))%><%= attribute.send(field_name) %><br/>
+          <%=  check_box(field_name, attribute.send(field_name))%><%#= f.check_box(field_name) %><%= attribute.send(field_name) %>
+          <br/>
         <% end %>
       </div>
       <% end %>
     <% }%>
-<% end %>
+
+        <p>
+          <%= submit_tag "Set Filter" %>
+        </p>
+
+            <%= f.hidden_field("project_id", :value=> @project.id) %>
+
+  <% end %>
 
 <% else %>
   <h5>No categories for filter</h5>
 <% end %>
+  <div id="filterStatus"></div>
