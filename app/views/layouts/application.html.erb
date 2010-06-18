@@ -47,7 +47,6 @@
           <%if this_assignment.theme == 1 %>
             <%= image_tag "logo2.jpg", :style => "float:right;", :class => "BlogNogLogo" %>
           <% else %>
-          <% puts this_assignment.theme %>
             <%= image_tag Themes.find(this_assignment.theme).logo.url(:size100), :style => "float:right;", :class => "BlogNogLogo" %>
           <% end %>
 	
@@ -118,7 +117,12 @@
 <!-- Yield ends here -->
 
     <div id="footer">
-      <div class="copyright"><a href='http://www.AccelerantResearch.com' target="_blank"><%= image_tag "Logo_final2.png" %></a>
+      <div class="copyright">
+        <%if this_assignment.theme == 1 %>
+        <a href='http://www.AccelerantResearch.com' target="_blank"><%= image_tag "Logo_final2.png" %></a>
+        <% else %>
+        <%= image_tag Themes.find(this_assignment.theme).logo.url(:size100) %>
+        <% end %>
         <br/>
         &copy; Copyright <%= Time.now.strftime("%Y") %> BlogNogResearch.com</div>
     </div>

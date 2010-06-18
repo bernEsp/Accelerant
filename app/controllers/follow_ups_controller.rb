@@ -12,6 +12,6 @@ class FollowUpsController < ApplicationController
   end
 
   def show
-    @follow_ups = FollowUps.unread.find(:all, :conditions => {:reply_belongs_to => self.current_user.id})
+    @follow_ups = FollowUps.find(:all, :conditions => {:reply_belongs_to => self.current_user.id})
   end
 end
