@@ -1,1 +1,11 @@
+
+<h1>Your Follow Ups...</h1>
 <% for follow in @follow_ups %>
+<p>
+<%= follow.content %>
+<%
+  follow.read = true
+  follow.save
+%>
+</p>
+<% end %>
