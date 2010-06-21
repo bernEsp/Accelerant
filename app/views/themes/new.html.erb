@@ -17,7 +17,12 @@
   :html => { :multipart => true, :id => "this_form" }  do |f| -%>
 
 <p><%= label_tag 'name' %><br/>
-<%= f.text_field :name %></p>
+<%= f.text_field :name %>
+</p>
+
+<p><%= label_tag 'color' %><br/>
+  <%= picky_color_tag "color", "07395a" %>
+</p>
 
 <p>
 	Upload logo:<br/>

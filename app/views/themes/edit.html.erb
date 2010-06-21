@@ -14,6 +14,11 @@
 </p>
 
 <p>
+        Background Color:<br/>
+        <%= f.picky_color :color %>
+</p>
+
+<p>
 	<% if @theme.logo_file_name %>
 	<%= image_tag @theme.logo.url(:size50) %>
 	<% end %>
