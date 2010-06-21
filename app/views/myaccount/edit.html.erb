@@ -9,12 +9,12 @@
 	Email Address:<br/>
 	<%= f.text_field :email %>
 </p>
-
+<% unless self.current_user.participant %>
 <p>
 	Login Name:<br/>
 	<%= f.text_field :login %>
 </p>
-
+<% end %>
 <p>
 	Reset Password:<br/>
 	<%= f.password_field :password %>
