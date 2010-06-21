@@ -18,8 +18,13 @@
 <%= javascript_include_tag 'picky_color' %>
 <%= stylesheet_link_tag 'picky_color' %>
 
+
 </head>
-<body>
+<% if session[:theme] %>
+<body style="background-color:#<%=Themes.find(session[:theme]).color %>" >
+<% else %>
+  <body>
+<% end %>
 <div id="wrapper">
   <div id="banner">
     <div id="topNavLeft">
@@ -120,14 +125,10 @@
 
     <div id="footer">
       <div class="copyright">
-        <% if @project %>
-        <%if this_assignment.theme == 1 %>
+        <% unless session[:theme] %>
         <a href='http://www.AccelerantResearch.com' target="_blank"><%= image_tag "Logo_final2.png" %></a>
         <% else %>
-        <%= image_tag Themes.find(this_assignment.theme).logo.url(:size100) %>
-        <% end %>
-        <% else %>
-        <a href='http://www.AccelerantResearch.com' target="_blank"><%= image_tag "Logo_final2.png" %></a>
+        <%= image_tag Themes.find(session[:theme]).logo.url(:size100) %>
         <% end %>
         <br/>
         &copy; Copyright <%= Time.now.strftime("%Y") %> BlogNogResearch.com</div>

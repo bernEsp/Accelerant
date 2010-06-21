@@ -6,6 +6,15 @@ class MyassignmentsController < ApplicationController
 
   def show
     @your_assignments = UserAssignments.find(:all, :conditions => { :user_id => self.current_user.id})
+    @last_ass = UserAssignments.find(:last, :conditions => { :user_id => self.current_user.id})
+    @ass = Project.find(@last_ass.project_id)
+    @theme = Themes.find(@ass.theme)
+    
+    unless @theme.nil?
+      session[:theme] = @theme.id
+    else
+      session[:theme] = nil
+    end
   end
   
 end

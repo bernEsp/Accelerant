@@ -25,6 +25,10 @@ class ThemesController < ApplicationController
 
   def edit
     @theme = Themes.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.css
+    end
   end
 
   def update
