@@ -50,14 +50,14 @@ class CommentController < ApplicationController
      comment = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user)
      report = StringIO.new
         CSV::Writer.generate(report, ',') do |title|
-          title << ['Comment','User','Date Posted','Time Posted']
+          title << ['Comment','User','Login','Date Posted','Time Posted']
           comment.each do |c|
             created = Date.parse(c.created_at.to_s).strftime("%m/%d/%Y")
             puts created
-            title << [c.comment,c.user.name,Date.parse(c.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(c.created_at.to_s).strftime("%I:%M:%S")]
+            title << [c.comment,c.user.name,c.user.login,Date.parse(c.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(c.created_at.to_s).strftime("%I:%M:%S")]
             @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id DESC", :include => :user)
             @replies.each do |d|
-              title << ['Reply-->' + d.content,d.user.name,Date.parse(d.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(d.created_at.to_s).strftime("%I:%M:%S")]
+              title << ['Reply-->' + d.content,d.user.name,d.user.login,Date.parse(d.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(d.created_at.to_s).strftime("%I:%M:%S")]
             end
           end
         end
