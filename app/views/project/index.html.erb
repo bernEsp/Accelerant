@@ -3,7 +3,7 @@
 <p>&nbsp;</p>
 <%= link_to 'Add Project', {:controller => 'project', :action => 'new'} %>
 <p>&nbsp;</p>
-<div style="display:block;">
+<div style="display:block;width:500px;">
 <% for project in @these_projects %>
 
     <p>
@@ -14,6 +14,5 @@
 	<%= link_to 'Delete', {:controller => 'project', :action => 'drop', :id => project.id}, :confirm => "Are you sure?" %>
     </p>
 
-<hr noshade="noshade"/>
 <% end %>
 </div>
