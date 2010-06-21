@@ -3,15 +3,16 @@
 <p>&nbsp;</p>
 <%= link_to 'Add Project', {:controller => 'project', :action => 'new'} %>
 <p>&nbsp;</p>
-
-<% for project in @these_projects %>
 <div>
+<% for project in @these_projects %>
+
     <p>
 	<strong><%=project.title %></strong><br/>
 	<%= link_to 'View', :controller => 'assignment', :action => 'show', :id => project.id %> | 
 	<%= link_to "Edit", {:controller => "project", :action => "edit", :id => project.id} %> |
 	<%= link_to 'Assign Participants', :controller => 'assignment', :action => 'assign',:id => project.id %> | 
 	<%= link_to 'Delete', {:controller => 'project', :action => 'drop', :id => project.id}, :confirm => "Are you sure?" %></p>
-</div>
+
 <hr noshade="noshade"/>
 <% end %>
+</div>

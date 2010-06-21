@@ -15,6 +15,7 @@ body {
 	font:11px Arial, Helvetica, sans-serif;
 	line-height:16px;
 	background:url("../images/bg_body.gif") repeat-x top left #07395a;
+        /*background:url("../images/bg_body.gif") repeat-x top left #fff;*/
 }
 
 a {
@@ -41,7 +42,7 @@ img {
 	/*behavior:url("pngbehavior.htc");*/
 }
 #wrapper {
-	margin:0 auto;
+	margin:2px auto;
 	width:800px;
 	text-align:left;
 }
