@@ -7,7 +7,12 @@
   <tr>
   <td><%= render_avatar(user) %></td>
 <td>
-<%= simple_format(follow.content) %>
+<%  if user.id == self.current_user.id %>
+You said:<br/>
+<% else %>
+<%= user.name %> said:<br/>
+<% end %>
+"<%= follow.content %>"
   
 </td>
   </tr>
