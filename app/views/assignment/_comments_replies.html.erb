@@ -73,7 +73,7 @@
                 %>
                 <% if displayFlag %>
                 <div id="reply<%= replies.id%>" style="background-color:#cdd7de;margin:8px;padding:2px;">
-			<p >
+			<!--<p > -->
                        
                           <%= render_small_avatar(replies.user) %>
                           &nbsp;&nbsp;<%= simple_format(replies.content) %>
@@ -112,7 +112,10 @@
                       <% @follows = FollowUps.find(:all, :conditions => "1 = 0") %>
                     <% end %>
                     <% for follows in @follows %>
-                        <br/><br/><em><%=User.find(follows.user_id).name %> followed up with: </em><%=simple_format(follows.content) %><br/>
+                    <div class="probe">
+                    <em><%=User.find(follows.user_id).name %> followed up with: </em>
+                    <%=simple_format(follows.content) %>
+                    </div>
                      <%  if (follows.id == @follows_last.id) %>
                         <br/>
                     <%= link_to_remote "Follow Up",
@@ -123,7 +126,7 @@
 
                         <br/><br/>
                         
-				</p>
+				<!--</p>-->
                 </div> <!-- end reply -->
                 <% end %>
 		<% end %>
@@ -201,7 +204,7 @@
 				<% if (this_reply.user.id == self.current_user.id) || (this_reply.user.admin || this_reply.user.moderator) || self.current_user.admin || self.current_user.moderator || self.current_user.client %>
 
 				<div style="background-color:#cdd7de;margin:8px;padding:2px;" id="reply<%= this_reply.id%>">
-                                  <p>
+                                  <!-- <p> -->
                                   <%= render_small_avatar(this_reply.user) %>
             &nbsp;&nbsp;<%= simple_format(this_reply.content) %>
 					<% if this_reply.media_file_name %>
@@ -239,7 +242,9 @@
                       <% @follows = FollowUps.find(:all, :conditions => "1 = 0") %>
                     <% end %>
                     <% for follows in @follows %>
-                        <br/><br/><em><%=User.find(follows.user_id).name %> followed up with: </em><%=simple_format(follows.content)%><br/>
+                        <div class="probe">
+                        <em><%=User.find(follows.user_id).name %> followed up with: </em><%=simple_format(follows.content)%>
+                        </div>
                     <% if follows.id == @follows_last.id %>
                         <br/>
                         <%= link_to_remote "Follow Up",
@@ -248,7 +253,7 @@
                       <% end %>
                       <% end %>
                         <br/><br/>
-					</p>
+					<!-- </p> -->
                                 </div>
 
                         <% end %>

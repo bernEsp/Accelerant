@@ -6,12 +6,16 @@ class FollowUpsController < ApplicationController
 
   def create
       @follow_up = FollowUps.new(params[:follow_up])
-      @follow_up.read = false
+      unless self.current_user.participant
+        @follow_up.read = false
+      else
+        @follow_up.read = true
+      end
       @follow_up.save
       render :text => "Follow up posted!"
   end
 
   def show
-    @follow_ups = FollowUps.find(:all, :conditions => {:reply_belongs_to => self.current_user.id})
+    @follow_ups = FollowUps.find(:all, :conditions => {:reply_belongs_to => self.current_user.id}, :order => "id DESC")
   end
 end
