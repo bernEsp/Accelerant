@@ -42,6 +42,8 @@
 	Theme:<br/>
 	<%=  select("this_project", "theme", Themes.find(:all).collect {|p| [ p.name, p.id ] }, {:include_blank => 'Select...'}) %>
 </p>
+
+<%= f.check_box :lock %> This project is locked <br/>
   
 <p><%= submit_tag 'Enter' %></p>
 <% end -%>

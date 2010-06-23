@@ -7,7 +7,11 @@
 <% for project in @these_projects %>
 
     <p>
-	<strong><%=project.title %></strong><br/>
+	<strong><%=project.title %>
+          <% if project.lock %>
+           <%= image_tag "lock.png", :title => "Project has been locked" %>
+           <% end %>
+        </strong><br/>
 	<%= link_to 'View', :controller => 'assignment', :action => 'show', :id => project.id %> | 
 	<%= link_to "Edit", {:controller => "project", :action => "edit", :id => project.id} %> |
 	<%= link_to 'Assign Participants', :controller => 'assignment', :action => 'assign',:id => project.id %> | 
