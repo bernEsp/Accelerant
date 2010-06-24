@@ -29,7 +29,7 @@
   <div id="banner">
     <div id="topNavLeft">
 	<% if logged_in?%>
-	
+
 	<%if self.current_user.admin? %>
 	<%= link_to "Home", :controller => "assignment", :action => "index" %>
 	<%end%>
@@ -50,24 +50,24 @@
 
 	<% if @project && (self.current_user.participant? || self.current_user.admin || self.current_user.client?|| self.current_user.moderator?) %>
 	<div id="assignmentBox">
-        
-          <%if @project.theme == 1 %>
+        <% for this_assignment in @project %>
+          <%if this_assignment.theme == 1 %>
             <%= image_tag "logo2.jpg", :style => "float:right;", :class => "BlogNogLogo" %>
           <% else %>
-            <%= image_tag Themes.find(@project.theme).logo.url(:size100), :style => "float:right;", :class => "BlogNogLogo" %>
+            <%= image_tag Themes.find(this_assignment.theme).logo.url(:size100), :style => "float:right;", :class => "BlogNogLogo" %>
           <% end %>
-	
-    <h1><%= @project.title %></h1>
+
+    <h1><%= this_assignment.title %></h1>
     <h2>Project Overview:</h2>
-    
+
     <p>
-	<%=@project.description %>
-		<% if @project.photo_file_name %>
-			<% if @project.photo_content_type =~ /image.*/  %>
-				<a href='<%=@project.photo.url%>' target="_blank">
-				<%= image_tag @project.photo.url(:medium), :style => "margin-right:10px;" %></a>
+	<%=this_assignment.description %>
+		<% if this_assignment.photo_file_name %>
+			<% if this_assignment.photo_content_type =~ /image.*/  %>
+				<a href='<%=this_assignment.photo.url%>' target="_blank">
+				<%= image_tag this_assignment.photo.url(:medium), :style => "margin-right:10px;" %></a>
 			<% else %>
-				&nbsp;&nbsp;<%= image_tag "download.png"%><a href='<%=@project.photo.url%>' target="_blank" style="color:#fff;">Multimedia file included.  Click here.</a>
+				&nbsp;&nbsp;<%= image_tag "download.png"%><a href='<%=this_assignment.photo.url%>' target="_blank" style="color:#fff;">Multimedia file included.  Click here.</a>
 			<% end %>
 		<% end %>
 
@@ -75,7 +75,7 @@
     <div id="searchBox">
 
     </div>
-	
+	<% end %>
 	</div>
 	<% end %>
   <div id="leftColumn">
@@ -93,26 +93,25 @@
     	<li><%= link_to 'Users', {:controller => 'users', :action => 'index'} %></li>
 		<li ><%= link_to 'Projects', {:controller => 'project', :action => 'index'} %></li>
                 <li class="last"><%= link_to 'Themes', {:controller => 'themes', :action => 'index'} %></li>
-		
+
 	<% end %>
 	<% if self.current_user.participant? %>
       <li ><%= link_to 'My Assignments', {:controller => 'myassignments', :action => 'show'}%></li>
       <% @probes = FollowUps.find(:all, :conditions => {:read => false, :reply_belongs_to => self.current_user.id}) %>
       <% unless @probes.empty?
         this_count = FollowUps.count( :conditions => {:read => false, :reply_belongs_to => self.current_user.id})
-       
+
       %>
         <li><%= link_to "Follow Ups (#{this_count})", {:controller => 'follow_ups', :action => 'show'} %></li>
       <% end %>
       <li class="last"><%= link_to 'My Emails' , {:controller => 'comment', :action => 'emailed'} %></li>
-      
+
 	<% end %>
 	<% end %>
     </ul>
 
         <% if @project && (self.current_user.admin || self.current_user.moderator?) %>
-        <%#= render :partial => 'filter/filter', :collection => @project, :as => :project, :layout => 'layouts/filter' %>
-        <%= render :partial => 'filter/filter', :layout => 'layouts/filter' %>
+        <%= render :partial => 'filter/filter', :collection => @project, :as => :project, :layout => 'layouts/filter' %>
         <% end %>
   </div>
 <!-- Yield starts here -->
@@ -121,7 +120,7 @@
 <% end %>
 <%= yield  %>
 
-  
+
 <!-- Yield ends here -->
 
     <div id="footer">
