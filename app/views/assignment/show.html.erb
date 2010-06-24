@@ -10,7 +10,7 @@
   <div id="discussion<%= discussion.id %>"  ><br/>
   
   <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
-  <% if !self.current_user.client && !@project.lock && @project.response_box %>
+  <% if !self.current_user.client && !@project.lock %>
     <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
   <% end  %>
 

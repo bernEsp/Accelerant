@@ -10,7 +10,7 @@
   <%= render :partial => 'discussion_links', :locals => {:discussions => @discussions} %>
 
   <%= render :partial => 'assignment/discussion_display', :locals => {:discussions => @discussion} %>
-<% if !self.current_user.client && !@project.lock && @project.response_box %>
+<% if !self.current_user.client && !@project.lock %>
   <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id]} %>
   <% end  %>
 
