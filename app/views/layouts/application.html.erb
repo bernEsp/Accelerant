@@ -117,7 +117,7 @@
   </div>
 <!-- Yield starts here -->
 <% if flash[:notice]%>
-	<h4 class="lower"><%= flash[:notice] %></h4>
+	<h4  class="lower"><%= flash[:notice] %></h4>
 <% end %>
 <%= yield  %>
 
@@ -125,7 +125,7 @@
 <!-- Yield ends here -->
 
     <div id="footer">
-      <div class="copyright">
+      <div class="copyright" >
         <% unless session[:theme] %>
         <a href='http://www.AccelerantResearch.com' target="_blank"><%= image_tag "Logo_final2.png" %></a>
         <% else %>
