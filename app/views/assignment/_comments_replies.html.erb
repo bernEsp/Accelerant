@@ -8,92 +8,23 @@
           else
             @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "id DESC", :include => :user)
           end
-        %>
-		<% for comment in @latest_postings_redux %>
-		<% not_visible = CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id, :comment_id => comment.id })%>
-		<% my_project = Project.find(:last, :conditions => {:id => project_id}) %>
 
-                <% if (!not_visible && !my_project.one_to_one)  %>
-                <%= show_comment(comment) %>
+          for comment in @latest_postings_redux
+            not_visible = CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id, :comment_id => comment.id })
+            my_project = Project.find(:last, :conditions => {:id => project_id})
 
-	<% else %>
-
-		<% if (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? )) %>
-			<div class="clientSubComment" id="commentSub<%= comment.id%>"><a name="<%=comment.id%>"></a>
-		      <div class="subCommentAvatar">
-				<%= link_to render_avatar(comment.user) %>
-				</div>
-		     <div class="clientSubCommentText" >
-			 <p>
-
-				<strong><%=h comment.user.name %></strong>
-			<%=comment.comment %>
-			<% if comment.photo_content_type %>
-			<% if comment.photo_content_type =~ /image.*/  %>
-				<a href='<%=comment.photo.url%>' class="MagicThumb" rel="buttons:hide" target="_blank" >
-				<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
-				</a>
-			<% else %>
-				<p><a href='<%=comment.photo.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
-			<% end %>
-			<% end %>
-			<br/>
-
-			<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
-                        <% unless @project.lock %>
-				<% if !self.current_user.client %>
-                        | <%= link_to_remote 'Add Comment',
-				:url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
-				:complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
-				:onclick => '',
-				:update => "subCommentForm#{comment.id}" %>
-                        <% end  %>
-				<% if (comment.user.id == self.current_user.id) || self.current_user.admin %>
-					| <%= link_to_remote "Delete",
-					:confirm => "Are you sure you want to delete this?",
-					:url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
-					:complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
-					:update => "commentSub#{comment.id}" %>
-				<% end %>
-                        <% end %>
-
-
-
-
-			<div id="subCommentForm<%= comment.id %>"></div>
-			<div id="reclaimer<%= comment.id %>"></div>
-			<% @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user) %>
-			<% for replies in @replies %>
-                                        <%
-                displayFlag = true
-                if cookies[:filter] == "yes"
-                    displayFlag = false
-                    cookies.to_hash.each_pair do |k, v|
-                      if cookies[k.to_sym].split('_')[0] == "field"
-                        #puts cookies[k.to_sym]
-                        #puts k
-                        if replies.user.send(cookies[k.to_sym]) == k
-                          displayFlag = true
-                        end
-                      end
-                    end
-                end
+            if (!not_visible && !my_project.one_to_one)
+              %>
+              <%= show_comment(comment) %>
+              <%
+            else
+              if (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? ))
                 %>
-                <% if displayFlag %>
-                  <% if (replies.user.id == self.current_user.id) || (replies.user.admin || replies.user.moderator) || self.current_user.admin || self.current_user.moderator || self.current_user.client %>
-
-                    <%= render_reply(replies) %>
-
-                  <% end %>
-                <% end %>
-			<% end %>
-				<div id="<%=dom_id(comment)%>"></div>
-			</div>
-			<hr noshade="noshade"/>
-	    </div>
-
-	<% end %>
-  <% end %>
-<% end %>
+                <%=  show_comment(comment) %>
+                <%
+              end
+            end
+          end
+%>
     </div><!-- responses -->
     

@@ -11,7 +11,7 @@ module CommentsHelper
 
 		out = out + "<strong>"
     out = out + comment.user.name
-    out = out + "</strong>"
+    out = out + "</strong> "
 		out = out + comment.comment
 		if comment.photo_content_type
       if comment.photo_content_type =~ /image.*/
@@ -41,13 +41,19 @@ module CommentsHelper
       end
       if (comment.user.id == self.current_user.id) || self.current_user.admin
 				out = out + " | "
+        out = out + link_to_remote("Edit",
+          :url => {:controller => 'plain', :action => 'edit_comment', :id => comment.id},
+          :complete => "new Effect.SlideDown('commentSub#{comment.id}', { duration: .2 })",
+          :update => "commentSub#{comment.id}")
+      end
+      if (comment.user.id == self.current_user.id) || self.current_user.admin
+				out = out + " | "
         out = out + link_to_remote("Delete",
           :confirm => "Are you sure you want to delete this?",
           :url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
           :complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
           :update => "commentSub#{comment.id}")
       end
-
     end
 
 		out = out + "<div id='subCommentForm#{comment.id}'></div>"
@@ -69,7 +75,7 @@ module CommentsHelper
       end
 
       if displayflag
-        render_reply(replies)
+        out = out + render_reply(replies)
       end
 		end
 		out = out + "<div id='#{dom_id(comment)}'>"

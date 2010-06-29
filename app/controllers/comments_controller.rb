@@ -10,8 +10,9 @@ class CommentsController < ApplicationController
   end
   
   def show
-    user_id = self.current_user.id
-    @comments = Comment.find(:all, :conditions => { :user_id => user_id})
+    #user_id = self.current_user.id
+    #@comments = Comment.find(:all, :conditions => { :user_id => user_id})
+    @comment = Comment.find(params[:id])
   end
 
   def new
