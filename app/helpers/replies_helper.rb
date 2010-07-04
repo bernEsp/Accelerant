@@ -7,8 +7,9 @@ module RepliesHelper
     output = output + simple_format(replies.content)
 		if replies.media_file_name
       if replies.media_content_type =~ /image.*/
-        output = output + "<a href='#{replies.media.url}' class='MagicThumb' rel='buttons:hide' target='_blank'>"
-        output = output + image_tag(replies.media.url(:small), :style => 'margin-left:40px;')
+        #output = output + "<a href='#{replies.media.url}' class='MagicThumb' rel='buttons:hide' target='_blank'>"
+        output = output + "<a href='#{replies.media.url}' target='_blank'>"
+        output = output + image_tag(replies.media.url(:small), :style => 'margin-left:1px;')
         output = output + "</a>"
 			else
         output = output + "<a href='#{replies.media.url}' target='_blank'>View attached file here.</a>"
