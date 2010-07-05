@@ -26,16 +26,16 @@ class RepliesController < ApplicationController
     if (@discussion.character_minimum == 0) || ((@discussion.character_minimum != 0 && params[:reply][:content].length >= @discussion.character_minimum))
       @reply = Replies.new(params[:reply])
       @reply.save
-      @comment = Comment.find(@reply.comment_id)
-      @discussion = Discussion.find(params[:reply][:discussion_id])
-      @assignment = Comment.find(:last, :conditions => {:id => params[:reply][:comment_id]})
+      #@comment = Comment.find(@reply.comment_id)
+      #@discussion = Discussion.find(params[:reply][:discussion_id])
+      #@assignment = Comment.find(:last, :conditions => {:id => params[:reply][:comment_id]})
       #redirect_to "/discussion/show/#{@discussion.id}?project_id=#{@discussion.project_id}#bottom"
       responds_to_parent do
         render :update do |page|
           #page << "document.getElementById('stuff').innerHTML = '';"
-          page << "document.getElementById('thisForm#{@assignment.id}').innerHTML = '#{@reply.content}';"
-          #page << "document.getElementById('thisForm#{@assignment.id}').innerHTML = '<div style='background-color:#cdd7de;margin:8px;padding:2px;'>#{@reply.content}</div>';"
-          #render :text => "Response posted!"
+          #gunk = render_reply_standalone(@reply)
+          page << "document.getElementById('thisForm#{@reply.comment_id}').innerHTML = '#{@reply.content}';"
+          #page << "document.getElementById('stuff').innerHTML = '#{gunk}"
         end
       end
       

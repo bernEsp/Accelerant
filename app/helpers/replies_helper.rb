@@ -54,4 +54,34 @@ module RepliesHelper
     output = output + "</div> <!-- end reply -->"
     return output
   end
+
+  def render_reply_standalone(replies)
+    output = "<div id='reply#{replies.id}' style='background-color:#cdd7de;margin:8px;padding:2px;'>"
+
+    output = output + render_small_avatar(replies.user)
+    output = output + "&nbsp;&nbsp;"
+    output = output + simple_format(replies.content)
+		if replies.media_file_name
+      if replies.media_content_type =~ /image.*/
+        output = output + "<a href='#{replies.media.url}' target='_blank'>"
+        output = output + image_tag(replies.media.url(:small), :style => 'margin-left:1px;')
+        output = output + "</a>"
+			else
+        output = output + "<a href='#{replies.media.url}' target='_blank'>View attached file here.</a>"
+        output = output + image_tag("download.png")
+			end
+		end
+		output = output + " posted by"
+    if replies.user.name == self.current_user.name
+       output = output + " you "
+		else
+			output = output + replies.user.name
+		end
+		output = output + time_ago_in_words(replies.created_at)
+    output = output + " ago"
+
+    output = output + "<br/><br/>"
+    output = output + "</div> <!-- end reply -->"
+    return output
+  end
 end
