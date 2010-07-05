@@ -1,7 +1,9 @@
+<div id="stuff"></div>
 <div id="thisForm<%= params[:id]%>">
+  
 <%  comment_num = Comment.find(params[:id])%>
 <% form_for :reply,
-:html => { :multipart => true},
+:html => { :multipart => true, :target => 'iframe'},
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
 
 <%= f.text_area :content, :size => "50 x 10" %><br/>

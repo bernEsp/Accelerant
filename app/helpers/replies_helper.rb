@@ -16,14 +16,14 @@ module RepliesHelper
         output = output + image_tag("download.png")
 			end
 		end
-		output = output + "posted by"
+		output = output + " posted by"
     if replies.user.name == self.current_user.name
-       output = output + "you"
+       output = output + " you "
 		else
 			output = output + replies.user.name
 		end
 		output = output + time_ago_in_words(replies.created_at)
-    output = output + "ago"
+    output = output + " ago"
     unless @project.lock
       if (replies.user.id == self.current_user.id) || self.current_user.admin
 
