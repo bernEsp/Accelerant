@@ -34,6 +34,7 @@ class RepliesController < ApplicationController
         render :update do |page|
           #page << "document.getElementById('stuff').innerHTML = '';"
           page << "document.getElementById('thisForm#{@assignment.id}').innerHTML = '#{@reply.content}';"
+          #page << "document.getElementById('thisForm#{@assignment.id}').innerHTML = '<div style='background-color:#cdd7de;margin:8px;padding:2px;'>#{@reply.content}</div>';"
           #render :text => "Response posted!"
         end
       end
