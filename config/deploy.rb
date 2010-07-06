@@ -20,9 +20,9 @@ set :repository,  "git@github.com:chazzerguy/Accelerant.git"
 
 set :scm, "git"
 set :branch, "master"
-ssh_options[:forward_agent] = true
-#set :user, "chazzer@67.23.9.5"  # The server's user for deploys
-#set :scm_passphrase, "At0m1cD0g"  # The deploy user's password
+#ssh_options[:forward_agent] = true
+set :user, "chazzer@Accelerant"  # The server's user for deploys
+set :scm_passphrase, "At0m1cD0g"  # The deploy user's password
 set :deploy_via, :remote_cache
 #set :scm_command, "usr/lib/ruby/gems/1.8/gems/git-1.0.5/lib/git/"
  
