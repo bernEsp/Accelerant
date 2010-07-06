@@ -33,7 +33,7 @@ class RepliesController < ApplicationController
       responds_to_parent do
         render :update do |page|
           #page << "document.getElementById('stuff').innerHTML = '';"
-          #gunk = render_reply_standalone(@reply)
+          gunk = render_reply_standalone(@reply)
           page << "document.getElementById('thisForm#{@reply.comment_id}').innerHTML = '#{@reply.content}';"
           #page << "document.getElementById('stuff').innerHTML = '#{gunk}"
         end

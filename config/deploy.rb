@@ -6,7 +6,8 @@ set :port, 30000
 set :deploy_to, "/home/chazzer/public_html/#{application}"
  
 default_run_options[:pty] = true
-set :repository,  "git://github.com/chazzerguy/Accelerant.git"
+#set :repository,  "git://github.com/chazzerguy/Accelerant.git"
+set :repository,  "git@github.com:chazzerguy/Accelerant.git"
  
  
 # If you aren't deploying to /u/apps/#{application} on the target
@@ -16,8 +17,11 @@ set :repository,  "git://github.com/chazzerguy/Accelerant.git"
  
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
+
 set :scm, "git"
 set :branch, "master"
+#set :user, "chazzer@67.23.9.5"  # The server's user for deploys
+#set :scm_passphrase, "At0m1cD0g"  # The deploy user's password
 set :deploy_via, :remote_cache
 #set :scm_command, "usr/lib/ruby/gems/1.8/gems/git-1.0.5/lib/git/"
  
