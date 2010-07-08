@@ -20,7 +20,15 @@ class FilterController < ApplicationController
         end
       end
     }
-    render :text => "Filter set"
+    #render :update do |page|
+      #page << "document.getElementById('responses').innerHTML = 'You need to reload this page';"
+    #end
+
+    #render :partial => 'plain/comment_puker'
+    #render :text => "Filter Set"
+    render :update do |page|
+      page << "window.location.reload(false)"
+    end
   end
 
   def filter_clear
@@ -30,7 +38,11 @@ class FilterController < ApplicationController
       end
     end
     cookies.delete(:filter)
-    render :text => "Filter cleared"
+    #render :text => "Filter cleared"
+
+    render :update do |page|
+      page << "window.location.reload(false)"
+    end
   end
   
 end

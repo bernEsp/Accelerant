@@ -9,16 +9,25 @@ category = AttributeTags.find_last_by_project_id(@project.id)
 <% unless category.nil? %>
 
   <% remote_form_for :filter, :complete => "new Effect.BlindDown('filterStatus', { duration: .5 })",
-    :url => { :controller=> 'filter', :action => "filter_set" },
-    :update => 'filterStatus' do |f| %>
+    :update => 'filterStatus',
+    #:update => 'responses',
+    :url => { :controller=> 'filter', :action => "filter_set" } do |f| %>
     
 
     <% 1.upto(10) { |i|
       field_name = "field_#{i}" -%>
       <% unless category.send(field_name).nil? %>
-        <label onclick="Effect.toggle('<%= field_name %>', 'slide'); return false;"><strong><%= category.send(field_name) %></strong></label><br/>
-        <div id="<%= field_name %>" style="display:none">
         <% attributes = Attributes.find(:all, :conditions => { :project_id => @project.id }, :group => field_name) %>
+        <label onclick="Effect.toggle('<%= field_name %>', 'slide'); return false;"><strong><%= category.send(field_name) %></strong></label><br/>
+        <% style = "style='display:none;'" %>
+        <% for pre_look in attributes %>
+          <% if cookies[pre_look.send(field_name)] %>
+            <% style = "" %>
+          <% end %>
+        <% end %>
+
+        <div id="<%= field_name %>" <%= style %>
+        
         <% for attribute in attributes %>
           <%
             unless cookies[attribute.send(field_name)]
@@ -31,17 +40,21 @@ category = AttributeTags.find_last_by_project_id(@project.id)
           <br/>
         <% end %>
       </div>
+      <% style = "style='display:none;'" %>
       <% end %>
     <% }%>
 
         <p>
           <%= submit_tag "Set Filter" %>
+          <% if cookies[:filter] %>
           <%= link_to_remote "Clear", :complete => "new Effect.BlindUp('filterStatus', { duration: .5 })",
           :url => {:controller => 'filter', :action => 'filter_clear'},
           :update => 'filterStatus' %>
+          <% end %>
         </p>
 
             <%= f.hidden_field("project_id", :value=> @project.id) %>
+            
 
   <% end %>
 

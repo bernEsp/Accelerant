@@ -7,6 +7,7 @@
 
   <% discussion = @discussions_desc %>
   <% if discussion %>
+  <% cookies[:discussion_id] = {:value => "#{discussion.id}", :expires => Time.now + 3600} %>
   <div id="discussion<%= discussion.id %>"  ><br/>
   
   <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
