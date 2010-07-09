@@ -27,7 +27,7 @@ category = AttributeTags.find_last_by_project_id(@project.id)
         <% end %>
 
         <div id="<%= field_name %>" <%= style %>
-        
+             <br/>
         <% for attribute in attributes %>
           <%
             unless cookies[attribute.send(field_name)]
