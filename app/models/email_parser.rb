@@ -29,8 +29,8 @@ if @emailing_user
   comment.user_id = @emailing_user.id
   if ! mail.attachments.blank?
     #File.open(mail.attachments.first.original_filename, 'rb') { |attachment| comment.photo = attachment }
-    comment.photo = mail.attachments.first
-    #comment.photo = mail.attachments.first.base64_decode!
+    #comment.photo = mail.attachments.first
+    comment.photo = mail.attachments.first.base64_decode!
   end
   comment.save
 
