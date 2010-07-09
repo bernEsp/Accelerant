@@ -80,10 +80,10 @@
 	<% end %>
   <div id="leftColumn">
 	<% if @project && self.current_user.participant? %>
-	<% for this_assignment in @project %>
-    <p>Created <%=h this_assignment.created_at.strftime("%m/%d/%Y") %><br />
-      Last Edited <%=h this_assignment.updated_at.strftime("%m/%d/%Y") %></p>
-	<% end %>
+	
+    <p>Created <%=h @project.created_at.strftime("%m/%d/%Y") %><br />
+      Last Edited <%=h @project.updated_at.strftime("%m/%d/%Y") %></p>
+	
 	<% else %>
 	<p></p>
 	<% end %>
