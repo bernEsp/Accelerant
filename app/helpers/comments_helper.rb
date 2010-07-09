@@ -30,7 +30,7 @@ module CommentsHelper
 
 		out = out + "<span>- Posted "
     out = out + time_ago_in_words(comment.created_at)
-    out = out + " ago </span>"
+    out = out + " ago </span> <!-- #{comment.created_at}  -->"
 		unless @project.lock
       if !self.current_user.client
         out = out + " | "
