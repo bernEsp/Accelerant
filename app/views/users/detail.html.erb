@@ -11,7 +11,7 @@
 Username: <%= @this_user.login %><br/>
 Email: <%= @this_user.email %><br/>
 <%
-unless @category.empty?
+if @category
 1.upto(10) { |i|
 field_name = "field_#{i}" -%>
 <strong><%= @category.send(field_name) %>: </strong><%= @this_user.send(field_name) %><br/>

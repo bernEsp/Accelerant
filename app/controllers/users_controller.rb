@@ -153,11 +153,10 @@ class UsersController < ApplicationController
     @these_comments = Comment.belongs_to_discussion.find(:all, :conditions => { :user_id => params[:id]})
     @these_replies = Replies.find(:all, :conditions => {:user_id => params[:id]})
 
-    unless @assignments.empty?
+    unless @assignments.last.nil?
       @category = AttributeTags.find_last_by_project_id(@assignments.last.project_id)
-    else
-      @category = ""
     end
+
     #unless @assignments.nil?
       #@projects = Project.find(:last, :conditions => {:id => @assignments.project_id})
     #end
