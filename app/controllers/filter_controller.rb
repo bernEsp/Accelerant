@@ -7,9 +7,9 @@ class FilterController < ApplicationController
   end
 
   def filter_set
-
-  
-  1.upto(10) { |n| 
+  i = Integer(params[:filter][:num_params])
+  puts i
+  1.upto(i) { |n|
       params["field_#{n}"].each_key do |field_name|
         field_name.each_with_index do |name,index|
           if params["field_#{n}"][name] == "1"

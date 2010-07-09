@@ -13,10 +13,12 @@ category = AttributeTags.find_last_by_project_id(@project.id)
     #:update => 'responses',
     :url => { :controller=> 'filter', :action => "filter_set" } do |f| %>
     
-
+    <% param_count = 0 %>
     <% 1.upto(10) { |i|
       field_name = "field_#{i}" -%>
+
       <% unless category.send(field_name).nil? %>
+        <% param_count = param_count + 1 %>
         <% attributes = Attributes.find(:all, :conditions => { :project_id => @project.id }, :group => field_name) %>
         <label onclick="Effect.toggle('<%= field_name %>', 'slide'); return false;"><strong><%= category.send(field_name) %></strong></label><br/>
         <% style = "style='display:none;'" %>
@@ -54,6 +56,7 @@ category = AttributeTags.find_last_by_project_id(@project.id)
         </p>
 
             <%= f.hidden_field("project_id", :value=> @project.id) %>
+            <%= f.hidden_field("num_params", :value=> param_count) %>
             
 
   <% end %>
