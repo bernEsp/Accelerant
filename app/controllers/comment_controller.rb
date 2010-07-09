@@ -83,7 +83,7 @@ class CommentController < ApplicationController
   end
 
   def email_assign
-
+    email_parser.check_inbound
     @comment = Comment.find(params[:comment][:id])
     @discussion = Discussion.find(params[:discussion][:discussion_id])
     @comment.discussion_id = @discussion.id
