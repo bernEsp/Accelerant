@@ -21,7 +21,7 @@ module CommentsHelper
         out = out + "<span>&nbsp;</span>"
         out = out + "</a>"
       else
-        out = out + "<p><a href='{#{comment.photo.url}' target='_blank'>View attached file here.</a>"
+        out = out + "<p><a href='#{comment.photo.url}' target='_blank'>View attached file here.</a>"
         out = out + image_tag("download.png")
         out = out + "</p>"
       end
@@ -109,7 +109,7 @@ module CommentsHelper
         out = out + "<span>&nbsp;</span>"
         out = out + "</a>"
       else
-        out = out + "<p><a href='{#{comment.photo.url}' target='_blank'>View attached file here.</a>"
+        out = out + "<p><a href='#{comment.photo.url}' target='_blank'>View attached file here.</a>"
         out = out + image_tag("download.png")
         out = out + "</p>"
       end
