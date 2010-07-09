@@ -30,6 +30,7 @@ if @emailing_user
   if ! mail.attachments.blank?
     #File.open(mail.attachments.first.original_filename, 'rb') { |attachment| comment.photo = attachment }
     comment.photo = mail.attachments.first
+    #comment.photo = mail.attachments.first.base64_decode!
   end
   comment.save
 
