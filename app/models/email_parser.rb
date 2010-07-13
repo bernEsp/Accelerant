@@ -39,9 +39,9 @@ UserMailer.deliver_not_found(from, subject)
 end
 
 
-imap.store(message_id, "+FLAGS", [:Deleted])
+#imap.store(message_id, "+FLAGS", [:Deleted])
 end
-imap.expunge()
+#imap.expunge()
 
 end
 end

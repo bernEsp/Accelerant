@@ -75,6 +75,7 @@ class CommentController < ApplicationController
   end
 
   def emailed
+    #email_parser.check_inbound
     @your_assignment = UserAssignments.find(:last, :conditions => { :user_id => self.current_user.id})
     @this_assignment = Project.find(:last, :conditions => {:id => @your_assignment.project_id})
     puts "shit"
@@ -83,7 +84,7 @@ class CommentController < ApplicationController
   end
 
   def email_assign
-    email_parser.check_inbound
+    
     @comment = Comment.find(params[:comment][:id])
     @discussion = Discussion.find(params[:discussion][:discussion_id])
     @comment.discussion_id = @discussion.id
