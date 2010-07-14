@@ -76,7 +76,7 @@ module CommentsHelper
       end
 
       if displayflag
-        #out = out + render_reply(replies)
+        out = out + render_reply(replies)
       end
 		end
 		out = out + "<div id='#{dom_id(comment)}'>"
