@@ -1,5 +1,6 @@
 module RepliesHelper
   def render_reply(replies)
+    if !@project.one_to_one || (replies.user && ((replies.user.id == self.current_user.id || replies.user.admin? || replies.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? ))
     output = "<div id='reply#{replies.id}' style='background-color:#cdd7de;margin:8px;padding:2px;'>"
 
     output = output + render_small_avatar(replies.user)
@@ -53,6 +54,7 @@ module RepliesHelper
     output = output + "<br/><br/>"
     output = output + "</div> <!-- end reply -->"
     return output
+    end
   end
 
   def render_reply_standalone(replies)
