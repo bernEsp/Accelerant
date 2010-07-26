@@ -18,6 +18,8 @@ class FilterController < ApplicationController
             cookies[field_name] = { :value => "field_#{n}", :expires => Time.now + 3600}
             cookies[:filter] = {:value => "yes", :expires => Time.now + 3600}
             sql = sql + " field_#{n} = '#{field_name}' AND"
+          else
+            cookies.delete(field_name)
           end
         end
       end
