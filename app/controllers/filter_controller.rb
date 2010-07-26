@@ -8,7 +8,8 @@ class FilterController < ApplicationController
 
   def filter_set
   i = Integer(params[:filter][:num_params])
-  puts i
+  sql = ""
+  #puts i
   1.upto(i) { |n|
       params["field_#{n}"].each_key do |field_name|
         field_name.each_with_index do |name,index|
@@ -16,10 +17,15 @@ class FilterController < ApplicationController
             #puts "#{field_name} from field_#{n}"
             cookies[field_name] = { :value => "field_#{n}", :expires => Time.now + 3600}
             cookies[:filter] = {:value => "yes", :expires => Time.now + 3600}
+            sql = sql + " field_#{n} = '#{field_name}' AND"
           end
         end
       end
     }
+    sql.chop!.chop!.chop!
+    cookies[:sql] = {:value => sql, :expires => Time.now + 3600}
+    puts "cookie:"
+    puts cookies[:sql]
     #render :update do |page|
       #page << "document.getElementById('responses').innerHTML = 'You need to reload this page';"
     #end

@@ -70,7 +70,13 @@ module CommentsHelper
             #puts cookies[k.to_sym]  #e.g. "field_10"
             #puts k                  #e.g. "male"
             #puts "stop"
-            if replies.user.send(cookies[k.to_sym]) == k  #e.g. if user.field_10 == "male"
+            #if replies.user.send(cookies[k.to_sym]) == k  #e.g. if user.field_10 == "male"
+              #displayflag = true
+            #end
+            testuser = User.find_by_id(replies.user.id,:conditions => cookies[:sql])
+            if testuser.nil?
+              displayflag = false
+            else
               displayflag = true
             end
           end
