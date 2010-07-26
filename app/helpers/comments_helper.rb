@@ -72,8 +72,6 @@ module CommentsHelper
             #puts "stop"
             if replies.user.send(cookies[k.to_sym]) == k  #e.g. if user.field_10 == "male"
               displayflag = true
-            else
-              displayflag = false
             end
           end
         end
