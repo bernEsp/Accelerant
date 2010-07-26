@@ -66,15 +66,19 @@ module CommentsHelper
         displayflag = false
         cookies.to_hash.each_pair do |k, v|
           if cookies[k.to_sym].split('_')[0] == "field"
-            #puts cookies[k.to_sym]
-            #puts k
-            if replies.user.send(cookies[k.to_sym]) == k
+            #puts "start"
+            #puts cookies[k.to_sym]  #e.g. "field_10"
+            #puts k                  #e.g. "male"
+            #puts "stop"
+            if replies.user.send(cookies[k.to_sym]) == k  #e.g. if user.field_10 == "male"
               displayflag = true
+            else
+              displayflag = false
             end
           end
         end
       end
-
+      #displayflag = filter_results(replies)
       if displayflag
         if !@project.one_to_one || ((replies.user.id == self.current_user.id || replies.user.admin? || replies.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? )
           out = out + render_reply(replies)
