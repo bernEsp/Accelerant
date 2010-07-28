@@ -32,13 +32,16 @@ end
 		 <p>
 
 		<%=comment.comment %>
+
 		<% if comment.photo_content_type %>
 		<% if comment.photo_content_type =~ /image.*/  %>
-			<a href="<%=comment.photo.url%>" class="MagicThumb" rel="buttons:hide">
-			<%= image_tag comment.photo.url(:thumb), :style => "margin-left:40px;" %>
-			</a>
+                  <br/>
+                  <a href="<%=comment.photo.url%>" >
+                  <%= image_tag comment.photo.url(:thumb) %>
+                  </a>
 		<% else %>
-			<a href="<%=comment.photo.url%>" target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+                  <br/>
+                  <a href="<%=comment.photo.url%>" target="_blank">View attached file here.</a><%= image_tag "download.png"%>
 		<% end %>
 		<% end %>
 		<br/>
