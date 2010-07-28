@@ -36,7 +36,7 @@ end
 		<% if comment.photo_content_type %>
 		<% if comment.photo_content_type =~ /image.*/  %>
                   <br/>
-                  <a href="<%=comment.photo.url%>" >
+                  <a href="<%=comment.photo.url%>" > 
                     <%= image_tag comment.photo.url(:thumb) %>
                   </a>
 		<% else %>
