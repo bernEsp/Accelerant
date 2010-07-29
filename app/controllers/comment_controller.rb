@@ -3,9 +3,9 @@ class CommentController < ApplicationController
   require 'csv'
 
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :new, :create, :edit, :update,
-      :drop, :assign, :show, :destroy, :csv_dump, :export_to_csv,
-      :by_user, :email_assign, :emailed
+    #ssl_required :index, :new, :create, :edit, :update,
+      #:drop, :assign, :show, :destroy, :csv_dump, :export_to_csv,
+      #:by_user, :email_assign, :emailed
   end
 
   def index

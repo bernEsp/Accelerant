@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :update, :new, :create, :get, :destroy
+    #ssl_required :index, :show, :update, :new, :create, :get, :destroy
   end
   
   def index
