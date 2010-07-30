@@ -1,7 +1,7 @@
 class RepliesController < ApplicationController
 
   if ENV['RAILS_ENV'] == 'production'
-    #ssl_required :index, :show, :get, :update, :new, :create
+    ssl_required :index, :show, :get, :update, :new, :create
   end
 
   def index

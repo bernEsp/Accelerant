@@ -3,7 +3,7 @@ class FilterController < ApplicationController
   layout 'filter'
 
   if ENV['RAILS_ENV'] == 'production'
-    #ssl_required :filter_set, :filter_clear, :index
+    ssl_required :filter_set, :filter_clear, :index
   end
 
   def filter_set

@@ -2,7 +2,7 @@ class MyaccountController < ApplicationController
   before_filter :login_required
   
   if ENV['RAILS_ENV'] == 'production'
-    #ssl_allowed :index, :edit, :update
+    ssl_allowed :index, :edit, :update
   end
 
   def index
