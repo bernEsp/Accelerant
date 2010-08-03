@@ -1,4 +1,5 @@
 class CommentController < ApplicationController
+  before_filter :login_required
   uses_yui_editor
   require 'csv'
 
