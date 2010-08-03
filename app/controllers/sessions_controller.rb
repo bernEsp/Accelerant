@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
       if user.participant?
         redirect_to  "/myassignments/show"
       end
-      #flash[:notice] = "Logged in successfully"
+      flash[:notice] = "Logged in successfully"
     else
       note_failed_signin
       @login       = params[:login]
