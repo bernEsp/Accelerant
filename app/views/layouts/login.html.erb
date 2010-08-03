@@ -44,6 +44,7 @@
     </div>
     <% end %>
     <div id="formBlock">
+      <%= flash[:notice] %>
       <%=yield%>
     </div>
     <div id="copyright">&copy;<%= Time.now.strftime("%Y") %> BlogNog Research and Accelerant Research. All Rights Reserved.</div>

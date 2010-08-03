@@ -42,6 +42,7 @@ class SessionsController < ApplicationController
       note_failed_signin
       @login       = params[:login]
       # @remember_me = params[:remember_me]
+      flash[:notice] = "Login failed"
       render :action => 'new'
     end
   end
