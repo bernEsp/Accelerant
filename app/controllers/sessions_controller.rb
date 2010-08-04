@@ -47,6 +47,10 @@ class SessionsController < ApplicationController
     end
   end
 
+  def index
+    
+  end
+
   def destroy
     logout_killing_session!
     flash[:notice] = "You have been logged out."
