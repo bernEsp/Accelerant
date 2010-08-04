@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 :handle_token_issues
 
 def handle_token_issues
-  redirect_to('cookies') #redirect to page for handling this issue
+  #redirect_to('cookies') #redirect to page for handling this issue
 end
 
 end
