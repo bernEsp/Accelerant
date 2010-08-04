@@ -15,6 +15,10 @@ class SessionsController < ApplicationController
   end
 
   def create
+    if cookies[:test_cookie] != "1234567890"
+      flash[:notice] = "Cookies must be enabled."
+      redirect_to  "/login" and return
+    end
     logout_keeping_session!
     user = User.authenticate(params[:login], params[:password])
     if user

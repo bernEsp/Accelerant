@@ -1,10 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+  <% cookies[:test_cookie] = {:value => "1234567890", :expires => Time.now + 3600}  %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<%
 
-%>
 <title>blognog</title>
   <%= stylesheet_link_tag 'login'%>
 <!--[if IE 6]>
@@ -26,6 +25,12 @@
     <div id="leftStuff">
       <div id="secure">Secure Login</div>
       <div id="links">
+
+        <%
+        #if cookies[:test_cookie] != "1234567890"
+         # flash[:notice] = "Cookies must be enabled."
+        #end
+        %>
         <!--
       <p>Forget your Password? No worries, just <span>Click Here</span></p>
       <p>Need to Sign Up?  <span>Click Here to get started</span></p>
