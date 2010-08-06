@@ -22,9 +22,9 @@ class ApplicationController < ActionController::Base
 
  #rescue_from ActionController::InvalidAuthenticityToken, :with => :handle_token_issues
 
-def handle_token_issues
+#def handle_token_issues
   #redirect to page for handling this issue
   #redirect_to('cookies') 
-end
+#end
 
 end
