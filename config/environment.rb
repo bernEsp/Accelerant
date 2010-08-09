@@ -57,7 +57,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_accelerant_session',
+    :session_key => 'blognog',
     :secret      => '8942cc24d1a1068feafe25bb96f0c6b4daf54f6857d5bdad7aa724eb85b0c6df2491161da9f9916fc72d0a969ed8c340746966a17061319b5e6ad09ccf4d92a0'
   }
 
