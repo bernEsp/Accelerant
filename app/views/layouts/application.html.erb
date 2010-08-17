@@ -20,10 +20,18 @@
 
 
 </head>
+<%
+  if self.current_user.participant?
+    bodyTag = "oncontextmenu='return false;'"
+  else
+    bodyTag = ""
+  end
+%>
+end
 <% if session[:theme] %>
-<body style="background-color:#<%=Themes.find(session[:theme]).color %>" >
+<body style="background-color:#<%=Themes.find(session[:theme]).color %>" <%=bodyTag %> >
 <% else %>
-  <body>
+  <body <%=bodyTag %> >
 <% end %>
 <div id="wrapper">
   <div id="banner">
