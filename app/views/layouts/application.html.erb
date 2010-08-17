@@ -27,7 +27,7 @@
     bodyTag = ""
   end
 %>
-end
+
 <% if session[:theme] %>
 <body style="background-color:#<%=Themes.find(session[:theme]).color %>" <%=bodyTag %> >
 <% else %>
