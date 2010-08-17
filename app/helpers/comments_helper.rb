@@ -59,7 +59,7 @@ module CommentsHelper
 
 		out = out + "<div id='subCommentForm#{comment.id}'></div>"
 		out = out + "<div id='reclaimer#{comment.id}'></div>"
-		@replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id DESC", :include => :user)
+		@replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id ASC", :include => :user)
 		for replies in @replies
       displayflag = true
       if cookies[:filter] == "yes"
