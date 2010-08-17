@@ -47,7 +47,7 @@ module CommentsHelper
           :complete => "new Effect.SlideDown('commentSub#{comment.id}', { duration: .2 })",
           :update => "commentSub#{comment.id}")
       end
-      if (comment.user.id == self.current_user.id) || self.current_user.admin
+      if (comment.user.id == self.current_user.id) || self.current_user.admin  || self.current_user.moderator
 				out = out + " | "
         out = out + link_to_remote("Delete",
           :confirm => "Are you sure you want to delete this?",

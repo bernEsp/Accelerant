@@ -23,7 +23,7 @@
   
 
 </div> <!-- right column -->
-<% if self.current_user.admin %>
+<% if self.current_user.admin || self.current_user.moderator %>
 <%= link_to "CSV", :controller => 'comment', :action => 'export_to_csv', :id => params[:id], :format => 'csv' %>
 <% end %>  
  
