@@ -12,7 +12,7 @@ module CommentsHelper
 		out = out + "<strong>"
     out = out + comment.user.name
     out = out + "</strong> "
-		out = out + comment.comment
+		out = out + Remo.new(comment.comment).to_html
 		if comment.photo_content_type
       if comment.photo_content_type =~ /image.*/
         #out = out + "<a href='#{comment.photo.url}' class='MagicThumb' rel='buttons:hide' target='_blank' >"

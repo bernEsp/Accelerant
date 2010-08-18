@@ -14,6 +14,7 @@ class Remo
   #  - extras: Add more emoticons 'on the fly'. Hash of regexp => image. Default is an empty hash.
   def initialize(string, options={})
     options[:theme] ||= "simplesmileys"
+    #options[:theme] ||= "skype"
     options[:images_path] ||= "/images/emoticons/"
     options[:extras] ||= {}
     @string, @options = string, options
