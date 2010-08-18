@@ -1,7 +1,7 @@
 module RepliesHelper
   def render_reply(replies)
     
-    output = "<div id='reply#{replies.id}' style='background-color:#cdd7de;margin:8px;padding:2px;'>"
+    output = "<div id='reply#{replies.id}' class='replyStyle'>"
 
     output = output + render_small_avatar(replies.user)
     output = output + "&nbsp;&nbsp;"

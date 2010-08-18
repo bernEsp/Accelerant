@@ -37,7 +37,6 @@ module CommentsHelper
         out = out + link_to_remote('Add Comment',
           :url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
           :complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
-          :onclick => '',
           :update => "subCommentForm#{comment.id}")
       end
       if (comment.user.id == self.current_user.id) || self.current_user.admin
@@ -57,7 +56,7 @@ module CommentsHelper
       end
     end
 
-		out = out + "<div id='subCommentForm#{comment.id}'></div>"
+		out = out + "<div id='subCommentForm#{comment.id}' class='replyStyle' style='display:none;'></div>"
 		out = out + "<div id='reclaimer#{comment.id}'></div>"
 		@replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id ASC", :include => :user)
 		for replies in @replies

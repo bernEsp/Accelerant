@@ -36,7 +36,7 @@ class RepliesController < ApplicationController
           #page << "document.getElementById('stuff').innerHTML = '';"
           #gunk = render_reply_standalone(@reply)
           #gunk = @reply.content
-          page << "document.getElementById('subCommentForm#{@reply.comment_id}').innerHTML = 'Response POSTED!';"
+          page << "document.getElementById('subCommentForm#{@reply.comment_id}').innerHTML = '#{@reply.content}';"
           #page << "document.getElementById('stuff').innerHTML = '#{gunk}"
 
           #page << "document.getElementById('subCommentForm#{@reply.comment_id}').innerHTML = '#{gunk}"
