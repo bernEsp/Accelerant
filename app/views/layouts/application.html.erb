@@ -26,13 +26,16 @@
   else
     bodyTag = ""
   end
+
+
+  if session[:theme]
+    styleTag = "style='background-color:##{Themes.find(session[:theme]).color};'"
+  else
+    styleTag = ""
+  end
 %>
 
-<% if session[:theme] %>
-<body style="background-color:#<%=Themes.find(session[:theme]).color %>" <%=bodyTag %> >
-<% else %>
-  <body <%=bodyTag %> >
-<% end %>
+<body <%=styleTag %> <%=bodyTag %> >
 <div id="wrapper">
   <div id="banner">
     <div id="topNavLeft">

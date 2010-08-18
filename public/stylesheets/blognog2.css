@@ -374,3 +374,21 @@ img {
 }
 
 .replyStyle {background-color:#cdd7de;margin:8px;padding:2px;}
+
+ .smiley {
+       background-repeat:no-repeat;
+       padding-left: 16px; /* The width of the image */
+  }
+
+ .smiley.smile {
+     background-image:url(/images/smileys/smile_16.png);
+ }
+
+ .smiley.grin {
+     background-image:url(/images/smileys/grin_16.png);
+ }
+
+ .smiley .smiley-as-text {
+     position: fixed;
+     top: -500px;
+ }
