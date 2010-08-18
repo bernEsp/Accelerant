@@ -29,13 +29,23 @@ class ProjectController < ApplicationController
     @this_project = Project.find(params[:id])
     @this_project.update_attributes(params[:project])
     @this_project.update_attributes(params[:this_project])
-    redirect_to "/project"
+    if self.current_user.admin
+      redirect_to "/project"
+    end
+    if self.current_user.moderator
+      redirect_to "/moderator"
+    end
   end
   
   def drop
     @this_project = Project.find(params[:id])
     @this_project.destroy
-    redirect_to "/project"
+    if self.current_user.admin
+      redirect_to "/project"
+    end
+    if self.current_user.moderator
+      redirect_to "/moderator"
+    end
   end
 
 end
