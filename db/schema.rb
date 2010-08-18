@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100622235452) do
+ActiveRecord::Schema.define(:version => 20100818144108) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(:version => 20100622235452) do
     t.integer  "moderator_id"
     t.integer  "theme",              :default => 1
     t.boolean  "lock",               :default => false
+    t.boolean  "active",             :default => true
   end
 
   create_table "replies", :force => true do |t|
