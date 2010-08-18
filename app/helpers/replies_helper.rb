@@ -39,7 +39,7 @@ module RepliesHelper
         output = output + " | "
         output = output + link_to_remote("Probe",
 					:url => {:controller => 'plain', :action => 'follow_up', :id => replies.id},
-					:update => "reply#{replies.id}")
+					:update => "probe#{replies.id}")
       end
     end
     if (self.current_user.admin || self.current_user.moderator || (self.current_user.id == replies.user_id) )
@@ -48,6 +48,7 @@ module RepliesHelper
     else
       @follows = FollowUps.find(:all, :conditions => "1 = 0")
     end
+    output = output + "<div id='probe#{replies.id}'></div>"
     for follows in @follows
       output = output + render_probe(follows,replies)
     end

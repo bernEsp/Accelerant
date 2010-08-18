@@ -12,7 +12,7 @@ class FollowUpsController < ApplicationController
         @follow_up.read = true
       end
       @follow_up.save
-      render :text => "Follow up posted!"
+      render :text => "<div class='probe'>"+@follow_up.content+"</div>"
   end
 
   def show
