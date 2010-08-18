@@ -12,7 +12,7 @@ class FollowUpsController < ApplicationController
         @follow_up.read = true
       end
       @follow_up.save
-      render :text => "<div class='probe'>"+@follow_up.content+"</div>"
+      render :text => "<div class='probe'>"+Remo.new(@follow_up.content).to_html+"</div>"
   end
 
   def show
