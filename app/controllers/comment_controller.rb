@@ -70,6 +70,30 @@ class CommentController < ApplicationController
        :disposition =>'attachment', :encoding => 'utf8')
     end
 
+    def export_to_rtf
+     comment = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user)
+     document = Document.new(Font.new(Font::ROMAN, 'Times New Roman'))
+        document.paragraph do |p|
+          p << "header"
+          comment.each do |c|
+            created = Date.parse(c.created_at.to_s).strftime("%m/%d/%Y")
+            #puts created
+            #p << [c.comment,c.user.name,c.user.login,Date.parse(c.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(c.created_at.to_s).strftime("%I:%M:%S")]
+            p << c.comment
+            p << c.user.name
+        @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id DESC", :include => :user)
+            @replies.each do |d|
+              #p << ['Reply-->' + d.content,d.user.name,d.user.login,Date.parse(d.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(d.created_at.to_s).strftime("%I:%M:%S")]
+              p << d.content
+          end
+          end
+        end
+       #document.rewind
+       #File.open('my_document.rtf') {|file| file.write(document.to_rtf)}
+       send_data(document.to_rtf,:type=>'text/rtf',:filename=>'report.rtf',
+       :disposition =>'attachment')
+    end
+
   def by_user
     @these_comments = Comment.belongs_to_discussion.find(:all, :conditions => { :user_id => params[:id]})
     @these_replies = Replies.find(:all, :conditions => {:user_id => params[:id]})
