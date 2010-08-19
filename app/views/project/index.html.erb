@@ -11,6 +11,9 @@
           <% if project.lock %>
            <%= image_tag "lock.png", :title => "Project has been locked" %>
            <% end %>
+           <% if !project.active %>
+           <%= image_tag "not_active.png", :title => "Project is not currently active" %>
+           <% end %>
         </strong><br/>
 	<%= link_to 'View', :controller => 'assignment', :action => 'show', :id => project.id %> | 
 	<%= link_to "Edit", {:controller => "project", :action => "edit", :id => project.id} %> |
