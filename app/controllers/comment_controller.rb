@@ -6,7 +6,7 @@ class CommentController < ApplicationController
 
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :new, :create, :edit, :update,
-      :drop, :assign, :show, :destroy, :csv_dump, :export_to_csv,
+      :drop, :assign, :show, :destroy, :csv_dump, :export_to_csv, :export_to_rtf,
       :by_user, :email_assign, :emailed
   end
 
@@ -72,6 +72,8 @@ class CommentController < ApplicationController
     end
 
     def export_to_rtf
+      #http://ruby-rtf.rubyforge.org/
+      #http://ruby-rtf.rubyforge.org/docs/index.html
      comment = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user)
      document = RTF::Document.new(Font.new(Font::ROMAN, 'Times New Roman'))
         document.paragraph do |p|

@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
+  before_filter :admin_required, :only => [ :index, :detail, :edit, :update, :destroy, :new, :create ]
+  before_filter :client_required, :only => [ :detail ]
+  before_filter :moderator_required, :only => [ :detail ]
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, :activate, :detail
   end
@@ -146,8 +149,7 @@ class UsersController < ApplicationController
   # render new.rhtml
   
   def detail
-    :login_required
-    :admin_required || :client_required
+    
     @this_user = User.find(:last, :conditions => {:id => params[:id] })
     @assignments = UserAssignments.find(:all, :conditions => {:user_id => params[:id]})
     @these_comments = Comment.belongs_to_discussion.find(:all, :conditions => { :user_id => params[:id]})

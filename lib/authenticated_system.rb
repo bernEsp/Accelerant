@@ -35,6 +35,18 @@ module AuthenticatedSystem
       logged_in?
     end
 
+    def authorized_admin?
+      current_user.admin == true
+    end
+
+    def authorized_client?
+      current_user.client == true
+    end
+
+    def authorized_moderator?
+      current_user.moderator == true
+    end
+
     # Filter method to enforce a login requirement.
     #
     # To require logins for all actions, use this in your controllers:
@@ -53,6 +65,18 @@ module AuthenticatedSystem
       authorized? || access_denied
     end
 
+    def admin_required
+      authorized_admin? || access_denied
+    end
+
+    def client_required
+      authorized_client? || access_denied
+    end
+
+    def moderator_required
+      authorized_moderator? || access_denied
+    end
+
     # Redirect as appropriate when an access request fails.
     #
     # The default action is to redirect to the login screen.
@@ -65,7 +89,9 @@ module AuthenticatedSystem
       respond_to do |format|
         format.html do
           store_location
+          flash[:notice] = "You don't have permission for that..."
           redirect_to new_session_path
+
         end
         # format.any doesn't work in rails version < http://dev.rubyonrails.org/changeset/8987
         # Add any other API formats here.  (Some browsers, notably IE6, send Accept: */* and trigger 
@@ -96,7 +122,7 @@ module AuthenticatedSystem
     # Inclusion hook to make #current_user and #logged_in?
     # available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_user, :logged_in?, :authorized? if base.respond_to? :helper_method
+      base.send :helper_method, :current_user, :logged_in?, :authorized?, :authorized_admin?, :authorized_client?, :authorized_moderator? if base.respond_to? :helper_method
     end
 
     #
