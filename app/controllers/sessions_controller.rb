@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   layout 'login'
 
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :create, :new, :destroy
+    ssl_required :create, :new, :destroy, :wrong
   end
 
   # render new.rhtml
@@ -59,6 +59,10 @@ class SessionsController < ApplicationController
     logout_killing_session!
     flash[:notice] = "You have been logged out."
     redirect_to  "/login"
+  end
+
+  def wrong
+    
   end
 
 protected

@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
-  before_filter :admin_required, :only => [ :index, :detail, :edit, :update, :destroy, :new, :create ]
-  before_filter :client_required, :only => [ :detail ]
-  before_filter :moderator_required, :only => [ :detail ]
+  #before_filter :login_required, :only => [:detail]
+  before_filter :admin_required, :only => [ :index, :edit, :update, :destroy, :new, :create ]
+  before_filter :not_participant, :only => [:detail]
+  #before_filter :client_required, :only => [ :detail ]
+  #before_filter :moderator_required, :only => [ :detail ]
+
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, :activate, :detail
   end

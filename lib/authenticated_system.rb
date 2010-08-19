@@ -47,6 +47,10 @@ module AuthenticatedSystem
       current_user.moderator == true
     end
 
+    def authorized_not_participant?
+      current_user.participant != true
+    end
+
     # Filter method to enforce a login requirement.
     #
     # To require logins for all actions, use this in your controllers:
@@ -77,6 +81,10 @@ module AuthenticatedSystem
       authorized_moderator? || access_denied
     end
 
+    def not_participant
+      authorized_not_participant? || access_denied
+    end
+
     # Redirect as appropriate when an access request fails.
     #
     # The default action is to redirect to the login screen.
@@ -89,9 +97,9 @@ module AuthenticatedSystem
       respond_to do |format|
         format.html do
           store_location
-          flash[:notice] = "You don't have permission for that..."
-          redirect_to new_session_path
-
+          #flash[:notice] = "You don't have permission for that..."
+          #redirect_to new_session_path
+          redirect_to :controller => "sessions", :action => "wrong"
         end
         # format.any doesn't work in rails version < http://dev.rubyonrails.org/changeset/8987
         # Add any other API formats here.  (Some browsers, notably IE6, send Accept: */* and trigger 
