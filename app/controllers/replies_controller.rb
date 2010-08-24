@@ -36,7 +36,7 @@ class RepliesController < ApplicationController
           #page << "document.getElementById('stuff').innerHTML = '';"
           #gunk = render_reply_standalone(@reply)
           #gunk = @reply.content
-          page << "document.getElementById('subCommentForm#{@reply.comment_id}').innerHTML = '#{@reply.content}';"
+          page << "document.getElementById('subCommentForm#{params[:reply][:comment_id]}').innerHTML = '#{@reply.content}';"
           #page << "document.getElementById('stuff').innerHTML = '#{gunk}"
 
           #page << "document.getElementById('subCommentForm#{@reply.comment_id}').innerHTML = '#{gunk}"
@@ -47,7 +47,7 @@ class RepliesController < ApplicationController
       #render :text => "Response is too short.  Must be #{@discussion.character_minimum} characters minimum."
       responds_to_parent do
         render :update do |page|
-          page << "document.getElementById('stuff').innerHTML = 'Response is too short.  Must be #{@discussion.character_minimum} characters minimum.';"
+          page << "document.getElementById('subCommentForm#{params[:reply][:comment_id]}').innerHTML = 'Response is too short.  Must be #{@discussion.character_minimum} characters minimum.';"
         end
       end
     end

@@ -1,6 +1,12 @@
 module CommentsHelper
 
   def show_comment(comment)
+    if comment.hide_until_answered && self.current_user.participant
+      @reply_test = Replies.find(:all, :conditions => {:comment_id => comment.id, :user_id => self.current_user.id}, :include => :user)
+      if @reply_test.empty?
+        suppress = true
+      end
+    end
     out = "<div class='clientSubComment' id='commentSub#{comment.id}'><a name='##{comment.id}'></a>"
     out = out + "<div class='subCommentAvatar'>"
     out = out + render_avatar(comment.user)
@@ -58,8 +64,12 @@ module CommentsHelper
 
 		out = out + "<div id='subCommentForm#{comment.id}' class='replyStyle' style='display:none;'></div>"
 		out = out + "<div id='reclaimer#{comment.id}'></div>"
-		@replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id ASC", :include => :user)
-		for replies in @replies
+    if suppress
+      @replies = Replies.find(:all, :conditions => "1 = 2")
+    else
+      @replies = Replies.find(:all, :conditions => { :comment_id => comment.id}, :order => "id ASC", :include => :user)
+    end
+    for replies in @replies
       displayflag = true
       if cookies[:filter] == "yes"
         displayflag = false
