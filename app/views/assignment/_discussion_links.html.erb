@@ -5,9 +5,14 @@
     <legend>Jump to discussion topic:</legend>
     <p>&nbsp;</p>
   <% for discussion in discussions %>
-  <p><%= link_to discussion.title,
+  <p>
+  <%= link_to discussion.title,
     {:controller => "discussion", :id => discussion.id, :action => 'show', :sort => params[:sort], :project_id => discussion.project_id},
-    :class => 'discussion_links'%></p>
+    :class => 'discussion_links'%>
+  </p>
+  <% if self.current_user.admin || self.current_user.moderator %>
+  <%= link_to "Edit", {:controller => "discussion", :id => discussion.id, :action => 'edit'} %> | <%= link_to "Delete", {:controller => "discussion", :id => discussion.id, :action => 'delete'} %>
+  <% end  %>
   <% end %>
   </fieldset>
   <% end  %>
