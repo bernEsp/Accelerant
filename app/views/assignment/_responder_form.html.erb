@@ -24,6 +24,10 @@
 			<% end %>
 			<%= f.hidden_field :project_id, :value => project_id %>
                         <%= f.hidden_field :discussion_id, :value => discussions.id %>
+                        <% if !@project.one_to_one && self.current_user.moderator %>
+                          Hide responses until answered:
+                          <%= f.check_box :hidden_until_answered %>
+                        <% end %>
 			<div class="postButton" style="margin-top:-20px;">
 			<%= submit_tag "Share", :style => "margin-right:10px;" %>
                         </div>
