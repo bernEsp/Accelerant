@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :client, :has_many => :projects
   map.resources :project, :has_many => :assignments
   map.resources :assignment, :has_many => :participants
+  map.resources :discussion, :belongs_to => :projects
   map.comment '/comment', :controller => 'comment', :action => 'show'
   map.importer '/importer', :controller => 'importer', :action => 'index'
   map.resources :users

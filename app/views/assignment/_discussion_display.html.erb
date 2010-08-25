@@ -1,5 +1,6 @@
 <fieldset class="discussionLinks" >
     <legend><%= discussions.title %></legend>
+
     <p>&nbsp;</p>
   <div class="avatar">
           <% if discussions.user %>
@@ -19,4 +20,8 @@
 		<% end %>
 		<% end %>
   </div>
+          <% if self.current_user.admin || self.current_user.moderator %>
+  <%= link_to "Edit", {:controller => "discussion", :id => discussions.id, :action => 'edit'} %> |
+  <%= link_to "Delete", {:controller => "discussion", :id => discussions.id, :action => 'delete'}, :confirm => "Are you sure? Once deleted this action cannot be undone." %>
+  <% end  %>
   </fieldset>

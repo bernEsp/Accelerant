@@ -7,7 +7,7 @@
   <%= link_to "Default View", :controller => 'discussion', :action => 'show', :id => params[:id], :project_id => params[:project_id], :sort => '' %>
   <% end %>
   <% end %>
-  <%= render :partial => 'discussion_links', :locals => {:discussions => @discussions} %>
+  <%= render :partial => 'assignment/discussion_links', :locals => {:discussions => @discussions} %>
 
   <%= render :partial => 'assignment/discussion_display', :locals => {:discussions => @discussion} %>
 <% if !self.current_user.client && !@project.lock %>

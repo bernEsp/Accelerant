@@ -1,6 +1,6 @@
   <!-- Start Discussion Topic links -->
-  <% talk_count = Discussion.count(:all, :conditions => {:project_id => params[:id]}) %>
-  <%if talk_count > 1 %>
+  <% #talk_count = Discussion.count(:all, :conditions => {:project_id => params[:id]}) %>
+  <% if discussions.length > 1 %>
   <fieldset class="discussionLinks">
     <legend>Jump to discussion topic:</legend>
     <p>&nbsp;</p>
@@ -10,11 +10,8 @@
     {:controller => "discussion", :id => discussion.id, :action => 'show', :sort => params[:sort], :project_id => discussion.project_id},
     :class => 'discussion_links'%>
   </p>
-  <% if self.current_user.admin || self.current_user.moderator %>
-  <%= link_to "Edit", {:controller => "discussion", :id => discussion.id, :action => 'edit'} %> | <%= link_to "Delete", {:controller => "discussion", :id => discussion.id, :action => 'delete'} %>
-  <% end  %>
   <% end %>
   </fieldset>
-  <% end  %>
+  <% end %>
 
   <!-- End Discussion Topic links -->

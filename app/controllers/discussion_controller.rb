@@ -1,12 +1,19 @@
 class DiscussionController < ApplicationController
   before_filter :login_required
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :new, :create
+    ssl_required :index, :show, :new, :create, :edit, :update, :delete
   end
 
   def new
     @discussion = Discussion.new
     @comment_assignment = CommentAssignments.new
+  end
+
+  def delete
+    @discussion = Discussion.find(params[:id])
+    project = @discussion.project_id
+    @discussion.destroy
+    redirect_to :controller => 'assignment', :action => 'show', :id => project
   end
 
   def create
@@ -39,6 +46,16 @@ class DiscussionController < ApplicationController
     else
       @discussion = Discussion.find(params[:id])
     end
+  end
+
+  def edit
+    @discussion = Discussion.find(params[:id])
+  end
+
+  def update
+     @discussion = Discussion.find(params[:id])
+     @discussion.update_attributes(params[:discussion])
+    redirect_to :controller => 'assignment', :action => 'show', :id => @discussion.project_id
   end
 
 end
