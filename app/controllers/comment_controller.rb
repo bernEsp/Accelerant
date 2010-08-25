@@ -55,7 +55,8 @@ class CommentController < ApplicationController
           title << ['Comment','User','Login','Date Posted','Time Posted']
           comment.each do |c|
             created = Date.parse(c.created_at.to_s).strftime("%m/%d/%Y")
-            puts created
+            #puts created
+            c.comment = c.comment.gsub(/<\/?[^>]*>/,  "")
             title << [c.comment,c.user.name,c.user.login,Date.parse(c.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(c.created_at.to_s).strftime("%I:%M:%S")]
             @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id DESC", :include => :user)
             @replies.each do |d|
