@@ -82,6 +82,7 @@ class CommentController < ApplicationController
             created = Date.parse(c.created_at.to_s).strftime("%m/%d/%Y")
             #puts created
             #p << [c.comment,c.user.name,c.user.login,Date.parse(c.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(c.created_at.to_s).strftime("%I:%M:%S")]
+            c.comment = c.comment.gsub(/<\/?[^>]*>/,  "")
             p.bold << "#{c.comment}"
             p.italic << " -#{c.user.name}"
             p.line_break
