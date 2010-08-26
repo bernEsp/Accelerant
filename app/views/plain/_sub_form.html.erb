@@ -1,4 +1,6 @@
-<%= include_yui_editor_if_used %>
+<% if self.current_user.participant  %>
+  <%= include_yui_editor_if_used %>
+<% end %>
 <div id="thisForm<%= params[:id]%>">
   
 <%  comment_num = Comment.find(params[:id])%>
@@ -6,7 +8,7 @@
 :html => { :multipart => true, :target => 'iframe'},
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
 
-<% if self.current_user.participant?  %>
+<% if self.current_user.participant  %>
   <%= f.text_area :content, :size => "50 x 20", :class => 'rich_text_editor' %><br/>
 <% else %>
   <%= f.text_area :content, :size => "50 x 10" %><br/>

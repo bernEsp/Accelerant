@@ -24,7 +24,7 @@ class Remo
   # Converts all emoticons in +string+ to HTML-image tags.
   def to_html
     @emoticons.each do |regexp, image|
-      @string.gsub!(Regexp.new("(^|\s)(#{regexp})(\s|$)"), " <img src='#{@options[:images_path]}#{@options[:theme]}/#{image}'/> ")
+      @string.gsub!(Regexp.new("(^|\s)(#{regexp})(\s|$)"), " <img src='#{@options[:images_path]}#{@options[:theme]}/#{image}' title='#{@string}' /> ")
     end
     @options[:extras].each do |regexp, image|
       @string.gsub!(Regexp.new("(^|\s)(#{regexp})(\s|$)"), " <img src='#{@options[:images_path]}extras/#{image}'/> ")
