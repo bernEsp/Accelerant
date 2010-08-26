@@ -102,6 +102,8 @@ module CommentsHelper
 		end
 		out = out + "<div id='#{dom_id(comment)}'>"
 		out = out + "</div>"
+    out = out + "<a name='subCommentForm#{comment.id}' ></a>"
+    #out = out + "<div id='subCommentForm#{comment.id}' class='replyStyle' style='display:none;'></div>"
 		out = out + "</div>"
 		out = out + "<hr noshade='noshade'/>"
     out = out + "</div>"

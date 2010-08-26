@@ -9,7 +9,7 @@
 :url =>{:controller => 'replies', :action => 'create' } do |f| -%>
 
 <% if self.current_user.participant  %>
-  <%= f.text_area :content, :size => "50 x 20", :class => 'rich_text_editor' %><br/>
+  <%= f.text_area :content, :size => "50 x 15", :class => 'rich_text_editor' %><br/>
 <% else %>
   <%= f.text_area :content, :size => "50 x 10" %><br/>
 <% end %>
