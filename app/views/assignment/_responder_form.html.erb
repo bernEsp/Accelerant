@@ -1,4 +1,5 @@
 <!-- Response form starts here -->
+<% if !self.current_user.participant && !self.current_user.client %>
 <%
 @discussion_dis = Discussion.find(discussions.id)
 %>
@@ -39,3 +40,5 @@
 
       <% end -%><!-- form for -->
           </div>
+
+<% end %>
