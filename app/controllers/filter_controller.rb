@@ -82,6 +82,8 @@ class FilterController < ApplicationController
 
   def filter_set_new
     i = Integer(params[:filter][:num_params])  #maximum of 10
+
+    #first we build our arrays
     field_array = Array.new
     1.upto(i) { |n|
             field_array[n] = Array.new
@@ -100,28 +102,39 @@ class FilterController < ApplicationController
               end
             end
     }
+
+    #arrays built
+
+    #build the sql by cycling back thru the arrays
     sql = ""
     1.upto(i) { |n|
       if field_array[n].length > 0
         if field_array[n].length == 1
+          #this is a single category element so we just wrap it in parenthesis
           if sql == ""
+            #if it's the very first condition we don't want the AND
             sql = sql + "( field_#{n} = '#{field_array[n]}' )"
           else
             sql = sql + " AND ( field_#{n} = '#{field_array[n]}' )"
           end
-        else #this will be an OR block
+        else 
+          #this will be an OR block
           if sql == ""
+            #if it's the very first condition we don't want the AND
             sql = sql + "("
           else
             sql = sql + " AND ("
           end
           0.upto(field_array[n].length-1) { |z|
+            #cycle thru the array and build all the comparisons
             if z == 0
+              #if it's the first element we don't want the OR
               sql = sql + " field_#{n} = '#{field_array[n][z]}' "
             else
               sql = sql + " OR field_#{n} = '#{field_array[n][z]}' "
             end
           }
+          #...and close the OR statement with closing parenthesis
           sql = sql + ") "
         end
       end
