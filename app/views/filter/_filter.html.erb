@@ -11,7 +11,7 @@ category = AttributeTags.find_last_by_project_id(@project.id)
   <% remote_form_for :filter, :complete => "new Effect.BlindDown('filterStatus', { duration: .5 })",
     :update => 'filterStatus',
     #:update => 'responses',
-    :url => { :controller=> 'filter', :action => "filter_set" } do |f| %>
+    :url => { :controller=> 'filter', :action => "filter_set_new" } do |f| %>
     
     <% param_count = 0 %>
     <% 1.upto(10) { |i|
