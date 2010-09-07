@@ -212,8 +212,10 @@ img {
 	margin:0 0 0 10px;
 }
 .clientMainEntryText span,.clientSubCommentText span,.adminSubCommentText span {
-	color:#a5a4a4;
+	/*
+        color:#a5a4a4;
 	font-style:italic;
+ */
 }
 .clientSubComment {
 	width:520px;

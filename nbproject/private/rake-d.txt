@@ -41,6 +41,7 @@ doc\:guides=Generate Rails guides
 doc\:plugins=Generate documentation for all installed plugins
 doc\:plugins\:active_merchant=Generate documentation for the active_merchant plugin
 doc\:plugins\:acts_as_csvable=Generate documentation for the acts_as_csvable plugin
+doc\:plugins\:acts_as_list=Generate documentation for the acts_as_list plugin
 doc\:plugins\:attachment_fu=Generate documentation for the attachment_fu plugin
 doc\:plugins\:comma=Generate documentation for the comma plugin
 doc\:plugins\:fckeditor=Generate documentation for the fckeditor plugin
