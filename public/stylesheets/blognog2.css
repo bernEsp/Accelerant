@@ -222,7 +222,7 @@ img {
 	padding:10px 0;
 	display:inline;
 	float:right;
-	margin:0 10px 1px 60px;
+	margin:5px 10px 5px 60px;
 	/*background:#cdd7de;*/
 	
 }
@@ -375,7 +375,7 @@ img {
     border:1px dotted #000;
 }
 
-.replyStyle {background-color:#cdd7de;margin:8px;padding:2px;}
+.replyStyle {background-color:#cdd7de;margin:10px;padding:8px;border-top:10px solid #fff;}
 
  .smiley {
        background-repeat:no-repeat;
