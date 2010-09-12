@@ -1,4 +1,8 @@
-<%= image_tag "BlogNog2.png", :style => "float:right;", :class => "BlogNogLogo" %>
+<% unless session[:theme] %>
+  <%= image_tag "BlogNog2.png", :style => "float:right;", :class => "BlogNogLogo" %>
+<% else %>
+  <%= image_tag Themes.find(session[:theme]).logo.url(:size200), :style => "float:right;", :class => "BlogNogLogo" %>
+<% end %>
 <h1 class="lower">Moderator Home</h1>
 <p>&nbsp;</p>
 
