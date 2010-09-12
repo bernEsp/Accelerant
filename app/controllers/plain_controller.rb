@@ -4,7 +4,7 @@ class PlainController < ApplicationController
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :show, :showlatest, :update_count, :sub_comment_form,
       :sub_form, :show_comments, :drop_comment, :drop_reply, :follow_up, :edit_comment,
-      :comment_update
+      :comment_update, :update
   end
   
   def index
@@ -53,11 +53,14 @@ class PlainController < ApplicationController
   end
 
   def comment_update
-    @comment = Comment.find(params[:comment][:id])
-    @comment.update_attributes(params[:comment])
-    @comment.save
+    @comm = Comment.find(params[:comment][:id])
+    @comm.update_attribute(:comment, params[:comment][:comment])
+    puts @comm.id
+    @comm.comment = params[:comment][:comment]
+    puts params[:comment][:comment]
+    @comm.save
     #out = show_comment(@comment)
-    render :text => @comment.comment
+    render :text => @comm.comment
     #render :helper => show_comment(@comment)
     #render :partial => "comments/show/#{@comment.id}"
   end

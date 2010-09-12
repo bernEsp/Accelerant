@@ -3,7 +3,7 @@
 <%
 @discussion_dis = Discussion.find(discussions.id)
 %>
-          <div style="padding-top:15px;clear:both;" >
+          <div style="padding-top:15px;clear:both;" id="responder_form" >
               <% form_for :comments,
 		:html => {:id => "my_form", :multipart => true},
 		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>

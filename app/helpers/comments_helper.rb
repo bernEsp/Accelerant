@@ -49,7 +49,10 @@ module CommentsHelper
 				out = out + " | "
         out = out + link_to_remote("Edit",
           :url => {:controller => 'plain', :action => 'edit_comment', :id => comment.id},
-          :complete => "new Effect.SlideDown('commentSub#{comment.id}', { duration: .2 })",
+          #:complete => "new Effect.SlideDown('commentSub#{comment.id}', { duration: .2 })",
+          :complete => "new Effect.Parallel([new Effect.SlideDown('commentSub#{comment.id}', { duration: .2 }),
+          new Effect.SlideUp('responder_form', { duration: .2 })
+          ],{duration: 0.8,delay: 0.5})",
           :update => "commentSub#{comment.id}")
       end
       if (comment.user.id == self.current_user.id) || self.current_user.admin  || self.current_user.moderator

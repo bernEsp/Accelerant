@@ -33,6 +33,15 @@ class SessionsController < ApplicationController
         redirect_to  "/project"
       end
       if user.moderator?
+        @last_ass = Project.find(:last, :conditions => {:moderator_id => self.current_user.id })
+        @ass = Project.find(@last_ass.id)
+        @theme = Themes.find(@ass.theme)
+
+        unless @theme.nil?
+          session[:theme] = @theme.id
+        else
+          session[:theme] = nil
+        end
         redirect_to "/moderator"
       end
       if user.client?

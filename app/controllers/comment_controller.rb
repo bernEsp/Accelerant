@@ -112,7 +112,7 @@ class CommentController < ApplicationController
     #email_parser.check_inbound
     @your_assignment = UserAssignments.find(:last, :conditions => { :user_id => self.current_user.id})
     @this_assignment = Project.find(:last, :conditions => {:id => @your_assignment.project_id})
-    puts "shit"
+    
     puts @your_assignment.project_id
     @emailed_comments = Comment.unassigned.find(:all, :conditions => { :user_id => self.current_user.id})
   end
