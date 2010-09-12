@@ -38,8 +38,10 @@ category = AttributeTags.find_last_by_project_id(@project.id)
               checked = "checked"
             end
           %>
+          <% unless attribute.send(field_name) == '' %>
           <%=  check_box(field_name, attribute.send(field_name),{ :checked => checked })%><%= attribute.send(field_name) %>
           <br/>
+          <% end %>
         <% end %>
       </div>
       <% style = "style='display:none;'" %>
