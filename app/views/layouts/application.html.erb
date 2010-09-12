@@ -121,7 +121,7 @@
 	<% end %>
     </ul>
 
-        <% if @project && (self.current_user.admin || self.current_user.moderator?) %>
+        <% if @project && !self.current_user.participant %>
         <%#= render :partial => 'filter/filter', :collection => @project, :as => :project, :layout => 'layouts/filter' %>
         <%= render :partial => 'filter/filter', :layout => 'layouts/filter' %>
         <% end %>
