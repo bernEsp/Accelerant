@@ -49,7 +49,7 @@ module RepliesHelper
     else
       @follows = FollowUps.find(:all, :conditions => "1 = 0")
     end
-    
+    output = output + "<div id='probe#{replies.id}'></div>"
     for follows in @follows
       output = output + render_probe(follows,replies)
     end

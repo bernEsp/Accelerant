@@ -6,13 +6,14 @@ module ProbesHelper
     #probe_return = probe_return + simple_format(probe.content)
     probe_return = probe_return + simple_format(Remo.new(probe.content).to_html)
     probe_return = probe_return + "</div>"
-
+    
     if (probe.id == @follows_last.id) && !@project.lock
+      probe_return = probe_return + "<div id='probe_follow#{replies.id}'>"
       probe_return = probe_return + "<br/>"
-      probe_return = probe_return + "<div id='probe#{replies.id}'>"
-      probe_return = probe_return + link_to_remote('Follow Up', :url => {:controller => 'plain', :action => 'follow_up', :id => replies.id}, :update => "probe#{replies.id}")
+      probe_return = probe_return + link_to_remote('Follow Up', :url => {:controller => 'plain', :action => 'follow_up_reply', :id => replies.id}, :update => "probe_follow#{replies.id}")
       probe_return = probe_return + "</div>"
     end
+    
     return probe_return
   end
   

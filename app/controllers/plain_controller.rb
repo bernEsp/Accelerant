@@ -3,7 +3,7 @@ class PlainController < ApplicationController
 
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :show, :showlatest, :update_count, :sub_comment_form,
-      :sub_form, :show_comments, :drop_comment, :drop_reply, :follow_up, :edit_comment,
+      :sub_form, :show_comments, :drop_comment, :drop_reply, :follow_up, :follow_up_reply, :edit_comment,
       :comment_update, :update
   end
   
@@ -46,6 +46,10 @@ class PlainController < ApplicationController
 
   def follow_up
     render :partial => "follow_up_form"
+  end
+
+  def follow_up_reply
+    render :partial => "follow_up_reply_form"
   end
 
   def edit_comment
