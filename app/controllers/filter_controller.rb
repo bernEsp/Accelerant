@@ -94,7 +94,7 @@ class FilterController < ApplicationController
                   cookies[:filter] = {:value => "yes", :expires => Time.now + 3600}
                   field_array[n] << name
                 else
-                  cookies.delete(field_name)
+                  #cookies.delete(field_name)
                 end
                 #puts "array dump:"
                 #puts field_array[n]
