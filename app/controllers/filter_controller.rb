@@ -141,9 +141,12 @@ class FilterController < ApplicationController
     }
     #puts sql
     cookies[:sql] = {:value => sql, :expires => Time.now + 3600}
+    puts "cookies set"
     render :update do |page|
       page << "window.location.reload(false)"
     end
+
+    puts "all done"
   end
 
   def filter_clear
