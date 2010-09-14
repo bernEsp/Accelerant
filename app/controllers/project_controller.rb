@@ -6,6 +6,12 @@ class ProjectController < ApplicationController
   end
   
   def index
+    cookies.to_hash.each_pair do |k, v|
+      if cookies[k.to_sym].split('_')[0] == "field"
+        cookies.delete(k.to_sym)
+      end
+    end
+    cookies.delete(:filter)
     @these_projects = Project.find(:all)
   end
   
