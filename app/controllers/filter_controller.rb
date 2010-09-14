@@ -142,7 +142,7 @@ class FilterController < ApplicationController
     #puts sql
     cookies[:sql] = {:value => sql, :expires => Time.now + 3600}
     render :update do |page|
-      page << "window.location.reload(true); return false"
+      page << "window.location.reload(false)"
     end
   end
 
