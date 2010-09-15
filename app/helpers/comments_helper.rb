@@ -15,9 +15,9 @@ module CommentsHelper
     out = out + "<div class='clientSubCommentText' >"
 		out = out + "<p>"
 
-		out = out + "<strong>"
+		out = out + "<strong><em>"
     out = out + comment.user.name
-    out = out + "</strong> "
+    out = out + " says:</em></strong><br />"
 		out = out + Remo.new(comment.comment).to_html
 		if comment.photo_content_type
       if comment.photo_content_type =~ /image.*/
