@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :wysihat_files
+
 
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login/:id', :controller => 'sessions', :action => 'new'

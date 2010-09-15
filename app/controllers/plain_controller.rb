@@ -64,9 +64,13 @@ class PlainController < ApplicationController
     puts params[:comment][:comment]
     @comm.save
     #out = show_comment(@comment)
-    render :text => @comm.comment
+    #render :text => @comm.comment
     #render :helper => show_comment(@comment)
     #render :partial => "comments/show/#{@comment.id}"
+    #render :update do |page|
+    #  page << "window.location.reload(false)"
+    #end
+    redirect_to "/assignment/#{@comm.project_id}"
   end
   
 end

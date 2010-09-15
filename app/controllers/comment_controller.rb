@@ -7,7 +7,7 @@ class CommentController < ApplicationController
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :new, :create, :edit, :update,
       :drop, :assign, :show, :destroy, :csv_dump, :export_to_csv, :export_to_rtf,
-      :by_user, :email_assign, :emailed
+      :by_user, :email_assign, :emailed, :comment_update
   end
 
   def index
@@ -124,6 +124,22 @@ class CommentController < ApplicationController
     @comment.discussion_id = @discussion.id
     @comment.save
     render :text => "Comment has been assigned!"
+  end
+
+  def comment_update
+    @comm = Comment.find(params[:comment][:id])
+    #@comm.update_attribute(:comment, params[:comment][:comment])
+    #puts @comm.id
+    @comm.comment = params[:comment][:comment]
+    #puts params[:comment][:comment]
+    @comm.save
+    #out = show_comment(@comment)
+    render :text => @comm.comment
+    #render :helper => show_comment(@comment)
+    #render :partial => "comments/show/#{@comment.id}"
+    #render :update do |page|
+     # page << "window.location.reload(false)"
+    #end
   end
   
 end

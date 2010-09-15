@@ -1,17 +1,11 @@
 <div id="thisForm<%= params[:id]%>">
 
-<% remote_form_for :comment,
-:html => { :multipart => true},
-:update => "commentSub#{params[:id]}",
-:url =>{:controller => 'plain', :action => 'comment_update' } do |f| -%>
+<% form_for :comment, :url => {:controller => 'plain', :action => 'comment_update' } do |f| -%>
 
-<%#= f.text_area :comment, :size => "50 x 10", :class => "rich_text_editor" %>
-  <%= f.text_area :comment, :size => "50 x 10" %>
+<%= f.text_area :comment, :size => "50 x 10", :class => "rich_text_editor" %>
+  <%#= f.wysihat_editor :comment, :size => "50 x 10" %>
   <br/>
 
-
-Upload a photo or file:<br/>
-<%= f.file_field :photo %><br/>
 
 <%= f.hidden_field :id %>
 
