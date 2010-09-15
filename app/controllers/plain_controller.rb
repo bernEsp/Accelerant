@@ -70,7 +70,9 @@ class PlainController < ApplicationController
     #render :update do |page|
     #  page << "window.location.reload(false)"
     #end
-    redirect_to "/assignment/#{@comm.project_id}"
+    @discussion = Discussion.find(@comm.discussion_id)
+    @project = Project.find(@discussion.project_id)
+    redirect_to "/assignment/#{@project.id}"
   end
   
 end
