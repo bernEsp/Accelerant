@@ -49,7 +49,7 @@ class CommentController < ApplicationController
   end
   
   def export_to_csv
-     comment = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user)
+     comment = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id ASC", :include => :user)
      report = StringIO.new
         CSV::Writer.generate(report, ',') do |title|
           title << ['Comment','User','Login','Date Posted','Time Posted']
@@ -75,7 +75,7 @@ class CommentController < ApplicationController
     def export_to_rtf
       #http://ruby-rtf.rubyforge.org/
       #http://ruby-rtf.rubyforge.org/docs/index.html
-     comment = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user)
+     comment = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id ASC", :include => :user)
      document = RTF::Document.new(Font.new(Font::ROMAN, 'Times New Roman'))
         document.paragraph do |p|
           #p << "header"
