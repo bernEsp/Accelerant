@@ -16,12 +16,12 @@ msg = imap.fetch(message_id,'RFC822')[0].attr['RFC822']
 mail = TMail::Mail.parse(msg)
 
 
-#body = mail.body
-if mail.body_plain.nil?
-  body = mail.body_html
-else
-  body = mail.body_plain
-end
+body = mail.body
+#if mail.body_plain.nil?
+#  body = mail.body_html
+#else
+#  body = mail.body_plain
+#end
 subject = mail.subject
 from = mail.from
 

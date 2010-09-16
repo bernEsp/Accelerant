@@ -33,7 +33,7 @@ end
 
 require 'action_mailer/vendor'
 require 'tmail'
-require 'action_mailer/tmail_mail_extension'
+#require 'action_mailer/tmail_mail_extension'
 
 require 'action_mailer/base'
 require 'action_mailer/helpers'
