@@ -91,7 +91,7 @@ class CommentController < ApplicationController
             @replies.each do |d|
               #p << ['Reply-->' + d.content,d.user.name,d.user.login,Date.parse(d.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(d.created_at.to_s).strftime("%I:%M:%S")]
               p.italic << "#{d.user.name} replied: "
-              p << "#{d.content}"
+              p << "#{d.content.gsub(/<\/?[^>]*>/,  "")}"
               p.line_break
               p.line_break
           end

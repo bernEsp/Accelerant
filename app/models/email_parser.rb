@@ -15,8 +15,13 @@ imap.search(["NOT", "DELETED"]).each do |message_id|
 msg = imap.fetch(message_id,'RFC822')[0].attr['RFC822']
 mail = TMail::Mail.parse(msg)
 
-body = mail.body
-#body = mail.body_plain
+
+#body = mail.body
+if mail.body_plain.nil?
+  body = mail.body_html
+else
+  body = mail.body_plain
+end
 subject = mail.subject
 from = mail.from
 
