@@ -58,7 +58,7 @@ class CommentController < ApplicationController
             #puts created
             c.comment = c.comment.gsub(/<\/?[^>]*>/,  "")
             title << [c.comment,c.user.name,c.user.login,Date.parse(c.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(c.created_at.to_s).strftime("%I:%M:%S")]
-            @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id DESC", :include => :user)
+            @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id ASC", :include => :user)
             @replies.each do |d|
               title << ['Reply-->' + d.content,d.user.name,d.user.login,Date.parse(d.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(d.created_at.to_s).strftime("%I:%M:%S")]
             end
@@ -87,7 +87,7 @@ class CommentController < ApplicationController
             p.bold << "#{c.comment}"
             p.italic << " -#{c.user.name}"
             p.line_break
-        @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id DESC", :include => :user)
+        @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id ASC", :include => :user)
             @replies.each do |d|
               #p << ['Reply-->' + d.content,d.user.name,d.user.login,Date.parse(d.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(d.created_at.to_s).strftime("%I:%M:%S")]
               p.italic << "#{d.user.name} replied: "
