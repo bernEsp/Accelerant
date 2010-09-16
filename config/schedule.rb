@@ -21,6 +21,6 @@
 
 set :output, "~/public_html/accelerant/current/log/cron_log.log"
 
-every 20.minutes do
+every 1.minutes do
   runner "EmailParser.check_inbound"
 end
