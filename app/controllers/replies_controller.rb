@@ -21,10 +21,15 @@ class RepliesController < ApplicationController
 
   def create
     @discussion = Discussion.find(params[:reply][:discussion_id])
+    if @discussion.character_minimum.nil?
+      charMin = 0
+    else
+      charMin = @discussion.character_minimum
+    end
     #puts params[:reply][:content].length
     #puts (@discussion.character_minimum != 0)
     #puts (params[:reply][:content].length >= @discussion.character_minimum)
-    if (@discussion.character_minimum == 0) || ((@discussion.character_minimum != 0 && params[:reply][:content].length >= @discussion.character_minimum))
+    if (charMin == 0) || ((charMin != 0 && params[:reply][:content].length >= charMin))
       @reply = Replies.new(params[:reply])
       @reply.save
       #@comment = Comment.find(@reply.comment_id)
@@ -52,7 +57,7 @@ class RepliesController < ApplicationController
       #render :text => "Response is too short.  Must be #{@discussion.character_minimum} characters minimum."
       responds_to_parent do
         render :update do |page|
-          page << "document.getElementById('subCommentForm#{params[:reply][:comment_id]}').innerHTML = 'Response is too short.  Must be #{@discussion.character_minimum} characters minimum.';"
+          page << "document.getElementById('subCommentForm#{params[:reply][:comment_id]}').innerHTML = 'Response is too short.  Must be #{charMin} characters minimum.';"
         end
       end
     end
