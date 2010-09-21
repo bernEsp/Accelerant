@@ -44,12 +44,15 @@ class RepliesController < ApplicationController
           #@gunk = @reply.content.gsub(/<\/?[^>]*>/,  "")
           @gunk = @gunk.gsub(/"/,  " ")
           @gunk = @gunk.gsub(/'/,  " ")
+          @gunk = @gunk.dump
+          #@gunk = @gunk.gsub("/r",  " ")
+          #@gunk = @gunk.gsub("/n",  " ")
           #@gunk = simple_format(@gunk)
           #page << "document.getElementById('subCommentForm#{params[:reply][:comment_id]}').innerHTML = '#{@reply.content}';"
           #page << "document.getElementById('subCommentForm#{params[:reply][:comment_id]}').innerHTML = 'Comment posted... Thank you!';"
           page << "document.getElementById('subCommentForm#{params[:reply][:comment_id]}').innerHTML = '#{@gunk}';"
           #page << "document.getElementById('subCommentForm#{@reply.comment_id}').innerHTML = '#{gunk}"
-          #puts @gunk
+          puts @gunk
         end
       end
       
