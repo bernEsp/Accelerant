@@ -31,7 +31,8 @@ if @emailing_user
 
 
   comment = Comment.new()
-  comment.comment = body.gsub(/<\/?[^>]*>/,  "")
+  #comment.comment = body.gsub(/<\/?[^>]*>/,  "")
+  comment.comment = body
   comment.user_id = @emailing_user.id
   if ! mail.attachments.blank?
     #File.open(mail.attachments.first.original_filename, 'rb') { |attachment| comment.photo = attachment }
