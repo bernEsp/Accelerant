@@ -1,5 +1,5 @@
 class Sortableitems < ActiveRecord::Base
-
+acts_as_list
 has_attached_file :image,
   :whiny => false,
   :whiny_thumbnails => false,

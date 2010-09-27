@@ -394,3 +394,6 @@ img {
      position: fixed;
      top: -500px;
  }
+
+ li .handle
+ {cursor:move;}

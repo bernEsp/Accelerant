@@ -51,7 +51,22 @@
 <%= f.check_box :lock %> This project is locked
 </p>
 
-  
+<fieldset>
+<legend>Sortable Lists</legend>
+<% unless @sortables.nil? %>
+
+<% for sortable in @sortables %>
+<%= link_to "Add a new list", :controller => "sortables", :action => "new", :id => params[:id] %><br/>
+  <%= sortable.title %>
+&nbsp;<%= link_to "Edit", :controller => "sortables", :action => "edit", :id => sortable.id %>
+&nbsp;<%= link_to "View", :controller => "sortables", :action => "show", :id => sortable.id %>
+<br/>
+<% end %>
+
+<% else %>
+  <%= link_to "Create a sortbale list", :controller => "sortables", :action => "new", :id => params[:id] %>
+<% end %>
+</fieldset>
 <p><%= submit_tag 'Enter' %></p>
 <% end -%>
 </div>

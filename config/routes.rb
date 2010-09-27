@@ -18,6 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   map.importer '/importer', :controller => 'importer', :action => 'index'
   map.resources :users
   map.resources :themes, :belongs_to => :project
+  map.resources :sortableitems, :collection => {:sort => :post}
+  map.resources :sortables, :collection => {:sort => :post}
 
   map.resource :session
   

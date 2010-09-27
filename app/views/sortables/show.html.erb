@@ -1,0 +1,15 @@
+<h1 class="lower"><%=  @sortable.title %></h1>
+
+<ul id="sortables">
+  <% for sortableitems in @sortableitems %>
+  
+  <% content_tag_for :li, sortableitems do %>
+  <span class="handle">
+    <%= sortableitems.description %>
+  </span>
+  <% end %>
+  
+  <% end %>
+
+</ul>
+<%= sortable_element("sortables", :url => sort_sortableitems_path, :handle => "handle") %>

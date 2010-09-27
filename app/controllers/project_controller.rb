@@ -29,6 +29,7 @@ class ProjectController < ApplicationController
   
   def edit
     @this_project = Project.find(params[:id])
+    @sortables = Sortables.find_all_by_project_id(params[:id])
   end
   
   def update
