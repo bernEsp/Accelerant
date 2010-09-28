@@ -26,7 +26,7 @@
                    <% content_tag_for :li, usersortable do %>
                     <span class="handle2">
                     <%  if Sortableitems.find(usersortable.sortableitem).image %>
-                      <%= image_tag Sortableitems.find(usersortable.sortableitem).image.url(:size100) %>
+                      <%= image_tag Sortableitems.find(usersortable.sortableitem).image.url(:size100), :style => "vertical-align:middle;" %>
                     <% end %>
                     <%= Sortableitems.find(usersortable.sortableitem).description %>
                     </span>

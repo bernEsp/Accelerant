@@ -10,7 +10,7 @@ participants will be dragging and dropping.  Go ahead and try it!</p>
   <% content_tag_for :li, sortableitems do %>
   <span class="handle" >
         <%  if sortableitems.image %>
-      <%= image_tag sortableitems.image.url(:size100) %>
+      <%= image_tag sortableitems.image.url(:size100), :style => "vertical-align:middle;" %>
     <% end %>
     <span ><%= sortableitems.description %></span>
   </span>
