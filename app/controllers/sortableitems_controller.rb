@@ -2,7 +2,7 @@ class SortableitemsController < ApplicationController
 
   #before_filter :login_required
   if ENV['RAILS_ENV'] == 'production'
-    #ssl_required :index, :new, :create, :edit, :update, :show, :destroy
+    ssl_required :index, :new, :create, :edit, :update, :show, :destroy, :sort
   end
 
   def new
