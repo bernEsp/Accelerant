@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100927210742) do
+ActiveRecord::Schema.define(:version => 20100928155824) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20100927210742) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sortable"
   end
 
   create_table "attribute_tags", :force => true do |t|
@@ -116,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20100927210742) do
     t.integer  "media_file_size"
     t.datetime "media_updated_at"
     t.integer  "character_minimum",  :default => 0
+    t.integer  "sortable"
   end
 
   create_table "email_parsers", :force => true do |t|
@@ -290,6 +292,15 @@ ActiveRecord::Schema.define(:version => 20100927210742) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "usersortables", :force => true do |t|
+    t.integer  "sortable"
+    t.integer  "sortableitem"
+    t.integer  "user"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "wysihat_files", :force => true do |t|
     t.string   "file_file_name"

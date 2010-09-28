@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resources :themes, :belongs_to => :project
   map.resources :sortableitems, :collection => {:sort => :post}
+  map.resources :usersortables, :collection => {:sort => :post}
   map.resources :sortables, :collection => {:sort => :post}
 
   map.resource :session

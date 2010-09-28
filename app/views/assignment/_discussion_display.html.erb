@@ -19,6 +19,21 @@
 			<p><a href='<%=discussions.media.url%>' target="_blank">View attached file here.</a><%= image_tag "download.png"%></p>
 		<% end %>
 		<% end %>
+                <% unless discussions.sortable.nil? %>
+                  <ul id="usersortables">
+                  <% for usersortable in @usersortables %>
+
+                   <% content_tag_for :li, usersortable do %>
+                    <span class="handle2">
+                    <%= Sortableitems.find(usersortable.sortableitem).description %>
+                    </span>
+                  <% end %>
+
+                <% end %>
+
+</ul>
+<%= sortable_element("usersortables", :url => sort_usersortables_path, :handle => "handle2") %>
+                <% end %>
   </div>
           <% if self.current_user.admin || self.current_user.moderator %>
   <%= link_to "Edit", {:controller => "discussion", :id => discussions.id, :action => 'edit'} %> |

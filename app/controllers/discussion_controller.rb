@@ -46,6 +46,23 @@ class DiscussionController < ApplicationController
     else
       @discussion = Discussion.find(params[:id])
     end
+    unless @discussion.sortable.nil?
+    @sortable = Sortables.find(@discussion.sortable)
+    unless @sortable.nil?
+      @usersortables = Usersortables.find_all_by_sortable(@sortable.id, :conditions => {:user => self.current_user.id}, :order => "position ASC" )
+      if @usersortables.empty?
+        @sortableitems = Sortableitems.find_all_by_sortables(@sortable.id)
+        for sortableitem in @sortableitems
+          @newusersortable = Usersortables.new
+          @newusersortable.user = self.current_user.id
+          @newusersortable.sortableitem = sortableitem.id
+          @newusersortable.sortable = sortableitem.sortables
+          @newusersortable.save
+          @usersortables = Usersortables.find_all_by_sortable(@sortable.id, :conditions => {:user => self.current_user.id}, :order => "position ASC" )
+        end
+      end
+    end
+    end
   end
 
   def edit
