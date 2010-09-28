@@ -53,7 +53,7 @@
 
 <fieldset>
 <legend>Sortable Lists</legend>
-<% unless @sortables.nil? %>
+<% unless @sortables.empty? %>
 
 <% for sortable in @sortables %>
 <%= link_to "Add a new list", :controller => "sortables", :action => "new", :id => params[:id] %><br/>
@@ -64,7 +64,8 @@
 <% end %>
 
 <% else %>
-  <%= link_to "Create a sortbale list", :controller => "sortables", :action => "new", :id => params[:id] %>
+
+  <%= link_to "Create a sortable list", :controller => "sortables", :action => "new", :id => params[:id] %>
 <% end %>
 </fieldset>
 <p><%= submit_tag 'Enter' %></p>
