@@ -20,11 +20,14 @@
 		<% end %>
 		<% end %>
                 <% unless discussions.sortable.nil? %>
-                  <ul id="usersortables">
+                  <ul id="usersortables" style="clear:left;margin-left:50px;list-style:none;">
                   <% for usersortable in @usersortables %>
 
                    <% content_tag_for :li, usersortable do %>
                     <span class="handle2">
+                    <%  if Sortableitems.find(usersortable.sortableitem).image %>
+                      <%= image_tag Sortableitems.find(usersortable.sortableitem).image.url(:size100) %>
+                    <% end %>
                     <%= Sortableitems.find(usersortable.sortableitem).description %>
                     </span>
                   <% end %>

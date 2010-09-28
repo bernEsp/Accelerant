@@ -395,10 +395,15 @@ img {
      top: -500px;
  }
 
- li .handle
- {cursor:move;}
+ li .handle {
+     cursor:move;
+     margin:40px 0;
+     padding:40px 0;
+     line-height:10em;
+ }
 
   li .handle2 {
       cursor:move;
       list-style:none;
+      line-height:10em;
   }
