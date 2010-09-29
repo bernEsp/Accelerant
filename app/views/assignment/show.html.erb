@@ -22,7 +22,7 @@
     <%= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
   <% else %>
     <% @disctester =  CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id}) %>
-    <% unless @disctester.nil? %>
+    <% unless @disctester.empty? %>
     <% discussion = Discussion.find(:last, :conditions => {:id => @disctester.discussion_id}) %>
     <% end %>
     <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
