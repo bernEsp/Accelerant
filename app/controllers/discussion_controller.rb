@@ -67,12 +67,29 @@ class DiscussionController < ApplicationController
   end
 
   def edit
+    
     @discussion = Discussion.find(params[:id])
+    @project_members = UserAssignments.find(:all, :conditions => {:project_id => @discussion.project_id}, :include => :user)
   end
 
   def update
      @discussion = Discussion.find(params[:id])
      @discussion.update_attributes(params[:discussion])
+         #new stuff
+      if self.current_user.admin? || self.current_user.moderator?
+      @user_assignments = params[:comment_assignment]
+      if @user_assignments
+        @these_keys = @user_assignments.keys
+        @user_assignments.each do |key, value|
+          #if value=="0"
+            if value !="0"
+            @comment_assignment = CommentAssignments.new
+            @comment_assignment.update_attributes(:user_id => key, :discussion_id => @discussion.id)
+            @comment_assignment.save
+          end
+      end
+      end
+    end
     redirect_to :controller => 'assignment', :action => 'show', :id => @discussion.project_id
   end
 

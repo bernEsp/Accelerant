@@ -1,7 +1,7 @@
 <p>&nbsp;</p>
 
 <div style="width:400px;float:left;">
-<% form_for @discussion, :html => { :multipart => true } do |f| -%>
+<% form_for @discussion, :html => { :id => "top_form" } do |f| -%>
 
 <p><%= label_tag 'Discussion title:' %><br/>
 <%= f.text_field :title %>
@@ -11,14 +11,28 @@
 <%= f.text_area :content, :size => "60 x 20", :class => 'rich_text_editor' %>
 </p>
 
-
+<!--
 <p>
-	<% if @discussion.media_content_type %>
-		<%= image_tag @this_project.media.url(:small) %>
-	<% end %>
+	<%# if @discussion.media_content_type %>
+		<%#= image_tag @this_project.media.url(:small) %>
+	<% #end %>
 	Upload File:<br/>
-	<%= f.file_field :media %>
+	<%#= f.file_field :media %>
 </p>
+-->
+
+<input id="check_all" name="check_all" type="checkbox" onclick="Form.getInputs('top_form', 'checkbox').each(function(box){box.checked = $('check_all').checked})" /> <strong>Select All</strong><br/><br/>
+	<% for participant in @project_members %>
+        <% if participant.user %>
+		<div class="cellClass150"><%= check_box("comment_assignment", participant.user.id, {}, "#{participant.user.id}") %>
+                <% if !participant.user %>
+                  &nbsp;
+                <% else %>
+                  <%= participant.user.name %>
+                <% end %>
+                &nbsp;&nbsp;</div>
+        <% end  %>
+	<% end %>
 
 
 <p><%= submit_tag 'Update' %></p>
