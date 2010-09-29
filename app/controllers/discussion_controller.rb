@@ -25,7 +25,8 @@ class DiscussionController < ApplicationController
       if @user_assignments
         @these_keys = @user_assignments.keys
         @user_assignments.each do |key, value|
-          if value=="0"
+          #if value=="0"
+            if value !="0"
             @comment_assignment = CommentAssignments.new
             @comment_assignment.update_attributes(:user_id => key, :discussion_id => @discussion.id)
             @comment_assignment.save

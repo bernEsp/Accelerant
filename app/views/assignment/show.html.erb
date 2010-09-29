@@ -9,7 +9,8 @@
   <% if discussion %>
   <% cookies[:discussion_id] = {:value => "#{discussion.id}", :expires => Time.now + 3600} %>
   <div id="discussion<%= discussion.id %>"  ><br/>
-  
+  <% @disctest =  CommentAssignments.find(:all, :conditions => {:user_id => self.current_user.id, :discussion_id => discussion.id}) %>
+  <% unless @disctest.empty? && self.current_user.participant %>
   <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
 
   <% if !self.current_user.client && !@project.lock %>
@@ -19,7 +20,19 @@
   <% end  %>
 
     <%= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
+  <% else %>
+    <% @disctester =  CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id}) %>
+    <% discussion = Discussion.find(:last, :conditions => {:id => @disctester.discussion_id}) %>
+    <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
 
+  <% if !self.current_user.client && !@project.lock %>
+
+    <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
+
+  <% end  %>
+
+    <%= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
+  <% end %>
 
 </div>
 <% end  %>
