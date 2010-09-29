@@ -21,19 +21,19 @@
 
     <%= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
   <% else %>
-    <% @disctester =  CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id}) %>
-    <% unless @disctester.empty? %>
-    <% discussion = Discussion.find(:last, :conditions => {:id => @disctester.discussion_id}) %>
-    <% end %>
-    <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
+    <% #@disctester =  CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id}) %>
+    <% #unless @disctester.nil? %>
+    <% #discussion = Discussion.find(:last, :conditions => {:id => @disctester.discussion_id}) %>
+    <% #end %>
+    <%#= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
 
-  <% if !self.current_user.client && !@project.lock %>
+  <% #if !self.current_user.client && !@project.lock %>
 
-    <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
+    <%#= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
 
-  <% end  %>
+  <% #end  %>
 
-    <%= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
+    <%#= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
   <% end %>
 
 </div>
