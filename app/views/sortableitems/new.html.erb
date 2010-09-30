@@ -9,7 +9,7 @@
   <% for previous in @previousitems %>
 
     <p>
-    <%  if previous.image %>
+    <%  unless previous.image.url == "" %>
       <%= image_tag previous.image.url(:size50) %>
     <% end %>
     <%= previous.description %></p>
