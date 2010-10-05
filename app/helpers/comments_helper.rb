@@ -23,8 +23,8 @@ module CommentsHelper
 		if comment.photo_content_type
       if comment.photo_content_type =~ /image.*/
         #out = out + "<a href='#{comment.photo.url}' class='MagicThumb' rel='buttons:hide' target='_blank' >"
-        #out = out + "<a href='#{comment.photo.url}' target='_blank' >"
-        out = out + "<a href='#{comment.photo.url}' rel='zoombox' >"
+        out = out + "<a href='#{comment.photo.url}' target='_blank' >"
+        #out = out + "<a href='#{comment.photo.url}' rel='zoombox' >"
         out = out + image_tag(comment.photo.url(:thumb), :style => 'margin-left:1px;')
         out = out + "<span>&nbsp;</span>"
         out = out + "</a>"
