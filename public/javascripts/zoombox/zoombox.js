@@ -3,6 +3,7 @@
 	Author: Jonathan Boyer (http://www.grafikart.fr)
 	Version: 1.1
 ------------------------------------------------------------------------- */
+J = jQuery.noConflict();
 zoombox = {
 	/***************************************
 	 *
@@ -119,30 +120,30 @@ zoombox = {
 	 * Init the box binding "click" on every links with rel="zoombox and doing some cool stuff
 	 * */
 	init : function(){
-		$(zoombox.bindable).each(function(){
-			$(this).unbind('click');
+		J(zoombox.bindable).each(function(){
+			J(this).unbind('click');
 		});
 		zoombox.images = new Array();	  // Array used to stock the "gallery"
-		$(zoombox.bindable).each(function(){
-			var gallery = zoombox.galleryRegExp.exec($(this).attr("rel"));
+		J(zoombox.bindable).each(function(){
+			var gallery = zoombox.galleryRegExp.exec(J(this).attr("rel"));
 			if(!zoombox.images[gallery]){
 				zoombox.images[gallery]=new Array();
 			}
-			zoombox.images[gallery].push($(this));
+			zoombox.images[gallery].push(J(this));
 			
 			//We bind click on every elements
-			$(this).bind('click',function(){
-				zoombox.click($(this));
+			J(this).bind('click',function(){
+				zoombox.click(J(this));
 				return false;
 			});
 		});
 		// We unbind everything before avoiding bind x2
-		$(window).unbind('resize',zoombox.resize);
-		$(window).unbind('scroll',zoombox.resize);
-		$(document).unbind('keyup',zoombox.keyboard);
-		$(window).resize(zoombox.resize);
-		$(window).scroll(zoombox.resize);
-		$(document).keyup(zoombox.keyboard);
+		J(window).unbind('resize',zoombox.resize);
+		J(window).unbind('scroll',zoombox.resize);
+		J(document).unbind('keyup',zoombox.keyboard);
+		J(window).resize(zoombox.resize);
+		J(window).scroll(zoombox.resize);
+		J(document).keyup(zoombox.keyboard);
 	},
 	
 	/**
@@ -152,7 +153,7 @@ zoombox = {
 		zoombox.gallery=zoombox.galleryRegExp.exec(div.attr("rel"));	// The current Gallery
 		// The position of the image in the current Gallery
 		for (var i = 0; i < zoombox.images[zoombox.gallery].length; i++){
-			if($(zoombox.images[zoombox.gallery][i]).html()  == div.html() && $(zoombox.images[zoombox.gallery][i]).attr("href") == div.attr("href") ){
+			if(J(zoombox.images[zoombox.gallery][i]).html()  == div.html() && J(zoombox.images[zoombox.gallery][i]).attr("href") == div.attr("href") ){
 				zoombox.position=i;
 				break;
 			}
@@ -211,8 +212,8 @@ zoombox = {
 		    img=new Image();
 			img.src=zoombox.url;
 			zoombox.type="img";
-			$("body").append('<div id="zoombox_loader"></div>');
-			$("#zoombox_loader").css("marginTop",zoombox.scrollY());
+			J("body").append('<div id="zoombox_loader"></div>');
+			J("#zoombox_loader").css("marginTop",zoombox.scrollY());
 			zoombox.timer = window.setInterval("zoombox.loadImg(img)",100);
 			return false;
 		}
@@ -220,62 +221,62 @@ zoombox = {
 		
 		// Let's begin !!
 		// If there isn't already a zoombox opened
-		if(!$("#zoombox").length){
-			$("body").append(zoombox.themes[zoombox.theme]);	// We create the zoombox structure
+		if(!J("#zoombox").length){
+			J("body").append(zoombox.themes[zoombox.theme]);	// We create the zoombox structure
 			// We place the overlay
-			$("#zoombox_aplat").css({
+			J("#zoombox_aplat").css({
 				"height":zoombox.windowH(),
 				"width":zoombox.windowW()
 			});
 			// we find the width/height of the marges
-			if(zoombox.margesH==null){ zoombox.margesH = parseInt($("#zoombox_contener").css("paddingLeft")) + parseInt($("#zoombox_contener").css("paddingRight")) + parseInt($("#zoombox_contener").css("marginLeft")) + parseInt($("#zoombox_contener").css("marginRight")); }
-			if(zoombox.margesV==null){ zoombox.margesV = parseInt($("#zoombox_contener").css("paddingTop")) + parseInt($("#zoombox_contener").css("paddingBottom")) + parseInt($("#zoombox_contener").css("marginTop")) + parseInt($("#zoombox_contener").css("marginBottom")); }
+			if(zoombox.margesH==null){ zoombox.margesH = parseInt(J("#zoombox_contener").css("paddingLeft")) + parseInt(J("#zoombox_contener").css("paddingRight")) + parseInt(J("#zoombox_contener").css("marginLeft")) + parseInt(J("#zoombox_contener").css("marginRight")); }
+			if(zoombox.margesV==null){ zoombox.margesV = parseInt(J("#zoombox_contener").css("paddingTop")) + parseInt(J("#zoombox_contener").css("paddingBottom")) + parseInt(J("#zoombox_contener").css("marginTop")) + parseInt(J("#zoombox_contener").css("marginBottom")); }
 			
-			$("#zoombox_next").hide();				// We hide some elements, we'll display them later if ther are needed
-			$("#zoombox_prev").hide();
-			$("#zoombox_title").hide();
-			$(".zoombox_close").click(zoombox.close);		// We bind the "close" event
-			$("#zoombox_next").click(zoombox.next);		// We bind the "next" event
-			$("#zoombox_prev").click(zoombox.prev);		// We bind the "next" event
-			$("embed").css("visibility","hidden"); 			// embed and object elements can generate overflow problem so we hide them
-			$("object").css("visibility","hidden");
+			J("#zoombox_next").hide();				// We hide some elements, we'll display them later if ther are needed
+			J("#zoombox_prev").hide();
+			J("#zoombox_title").hide();
+			J(".zoombox_close").click(zoombox.close);		// We bind the "close" event
+			J("#zoombox_next").click(zoombox.next);		// We bind the "next" event
+			J("#zoombox_prev").click(zoombox.prev);		// We bind the "next" event
+			J("embed").css("visibility","hidden"); 			// embed and object elements can generate overflow problem so we hide them
+			J("object").css("visibility","hidden");
 			if(zoombox.gallery){
 				if(zoombox.position<zoombox.images[zoombox.gallery].length-1){
-					$("#zoombox_next").show();
+					J("#zoombox_next").show();
 				}
 				if(zoombox.position>0){
-					$("#zoombox_prev").show();
+					J("#zoombox_prev").show();
 				}
 			}
 			// We animate the black overlay
-			$('#zoombox_aplat').css({'opacity': 0});
-			$('#zoombox_aplat').fadeTo(zoombox.duration,zoombox.maskOpacity);
+			J('#zoombox_aplat').css({'opacity': 0});
+			J('#zoombox_aplat').fadeTo(zoombox.duration,zoombox.maskOpacity);
 			// We adjust Two parameters that calculate the initial position of the box adding box margin
 			if(zoombox.inCSS!=null){
-				zoombox.inCSS.left-=parseInt($("#zoombox_contener").css("paddingLeft"))+parseInt($("#zoombox_contener").css("marginLeft"));
-				zoombox.inCSS.top-=parseInt($("#zoombox_contener").css("paddingTop"))+parseInt($("#zoombox_contener").css("marginTop"));
+				zoombox.inCSS.left-=parseInt(J("#zoombox_contener").css("paddingLeft"))+parseInt(J("#zoombox_contener").css("marginLeft"));
+				zoombox.inCSS.top-=parseInt(J("#zoombox_contener").css("paddingTop"))+parseInt(J("#zoombox_contener").css("marginTop"));
 			}
 			var boxBeginCSS = zoombox.inCSS;
 		}
 		// If there is already a zoombox it's because we want a cool transition, so let's make some change.
 		else{
-			$("#zoombox_title span").empty();
-			$("#zoombox_content").empty();				
+			J("#zoombox_title span").empty();
+			J("#zoombox_content").empty();
 
 			var boxBeginCSS = {
-				"width":$("#zoombox_contener").css("width"),
-				"height":$("#zoombox_contener").css("height"),
-				"top":$("#zoombox_contener").css("top"),
-				"left":$("#zoombox_contener").css("left")
+				"width":J("#zoombox_contener").css("width"),
+				"height":J("#zoombox_contener").css("height"),
+				"top":J("#zoombox_contener").css("top"),
+				"left":J("#zoombox_contener").css("left")
 			}
 			var transition = true;
 		}
 		
 		var content = zoombox.getContent(zoombox.url);					// What we want to insert
-		if(zoombox.type=="img"){ $("#zoombox_content").append(content); }		// If it's an image we inset NOW
-		if(transition){ $("#zoombox_content img").hide(); }					// If it's a transition (next or prev) we hide the image for a fadeIn
-		if(zoombox.title && zoombox.title!="" && zoombox.title!=null){ $("#zoombox_title span").append(zoombox.title); $("#zoombox_title").show();   }  // Do we have a title ?
-		else{ $("#zoombox_title").hide();	$("#zoombox_titlel").hide();	$("#zoombox_title").hide(); }// The box won't fit in the window
+		if(zoombox.type=="img"){ J("#zoombox_content").append(content); }		// If it's an image we inset NOW
+		if(transition){ J("#zoombox_content img").hide(); }					// If it's a transition (next or prev) we hide the image for a fadeIn
+		if(zoombox.title && zoombox.title!="" && zoombox.title!=null){ J("#zoombox_title span").append(zoombox.title); J("#zoombox_title").show();   }  // Do we have a title ?
+		else{ J("#zoombox_title").hide();	J("#zoombox_titlel").hide();	J("#zoombox_title").hide(); }// The box won't fit in the window
 		if(zoombox.allowOverflow==false && (zoombox.height+120)>zoombox.windowH()){
 			zoombox.width=zoombox.width*((zoombox.windowH()-120)/zoombox.height);
 			zoombox.height=(zoombox.windowH()-120);
@@ -295,21 +296,21 @@ zoombox = {
 
 		//Do we want animation ? 
 		if(zoombox.animateOpening==false && transition !=true){
-			$("#zoombox_contener").css(cssProp);
-			$('#zoombox_contener').hide();
-			$('#zoombox_contener').show();
-			$("#zoombox_content").empty().append(content);
+			J("#zoombox_contener").css(cssProp);
+			J('#zoombox_contener').hide();
+			J('#zoombox_contener').show();
+			J("#zoombox_content").empty().append(content);
 			zoombox.working = false;
 		}
 		else{
-			$("#zoombox_contener").css(boxBeginCSS);
-			$("#zoombox_contener").animate(cssProp,zoombox.duration,function(){
+			J("#zoombox_contener").css(boxBeginCSS);
+			J("#zoombox_contener").animate(cssProp,zoombox.duration,function(){
 				zoombox.working = false;
 				if(zoombox.type=="img"){
-					$("#zoombox_content img").fadeIn(zoombox.duration/2);
+					J("#zoombox_content img").fadeIn(zoombox.duration/2);
 				}
 				else{
-					$("#zoombox_content").empty().append(content);
+					J("#zoombox_content").empty().append(content);
 				}
 			});
 		}
@@ -321,25 +322,25 @@ zoombox = {
 	close : function(){
 		window.clearInterval(zoombox.timer);
 		// To avoid lags we remove the content before animation if it isn't an image
-		if(zoombox.type!="img"){	$("#zoombox_content").empty();	}	
+		if(zoombox.type!="img"){	J("#zoombox_content").empty();	}
 		if(zoombox.animateOpening==true){
 			zoombox.inCSS.opacity = 0; 
-			$("#zoombox_contener").animate(zoombox.inCSS,zoombox.duration);
+			J("#zoombox_contener").animate(zoombox.inCSS,zoombox.duration);
 		}
 		else{
-			$("#zoombox_contener").remove();
+			J("#zoombox_contener").remove();
 		}
-		$("#zoombox_aplat").animate({"opacity":0},zoombox.duration,zoombox.remove);
+		J("#zoombox_aplat").animate({"opacity":0},zoombox.duration,zoombox.remove);
 	},
 	
 	/**
 	 * Destroy the zoombox structure
 	 * */
 	remove : function(){
-		$("#zoombox").remove();
-		$("#zoombox_loader").remove();
-		$("embed").css("visibility","visible");  // embed and object elements can generate overflow problem so we hide them
-		$("object").css("visibility","visible");
+		J("#zoombox").remove();
+		J("#zoombox_loader").remove();
+		J("embed").css("visibility","visible");  // embed and object elements can generate overflow problem so we hide them
+		J("object").css("visibility","visible");
 	},
 	
 	/**
@@ -349,14 +350,14 @@ zoombox = {
 		// The new CSS for the box, final position
 		var topPos = (zoombox.windowH() - zoombox.height - zoombox.margesV)/2 + zoombox.scrollY();
 		var leftPos = (zoombox.windowW() - zoombox.width - zoombox.margesH)/2;
-		$("#zoombox_contener").css("left",leftPos);
+		J("#zoombox_contener").css("left",leftPos);
 		// We place the overlay
-		$("#zoombox_aplat").css({
+		J("#zoombox_aplat").css({
 			"height":zoombox.windowH(),
 			"width":zoombox.windowW()
 		});
 		// Do we fix the box ?
-		if(zoombox.fixed){	$("#zoombox_contener").css("top",topPos);	}
+		if(zoombox.fixed){	J("#zoombox_contener").css("top",topPos);	}
 	},
 	
 	/**
@@ -381,10 +382,10 @@ zoombox = {
 		if(zoombox.gallery!=null){
 			zoombox.position++;
 			if(zoombox.position==zoombox.images[zoombox.gallery].length-1){
-				$("#zoombox_next").fadeOut();
+				J("#zoombox_next").fadeOut();
 			}
-			if($("#zoombox_prev").is(":hidden")){
-				$("#zoombox_prev").fadeIn();
+			if(J("#zoombox_prev").is(":hidden")){
+				J("#zoombox_prev").fadeIn();
 			}
 			zoombox.click(zoombox.images[zoombox.gallery][zoombox.position]);
 		}
@@ -398,10 +399,10 @@ zoombox = {
 		if(zoombox.gallery!=null){
 			zoombox.position--;
 			if(zoombox.position==0){
-				$("#zoombox_prev").fadeOut();
+				J("#zoombox_prev").fadeOut();
 			}
-			if($("#zoombox_next").is(":hidden")){
-				$("#zoombox_next").fadeIn();
+			if(J("#zoombox_next").is(":hidden")){
+				J("#zoombox_next").fadeIn();
 			}
 			zoombox.click(zoombox.images[zoombox.gallery][zoombox.position]);
 		}
@@ -416,19 +417,19 @@ zoombox = {
 				zoombox.loaded=true;
 				zoombox.width=img.width;
 				zoombox.height=img.height;
-				$('#zoombox_loader').remove();
+				J('#zoombox_loader').remove();
 				// There is already an img in the content, FADE OUT !!
-				if($('#zoombox_content img').length){
-					$('#zoombox_content img').fadeOut(zoombox.duration/2,function(){$('#zoombox_content').empty(); zoombox.open();})
+				if(J('#zoombox_content img').length){
+					J('#zoombox_content img').fadeOut(zoombox.duration/2,function(){J('#zoombox_content').empty(); zoombox.open();})
 				}
 				else{
-					$('#zoombox_content').empty();
+					J('#zoombox_content').empty();
 					zoombox.open();
 				}
 			}	
 			// On anim le loader
 			if(typeof(j)=='undefined'){j=0;}
- 			$('#zoombox_loader').css({'background-position': "0px "+j+"px"});
+ 			J('#zoombox_loader').css({'background-position': "0px "+j+"px"});
 			j=j-40;
 			if(j<(-440)){j=0;}
 	},
@@ -523,7 +524,7 @@ zoombox = {
 	* */
 	windowH : function(){
 		if (window.innerHeight) return window.innerHeight  ;
-		else{return $(window).height();}
+		else{return J(window).height();}
 	},
 	
 	/**
@@ -531,7 +532,7 @@ zoombox = {
 	 * */
 	windowW : function(){
 		if (window.innerWidth) return window.innerWidth  ;
-		else{return $(window).width();}
+		else{return J(window).width();}
 	},
 	
 	/**
@@ -571,6 +572,6 @@ zoombox = {
 	}
 };
 
-$(document).ready(function(){
+J(document).ready(function(){
 	zoombox.init();
 });
