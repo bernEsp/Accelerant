@@ -21,6 +21,9 @@ class MyaccountController < ApplicationController
     else
       flash[:notice] = "Update Failed"
     end
+    if self.current_user.moderator
+      redirect_to "/moderator"
+    end
      redirect_to "/myaccount/edit"
   end
   

@@ -60,6 +60,7 @@
   <%= sortable.title %>
 &nbsp;<%= link_to "Edit", :controller => "sortables", :action => "edit", :id => sortable.id %>
 &nbsp;<%= link_to "View", :controller => "sortables", :action => "show", :id => sortable.id %>
+&nbsp;<%#= link_to "CSV Report", :controller => 'usersortables', :action => 'csv', :id => sortable.id, :format => 'csv' %>
 <br/>
 <% end %>
 

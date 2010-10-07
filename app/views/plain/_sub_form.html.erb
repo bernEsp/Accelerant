@@ -4,6 +4,8 @@
 <% if self.current_user.participant  %>
   <%= include_yui_editor_if_used %>
 <% end %>
+
+
 <div id="thisForm<%= params[:id]%>">
   
 <%  comment_num = Comment.find(params[:id])%>
