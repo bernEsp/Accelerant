@@ -83,4 +83,9 @@ Rails::Initializer.run do |config|
   #config.gem 'rtf', :lib => false, :source => 'http://rubygems.org/gems/'
   #config.gem 'wysihat-engine', :source => 'http://gemcutter.org'
   require 'tmail_extensions'
+
+  CGI::Session::ActiveRecordStore::Session.recent_activity_limit = 2.hours
+  CGI::Session::ActiveRecordStore::Session.hard_session_limit = 24.hours
+  CGI::Session::ActiveRecordStore::Session.auto_clean_sessions = 1000
+  ActionController::CgiRequest.ip_restriction = :subnet
 end
