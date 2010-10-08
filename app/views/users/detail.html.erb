@@ -26,6 +26,33 @@ end
 
 <div id="rightColumn">
 
+  <%
+  unless @usersortablestest.empty?
+    @sortable = Usersortables.find_all_by_user(params[:id], :group => :sortable)
+    %>
+  <% for sortable in @sortable %>
+  <h4>Sorting Exercise: <%= Sortables.find_by_id(sortable.sortable).title %></h4>
+    <% @usersortables = Usersortables.find(:all, :conditions => {:sortable => sortable.sortable, :user => params[:id]}, :order => :position) %>
+                  <ul id="usersortables" style="clear:left;margin-left:50px;list-style:none;">
+                  <% for usersortable in @usersortables %>
+
+                   <% content_tag_for :li, usersortable do %>
+                    <%= usersortable.position %>)&nbsp;
+                    <%  unless Sortableitems.find(usersortable.sortableitem).image.url == "" %>
+                      <%= image_tag Sortableitems.find(usersortable.sortableitem).image.url(:size100), :style => "vertical-align:middle;" %>
+                    <% end %>
+                    <%= Sortableitems.find(usersortable.sortableitem).description %>
+                    
+                  <% end %>
+
+                <% end %>
+
+                </ul>
+  <% end %>
+ <hr/>
+
+  <% end %>
+
 <% for comment in @these_comments do %>
 
 <div class="clientSubCommentText" >

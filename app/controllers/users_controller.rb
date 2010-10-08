@@ -152,7 +152,7 @@ class UsersController < ApplicationController
   # render new.rhtml
   
   def detail
-    
+    @usersortablestest = Usersortables.find_all_by_user(params[:id])
     @this_user = User.find(:last, :conditions => {:id => params[:id] })
     @assignments = UserAssignments.find(:all, :conditions => {:user_id => params[:id]})
     @these_comments = Comment.belongs_to_discussion.find(:all, :conditions => { :user_id => params[:id]})
@@ -162,9 +162,6 @@ class UsersController < ApplicationController
       @category = AttributeTags.find_last_by_project_id(@assignments.last.project_id)
     end
 
-    #unless @assignments.nil?
-      #@projects = Project.find(:last, :conditions => {:id => @assignments.project_id})
-    #end
   end
  
 end

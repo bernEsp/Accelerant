@@ -58,8 +58,23 @@ class DiscussionController < ApplicationController
           @newusersortable.user = self.current_user.id
           @newusersortable.sortableitem = sortableitem.id
           @newusersortable.sortable = sortableitem.sortables
+          if self.current_user.participant
+            @newusersortable.participant = true
+          else
+            @newusersortable.participant = false
+          end
           @newusersortable.save
           @usersortables = Usersortables.find_all_by_sortable(@sortable.id, :conditions => {:user => self.current_user.id}, :order => "position ASC" )
+        end
+        puts "didnt find none"
+      else
+        for usersorts in @usersortables
+          if self.current_user.participant
+            puts "woopee"
+            usersorts.participant = true
+            usersorts.save
+          end
+          puts "found some"
         end
       end
     end

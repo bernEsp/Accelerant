@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   named_scope :is_moderator, :conditions => {:moderator => true}
   named_scope :is_admin, :conditions => {:admin => true}
+  named_scope :is_participant, :conditions => {:participant => true}
 
   has_attached_file :avatar, 
   :whiny => false, 
