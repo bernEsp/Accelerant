@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   #before_filter :moderator_required, :only => [ :detail ]
 
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, :activate, :detail
+    ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, :activate, :detail, :showsessions
   end
 
   def index
@@ -163,5 +163,10 @@ class UsersController < ApplicationController
     end
 
   end
+
+  def showsessions
+    @sessions = Sessions.find(:all)
+  end
+
  
 end

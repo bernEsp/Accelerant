@@ -1,0 +1,9 @@
+
+<h4>Active Sessions </h4>
+<p>&nbsp;</p>
+<%  for session in @sessions %>
+  <%= session.id %>
+  <%= session.created_at %>
+  <%= session.updated_at %>
+<br/>
+<% end %>

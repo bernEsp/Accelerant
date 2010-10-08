@@ -83,6 +83,8 @@ class SessionsController < ApplicationController
     
   end
 
+
+
 protected
   # Track failed login attempts
   def note_failed_signin
