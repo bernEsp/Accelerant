@@ -21,13 +21,18 @@
           if cookies[k.to_sym].split('_')[0] == "field"
             testuser = User.find_by_id(comment.user.id,:conditions => cookies[:sql])
             if testuser.nil?
-              displayflag = false
+              if !User.is_participant.find_by_id(comment.user.id)
+                displayflag = true
+              else
+                displayflag = false
+              end
             else
-              displayflag = true
+                displayflag = true
             end
           end
         end
       end
+
 
 
 

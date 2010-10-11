@@ -89,7 +89,11 @@ module CommentsHelper
             #end
             testuser = User.find_by_id(replies.user.id,:conditions => cookies[:sql])
             if testuser.nil?
-              displayflag = false
+              if !User.is_participant.find_by_id(replies.user.id)
+                displayflag = true
+              else
+                displayflag = false
+              end
               #puts "no match"
             else
               displayflag = true
