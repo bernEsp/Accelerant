@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101026135028) do
+ActiveRecord::Schema.define(:version => 20101026135838) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -152,6 +152,13 @@ ActiveRecord::Schema.define(:version => 20101026135028) do
   create_table "groupables", :force => true do |t|
     t.text     "title"
     t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groupabletargets", :force => true do |t|
+    t.text     "description"
+    t.integer  "groupable"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
