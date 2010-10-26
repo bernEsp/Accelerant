@@ -2,7 +2,7 @@ class SortableitemsController < ApplicationController
 
   #before_filter :login_required
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :new, :create, :edit, :update, :show, :destroy, :sort
+    ssl_required :new, :create, :sort
   end
 
   def new
@@ -19,6 +19,7 @@ class SortableitemsController < ApplicationController
   def sort
     params[:sortables].each_with_index do |id, index|
       Sortableitems.update_all(['position=?', index+1], ['id=?', id])
+      # Update all Sortableitems to position=index+1 where id = id
     end
     render :nothing => true
   end

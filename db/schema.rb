@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101007202445) do
+ActiveRecord::Schema.define(:version => 20101026135028) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20101007202445) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sortable"
+    t.integer  "groupable"
   end
 
   create_table "attribute_tags", :force => true do |t|
@@ -118,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20101007202445) do
     t.datetime "media_updated_at"
     t.integer  "character_minimum",  :default => 0
     t.integer  "sortable"
+    t.integer  "groupable"
   end
 
   create_table "email_parsers", :force => true do |t|
@@ -133,6 +135,25 @@ ActiveRecord::Schema.define(:version => 20101007202445) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "read"
+  end
+
+  create_table "groupableitems", :force => true do |t|
+    t.text     "description"
+    t.integer  "groupables"
+    t.integer  "position"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groupables", :force => true do |t|
+    t.text     "title"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "moderators", :force => true do |t|
@@ -268,6 +289,15 @@ ActiveRecord::Schema.define(:version => 20101007202445) do
     t.integer  "height"
     t.integer  "parent_id"
     t.string   "thumbnail"
+  end
+
+  create_table "usergroupables", :force => true do |t|
+    t.integer  "groupable"
+    t.integer  "groupableitem"
+    t.integer  "user"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
