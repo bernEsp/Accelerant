@@ -69,6 +69,24 @@
   <%= link_to "Create a sortable list", :controller => "sortables", :action => "new", :id => params[:id] %>
 <% end %>
 </fieldset>
+
+<fieldset>
+<legend>Groupables</legend>
+<% unless @groupables.empty? %>
+
+<% for groupable in @groupables %>
+<%= link_to "Add a new list", :controller => "groupables", :action => "new", :id => params[:id] %><br/>
+  <%= groupable.title %>
+&nbsp;<%= link_to "Edit", :controller => "groupables", :action => "edit", :id => sortable.id %>
+&nbsp;<%= link_to "View", :controller => "groupables", :action => "show", :id => sortable.id %>
+<br/>
+<% end %>
+
+<% else %>
+
+  <%= link_to "Create a new groupable", :controller => "groupables", :action => "new", :id => params[:id] %>
+<% end %>
+</fieldset>
 <p><%= submit_tag 'Enter' %></p>
 <% end -%>
 </div>

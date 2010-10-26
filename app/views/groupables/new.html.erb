@@ -1,0 +1,21 @@
+<h1 class="lower">Create a New Sortable List</h1>
+<div style="width:400px;float:left;">
+<% form_for :groupables, @groupable,
+:url =>{:controller => 'groupables', :action => 'create' } do |f| -%>
+
+  <p><strong>Groupable lists</strong> are a way to present a user-friendly list which your participants can use to group their preferences
+  using a simple drag-and-drop interface.</p>
+
+  <p>To get started, give your groping a title.  This is for your reference only, so give it a title that will help you
+  remember the subject or content of this group (eg. "Your grouping exercise").</p>
+
+<p><%= label_tag 'title:' %><br/>
+<%= f.text_field :title %>
+<%= f.hidden_field :project_id, :value => params[:id] %>
+</p>
+
+
+<p>&nbsp;&nbsp;<%= link_to "Cancel", :controller => "project", :action => "edit", :id => params[:id] %>&nbsp;&nbsp;<%= submit_tag 'Next -->' %></p>
+
+<% end -%>
+</div>

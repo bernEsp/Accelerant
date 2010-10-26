@@ -1,0 +1,38 @@
+<h1 class="lower">Add a groupable item...</h1>
+<br/>
+<div style="width:400px;float:left;">
+
+  <% unless @previousitems.empty? %>
+    The following are already in the list...<br/>
+  <% end %>
+
+  <% for previous in @previousitems %>
+
+    <p>
+    <%  unless previous.image.url == "" %>
+      <%= image_tag previous.image.url(:size50) %>
+    <% end %>
+    <%= previous.description %></p>
+
+  <% end %>
+
+
+<% form_for :groupableitems, @groupableitems,
+  :html => { :multipart => true },
+:url =>{:controller => 'groupableitems', :action => 'create' } do |f| -%>
+
+
+<p><%= label_tag 'description:' %><br/>
+<%= f.text_field :description %>
+<%= f.hidden_field :groupables, :value => params[:id] %>
+</p>
+
+<p>
+	Image (optional):<br/>
+	<%= f.file_field :image %>
+</p>
+
+<p><%= submit_tag 'Add' %>&nbsp;&nbsp;<%= link_to "I'm done", :controller => "groupables", :action => "show", :id => params[:id] %></p>
+
+<% end -%>
+</div>
