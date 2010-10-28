@@ -33,6 +33,8 @@ class GroupablesController < ApplicationController
   def show
     @groupable = Groupables.find_by_id(params[:id])
     @groupableitems = Groupableitems.find_all_by_groupables(params[:id], :order => "position")
+
+    @groupabletargets = Groupabletargets.find_all_by_groupable(params[:id])
   end
 
 end

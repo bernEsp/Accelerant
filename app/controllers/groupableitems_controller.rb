@@ -20,10 +20,12 @@ class GroupableitemsController < ApplicationController
   end
 
   def group
-    params[:groupables].each_with_index do |id, index|
-      Groupableitems.update_all(['position=?', index+1], ['id=?', id])
+    #params[:groupables].each_with_index do |id, index|
+      puts params[:id].gsub('groupableitems_','')
+      puts params[:target]
+      #Groupableitems.update_all(['position=?', index+1], ['id=?', id])
       # Update all Sortableitems to position=index+1 where id = id
-    end
+    #end
     render :nothing => true
   end
 

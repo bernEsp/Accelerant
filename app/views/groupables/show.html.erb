@@ -1,5 +1,6 @@
 <h1 class="lower"><%=  @groupable.title %></h1>
 <br/>
+<h4>List</h4>
 <p>Here are the items in your list "<%=  @groupable.title %>" and these can actually be dragged and dropped in the same manner that your
 participants will be dragging and dropping.  Go ahead and try it!</p>
 <br/>
@@ -20,6 +21,17 @@ participants will be dragging and dropping.  Go ahead and try it!</p>
 
 </ul>
 </div>
-<div id="groupable_target" style="width:200px;height:200px;border:1px dotted #000;"></div>
+<div ></div>
+<h4>Targets</h4>
+<% for groupabletarget in @groupabletargets %>
 
-<%= drop_receiving_element("groupable_target", :url =>{ :controller => "cart", :action => "add" }) %>
+
+  <% div_for groupabletarget, :class => "targets" do %>
+      <%=  groupabletarget.description %>
+   <% end %>
+
+<%= drop_receiving_element("groupabletargets_#{groupabletarget.id}",
+  :hoverclass => 'hover',
+  :url =>{ :controller => "groupableitems", :action => "group", :target => groupabletarget.id }) %>
+
+<% end %>
