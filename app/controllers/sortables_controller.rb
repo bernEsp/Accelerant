@@ -27,7 +27,7 @@ class SortablesController < ApplicationController
     @sortable = Sortables.find_by_id(params[:sortables][:id])
     @sortable.update_attributes(params[:sortables])
     @sortable.save
-    redirect_to "/project/edit/#{@sortable.project_id}"
+    redirect_to "/sortableitems/new/#{@sortables.id}"
   end
 
   def show

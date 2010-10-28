@@ -77,8 +77,8 @@
 <% for groupable in @groupables %>
 <%= link_to "Add a new list", :controller => "groupables", :action => "new", :id => params[:id] %><br/>
   <%= groupable.title %>
-&nbsp;<%= link_to "Edit", :controller => "groupables", :action => "edit", :id => sortable.id %>
-&nbsp;<%= link_to "View", :controller => "groupables", :action => "show", :id => sortable.id %>
+&nbsp;<%= link_to "Edit", :controller => "groupables", :action => "edit", :id => groupable.id %>
+&nbsp;<%= link_to "View", :controller => "groupables", :action => "show", :id => groupable.id %>
 <br/>
 <% end %>
 

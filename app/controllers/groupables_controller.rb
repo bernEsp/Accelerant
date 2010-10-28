@@ -20,14 +20,14 @@ class GroupablesController < ApplicationController
   end
 
  def edit
-    @groupable = groupables.find_by_id(params[:id])
+    @groupable = Groupables.find_by_id(params[:id])
   end
 
   def update
-    @groupable = groupables.find_by_id(params[:groupables][:id])
+    @groupable = Groupables.find_by_id(params[:groupables][:id])
     @groupable.update_attributes(params[:groupables])
     @groupable.save
-    redirect_to "/project/edit/#{@groupable.project_id}"
+    redirect_to "/groupableitems/new/#{@groupable.id}"
   end
 
   def show

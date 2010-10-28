@@ -15,9 +15,11 @@ participants will be dragging and dropping.  Go ahead and try it!</p>
     <span ><%= groupableitems.description %></span>
   </span>
   <% end %>
-
+<%= draggable_element("groupableitems_#{groupableitems.id}", :revert => false) %>
   <% end %>
 
 </ul>
 </div>
-<%= sortable_element("groupables", :url => group_groupableitems_path, :handle => "handle") %>
+<div id="groupable_target" style="width:200px;height:200px;border:1px dotted #000;"></div>
+
+<%= drop_receiving_element("groupable_target", :url =>{ :controller => "cart", :action => "add" }) %>

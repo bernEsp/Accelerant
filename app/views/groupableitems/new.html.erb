@@ -35,4 +35,37 @@
 <p><%= submit_tag 'Add' %>&nbsp;&nbsp;<%= link_to "I'm done", :controller => "groupables", :action => "show", :id => params[:id] %></p>
 
 <% end -%>
+
+
+<h1 class="lower">Add targets...</h1>
+<p>Targets are where your GROUPABLE ITEMS get moved into...</p>
+<br/>
+
+
+  <% unless @previoustargets.empty? %>
+    The following targets are already in the list...<br/>
+  <% end %>
+
+  <% for previous in @previoustargets %>
+
+    <p>
+    <%= previous.description %>
+    </p>
+
+  <% end %>
+
+
+<% form_for :groupabletargets, @groupabletargets,
+:url =>{:controller => 'groupabletargets', :action => 'create' } do |f| -%>
+
+
+<p><%= label_tag 'description:' %><br/>
+<%= f.text_field :description %>
+<%= f.hidden_field :groupable, :value => params[:id] %>
+</p>
+
+
+<p><%= submit_tag 'Add' %>&nbsp;&nbsp;<%= link_to "I'm done", :controller => "groupables", :action => "show", :id => params[:id] %></p>
+
+<% end -%>
 </div>
