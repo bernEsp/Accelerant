@@ -27,6 +27,15 @@
   <%=  select("discussion", "sortable", Sortables.find(:all, :conditions => { :project_id => params[:id]}).collect {|p| [ p.title, p.id ] }, {:include_blank => 'Select...'}) %>
 </p>
 <% end %>
+
+<% @groupies = Groupables.find(:all, :conditions => { :project_id => params[:id]}) %>
+<% unless @groupies.empty? %>
+
+<p>
+  <%= label_tag 'A groupable list is available for this project.  If you wish to include it in this topic, select it here:' %><br/>
+  <%=  select("discussion", "sortable", Groupables.find(:all, :conditions => { :project_id => params[:id]}).collect {|p| [ p.title, p.id ] }, {:include_blank => 'Select...'}) %>
+</p>
+<% end %>
 	<input id="check_all" name="check_all" type="checkbox" onclick="Form.getInputs('top_form', 'checkbox').each(function(box){box.checked = $('check_all').checked})" /> <strong>Select All</strong><br/><br/>
 	<% for participant in @project_members %>
         <% if participant.user %>
