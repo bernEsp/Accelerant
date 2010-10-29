@@ -408,7 +408,7 @@ img {
       line-height:5em;
   }
 
-  .targets  {width:100px;height:50px;border:1px dotted #000;margin:10px;display:inline-block;}
+  .targets  {width:100px;height:50px;border:1px dotted #000;margin:10px;display:inline-block;float:left;}
 
   .hover {
     border: 5px dashed #aaa;

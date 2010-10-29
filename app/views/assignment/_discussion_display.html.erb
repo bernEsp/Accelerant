@@ -40,21 +40,21 @@
 
 <% unless discussions.groupable.nil? %>
 
-<ul id="groupables" style="list-style:none">
+
   <% for usergroupable in @usergroupables %>
 
-  <% content_tag_for :li, usergroupable do %>
-  <span class="handle" >
+  <% div_for usergroupable, :style => 'text-align:center;display:block;float:left;margin:5px;' do %>
+  
                     <%  unless Groupableitems.find(usergroupable.groupableitem).image.url == "" %>
-                      <%= image_tag Groupableitems.find(usergroupable.groupableitem).image.url(:size100), :style => "vertical-align:middle;" %>
+                      <%= image_tag Groupableitems.find(usergroupable.groupableitem).image.url(:size50), :style => "vertical-align:middle;" %><br/>
                     <% end %>
                     <%= Groupableitems.find(usergroupable.groupableitem).description %>
-  </span>
+  
   <% end %>
 <%= draggable_element("usergroupables_#{usergroupable.id}", :revert => false) %>
   <% end %>
 
-</ul>
+                      <div style="clear:left;"></div>
 
 <% for groupabletarget in @groupabletargets %>
 
@@ -73,6 +73,7 @@
 
   <% end %>
   </div>
+    <div style="clear:left;"></div>
           <% if self.current_user.admin || self.current_user.moderator %>
   <%= link_to "Edit", {:controller => "discussion", :id => discussions.id, :action => 'edit'} %> |
   <%= link_to "Delete", {:controller => "discussion", :id => discussions.id, :action => 'delete'}, :confirm => "Are you sure? Once deleted this action cannot be undone." %>
