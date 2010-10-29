@@ -21,9 +21,10 @@ class GroupableitemsController < ApplicationController
 
   def group
       groupableitem = params[:id].gsub('groupableitems_','')
+      groupableitem = params[:id].gsub('usergroupables_','')
       puts groupableitem
       puts params[:target]
-      puts params[:user]
+      #puts params[:user]
       usergroupable = Usergroupables.find_by_user_and_groupableitem(params[:user],groupableitem)
       usergroupable.position = params[:target]
       usergroupable.save

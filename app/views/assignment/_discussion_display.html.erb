@@ -37,6 +37,41 @@
                 </ul>
 <%= sortable_element("usersortables", :url => sort_usersortables_path, :handle => "handle2") %>
                 <% end %>
+
+<% unless discussions.groupable.nil? %>
+
+<ul id="groupables" style="list-style:none">
+  <% for usergroupable in @usergroupables %>
+
+  <% content_tag_for :li, usergroupable do %>
+  <span class="handle" >
+                    <%  unless Groupableitems.find(usergroupable.groupableitem).image.url == "" %>
+                      <%= image_tag Groupableitems.find(usergroupable.groupableitem).image.url(:size100), :style => "vertical-align:middle;" %>
+                    <% end %>
+                    <%= Groupableitems.find(usergroupable.groupableitem).description %>
+  </span>
+  <% end %>
+<%= draggable_element("usergroupables_#{usergroupable.id}", :revert => false) %>
+  <% end %>
+
+</ul>
+
+<% for groupabletarget in @groupabletargets %>
+
+
+  <% div_for groupabletarget, :class => "targets" do %>
+      <%=  groupabletarget.description %>
+   <% end %>
+
+<%= drop_receiving_element("groupabletargets_#{groupabletarget.id}",
+  :hoverclass => 'hover',
+  :url =>{ :controller => "groupableitems", :action => "group", :target => groupabletarget.id, :user => self.current_user.id }) %>
+
+<% end %>
+
+
+
+  <% end %>
   </div>
           <% if self.current_user.admin || self.current_user.moderator %>
   <%= link_to "Edit", {:controller => "discussion", :id => discussions.id, :action => 'edit'} %> |
