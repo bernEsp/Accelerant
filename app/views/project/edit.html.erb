@@ -53,10 +53,11 @@
 
 <fieldset>
 <legend>Sortable Lists</legend>
+<%= link_to "Add a new list", :controller => "sortables", :action => "new", :id => params[:id] %><br/>
 <% unless @sortables.empty? %>
 
 <% for sortable in @sortables %>
-<%= link_to "Add a new list", :controller => "sortables", :action => "new", :id => params[:id] %><br/>
+
   <%= sortable.title %>
 &nbsp;<%= link_to "Edit", :controller => "sortables", :action => "edit", :id => sortable.id %>
 &nbsp;<%= link_to "View", :controller => "sortables", :action => "show", :id => sortable.id %>
@@ -72,10 +73,11 @@
 
 <fieldset>
 <legend>Groupables</legend>
+<%= link_to "Add a new list", :controller => "groupables", :action => "new", :id => params[:id] %><br/>
 <% unless @groupables.empty? %>
 
 <% for groupable in @groupables %>
-<%= link_to "Add a new list", :controller => "groupables", :action => "new", :id => params[:id] %><br/>
+
   <%= groupable.title %>
 &nbsp;<%= link_to "Edit", :controller => "groupables", :action => "edit", :id => groupable.id %>
 &nbsp;<%= link_to "View", :controller => "groupables", :action => "show", :id => groupable.id %>

@@ -74,5 +74,6 @@ class PlainController < ApplicationController
     @project = Project.find(@discussion.project_id)
     redirect_to "/assignment/#{@project.id}"
   end
+
   
 end
