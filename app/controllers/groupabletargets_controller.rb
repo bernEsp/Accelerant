@@ -22,13 +22,13 @@ class GroupabletargetsController < ApplicationController
     @xlow.description = "Both Low"
     @xlow.groupableaxis_id = @targetx.id
     @xlow.groupable = params[:groupable]
-    @xlow.orientation = "X"
+    @xlow.orientation = "both low"
     @xlow.save
     @xhigh = Groupabletargets.new
     @xhigh.description = "High #{@targetx.description}"
     @xhigh.groupableaxis_id = @targetx.id
     @xhigh.groupable = params[:groupable]
-    @xhigh.orientation = "X"
+    @xhigh.orientation = "x high"
     @xhigh.save
 
     @targety = Groupableaxis.new
@@ -40,13 +40,13 @@ class GroupabletargetsController < ApplicationController
     @ylow.description = "High #{@targety.description}"
     @ylow.groupableaxis_id = @targety.id
     @ylow.groupable = params[:groupable]
-    @ylow.orientation = "Y"
+    @ylow.orientation = "y high"
     @ylow.save
     @yhigh = Groupabletargets.new
     @yhigh.description = "Both High"
     @yhigh.groupableaxis_id = @targety.id
     @yhigh.groupable = params[:groupable]
-    @yhighorientation = "Y"
+    @yhighorientation = "both high"
     @yhigh.save
     redirect_to "/groupableitems/new/#{params[:groupable]}"
   end
