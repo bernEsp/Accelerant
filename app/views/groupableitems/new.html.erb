@@ -71,15 +71,19 @@ Y-axis as QUALITY.  Your map will look like:</p>
 
 <% end -%>
 
-<% form_for :groupabletargets do |f| -%>
+<% form_for :groupabletargets,
+  :url =>{:controller => 'groupabletargets', :action => 'createaxis' } do |f| -%>
 
-<p><%= label_tag 'X-axis' %><br/>
-<%= f.text_field :xAxis %>
+<p><%= label_tag 'X-axis:' %><br/>
+  <input type="text" name="xAxis" />
 </p>
 
-<p><%= label_tag 'Y-axis' %><br/>
-<%= f.text_field :yAxis %>
+<p><%= label_tag 'Y-axis:' %><br/>
+  <input type="text" name="yAxis" />
 </p>
+
+<input type="hidden" name="groupable" value="<%= params[:id] %>" />
+<p><%= submit_tag 'Create' %></p>
 
 <% end -%>
 </div>

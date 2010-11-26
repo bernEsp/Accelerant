@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101029143126) do
+ActiveRecord::Schema.define(:version => 20101126185829) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -137,6 +137,13 @@ ActiveRecord::Schema.define(:version => 20101029143126) do
     t.boolean  "read"
   end
 
+  create_table "groupableaxis", :force => true do |t|
+    t.text     "description"
+    t.integer  "groupable"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "groupableitems", :force => true do |t|
     t.text     "description"
     t.integer  "groupables"
@@ -161,6 +168,7 @@ ActiveRecord::Schema.define(:version => 20101029143126) do
     t.integer  "groupable"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "groupableaxis_id"
   end
 
   create_table "moderators", :force => true do |t|
