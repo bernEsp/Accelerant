@@ -72,8 +72,8 @@
 </fieldset>
 
 <fieldset>
-<legend>Groupables</legend>
-<%= link_to "Add a new list", :controller => "groupables", :action => "new", :id => params[:id] %><br/>
+<legend>Perception Maps</legend>
+<%= link_to "Add a new map", :controller => "groupables", :action => "new", :id => params[:id] %><br/>
 <% unless @groupables.empty? %>
 
 <% for groupable in @groupables %>
@@ -86,7 +86,7 @@
 
 <% else %>
 
-  <%= link_to "Create a new groupable", :controller => "groupables", :action => "new", :id => params[:id] %>
+  <%= link_to "Create a new perception map", :controller => "groupables", :action => "new", :id => params[:id] %>
 <% end %>
 </fieldset>
 <p><%= submit_tag 'Enter' %></p>

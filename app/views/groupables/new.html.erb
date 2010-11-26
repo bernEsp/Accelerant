@@ -1,13 +1,13 @@
-<h1 class="lower">Create a New Groupable List</h1>
-<div style="width:400px;float:left;">
+<h1 class="lower">Create a new PERCEPTION MAP</h1>
+<div style="width:400px;float:left;margin-top:100px;">
 <% form_for :groupables, @groupable,
 :url =>{:controller => 'groupables', :action => 'create' } do |f| -%>
 
-  <p><strong>Groupable lists</strong> are a way to present a user-friendly list which your participants can use to group their preferences
+  <p><strong>Perception maps</strong> are a way to present a user-friendly list which your participants can use to group their preferences
   using a simple drag-and-drop interface.</p>
 
-  <p>To get started, give your groping a title.  This is for your reference only, so give it a title that will help you
-  remember the subject or content of this group (eg. "Your grouping exercise").</p>
+  <p>To get started, give your perception map a title.  This is for your reference only, so give it a title that will help you
+  remember the subject or content of this group (eg. "Quantity vs. quality perception map").</p>
 
 <p><%= label_tag 'title:' %><br/>
 <%= f.text_field :title %>

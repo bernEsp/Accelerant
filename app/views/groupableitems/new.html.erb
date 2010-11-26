@@ -1,9 +1,9 @@
-<h1 class="lower">Add a groupable item...</h1>
+<h1 class="lower">Add a items...</h1>
 <br/>
 <div style="width:400px;float:left;">
 
   <% unless @previousitems.empty? %>
-    The following are already in the list...<br/>
+    The following are already in the map...<br/>
   <% end %>
 
   <% for previous in @previousitems %>
@@ -37,8 +37,10 @@
 <% end -%>
 
 
-<h1 class="lower">Add targets...</h1>
-<p>Targets are where your GROUPABLE ITEMS get moved into...</p>
+<h1 class="lower">Define your axis...</h1>
+<p>You'll need to define an X and Y axis for your perception map... For instance, you may set your X-axis as QUANTITY and your 
+Y-axis as QUALITY.  Your map will look like:</p>
+!!!!  Image goes here!!!!!  <br/>
 <br/>
 
 
@@ -66,6 +68,18 @@
 
 
 <p><%= submit_tag 'Add' %>&nbsp;&nbsp;<%= link_to "I'm done", :controller => "groupables", :action => "show", :id => params[:id] %></p>
+
+<% end -%>
+
+<% form_for :groupabletargets do |f| -%>
+
+<p><%= label_tag 'X-axis' %><br/>
+<%= f.text_field :xAxis %>
+</p>
+
+<p><%= label_tag 'Y-axis' %><br/>
+<%= f.text_field :yAxis %>
+</p>
 
 <% end -%>
 </div>
