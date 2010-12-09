@@ -2,13 +2,14 @@ class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   #before_filter :login_required, :only => [:detail]
-  before_filter :admin_required, :only => [ :index, :edit, :destroy, :new, :create ]
-  before_filter :not_participant, :only => [:detail]
+  before_filter :admin_required, :only => [ :index ]
+  before_filter :not_participant, :only => [:detail, :edit, :destroy, :new, :create, :your_users]
   #before_filter :client_required, :only => [ :detail ]
   #before_filter :moderator_required, :only => [ :detail ]
 
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, :activate, :detail, :showsessions
+    ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, 
+      :activate, :detail, :showsessions, :your_users
   end
 
   def index
@@ -19,6 +20,10 @@ class UsersController < ApplicationController
   end
   def edit
     @user = User.find(params[:id])
+  end
+
+  def your_users
+    @users = User.find(:all)
   end
   
   def update

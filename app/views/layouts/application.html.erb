@@ -106,11 +106,15 @@
     <ul id="leftNav">
 	<% if logged_in? %>
 	<% if self.current_user.admin? %>
-    	<li><%= link_to 'Users', {:controller => 'users', :action => 'index'} %></li>
-		<li ><%= link_to 'Projects', {:controller => 'project', :action => 'index'} %></li>
-                <li class="last"><%= link_to 'Themes', {:controller => 'themes', :action => 'index'} %></li>
-		
+          <li><%= link_to 'Users', {:controller => 'users', :action => 'index'} %></li>
+          <li ><%= link_to 'Projects', {:controller => 'project', :action => 'index'} %></li>
+          <li class="last"><%= link_to 'Themes', {:controller => 'themes', :action => 'index'} %></li>
 	<% end %>
+        <% if self.current_user.moderator? %>
+          <li><%= link_to 'Users', {:controller => 'users', :action => 'your_users'} %></li>
+          <li ><%= link_to 'Projects', {:controller => 'moderator'} %></li>
+          <li class="last"><%= link_to 'Themes', {:controller => 'themes', :action => 'index'} %></li>
+        <% end %>
 	<% if self.current_user.participant? %>
       <li ><%= link_to 'My Assignments', {:controller => 'myassignments', :action => 'show'}%></li>
       <% @probes = FollowUps.find(:all, :conditions => {:read => false, :reply_belongs_to => self.current_user.id}) %>
