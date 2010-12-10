@@ -34,7 +34,7 @@
 	Upload Avatar:<br/>
 	<%= f.file_field :avatar %>
 </p>
-
+<% if self.current_user.admin? %>
 <fieldset style="width:30%;">
 <legend>User Type</legend>
 
@@ -48,6 +48,7 @@
 
 </fieldset>
 
+<% end %>
 <p>
 	<%= submit_tag 'Update' %>
 <p/>

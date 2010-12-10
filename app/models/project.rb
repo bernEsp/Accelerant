@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   has_many :comments
+  has_many :user_assignments
   belongs_to :client
   named_scope :exists, :conditions => [' 1 = 1 ']
   

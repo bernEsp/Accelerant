@@ -23,7 +23,8 @@ class UsersController < ApplicationController
   end
 
   def your_users
-    @users = User.find(:all)
+    @projects = Project.find(:all, :conditions => {:moderator_id => self.current_user.id })
+    
   end
   
   def update
@@ -60,8 +61,11 @@ class UsersController < ApplicationController
       flash[:notice] = "Update Failed"
     end
      #redirect_to users_path
-    if self.current_user.participant || self.current_user.client || self.current_user.moderator
+    if self.current_user.participant || self.current_user.client
        redirect_to '/myaccount/edit'
+    end
+    if self.current_user.moderator
+       redirect_to '/your_users'
     end
     if self.current_user.admin
       redirect_to users_path

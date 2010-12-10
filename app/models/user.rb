@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
   has_many :comments
   has_many :replies
+  belongs_to :user_assignments
 
 
   named_scope :is_moderator, :conditions => {:moderator => true}
