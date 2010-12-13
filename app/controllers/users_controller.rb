@@ -3,13 +3,13 @@ class UsersController < ApplicationController
   include AuthenticatedSystem
   #before_filter :login_required, :only => [:detail]
   before_filter :admin_required, :only => [ :index ]
-  before_filter :not_participant, :only => [:detail, :edit, :destroy, :new, :create, :your_users]
+  before_filter :not_participant, :only => [:detail, :edit, :destroy, :new, :create, :your_users, :add]
   #before_filter :client_required, :only => [ :detail ]
   #before_filter :moderator_required, :only => [ :detail ]
 
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, 
-      :activate, :detail, :showsessions, :your_users
+      :activate, :detail, :showsessions, :your_users, :add
   end
 
   def index
@@ -86,6 +86,10 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
+
+ def add
+    @user = User.new
+  end
  
   def create
     if !logged_in?
@@ -126,6 +130,38 @@ class UsersController < ApplicationController
         flash[:notice] = "New user successfully created."
         redirect_to '/users'
       end
+      else
+        flash[:notice] = "New user successfully created."
+        redirect_to '/users'
+      end
+    else
+      flash[:error]  = "We couldn't set up that account, sorry.  Please try again."
+      render :action => 'new'
+    end
+  end
+
+ def add_new
+    if !logged_in?
+      logout_keeping_session!
+    end
+    @user = User.new(params[:user])
+    if params[:user_type] == "participant"
+      @user.admin = false
+      @user.moderator = false
+      @user.client = false
+      @user.participant = true
+    end
+    success = @user && @user.save
+    if success && @user.errors.empty?
+      @userassignments = UserAssignments.new
+      @userassignments.user_id = @user.id
+      @userassignments.project_id = params[:dump][:project_id]
+      @userassignments.save
+      if logged_in?
+        if self.current_user.moderator?
+         flash[:notice] = "New user successfully created."
+         redirect_to '/your_users'
+        end
       else
         flash[:notice] = "New user successfully created."
         redirect_to '/users'

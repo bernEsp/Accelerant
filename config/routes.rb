@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login/:id', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
+  map.add_user '/add_user', :controller => 'users', :action => 'add'
   map.plain '/plain', :controller => 'plain', :action => 'showlatest'
   map.resources :users, :has_many => :comments
   map.resources :comments, :belongs_to => :users, :has_many => :subcomments

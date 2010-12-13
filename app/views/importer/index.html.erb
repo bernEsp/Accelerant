@@ -17,7 +17,12 @@
         Select project:
       </label>
      </td><td>
+       <% if self.current_user.admin? %>
        <%=  select("dump", "project_id", Project.find(:all, :order => "id DESC").collect {|p| [ p.title, p.id ] }) %>
+       <% end %>
+       <% if self.current_user.moderator? %>
+       <%=  select("dump", "project_id", Project.find(:all, :conditions => {:moderator_id => self.current_user.id}, :order => "id DESC").collect {|p| [ p.title, p.id ] }) %>
+       <% end %>
      </td>
    </tr>
    <tr>

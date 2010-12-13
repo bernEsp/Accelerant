@@ -1,5 +1,6 @@
 <h1 class="lower">Users</h1>
-<%= link_to 'Add New User', {:controller => 'users', :action => 'new'} %>
+<%= link_to 'Add New User', {:controller => 'add_user'} %>
+<%= link_to 'Bulk Import', {:controller => 'importer', :action => 'index'} %>
 <br/>
 <table cellpadding="10">
   <tr><th></th><th>Login ID</th><th>Name</th></tr>
