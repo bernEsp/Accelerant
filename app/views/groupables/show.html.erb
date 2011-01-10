@@ -23,8 +23,8 @@ participants will be dragging and dropping.  Go ahead and try it!</p>
 </div>
 <div ></div>
 <h4>The map</h4>
-<% for groupabletarget in @groupabletargets %>
 
+<% @groupabletargets.each do|groupabletarget| %>
 
   <% div_for groupabletarget, :class => "targets" do %>
       <%=  groupabletarget.description %>
@@ -32,6 +32,10 @@ participants will be dragging and dropping.  Go ahead and try it!</p>
 
 <%= drop_receiving_element("groupabletargets_#{groupabletarget.id}",
   :hoverclass => 'hover',
-  :url =>{ :controller => "groupableitems", :action => "group", :target => groupabletarget.id, :user => self.current_user.id }) %>
+  :url =>{ :controller => "groupableitems",
+    :action => "group",
+    :target => groupabletarget.id,
+    :user => self.current_user.id }) %>
+<%end%>
 
-<% end %>
+

@@ -74,20 +74,20 @@
 <fieldset>
 <legend>Perception Maps</legend>
 
-<%= link_to "Add a new map", :controller => "groupables", :action => "new", :id => params[:id] %><br/>
+<%#= link_to "Add a new map", :controller => "groupables", :action => "new", :id => params[:id] %><br/>
 <% unless @groupables.empty? %>
 
 <% for groupable in @groupables %>
 
   <%= groupable.title %>
-&nbsp;<%= link_to "Edit", :controller => "groupables", :action => "edit", :id => groupable.id %>
-&nbsp;<%= link_to "View", :controller => "groupables", :action => "show", :id => groupable.id %>
+&nbsp;<%#= link_to "Edit", :controller => "groupables", :action => "edit", :id => groupable.id %>
+&nbsp;<%#= link_to "View", :controller => "groupables", :action => "show", :id => groupable.id %>
 <br/>
 <% end %>
 
 <% else %>
 
-  <%= link_to "Create a new perception map", :controller => "groupables", :action => "new", :id => params[:id] %>
+  <%#= link_to "Create a new perception map", :controller => "groupables", :action => "new", :id => params[:id] %>
 <% end %>
 </fieldset>
 <p><%= submit_tag 'Enter' %></p>
