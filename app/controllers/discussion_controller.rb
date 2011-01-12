@@ -47,7 +47,7 @@ class DiscussionController < ApplicationController
     else
       @discussion = Discussion.find(params[:id])
     end
-    unless @discussion.sortable.nil?
+    unless !@discussion || @discussion.sortable.nil?
     @sortable = Sortables.find(@discussion.sortable)
     unless @sortable.nil?
       @usersortables = Usersortables.find_all_by_sortable(@sortable.id, :conditions => {:user => self.current_user.id}, :order => "position ASC" )
@@ -73,6 +73,39 @@ class DiscussionController < ApplicationController
             puts "woopee"
             usersorts.participant = true
             usersorts.save
+          end
+          puts "found some"
+        end
+      end
+    end
+    end
+
+    unless @discussion || @discussion.groupable.nil?
+    @groupable = Groupables.find(@discussion.groupable)
+    @groupabletargets = Groupabletargets.find_all_by_groupable(@groupable.id, :order => "id DESC")
+    unless @groupable.nil?
+      @usergroupables = Usergroupables.find_all_by_groupable(@groupable.id, :conditions => {:user => self.current_user.id} )
+      if @usergroupables.empty?
+        @groupableitems = Groupableitems.find_all_by_groupables(@groupable.id)
+        for groupableitem in @groupableitems
+          @newusergroupable = Usergroupables.new
+          @newusergroupable.user = self.current_user.id
+          @newusergroupable.groupableitem = groupableitem.id
+          @newusergroupable.groupable = groupableitem.groupables
+          if self.current_user.participant
+            @newusergroupable.participant = true
+          else
+            @newusergroupable.participant = false
+          end
+          @newusergroupable.save
+          @usergroupables = Usergroupables.find_all_by_groupable(@groupable.id, :conditions => {:user => self.current_user.id})
+        end
+      else
+        for usergroups in @usergroupables
+          if self.current_user.participant
+            puts "woopee"
+            usergroups.participant = true
+            usergroups.save
           end
           puts "found some"
         end

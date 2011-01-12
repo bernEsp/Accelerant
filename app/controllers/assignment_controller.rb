@@ -90,7 +90,7 @@ class AssignmentController < ApplicationController
 
     unless !@discussions_desc || @discussions_desc.groupable.nil?
     @groupable = Groupables.find(@discussions_desc.groupable)
-    @groupabletargets = Groupabletargets.find_all_by_groupable(@groupable.id)
+    @groupabletargets = Groupabletargets.find_all_by_groupable(@groupable.id, :order => "id DESC")
     unless @groupable.nil?
       @usergroupables = Usergroupables.find_all_by_groupable(@groupable.id, :conditions => {:user => self.current_user.id} )
       if @usergroupables.empty?

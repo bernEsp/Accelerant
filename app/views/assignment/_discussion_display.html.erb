@@ -39,7 +39,7 @@
                 <% end %>
 
 <% unless discussions.groupable.nil? %>
-
+<% @usergroupables = Usergroupables.find_all_by_groupable(discussions.groupable, :conditions => {:user => self.current_user.id}) %>
 
   <% for usergroupable in @usergroupables %>
 
@@ -54,20 +54,46 @@
 <%= draggable_element("usergroupables_#{usergroupable.id}", :revert => false) %>
   <% end %>
 
-                      <div style="clear:left;"></div>
+<div style="clear:left;"></div>
 
-<% for groupabletarget in @groupabletargets %>
+<% i = 0 %>
 
+<% @groupabletargets = Groupabletargets.find_all_by_groupable(discussions.groupable, :order => "id DESC") %>
+<% @groupabletargets.each do|groupabletarget| %>
 
-  <% div_for groupabletarget, :class => "targets" do %>
+<%
+  i = i +1
+  if i==3
+    %>
+<div style="clear:both"></div>
+<%
+  end
+%>
+
+  <% div_for groupabletarget, :class => "perceptiontargets" do %>
       <%=  groupabletarget.description %>
    <% end %>
 
 <%= drop_receiving_element("groupabletargets_#{groupabletarget.id}",
   :hoverclass => 'hover',
-  :url =>{ :controller => "groupableitems", :action => "group", :target => groupabletarget.id, :user => self.current_user.id }) %>
+  :url =>{ :controller => "groupableitems",
+    :action => "group",
+    :target => groupabletarget.id,
+    :user => self.current_user.id }) %>
+<%end%>
 
-<% end %>
+<div style="clear:both"></div>
+
+  <div class="groupabletargets perceptiontargets" id="groupabletargets_0" style="margin-top:1px;margin-right:205px;">
+      No Preference
+   </div>
+
+<%= drop_receiving_element("groupabletargets_0",
+  :hoverclass => 'hover',
+  :url =>{ :controller => "groupableitems",
+    :action => "group",
+    :target => 0,
+    :user => self.current_user.id }) %>
 
 
 
