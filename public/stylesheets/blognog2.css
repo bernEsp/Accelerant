@@ -413,8 +413,8 @@ img {
 
   .targets  {width:100px;height:50px;border:1px dotted #000;margin:10px;display:inline-block;float:left;}
 
-  .perceptiontargets  {width:100px;height:50px;border:1px dotted #000;display:inline-block;float:right;}
+  .perceptiontargets  {width:200px;height:150px;border:1px dotted #000;display:inline-block;float:right;}
 
   .hover {
     border: 1px dashed #aaa;
-    background:#efefef; }
+    background:#ff9; }
