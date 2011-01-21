@@ -395,6 +395,8 @@ img {
      top: -500px;
  }
 
+ .groupableitems    {display:inline-block;float:left;margin:10px;}
+
  li .handle {
      cursor:move;
      margin:40px 0;
@@ -406,6 +408,7 @@ img {
       cursor:move;
       list-style:none;
       line-height:5em;
+      display:block;
   }
 
   .targets  {width:100px;height:50px;border:1px dotted #000;margin:10px;display:inline-block;float:left;}
