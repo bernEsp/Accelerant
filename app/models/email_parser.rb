@@ -39,6 +39,7 @@ if @emailing_user
     comment.photo = mail.attachments.first
     #comment.photo = mail.attachments.first.base64_decode!
   end
+  comment.emailed = true
   comment.save
 
 else

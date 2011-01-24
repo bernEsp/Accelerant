@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101126200203) do
+ActiveRecord::Schema.define(:version => 20110124140801) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20101126200203) do
     t.integer  "project_id"
     t.integer  "discussion_id"
     t.boolean  "hide_until_answered",                    :default => false
+    t.boolean  "emailed",                                :default => false
   end
 
   create_table "companies", :force => true do |t|
