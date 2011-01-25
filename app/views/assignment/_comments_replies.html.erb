@@ -50,7 +50,7 @@
             else
               puts "id:"
               puts comment.user.id
-              if displayflag && (!comment.user.id.nil) && (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? ))
+              if displayflag && (!comment.user.id.nil?) && (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? ))
                 %>
                 <%=  show_comment(comment) %>
                 <%
