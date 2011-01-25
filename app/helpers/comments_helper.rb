@@ -109,7 +109,7 @@ module CommentsHelper
         end
       end
       #displayflag = filter_results(replies)
-      if displayflag && if User.exists?(replies.user_id)
+      if displayflag && User.exists?(replies.user_id)
         if !@project.one_to_one || ((replies.user.id == self.current_user.id || replies.user.admin? || replies.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? )
           out = out + render_reply(replies)
         end
