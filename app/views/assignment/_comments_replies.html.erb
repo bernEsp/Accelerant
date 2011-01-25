@@ -48,8 +48,7 @@
               <%= show_comment(comment) %>
               <%
             else
-              tester = User.find_by_id(comment.user_id)
-              if displayflag && (User.exists?(comment.user_id)) && (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? ))
+              if displayflag && (User.exists?(comment.user_id)) && (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin || comment.user.moderator) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? ))
                 %>
                 <%=  show_comment(comment) %>
                 <%
