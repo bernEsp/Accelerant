@@ -4,7 +4,7 @@ class PlainController < ApplicationController
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :show, :showlatest, :update_count, :sub_comment_form,
       :sub_form, :show_comments, :drop_comment, :drop_reply, :follow_up, :follow_up_reply, :edit_comment,
-      :comment_update, :update
+      :comment_update, :update, :delete_probe
   end
   
   def index
@@ -73,6 +73,12 @@ class PlainController < ApplicationController
     @discussion = Discussion.find(@comm.discussion_id)
     @project = Project.find(@discussion.project_id)
     redirect_to "/assignment/#{@project.id}"
+  end
+
+  def delete_probe
+    @probe = FollowUps.find(params[:id])
+    @probe.destroy
+    render :text => "Deleted"
   end
 
   
