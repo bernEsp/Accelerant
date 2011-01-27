@@ -17,10 +17,10 @@ You said:<br/>
 </td>
   </tr>
   <tr><td colspan="2" align="right">
-      <div id="reply<%=follow.reply_id%>">
+      <div id="reply<%=follow.id%>">
 <%= link_to_remote "Follow Up",
-					:url => {:controller => 'plain', :action => 'follow_up', :id => follow.reply_id},
-					:update => "reply#{follow.reply_id}" %>
+:url => {:controller => 'plain', :action => 'follow_up', :id => follow.reply_id},
+:update => "reply#{follow.id}" %>
   </div>
     </td>
 <%
