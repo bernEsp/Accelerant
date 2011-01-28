@@ -418,3 +418,13 @@ img {
   .hover {
     border: 1px dashed #aaa;
     background:#ff9; }
+
+  .targetFrame {
+      width:420px;
+      float:right;
+      padding:20px 10px 20px 10px;
+      /*border:1px dotted #000;*/
+      border-bottom:2px solid #000;
+      border-left:2px solid #000;
+      margin-right:90px;
+  }
