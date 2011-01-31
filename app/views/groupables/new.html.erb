@@ -1,19 +1,28 @@
 <h1 class="lower">Create a new PERCEPTION MAP</h1>
-<div style="width:400px;float:left;margin-top:100px;">
+<div style="width:400px;float:left;margin-top:40px;">
 <% form_for :groupables, @groupable,
 :url =>{:controller => 'groupables', :action => 'create' } do |f| -%>
 
-  <p><strong>Perception maps</strong> are a way to present a user-friendly list which your participants can use to group their preferences
-  using a simple drag-and-drop interface.</p>
+  <p><strong>Perception maps</strong> are a way to present a user-friendly list which your participants can use to 
+    group their preferences using a simple drag-and-drop interface.</p>
 
-  <p>To get started, give your perception map a title.  This is for your reference only, so give it a title that will help you
+  <p>To get started, give your perception map a title and enter some simple instructions (we've given you some 
+    simple instructions you can use, but feel free to edit these or add your own).  The title is for your reference only,
+    so give it a title that will help you
   remember the subject or content of this group (eg. "Quantity vs. quality perception map").</p>
 
 <p><%= label_tag 'title:' %><br/>
 <%= f.text_field :title %>
-<%= f.hidden_field :project_id, :value => params[:id] %>
 </p>
 
+<p><%= label_tag 'instructions:' %><br/>
+<%= f.text_area :instructions,
+  :value => "Please click and drag the listed items onto the grid below based on where you think they belong.  There are no right or wrong answers in this exercise."
+%>
+</p>
+
+
+<%= f.hidden_field :project_id, :value => params[:id] %>
 
 <p>&nbsp;&nbsp;<%= link_to "Cancel", :controller => "project", :action => "edit", :id => params[:id] %>&nbsp;&nbsp;<%= submit_tag 'Next -->' %></p>
 
