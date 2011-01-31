@@ -1,15 +1,14 @@
-<p>&nbsp;</p>
 
-<div style="width:400px;float:left;">
-<% form_for @reply do |f| -%>
+<form method="post" action="../../replies/update" >
 
 
 <p><%= label_tag 'content:' %><br/>
-<%= f.text_area :content, :size => "60 x 20" %>
+<textarea name="content"><%= @reply.content %></textarea>
 </p>
 
+<input type="hidden" name="id" value="<%= params[:id] %>" />
 
 
 <p><%= submit_tag 'Update' %></p>
-<% end -%>
-</div>
+
+</form>

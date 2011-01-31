@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.plain '/plain', :controller => 'plain', :action => 'showlatest'
   map.resources :users, :has_many => :comments
   map.resources :comments, :belongs_to => :users, :has_many => :subcomments
+  map.resources :replies, :belongs_to => :comments
   map.resources :subcomments, :belongs_to => :comments
   map.resources :client, :has_many => :projects
   map.resources :project, :has_many => :assignments

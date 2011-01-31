@@ -2,7 +2,7 @@ class RepliesController < ApplicationController
   before_filter :login_required
   
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :get, :update, :new, :create, :edit, :update
+    ssl_required :index, :show, :get, :update, :new, :create, :edit
   end
 
   def index
@@ -72,10 +72,15 @@ class RepliesController < ApplicationController
 
   def edit
     @reply = Replies.find(params[:id])
+    puts "reply content:"
+    puts @reply.content
   end
 
   def update
-    
+    @reply = Replies.find(params[:id])
+    @reply.content = params[:content]
+    @reply.save
+    render :text => "updated"
   end
 
 end
