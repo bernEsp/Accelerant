@@ -91,11 +91,13 @@ class CommentController < ApplicationController
             p.line_break
         @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id ASC", :include => :user)
             @replies.each do |d|
+              if User.exists?(@replies.user_id)
               #p << ['Reply-->' + d.content,d.user.name,d.user.login,Date.parse(d.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(d.created_at.to_s).strftime("%I:%M:%S")]
               p.italic << "#{d.user.name} replied: "
               p << "#{d.content.gsub(/<\/?[^>]*>/,  "")}"
               p.line_break
               p.line_break
+              end
           end
           end
         end
