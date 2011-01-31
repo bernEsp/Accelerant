@@ -60,7 +60,7 @@ class CommentController < ApplicationController
             title << [c.comment,c.user.name,c.user.login,Date.parse(c.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(c.created_at.to_s).strftime("%I:%M:%S")]
             @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id ASC", :include => :user)
             @replies.each do |d|
-              if User.exists?(@replies.user_id)
+              if User.exists?(d.user.id)
                 title << ['Reply-->' + d.content,d.user.name,d.user.login,Date.parse(d.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(d.created_at.to_s).strftime("%I:%M:%S")]
               end
             end
@@ -91,7 +91,7 @@ class CommentController < ApplicationController
             p.line_break
         @replies = Replies.find(:all, :conditions => {:comment_id => c.id }, :order => "id ASC", :include => :user)
             @replies.each do |d|
-              if User.exists?(@replies.user_id)
+              if User.exists?(d.user.id)
               #p << ['Reply-->' + d.content,d.user.name,d.user.login,Date.parse(d.created_at.to_s).strftime("%m/%d/%Y"),Time.parse(d.created_at.to_s).strftime("%I:%M:%S")]
               p.italic << "#{d.user.name} replied: "
               p << "#{d.content.gsub(/<\/?[^>]*>/,  "")}"
