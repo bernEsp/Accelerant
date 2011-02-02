@@ -7,6 +7,7 @@
 <% for project in @projects %>
 <% @userassignments = UserAssignments.find(:all, :conditions => {:project_id => project.id}) %>
 <% for users in @userassignments %>
+<% if User.exists?(users.user_id) %>
 <% user = User.find_by_id(users.user_id) %>
   <tr id="<%= dom_id(user) %>">
 	<td>
@@ -19,7 +20,7 @@
     <td><%= link_to 'Edit', {:controller => 'users', :action => 'edit', :id => user.id} %> |
 <% if !user.admin? %>
 		<%= link_to 'Show Comments', {:controller => 'comment', :action => 'show', :id => user.id} %> |
-		<% end %>
+<% end %>
 
 <% if !user.admin? %>
 		<%= link_to_remote 'Delete',
@@ -27,9 +28,10 @@
 		:update => "#{dom_id(user)}",
 		:complete => "new Effect.Fade('#{dom_id(user)}', { duration: 8.0 })",
 		:url =>{:controller => 'users', :action => 'dump_this',:id => user.id }%>
-		<% end %>
+<% end %>
 	</td>
   </tr>
+<% end %>
 <% end %>
 <% end %>
 </table>
