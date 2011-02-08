@@ -5,5 +5,6 @@ group :development do
   gem "rtf"
   gem "sqlite3"
   gem "ruby-debug"
+  gem "whenever"
 end
 
