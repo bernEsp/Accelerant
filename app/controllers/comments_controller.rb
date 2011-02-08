@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
   before_filter :login_required
 
-  if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :update, :new, :create, :get, :destroy
-  end
+#  if ENV['RAILS_ENV'] == 'production'
+#    ssl_required :index, :show, :update, :new, :create, :get, :destroy
+#  end
   
   def index
     user_id = self.current_user.id

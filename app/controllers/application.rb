@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
    require 'rtf'
   include RTF
   include AuthenticatedSystem
-  include SslRequirement
+  
   
   uses_yui_editor
 
