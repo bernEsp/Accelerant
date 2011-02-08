@@ -4,6 +4,7 @@ group :development do
   gem "fastercsv", "1.1"
   gem "rtf"
   gem "sqlite3"
+  gem "json"
   gem "ruby-debug"
   gem "whenever"
 end
