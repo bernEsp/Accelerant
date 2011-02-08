@@ -1,0 +1,27 @@
+<div id="responses">
+	<div id="latestresponse">
+
+	</div>
+	<% first = true %>
+	<% for latest in @latest_postings %>
+	<% posting_user = User.find(:last, :conditions => {:id => latest.user_id})%>		
+		<div class="clientSubComment">
+	      <div class="subCommentAvatar"><img src="../images/clientAvatar.png" width="50" height="50" /></div>
+	      <div class="clientSubCommentText">
+	        <h1><%= posting_user.name%></h1>
+	        <p><%=latest.comment %> <span>- Posted on <%=h latest.created_at.strftime("%Y-%m-%d at %H:%M:%S") %></span></p>
+			<% if !first %>
+				<% first = false %>
+			<% else %>
+			<% first = false %>
+			<p align="right">- <%= link_to_remote 'Add Comment',
+			:url => { :controller => 'plain', :action => 'sub_comment_form'},
+			:update => "subCommentForm" %></p>
+			<% end %>
+			<div id="subCommentForm"></div>
+				
+		</div>
+	    </div>
+	<% end %>
+
+</div>

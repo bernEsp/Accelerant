@@ -1,0 +1,25 @@
+<%= image_tag "BlogNog2.png", :style => "float:right;", :class => "BlogNogLogo" %>
+<h1 class="lower">Projects</h1>
+<p>&nbsp;</p>
+<%= link_to 'Add Project', {:controller => 'project', :action => 'new'} %>
+<p>&nbsp;</p>
+<div style="display:block;width:500px;float:left;">
+<% for project in @these_projects %>
+
+    <p>
+	<strong><%=project.title %>
+          <% if project.lock %>
+           <%= image_tag "lock.png", :title => "Project has been locked" %>
+           <% end %>
+           <% if !project.active %>
+           <%= image_tag "not_active.png", :title => "Project is not currently active" %>
+           <% end %>
+        </strong><br/>
+	<%= link_to 'View', :controller => 'assignment', :action => 'show', :id => project.id %> | 
+	<%= link_to "Edit", {:controller => "project", :action => "edit", :id => project.id} %> |
+	<%= link_to 'Assign Participants', :controller => 'assignment', :action => 'assign',:id => project.id %> | 
+	<%= link_to 'Delete', {:controller => 'project', :action => 'drop', :id => project.id}, :confirm => "Are you sure?" %>
+    </p>
+    <p>&nbsp;</p>
+<% end %>
+</div>

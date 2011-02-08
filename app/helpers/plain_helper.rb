@@ -1,0 +1,2 @@
+module PlainHelper
+end

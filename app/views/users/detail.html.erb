@@ -1,0 +1,126 @@
+
+<br/><br/>
+<h2><%= @this_user.name %></h2>
+
+<div class="clientSubComment">
+
+<%= render_avatar(@this_user) %>
+			
+<br/>
+  <div style="clear:both;float:right;margin-right:100px;">
+Username: <%= @this_user.login %><br/>
+Email: <%= @this_user.email %><br/>
+<%
+if @category
+1.upto(10) { |i|
+field_name = "field_#{i}" -%>
+<strong><%= @category.send(field_name) %>: </strong><%= @this_user.send(field_name) %><br/>
+<%
+}
+
+end
+
+%>
+</div>
+</div>
+
+<div id="rightColumn">
+
+  <%
+  unless @usersortablestest.empty?
+    @sortable = Usersortables.find_all_by_user(params[:id], :group => :sortable)
+    %>
+  <% for sortable in @sortable %>
+  <h4>Sorting Exercise: <%= Sortables.find_by_id(sortable.sortable).title %></h4>
+    <% @usersortables = Usersortables.find(:all, :conditions => {:sortable => sortable.sortable, :user => params[:id]}, :order => :position) %>
+                  <ul id="usersortables" style="clear:left;margin-left:50px;list-style:none;">
+                  <% for usersortable in @usersortables %>
+
+                   <% content_tag_for :li, usersortable do %>
+                    <%= usersortable.position %>)&nbsp;
+                    <%  unless Sortableitems.find(usersortable.sortableitem).image.url == "" %>
+                      <%= image_tag Sortableitems.find(usersortable.sortableitem).image.url(:size100), :style => "vertical-align:middle;" %>
+                    <% end %>
+                    <%= Sortableitems.find(usersortable.sortableitem).description %>
+                    
+                  <% end %>
+
+                <% end %>
+
+                </ul>
+  <% end %>
+ <hr/>
+
+  <% end %>
+
+<% for comment in @these_comments do %>
+
+<div class="clientSubCommentText" >
+		 <p>
+
+		<%=comment.comment %>
+
+		<% if comment.photo_content_type %>
+		<% if comment.photo_content_type =~ /image.*/  %>
+                  <br/>
+                  <a href="<%=comment.photo.url%>" > 
+                    <%= image_tag comment.photo.url(:thumb) %>
+                  </a>
+		<% else %>
+                  <br/>
+                  <a href="<%=comment.photo.url%>" target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+		<% end %>
+		<% end %>
+		<br/>
+
+		<span>- Posted <%= time_ago_in_words(comment.created_at)%> ago </span>
+
+              </p>
+<% if Discussion.exists?(comment.discussion_id) %>
+              <p>
+                <strong>In response to...</strong><br/>
+                <%=Discussion.find(comment.discussion_id).title%>
+
+              </p>
+<% end %>
+
+</div>
+  <hr/>
+  <% end %>
+
+  <% for reply in @these_replies do %>
+
+  <div class="clientSubCommentText" >
+		 <p>
+
+		<%=reply.content %>
+		<% if reply.media_content_type %>
+		<% if reply.media_content_type =~ /image.*/  %>
+                   <br/>
+			<a href="<%=reply.media.url%>" >
+			<%= image_tag reply.media.url(:small) %>
+			</a>
+		<% else %>
+                   <br/>
+			<a href="<%=reply.media.url%>" target="_blank">View attached file here.</a><%= image_tag "download.png"%>
+		<% end %>
+		<% end %>
+		<br/>
+
+		<span>- Posted <%= time_ago_in_words(reply.created_at)%> ago </span>
+
+              </p>
+              <% if Comment.exists?(reply.comment_id) %>
+              <p>
+                <strong>In response to...</strong><br/>
+                <%=Comment.find(reply.comment_id).comment%>
+
+              </p>
+              <% end %>
+</div>
+  <hr/>
+
+  <% end %>
+
+</div> <!-- right column -->
+

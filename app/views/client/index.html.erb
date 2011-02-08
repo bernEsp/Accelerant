@@ -1,0 +1,15 @@
+<% unless session[:theme] %>
+  <%= image_tag "BlogNog2.png", :style => "float:right;", :class => "BlogNogLogo" %>
+<% else %>
+  <%= image_tag Themes.find(session[:theme]).logo.url(:size200), :style => "float:right;", :class => "BlogNogLogo" %>
+<% end %>
+<h1 class="lower">Your Projects</h1>
+<br/><br/>
+<% for project in @projects %>
+	<% assignment_detail = Assignment.find(:last, :conditions => {:project_id => project.id}, :limit => 1) %>
+	<% if !assignment_detail %>
+          &gt;&nbsp;&nbsp;<%= link_to project.title, {:controller => 'assignment', :action => 'show', :id => project.id }%><br/>
+	<% else %>
+	&gt;&nbsp;&nbsp;<%= link_to assignment_detail.title, {:controller => 'assignment', :action => 'show', :id => project.id }%><br/>
+	<% end %>
+<% end %>

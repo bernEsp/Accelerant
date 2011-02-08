@@ -1,0 +1,12 @@
+
+<h1 class="lower">Themes</h1>
+<p><%= link_to "Add a new theme", :action => 'new' %></p>
+<table>
+<%for theme in @themes%>
+  <tr>
+    <td><%= image_tag theme.logo.url(:size50) %></td>
+    <td><%= theme.name %></td>
+    <td><%= link_to "Edit", :controller => "themes", :action => "edit", :id => theme.id %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,254 @@
+/* Redefined Tags */
+html,body {
+height: 100%;
+min-height:100%;
+width: 100%;
+}
+body,form,img,p,h1,h2,h3,ul,ol,li,input,div {
+	margin:0px;
+	padding:0px;
+}
+body {
+	text-align:center;
+	font:11px Arial, Helvetica, sans-serif;
+	line-height:16px;
+	background:url("../images/bg_body.gif") top center repeat-y #07395a;
+}
+a {
+	color:#07395a;
+}
+#banner {
+	width:100%;
+	height:29px;
+	line-height:25px;
+	background:url("../images/bg_topNav.png") repeat-x;
+}
+#banner a {
+	text-decoration:none;
+}
+img {
+	border: none;
+	behavior:url("pngbehavior.htc");
+}
+#container {
+	margin:0 auto;
+	width:800px;
+	text-align:left;
+}
+#topNav {
+	width:800px;
+	margin:0 auto;
+}
+#topNavLeft {
+	float:left;
+	margin-left:10px;
+}
+#topNavLeft a {
+	padding:0 10px;
+}
+#topNavLeft a:hover {
+	text-decoration:underline;
+}
+#topNavRight {
+	float:right;
+}
+#topNavRight a {
+	font-weight:bold;
+	padding:0 20px;
+}
+#assignmentBox {
+	width:780px;
+	background:url("../images/bg_assignmentBox.gif") center bottom no-repeat #07395a;
+	margin:-4px 10px 0 10px;
+	padding:20px 0;
+	color:#fff;
+	clear:both;
+}
+#assignmentBox h1, #assignmentBox p {
+	margin:0 20px 20px 20px;
+}
+#assignmentBox h1 {
+	font:normal 22px Georgia, "Times New Roman", Times, serif;
+}
+#assignmentBox h2 {
+	margin:0 20px 5px 20px;
+	font:normal 22px Georgia, "Times New Roman", Times, serif;
+}
+#assignmentBox p {
+	color:#efb31b;
+}
+#searchBox {
+	width:165px;
+	height:26px;
+	margin-left:20px;
+}
+#searchBox #searchButton {
+	width:27px;
+	height:26px;
+	float:left;
+}
+#searchBox #searchField {
+	width:133px;
+	height:26px;
+	float:left;
+	margin:0;
+	padding-top:5px;
+	border:none;
+	background:url("../images/bg_searchBox.gif") no-repeat top right;
+}
+#leftColumn {
+	width:180px;
+	padding:20px 0;
+	float:left;
+}
+#leftColumn #leftNav {
+	line-height:30px;
+	list-style:none;
+	text-align:right;
+	margin:0 20px 20px 30px;
+}
+#leftColumn #leftNav li {
+	border-top:1px solid #cdd7de;
+	padding:1px 0;
+}
+#leftColumn #leftNav li.last {
+	border-top:1px solid #cdd7de;
+	border-bottom:1px solid #cdd7de;
+}
+#leftColumn #leftNav li a {
+	display:block;
+	padding:0 10px;
+	text-decoration:none;
+	font-size:12px;
+}
+#leftColumn #leftNav li a:hover {
+	background:#cdd7de;
+}
+#leftColumn p {
+	margin:0 20px 20px 30px;
+	color:#bcbcbc;
+}
+#leftColumn p span {
+	text-align:right;
+}
+#rightColumn {
+	width:580px;
+	overflow:hidden;
+	float:left;
+	margin:20px 0 20px 0;
+}
+#rightColumn hr {
+	background-color:#e1e1e1;
+	border:none;
+	height:1px;
+	width:580px;
+	margin:20px 0;
+	float:left;
+}
+#topResponse {
+	float:left;
+	width:580px;
+	margin:0 0 20px 0;
+}
+#topResponse h1 {
+	text-align:left;
+	color:#07395a;
+	font:normal 22px Georgia, "Times New Roman", Times, serif;
+	margin:0 10px 5px 10px;
+}
+.avatar {
+	width:50px;
+	height:50px;
+	display:inline;
+	float:left;
+}
+.topResponseBox {
+	width:520px;
+	float:left;
+/*	background:#cdd7de;*/
+	background:#fff;
+	padding:10px 0;
+	margin:0 0 0 10px;
+}
+.responseWidget {
+	margin:0 0 0 10px;
+}
+.postButton {
+	text-align:right;
+	margin:10px 10px 0 0;
+}
+.clientMainEntry {
+	float:left;
+	width:580px;
+	margin:0 0 10px 0;
+}
+.clientMainEntryText {
+	float:left;
+	width:520px;
+	margin:0 0 0 10px;
+}
+.clientMainEntryText span,.clientSubCommentText span,.adminSubCommentText span {
+	color:#a5a4a4;
+	font-style:italic;
+}
+.clientSubComment {
+	width:520px;
+	padding:10px 0;
+	display:inline;
+	float:left;
+	margin:0 0 1px 60px;
+	background:#cdd7de;
+}
+.clientSubCommentText {
+	margin-left:10px;
+	width:430px;
+	float:left;
+}
+.clientSubCommentText h1 {
+	font:bold 12px Arial, Helvetica, sans-serif;
+}
+.adminSubComment {
+	width:520px;
+	float:left;
+	display:inline;
+	padding:10px 0;
+	margin:0 0 1px 60px;
+	background:#07395a;
+}
+.adminSubCommentText {
+	margin-left:10px;
+	color:#fff;
+	width:430px;
+	float:left;
+}
+.adminSubCommentText h1 {
+	font:bold 12px Arial, Helvetica, sans-serif;
+	color:#efb31b;
+}
+.subCommentAvatar {
+	width:50px;
+	height:50px;
+	display:inline;
+	float:left;
+	margin-left:10px;
+}
+.viewAll {
+	width:100%;
+	text-align:right;
+	padding-bottom:10px;
+	float:left;
+}
+#footer {
+	height:39px;
+	float:left;
+	width:800px;
+	clear:both;
+	background:url("../images/bg_footer.gif") no-repeat center bottom;
+}
+.copyright {
+	float:right;
+	display:inline;
+	margin-right:30px;
+	line-height:39px;
+	color:#4491c3;
+}

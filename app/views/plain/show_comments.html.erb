@@ -1,0 +1,5 @@
+<% for replies in @replies %>
+<% user = User.find(:last, :conditions => {:id => replies.user_id}) %>
+<p style="background-color:#eef;margin:8px;padding:2px;"><%= image_tag user.avatar.url(:tiny) %>&nbsp;&nbsp;<%= replies.content %><br/>
+posted by <%= user.name%>  <%= time_ago_in_words(replies.created_at) %> ago</p>
+<% end %>

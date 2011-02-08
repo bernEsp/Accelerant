@@ -1,0 +1,56 @@
+<h1 class="lower">Edit User</h1>
+
+<% form_for @user, :html => { :multipart => true, :id => "this_form" } do |f| %>
+<% #form_for :user, @user, :url =>{:controller => 'users', :action => 'update' }, :html => { :multipart => true } do |f| %>
+<p>
+	Name:<br/>
+	<%= f.text_field :name %>
+</p>
+
+<p>
+	Email Address:<br/>
+	<%= f.text_field :email %>
+</p>
+
+<p>
+	Login Name:<br/>
+	<%= f.text_field :login %>
+</p>
+
+<p>
+	Reset Password:<br/>
+	<%= f.password_field :password %>
+</p>
+
+<p>
+	Confirm Reset Password:<br/>
+	<%= f.password_field :password_confirmation %>
+</p>
+
+<p>
+	<% if @user.avatar_file_name %>
+	<%= image_tag @user.avatar.url(:thumb) %>
+	<% end %>
+	Upload Avatar:<br/>
+	<%= f.file_field :avatar %>
+</p>
+<% if self.current_user.admin? %>
+<fieldset style="width:30%;">
+<legend>User Type</legend>
+
+<p>
+	<%= radio_button_tag("user_type", "admin", checked=@user.admin)%> Admin
+	<%= radio_button_tag("user_type", "moderator", checked=@user.moderator)%> Moderator
+	<%= radio_button_tag("user_type", "client", checked=@user.client)%> Client
+	<%= radio_button_tag("user_type", "participant", checked=@user.participant)%> Participant
+</p>
+
+
+</fieldset>
+
+<% end %>
+<p>
+	<%= submit_tag 'Update' %>
+<p/>
+
+<% end %>

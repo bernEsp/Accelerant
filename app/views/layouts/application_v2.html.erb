@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>blognog</title>
+ 	<%= include_yui_editor_if_used %>
+  <%= stylesheet_link_tag 'blognog'%>
+  <%= javascript_include_tag  :defaults %>
+<%= javascript_include_tag :fckeditor %>
+</head>
+<body>
+<div id="banner">
+  <div id="topNav">
+    <div id="topNavLeft"><a href="#">Home</a>></div>
+    <div id="topNavRight"><a href="#">Manage Account</a><a href="#">Support</a><% if logged_in? %><%= link_to "Log Out", logout_path %><% end %></div>
+  </div>
+</div>
+<div id="container">
+  <div id="assignmentBox">
+	<% if @assignment && self.current_user.participant? %>
+	<% for this_assignment in @assignment %>
+    <h1><%=h this_assignment.title %></h1>
+    <h2>Assignment:</h2>
+    <p><%=h this_assignment.description %></p>
+    <div id="searchBox">
+      <form method="post" action="#">
+        <input type="image" id="searchButton" src="../images/btn_search.gif" onClick="this.submit();" />
+        <input type="text" name="searchField" id="searchField" />
+      </form>
+    </div>
+	<% end %>
+	<% end %>
+  </div>
+  <div id="leftColumn">
+	<% if @assignment && self.current_user.participant? %>
+	<% for this_assignment in @assignment %>
+    <p>Created <%=h this_assignment.created_at.strftime("%m/%d/%Y") %><br />
+      Last Edited <%=h this_assignment.updated_at.strftime("%m/%d/%Y") %></p>
+	<% end %>
+	<% end %>
+    <ul id="leftNav">
+	<% if logged_in? %>
+	<% if self.current_user.admin? %>
+    	<li><%= link_to 'Users', {:controller => 'users', :action => 'index'} %></li>
+		<li><%= link_to 'Projects', {:controller => 'project', :action => 'index'} %></li>
+		<li><%= link_to 'Assignments', {:controller => 'assignment', :action => 'index'} %></li>
+		<li class="last"><%= link_to 'Comments', {:controller => 'comments', :action => 'index'} %></li>
+	<% end %>
+	<% if self.current_user.participant? %>
+      <li><a href="#">View My Projects</a></li>
+      <li class="last"><a href="#">View My Posts</a></li>
+	<% end %>
+	<% end %>
+    </ul>
+	<% if @assignment %>
+    <p align="right">Displaying 0 of 0 Comments<br />
+      - <a href="#">View All</a></p>
+	<% end %>
+  </div>
+<!-- Yield starts here -->
+
+<%= yield  %>
+
+  
+<!-- Yield ends here -->
+ <div id="footer"><div class="copyright">&copy; Copyright <%= Time.now.strftime("%Y") %> Blognog.com</div></div></div>
+
+</body>
+</html>

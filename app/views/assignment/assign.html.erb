@@ -1,0 +1,17 @@
+
+<h1 class="lower">Assign Participants to this Project</h1>
+<p>&nbsp;</p>
+<% project = Project.find(params[:id])%>
+<h4><%= project.title %></h4>
+<p><%= project.description %></p>
+
+<div style="padding-top:20px">
+<% form_for :user_assignments, :url => { :controller => "user_assignments", :action => "assign", :id => params[:id] }, :html => { :id => "my_form" } do |f| %>
+	<input id="check_all" name="check_all" type="checkbox" onclick="Form.getInputs('my_form', 'checkbox').each(function(box){box.checked = $('check_all').checked})" /> <strong>All</strong><br/><br/>
+<% for user in @users %>
+	<%= check_box("user_assignment", user.id, {}, "#{user.id}") %>  <%= h user.name %><br/>
+<% end %>
+
+<%= submit_tag 'Assign', :style => "margin-top:20px;" %>
+<% end %>
+</div>

@@ -1,0 +1,70 @@
+
+<%
+#@project = Project.find(@project.id)
+category = AttributeTags.find_last_by_project_id(@project.id)
+
+%>
+
+
+<% unless category.nil? %>
+
+  <% remote_form_for :filter,
+    #:complete => "new Effect.BlindDown('filterStatus', { duration: .5 })",
+    #:update => 'filterStatus',
+    #:update => 'responses',
+    :url => { :controller=> 'filter', :action => "filter_set_new" } do |f| %>
+    
+    <% param_count = 0 %>
+    <% 1.upto(10) { |i|
+      field_name = "field_#{i}" -%>
+
+      <% unless category.send(field_name).nil? %>
+        <% param_count = param_count + 1 %>
+        <% attributes = Attributes.find(:all, :conditions => { :project_id => @project.id }, :group => field_name) %>
+        <label onclick="Effect.toggle('<%= field_name %>', 'slide'); return false;"><strong><%= category.send(field_name) %></strong></label><br/>
+        <% style = "style='display:none;'" %>
+        <% for pre_look in attributes %>
+          <% if cookies[pre_look.send(field_name)] %>
+            <% style = "" %>
+          <% end %>
+        <% end %>
+
+        <div id="<%= field_name %>" <%= style %>
+             <br/>
+        <% for attribute in attributes %>
+          <%
+            unless cookies[attribute.send(field_name)]
+              checked = ""
+            else
+              checked = "checked"
+            end
+          %>
+          <% unless attribute.send(field_name).nil? %>
+          <%=  check_box(field_name, attribute.send(field_name),{ :checked => checked })%><%= attribute.send(field_name) %>
+          <br/>
+          <% end %>
+        <% end %>
+      </div>
+      <% style = "style='display:none;'" %>
+      <% end %>
+    <% }%>
+
+        <p>
+          <%= submit_tag "Set Filter" %>
+          <% if cookies[:filter] %>
+          <%= link_to_remote "Clear", :complete => "new Effect.BlindUp('filterStatus', { duration: .5 })",
+          :url => {:controller => 'filter', :action => 'filter_clear'},
+          :update => 'filterStatus' %>
+          <% end %>
+        </p>
+
+            <%= f.hidden_field("project_id", :value=> @project.id) %>
+            <%= f.hidden_field("num_params", :value=> param_count) %>
+            
+
+  <% end %>
+
+<% else %>
+  <h5>No filter available</h5>
+<% end %>
+  <div id="filterStatus"></div>

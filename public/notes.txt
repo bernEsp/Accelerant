@@ -1,0 +1,21 @@
+omnifroodle: the other option is named scopes, which are nice if you'll be 'limiting' by that a lot
+[3:14pm] omnifroodle: in your model you'd do
+[3:15pm] omnifroodle: named_scope :project_not_nil, :conditions => 'project_id IS NOT NULL'
+[3:15pm] omnifroodle: and
+[3:16pm] omnifroodle: actually that's all
+[3:16pm] omnifroodle: then you could do a
+[3:16pm] omnifroodle: Thing.project_not_nul.find_by_user_id(whatever.id)
+[3:16pm] omnifroodle: in your controller
+
+chazzer: In doing string comparisons, is there a wildcard character?  Like '%' or similar?
+[09:45am] omnifroodle: I think a regular expression is your best bet, but it's an easy one
+[09:45am] omnifroodle: >> 'this string' =~ /thi.*ring/
+[09:45am] omnifroodle: => 0
+[09:46am] omnifroodle: where 'this string' is the string your testing, and .* in the regular expression basically acts as a wild card
+omnifroodle: it'll return nil if there is no match and 0 if there is (it actually makes sense, but you have to dig deeper into regex before it does)
+[09:47am] omnifroodle: as a counter example:
+[09:47am] omnifroodle: >> 'this string' =~ /the.?ring/
+[09:47am] omnifroodle: => nil
+[09:47am] omnifroodle: sorry,
+[09:47am] omnifroodle: >> 'this string' =~ /the.*ring/
+[09:47am] omnifroodle: => nil

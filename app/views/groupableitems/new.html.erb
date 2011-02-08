@@ -1,0 +1,79 @@
+<h1 class="lower">Add items...</h1>
+<br/>
+<div style="width:400px;float:left;">
+
+  <% unless @previousitems.empty? %>
+    The following are already in the map...<br/>
+  <% end %>
+
+  <% for previous in @previousitems %>
+
+    <p>
+    <%  unless previous.image.url == "" %>
+      <%= image_tag previous.image.url(:size50) %>
+    <% end %>
+    <%= previous.description %></p>
+
+  <% end %>
+
+
+<% form_for :groupableitems, @groupableitems,
+  :html => { :multipart => true },
+:url =>{:controller => 'groupableitems', :action => 'create' } do |f| -%>
+
+
+<p><%= label_tag 'description:' %><br/>
+<%= f.text_field :description %>
+<%= f.hidden_field :groupables, :value => params[:id] %>
+</p>
+
+<p>
+	Image (optional):<br/>
+	<%= f.file_field :image %>
+</p>
+
+<p><%= submit_tag 'Add' %>&nbsp;&nbsp;<%= link_to "I'm done", :controller => "groupables", :action => "show", :id => params[:id] %></p>
+
+<% end -%>
+
+
+<h1 class="lower">Define your axis...</h1>
+<br/>
+<p>You'll need to define an X and Y axis for your perception map... For instance, you may set your X-axis as QUANTITY and your 
+Y-axis as QUALITY.  Your map will look like:</p>
+<p>
+<%= image_tag "BlogNogPerceptionMap.png" %>
+</p>
+<br/>
+
+
+  <% unless @previoustargets.empty? %>
+   The X and Y axis items have been set.<br/>
+  <% end %>
+
+  <% for previous in @previoustargets %>
+
+    <p>
+    <%= previous.description %>
+    </p>
+
+  <% end %>
+
+<% if @previoustargets.empty? %>
+<% form_for :groupabletargets,
+  :url =>{:controller => 'groupabletargets', :action => 'createaxis' } do |f| -%>
+
+<p><%= label_tag 'X-axis:' %><br/>
+  <input type="text" name="xAxis" />
+</p>
+
+<p><%= label_tag 'Y-axis:' %><br/>
+  <input type="text" name="yAxis" />
+</p>
+
+<input type="hidden" name="groupable" value="<%= params[:id] %>" />
+<p><%= submit_tag 'Create' %></p>
+
+<% end -%>
+<% end %>
+</div>

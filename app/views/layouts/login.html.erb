@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>blognog</title>
+  <%= stylesheet_link_tag 'login'%>
+<!--[if IE 6]>
+  <%= stylesheet_link_tag 'loginie'%>
+<![endif]-->
+  <%= javascript_include_tag  :defaults %>
+
+</head>
+<% if @theme.nil? %>
+<body>
+<% else %>
+  <body style="background-color:#<%= @theme.color  %>" >
+<% end %>
+  <div id="content">
+  <div id="topper"></div>
+  <div id="yellowBar"></div>
+  <% if @theme.nil? %>
+  <div id="bottom">
+    <div id="leftStuff">
+      <div id="secure">Secure Login</div>
+      <div id="links">
+
+        <%
+        #if cookies[:test_cookie] != "1234567890"
+         # flash[:notice] = "Cookies must be enabled."
+        #end
+        %>
+        <!--
+      <p>Forget your Password? No worries, just <span>Click Here</span></p>
+      <p>Need to Sign Up?  <span>Click Here to get started</span></p>
+      <p>Not sure why you are here?  <span>Learn More &gt;&gt;</span></p>
+        -->
+      </div>
+    </div>
+    <% else %>
+    <div id="bottom_generic">
+      <div id="leftStuff">
+      <%= image_tag @theme.logo.url(:size300), :style => "margin:30px 0 0 40px;" %>
+      <div id="secure">Secure Login</div>
+      <div id="links">
+        
+      </div>
+    </div>
+    <% end %>
+    <div id="formBlock">
+      <%= flash[:notice] %>
+      <%=yield%>
+    </div>
+    <div id="copyright">&copy;<%= Time.now.strftime("%Y") %> BlogNog Research and Accelerant Research. All Rights Reserved.</div>
+  </div>
+</div>
+  <!-- Generated <%= Time.now %>  -->
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+
+<div id="responses">
+    <div class="clientMainEntry" id="latestresponse"></div>
+    	<!-- Start comments -->
+        <%
+          if params[:sort] == "by_user"
+            @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "user_id ASC, id DESC", :include => :user)
+          else
+            @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "created_at DESC", :include => :user)
+          end
+
+            for comment in @latest_postings_redux
+
+
+          ####### this block is TEMPORARY to filter at the COMMENT level
+
+                displayflag = true
+      if cookies[:filter] == "yes"
+        displayflag = false
+        cookies.to_hash.each_pair do |k, v|
+          if cookies[k.to_sym].split('_')[0] == "field"
+            testuser = User.find_by_id(comment.user.id,:conditions => cookies[:sql])
+            if testuser.nil?
+              if !User.is_participant.find_by_id(comment.user.id)
+                displayflag = true
+              else
+                displayflag = false
+              end
+            else
+                displayflag = true
+            end
+          end
+        end
+      end
+
+
+
+
+
+          #######
+
+
+            not_visible = CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id, :comment_id => comment.id })
+            my_project = Project.find(:last, :conditions => {:id => project_id})
+
+            if (!not_visible && !my_project.one_to_one && displayflag)
+              %>
+              <%= show_comment(comment) %>
+              <%
+            else
+              if User.exists?(comment.user_id)
+              if displayflag && (my_project.one_to_one?) && (comment.user && ((comment.user.id == self.current_user.id || comment.user.admin? || comment.user.moderator?) || self.current_user.admin? || self.current_user.moderator? || self.current_user.client? ))
+                %>
+                  <%=  show_comment(comment) %>
+                <%
+              end
+              end
+            end
+          end
+          %>
+         
+    </div><!-- responses -->
+    

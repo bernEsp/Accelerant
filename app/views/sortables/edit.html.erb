@@ -1,0 +1,16 @@
+<h1 class="lower">Edit your list</h1>
+<div style="width:400px;float:left;">
+<% form_for :sortables, @sortable,
+:url =>{:controller => 'sortables', :action => 'update' } do |f| -%>
+
+
+<p><%= label_tag 'title:' %><br/>
+<%= f.text_field :title %>
+<%= f.hidden_field :id, :value => params[:id] %>
+</p>
+
+
+<p>&nbsp;&nbsp;<%= link_to "Cancel", :controller => "project", :action => "edit", :id => @sortable.project_id %>&nbsp;&nbsp;<%= submit_tag 'Next -->' %></p>
+
+<% end -%>
+</div>

@@ -1,0 +1,33 @@
+
+<%= page_title 'Your Follow Ups...' %>
+<p>&nbsp;</p>
+<table>
+<% for follow in @follow_ups %>
+<% user = User.find(follow.user_id) %>
+  <tr>
+  <td><%= render_avatar(user) %></td>
+<td>
+<%  if user.id == self.current_user.id %>
+You said:<br/>
+<% else %>
+<%= user.name %> said:<br/>
+<% end %>
+"<%= follow.content %>"
+  
+</td>
+  </tr>
+  <tr><td colspan="2" align="right">
+      <div id="reply<%=follow.id%>">
+<%= link_to_remote "Follow Up",
+:url => {:controller => 'plain', :action => 'follow_up', :id => follow.reply_id},
+:update => "reply#{follow.id}" %>
+  </div>
+    </td>
+<%
+  follow.read = true
+  follow.save
+%>
+  </tr>
+
+<% end %>
+</table>

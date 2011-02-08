@@ -1,0 +1,43 @@
+<%#= request.env['HTTP_USER_AGENT'].downcase %>
+<%#= client_browser_name %>
+<%#= safari_check %>
+<% if self.current_user.participant  %>
+  <%= include_yui_editor_if_used %>
+<% end %>
+
+
+<div id="thisForm<%= params[:id]%>">
+  
+<%  comment_num = Comment.find(params[:id])%>
+<% form_for :reply,
+:html => { :multipart => true, :target => 'iframe'},
+:url =>{:controller => 'replies', :action => 'create' } do |f| -%>
+
+<% if self.current_user.participant && safari_check != "Safari" %>
+  <%= f.text_area :content, :size => "50 x 10", :class => 'rich_text_editor' %><br/>
+<% else %>
+  <%= f.text_area :content, :size => "50 x 10" %><br/>
+<% end %>
+
+<% #if self.current_user.admin || self.current_user.moderator %>
+<% # =check_box("reply", "private", {}, :true )  %>
+<%  #end %>
+
+Upload a photo or file:<br/>
+<%= f.file_field :media %><br/>
+
+<div class="postButton">
+  <%= submit_tag "Post", :style => "margin-right:50px;" %>
+</div>
+
+<%= f.hidden_field :comment_id, :value => params[:id] %>
+<%= f.hidden_field :discussion_id, :value => comment_num.discussion_id %>
+
+<input type="hidden" name="project_id" value="<%= comment_num.project_id %>" >
+
+<%= f.hidden_field :user_id, :value => self.current_user.id %>
+
+<% end -%>
+
+</div>
+<div id="stuff"></div>

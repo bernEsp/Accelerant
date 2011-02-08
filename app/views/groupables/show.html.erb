@@ -1,0 +1,55 @@
+<h1 class="lower"><%=  @groupable.title %></h1>
+<br/>
+
+<p>Here are the items in your map "<%=  @groupable.title %>" and these can actually be dragged and dropped in the same manner that your
+participants will be dragging and dropping.  Go ahead and try it!</p>
+<br/>
+<div style="display:inline-block;">
+<ul id="groupables" style="list-style:none">
+  <% for groupableitems in @groupableitems %>
+
+  <% content_tag_for :li, groupableitems do %>
+  <span class="handle2" >
+        <%  unless groupableitems.image.url == "" %>
+      <%= image_tag groupableitems.image.url(:size100), :style => "vertical-align:middle;" %>
+    <% end %>
+    <span ><%= groupableitems.description %></span>
+  </span>
+  <% end %>
+<%= draggable_element("groupableitems_#{groupableitems.id}", :revert => false) %>
+  <% end %>
+
+</ul>
+</div>
+<div ></div>
+
+
+<div class="targetFrame">
+<div style="clear:both"></div>
+<% i = 0 %>
+<% @groupabletargets.each do|groupabletarget| %>
+
+<%
+  i = i +1
+  if i==3
+    %>
+<div style="clear:both"></div>
+<%
+  end
+%>
+
+  <% div_for groupabletarget, :class => "perceptiontargets" do %>
+      <%=  groupabletarget.description %>
+   <% end %>
+
+<%= drop_receiving_element("groupabletargets_#{groupabletarget.id}",
+  :hoverclass => 'hover',
+  :url =>{ :controller => "groupableitems",
+    :action => "group",
+    :target => groupabletarget.id,
+    :user => self.current_user.id }) %>
+<%end%>
+
+
+
+</div>

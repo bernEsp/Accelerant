@@ -1,0 +1,22 @@
+<h1 class="lower">Create a New Sortable List</h1>
+<div style="width:400px;float:left;">
+<% form_for :sortables, @sortable,
+:url =>{:controller => 'sortables', :action => 'create' } do |f| -%>
+
+  <p><strong>Sortable lists</strong> are a way to present a user-friendly list which your participants can use to rank their preferences
+  using a simple drag-and-drop interface.</p>
+
+  <p>To get started, give your list a title.  This is for your reference only, so give it a title that will help you
+  remember the subject or content of this list (eg. "Your favorite fruits").</p>
+
+<p><%= label_tag 'title:' %><br/>
+<%= f.text_field :title %>
+<%= f.hidden_field :project_id, :value => params[:id] %>
+</p>
+
+
+<p>&nbsp;&nbsp;<%= link_to "Cancel", :controller => "project", :action => "edit", :id => params[:id] %>&nbsp;&nbsp;<%= submit_tag 'Next -->' %></p>
+
+<p>On the next screen(s) you can add the actual list items (eg. "apples", "oranges", "kiwi", "grapes").</p>
+<% end -%>
+</div>

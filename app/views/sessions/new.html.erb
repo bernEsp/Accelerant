@@ -1,0 +1,12 @@
+<%#= image_tag "BlogNog.png", :style => "float:right;", :class => "BlogNogLogo" %>
+
+<% form_tag session_path do -%>
+<p><%= label_tag 'username:' %><br />
+<%= text_field_tag 'login', @login, :class => "textbox" %></p>
+
+<p><%= label_tag 'password:' %><br />
+<%= password_field_tag 'password', nil, :class => "textbox" %></p>
+<%= hidden_field_tag 'remember_me', 1  %>
+
+<input type="image" src="../images/login.jpg" alt="login" value="Submit" class="submitButton">
+<% end -%>

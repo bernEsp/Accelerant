@@ -1,0 +1,14 @@
+
+<form method="post" action="../../replies/update" >
+
+
+<p><%= label_tag 'content:' %><br/>
+<textarea name="content"><%= @reply.content %></textarea>
+</p>
+
+<input type="hidden" name="id" value="<%= params[:id] %>" />
+
+
+<p><%= submit_tag 'Update' %></p>
+
+</form>

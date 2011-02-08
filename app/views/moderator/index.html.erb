@@ -1,0 +1,19 @@
+<% unless session[:theme] %>
+  <%= image_tag "BlogNog2.png", :style => "float:right;", :class => "BlogNogLogo" %>
+<% else %>
+  <%= image_tag Themes.find(session[:theme]).logo.url(:size200), :style => "float:right;", :class => "BlogNogLogo" %>
+<% end %>
+<h1 class="lower">Moderator Home</h1>
+<p>&nbsp;</p>
+
+<% for project in @these_projects %>
+<div>
+    <p>
+	<strong><%=project.title %></strong><br/>
+        <%= link_to 'View', :controller => 'assignment', :action => 'show', :id => project.id %> |
+	<%= link_to "Edit", {:controller => "project", :action => "edit", :id => project.id} %> |
+	<%= link_to 'Delete', {:controller => 'project', :action => 'drop', :id => project.id}, :confirm => "Are you sure?" %>
+	</p>
+</div>
+
+<% end %>

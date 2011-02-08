@@ -1,0 +1,34 @@
+<% form_for :dump, :url=>{:controller=>"importer", :action=>"csv_import"}, :html => { :multipart => true } do |f| -%>
+
+<h4>Upload/Update Users via CSV import...</h4>
+<table>
+   <tr>
+     <td>
+      <label for="dump_file">
+        Select a CSV File:
+      </label>
+     </td>
+     <td >
+       <%= f.file_field :file -%>
+     </td>
+   </tr>
+   <tr><td>
+       <label for="dump_file">
+        Select project:
+      </label>
+     </td><td>
+       <% if self.current_user.admin? %>
+       <%=  select("dump", "project_id", Project.find(:all, :order => "id DESC").collect {|p| [ p.title, p.id ] }) %>
+       <% end %>
+       <% if self.current_user.moderator? %>
+       <%=  select("dump", "project_id", Project.find(:all, :conditions => {:moderator_id => self.current_user.id}, :order => "id DESC").collect {|p| [ p.title, p.id ] }) %>
+       <% end %>
+     </td>
+   </tr>
+   <tr>
+     <td colspan='2'>
+       <%= submit_tag 'Submit' -%>
+     </td>
+   </tr>
+ </table>
+<% end -%>

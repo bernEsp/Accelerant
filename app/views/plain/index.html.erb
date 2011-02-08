@@ -1,0 +1,8 @@
+<div id="responses">
+	<div id="latestresponse">
+
+	</div>
+	<% for latest in @latest_postings %>
+		<p><%=h latest.comment %></p>
+	<% end %>
+</div>

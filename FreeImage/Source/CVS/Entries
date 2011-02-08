@@ -1,0 +1,20 @@
+D/DeprecationManager////
+D/FreeImage////
+D/FreeImageLib////
+D/FreeImageToolkit////
+D/LibJPEG////
+D/LibMNG////
+D/LibPNG////
+D/LibTIFF////
+D/Metadata////
+D/ZLib////
+/CacheFile.h/1.4/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/FreeImage.h/1.65/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/FreeImageIO.h/1.4/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/Plugin.h/1.10/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/Quantizers.h/1.8/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/ToneMapping.h/1.1/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+/Utilities.h/1.13/Fri May  8 16:14:10 2009//D2007.01.01.05.00.00
+D/LibGIF////
+D/LibOpenJPEG////
+D/OpenEXR////

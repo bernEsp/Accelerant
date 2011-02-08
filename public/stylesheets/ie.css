@@ -1,0 +1,27 @@
+.copyright {
+	float:right;
+	display:inline;
+	margin-right:30px;
+	line-height:55px;
+	color:#4491c3;
+        text-align:right;
+}
+
+.discussionLinks {
+    position:relative;
+    margin-top:20px;
+}
+
+.discussionLinks legend {
+    position:absolute;
+    top: -.5em;
+    left: .2em;
+    margin-bottom:40px;
+    background-color:#f2f2f2;
+
+}
+
+.discussionLinks a {
+    line-height:30px;
+    margin-left:15px;
+}

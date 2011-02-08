@@ -1,0 +1,19 @@
+<div id="thisForm<%= params[:id]%>">
+
+<% form_for :comment, :url => {:controller => 'plain', :action => 'comment_update' } do |f| -%>
+
+<%= f.text_area :comment, :size => "70 x 10", :class => "rich_text_editor" %>
+  <%#= f.wysihat_editor :comment, :size => "50 x 10" %>
+  <br/>
+
+
+<%= f.hidden_field :id %>
+
+<div class="postButton">
+  <%= submit_tag "Update", :style => "margin-right:50px;" %>
+</div>
+
+
+<% end -%>
+
+</div>

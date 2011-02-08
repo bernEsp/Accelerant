@@ -1,0 +1,24 @@
+<% rand_int = rand(1024) %>
+<div id="thisForm<%= rand_int%>">
+<%  reply = Replies.find(params[:id])%>
+<% remote_form_for :follow_up,
+  :update => "thisForm#{rand_int}",
+:url =>{:controller => 'follow_ups', :action => 'create' } do |f| -%>
+
+<%= f.text_area :content, :size => "40 x 10" %><br/>
+
+
+<div class="postButton">
+  <%= submit_tag "Post", :style => "margin-right:50px;" %>
+</div>
+
+<%= f.hidden_field :reply_belongs_to, :value => reply.user_id %>
+<%= f.hidden_field :reply_id, :value => reply.id %>
+
+
+<%= f.hidden_field :user_id, :value => self.current_user.id %>
+
+
+<% end -%>
+
+</div>
