@@ -428,3 +428,9 @@ img {
       border-left:2px solid #000;
       margin-right:90px;
   }
+.heatmapLink{
+  float: right;
+}
+.heatmapContainer{
+  display: none;
+}

@@ -1,44 +1,53 @@
 <!-- Response form starts here -->
-<% if !self.current_user.participant && !self.current_user.client %>
+<%# if !self.current_user.participant && !self.current_user.client %>
 <%
 @discussion_dis = Discussion.find(discussions.id)
 %>
-          <div style="padding-top:15px;clear:both;" id="responder_form" >
-              <% form_for :comments,
-		:html => {:id => "my_form", :multipart => true},
-		:url =>{:controller => 'comments', :action => 'create' } do |f| -%>
-        <div class="avatar">
-          <%= render_avatar(self.current_user) %>
-	</div>
-        <div class="topResponseBox">
-          <h1>Post Your Response:</h1>
-          <% if !@discussion_dis.character_minimum.nil? && @discussion_dis.character_minimum > 0 %>
-          <p><%=@discussion_dis.character_minimum%> characters MINIMUM</p>
-          <% end %>
-          <div class="responseWidget">
-          	<%= f.text_area :comment, :size => "60 x 10", :class => 'rich_text_editor' %><br/>
-				Upload a photo or file:<br/>
-			<%= f.file_field :photo %>
-                                
-			<% if logged_in? %>
-			<%= f.hidden_field :user_id, :value => self.current_user.id %>
-			<% end %>
-			<%= f.hidden_field :project_id, :value => project_id %>
-                        <%= f.hidden_field :discussion_id, :value => discussions.id %>
-                        <% if !@project.one_to_one && self.current_user.moderator %>
-                          Hide responses until answered:
-                          <%= f.check_box :hide_until_answered %>
-                        <% end %>
-			<div class="postButton" style="margin-top:-20px;">
-			<%= submit_tag "Share", :style => "margin-right:10px;" %>
-                        </div>
-          </div>
+  <%= link_to "Post your heatmap", "#", :id =>"heatmapLink", :class =>"heatmapLink", :onclick => "$('heatmapContainer').removeClassName('heatmapContainer')"%> <br/>
+  <div style="padding-top:15px;clear:both;" id="responder_form" >
 
+    <% form_for :comments,:html => {:id => "my_form", :multipart => true}, :url =>{:controller => 'comments', :action => 'create' } do |f| -%>
 
-        </div>
+      <div class="avatar">
+        <%= render_avatar(self.current_user) %>
+	    </div>
 
+      <div class="topResponseBox">
+        <%= render :partial => "comment_form", :locals => {:f => f, :discussions => discussions, :project_id => project_id}%>
+      </div>
+    <% end -%><!-- form for -->
+  </div>
+<!-- Heatmap -->
+<div class="heatmapContainer", id="heatmapContainer">
+  <h1>Heatmap Stage</h1>
+  <h3><%=@discussion_dis.title.humanize%></h3>
+  <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+  id="HeatMap" width="680" height="463"
+  codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+    <param name="movie" value="HeatMap.swf" />
+    <param name="quality" value="high" />
+    <param name="bgcolor" value="#ffffff" />
+    <param name="allowScriptAccess" value="sameDomain" />
+    <param name='flashVars' value="firstName=Nick&lastName=Danger&image=<%= @discussion_dis.media.url %>"/>
+    <embed src="/heatMap/HeatMap.swf" quality="high" bgcolor="#ffffff"
+    	width="680" height="463" name="HeatMap" align="middle"
+    	play="true"
+    	loop="false"
+    	quality="high"
+    	allowScriptAccess="sameDomain"
+    	type="application/x-shockwave-flash"
+    	pluginspage="http://www.adobe.com/go/getflashplayer"
+    	flashVars="firstName=Nick&lastName=Danger&image=<%= @discussion_dis.media.url%>">
+    </embed>
+  </object>
+ <% form_for :heatmap_comments,:html => {:id => "my_form", :multipart => true}, :url =>{:controller => 'heatmap', :action => 'create' } do |f| -%>
+  <div class="heatmap_comment">
+    <%= render :partial => "comment_form", :locals => {:f => f, :discussions => discussions, :project_id => project_id}%>
+  </div>
+<%end%>
+</div>
 
-      <% end -%><!-- form for -->
-          </div>
-
-<% end %>
+<% content_for :scripts do%>
+  <%= javascript_include_tag "loadFlexapp"%>
+<%end%>
+<%# end %>

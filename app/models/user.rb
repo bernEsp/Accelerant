@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
   has_many :comments
   has_many :replies
+  has_many :heatmap
   belongs_to :user_assignments
 
 

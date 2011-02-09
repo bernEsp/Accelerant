@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110128141049) do
+ActiveRecord::Schema.define(:version => 20110208232847) do
 
   create_table "admins", :force => true do |t|
     t.integer  "user_id"
@@ -173,6 +173,26 @@ ActiveRecord::Schema.define(:version => 20110128141049) do
     t.datetime "updated_at"
     t.integer  "groupableaxis_id"
     t.string   "orientation"
+  end
+
+  create_table "heatmap_coords", :force => true do |t|
+    t.float    "coord_x"
+    t.float    "coord_y"
+    t.float    "coord_radio"
+    t.integer  "heatmap_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "heatmaps", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.text     "comment"
+    t.string   "image_result"
+    t.integer  "user_id"
+    t.integer  "discussion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "moderators", :force => true do |t|

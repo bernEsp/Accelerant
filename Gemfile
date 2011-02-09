@@ -7,5 +7,7 @@ group :development do
   gem "json"
   gem "ruby-debug"
   gem "whenever"
+  gem "paperclip", "~>2.3.1.1"
+  gem "comma"
 end
 
