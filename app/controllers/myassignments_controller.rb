@@ -5,7 +5,6 @@ class MyassignmentsController < ApplicationController
 #  end
 
   def show
-    debugger
     @your_assignments = UserAssignments.find(:all, :conditions => { :user_id => self.current_user.id}, :group => "project_id")
     @last_ass = UserAssignments.find(:last, :conditions => { :user_id => self.current_user.id})
     @ass = Project.find(@last_ass.project_id)
