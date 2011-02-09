@@ -7,8 +7,10 @@ class Discussion < ActiveRecord::Base
 
 
   has_attached_file :media,
+  :storage => :s3,
   :whiny => false,
   :whiny_thumbnails => false,
-  :styles => { :large => "300x300>", :medium => "100x100>", :small => "50x50>", :tiny => "20x20>" }
-
+  :styles => { :large => "300x300>", :medium => "100x100>", :small => "50x50>", :tiny => "20x20>" },
+  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
+  :path => "discusion/:attachment/:style/:id.:extension"
 end

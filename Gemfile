@@ -7,7 +7,8 @@ group :development do
   gem "json"
   gem "ruby-debug"
   gem "whenever"
-  gem "paperclip", "~>2.3.1.1"
   gem "comma"
+  gem "aws-s3", :require => 'aws/s3'
+  gem "paperclip", "~>2.3.1.1"
 end
 

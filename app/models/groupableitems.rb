@@ -1,6 +1,7 @@
 class Groupableitems < ActiveRecord::Base
 
   has_attached_file :image,
+  :storage => :s3,
   :whiny => false,
   :whiny_thumbnails => false,
   :styles => {
@@ -14,7 +15,9 @@ class Groupableitems < ActiveRecord::Base
   :size50 => "50x50>",
   :size30 => "30x30>",
   :size20 => "20x20>"
-  }
+  },
+  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
+  :path => "groupableitems/:attachment/:style/:id.:extension"
 
   
 end

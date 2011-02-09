@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
   has_many :comments
   has_many :replies
-  has_many :heatmap
+  has_many :heatmaps
   belongs_to :user_assignments
 
 
@@ -14,10 +14,13 @@ class User < ActiveRecord::Base
   named_scope :is_admin, :conditions => {:admin => true}
   named_scope :is_participant, :conditions => {:participant => true}
 
-  has_attached_file :avatar, 
+  has_attached_file :avatar,
+  :storage => :s3,
   :whiny => false, 
   :whiny_thumbnails => false,
-  :styles => { :large => "300x300>",:medium => "100x100>", :thumb => "80x80>", :small => "50x50>", :smaller => "30x30>", :tiny => "20x20>" }
+  :styles => { :large => "300x300>",:medium => "100x100>", :thumb => "80x80>", :small => "50x50>", :smaller => "30x30>", :tiny => "20x20>" },
+  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
+  :path => "user/:attachment/:style/:id.:extension"
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
