@@ -17,7 +17,7 @@ class Groupableitems < ActiveRecord::Base
   :size20 => "20x20>"
   },
   :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
-  :path => "groupableitems/:attachment/:style/:id.:extension"
+  :path => ":attachment/:id/:style/:filename"
 
   
 end

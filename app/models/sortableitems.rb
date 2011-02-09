@@ -16,7 +16,8 @@ has_attached_file :image,
   :size30 => "30x30>",
   :size20 => "20x20>"
   },
-  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml"
+  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
+  :path => ":attachment/:id/:style/:filename"
 
   
 end

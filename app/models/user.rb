@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   :whiny => false, 
   :whiny_thumbnails => false,
   :styles => { :large => "300x300>",:medium => "100x100>", :thumb => "80x80>", :small => "50x50>", :smaller => "30x30>", :tiny => "20x20>" },
-  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml"
+  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
+  :path => ":attachment/:id/:style/:filename"
 
   validates_presence_of     :login
   validates_length_of       :login,    :within => 3..40
