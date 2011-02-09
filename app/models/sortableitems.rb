@@ -16,8 +16,7 @@ has_attached_file :image,
   :size30 => "30x30>",
   :size20 => "20x20>"
   },
-  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
-  :path => "sortableitems/:attachment/:style/:id.:extension"
+  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml"
 
   
 end

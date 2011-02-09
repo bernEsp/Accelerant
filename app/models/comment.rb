@@ -19,8 +19,7 @@ class Comment < ActiveRecord::Base
   :whiny => false, 
   :whiny_thumbnails => false, 
   :styles => { :medium => "300x300>", :thumb => "100x100>", :small => "50x50>", :tiny => "20x20>" },
-  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
-  :path => "comment/:attachment/:style/:id.:extension"
+  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml"
 
   comma do
       project :title

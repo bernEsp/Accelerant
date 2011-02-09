@@ -9,7 +9,5 @@ class Project < ActiveRecord::Base
   :styles => { :large => "300x300>", :medium => "100x100>", :small => "50x50>", :tiny => "20x20>" },
   :whiny => false,
   :whiny_thumbnails => false,
-  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
-  :path => "project/:attachment/:style/:id.:extension"
-  
+  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml"
 end
