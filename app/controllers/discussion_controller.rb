@@ -145,5 +145,4 @@ class DiscussionController < ApplicationController
     end
     redirect_to :controller => 'assignment', :action => 'show', :id => @discussion.project_id
   end
-
 end
