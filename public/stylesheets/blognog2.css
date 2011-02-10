@@ -432,7 +432,5 @@ img {
   float: right;
 }
 .heatmapContainer{
-  clear: both;
-  display: none;
-  padding-top:15px;
+  padding-top:-15px;
 }

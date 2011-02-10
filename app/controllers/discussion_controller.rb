@@ -112,6 +112,11 @@ class DiscussionController < ApplicationController
       end
     end
     end
+    respond_to do |format|
+     format.html
+     format.xml { render :xml => {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => @discussion.media.url}.to_xml  }
+    end
+
   end
 
   def edit

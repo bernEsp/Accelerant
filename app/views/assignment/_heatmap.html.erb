@@ -1,0 +1,26 @@
+<!-- Heatmap -->
+<div class="heatmapContainer", id="heatmapContainer">
+  <h1>Heatmap Stage</h1>
+  <h3><%=discussion_dis.title.humanize%></h3>
+  <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="HeatMap" width="680" height="463" codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+    <param name="movie" value="HeatMap.swf" />
+    <param name="quality" value="high" />
+    <param name="bgcolor" value="#ffffff" />
+    <param name="allowScriptAccess" value="sameDomain" />
+    <param name='flashVars' value="firstName=Nick&lastName=Danger&image=<%= discussion_dis.media.url %>"/>
+    <embed src="/heatMap/HeatMap.swf" quality="high" bgcolor="#ffffff"
+    	width="680" height="463" name="HeatMap" align="middle"
+    	play="true"
+    	loop="false"
+    	quality="high"
+    	allowScriptAccess="sameDomain"
+    	type="application/x-shockwave-flash"
+    	pluginspage="http://www.adobe.com/go/getflashplayer"
+    	flashVars="firstName=Nick&lastName=Danger&image=<%= discussion_dis.media.url%>">
+    </embed>
+  </object>
+</div>
+
+<% content_for :scripts do%>
+  <%= javascript_include_tag "loadFlexapp"%>
+<%end%>
