@@ -39,7 +39,7 @@ participants will be dragging and dropping.  Go ahead and try it!</p>
 %>
 
   <% div_for groupabletarget, :class => "perceptiontargets" do %>
-      <%=  groupabletarget.description %>
+      <%#=  groupabletarget.description %>
    <% end %>
 
 <%= drop_receiving_element("groupabletargets_#{groupabletarget.id}",
@@ -52,4 +52,11 @@ participants will be dragging and dropping.  Go ahead and try it!</p>
 
 
 
+</div>
+<p class="y-label">
+<%= @Y.description %>
+</p>
+
+<div class="x-label">
+<%= @X.description %>
 </div>

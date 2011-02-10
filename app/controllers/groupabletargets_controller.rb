@@ -17,6 +17,7 @@ class GroupabletargetsController < ApplicationController
     @targetx.description = params[:xAxis]
     @targetx.groupable = params[:groupable]
     @targetx.orientation = "X"
+    #@targetx.axisname = params[:xAxis]
     @targetx.save
     @xlow = Groupabletargets.new
     @xlow.description = "Both Low"
