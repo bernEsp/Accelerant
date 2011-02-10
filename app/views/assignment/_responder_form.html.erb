@@ -5,9 +5,8 @@
 %>
 <% if @discussion_dis.has_heatmap%>
   <!-- Heatmap -->
-<div class="heatmapContainer", id="heatmapContainer">
-  <h1>Heatmap Stage</h1>
-  <h3><%=@discussion_dis.title.humanize%></h3>
+<br/>
+<div class="heatmapContainer" id="heatmapContainer">
   <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
   id="HeatMap" width="680" height="463"
   codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
@@ -25,6 +24,7 @@
     	pluginspage="http://www.adobe.com/go/getflashplayer">
     </embed>
   </object>
+</div>
 <%end%>
   <div style="padding-top:15px;clear:both;" id="responder_form" >
 

@@ -275,7 +275,7 @@ img {
 .copyright {
 	float:right;
 	display:inline;
-	margin-right:30px;
+	margin:-13px 30px 0 0;
 	line-height:40px;
 	color:#4491c3;
         text-align:right;
@@ -432,5 +432,5 @@ img {
   float: right;
 }
 .heatmapContainer{
-  padding-top:-15px;
+  margin-left: -93px;
 }
