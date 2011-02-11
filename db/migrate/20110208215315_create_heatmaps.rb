@@ -4,9 +4,6 @@ class CreateHeatmaps < ActiveRecord::Migration
       t.column  :image_result,              :binary
       t.column  :user_id,                   :integer
       t.column  :discussion_id,             :integer
-      t.column :coord_x,                    :decimal
-      t.column :coord_y,                    :decimal
-      t.column :coord_radio,                :decimal
       t.timestamps
     end
   end

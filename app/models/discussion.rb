@@ -1,7 +1,7 @@
 class Discussion < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
-  has_and_belongs_to_many :heatmaps
+  has_many :heatmaps
   
   #named_scope :is_last, :conditions => {:is_published => true}
 
