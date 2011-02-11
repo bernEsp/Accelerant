@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :assignment, :has_many => :participants
 
   map.resources :discussion, :belongs_to => :projects
-  map.discussion_show 'discussion_show', :controller => "discussion", :action => "discussion_show", :method => [:get, :post]
+  map.discussion_show 'discussion_show', :controller => "discussion", :action => "discussion_show"
   map.comment '/comment', :controller => 'comment', :action => 'show'
   map.importer '/importer', :controller => 'importer', :action => 'index'
   map.resources :users
