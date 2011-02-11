@@ -112,10 +112,11 @@ class DiscussionController < ApplicationController
       end
     end
     end
+    session[:discussion_id] = params[:id]
     discussion = {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => @discussion.media.url, :discussion_id => @discussion.id}
     respond_to do |format|
      format.html
-     format.xml { render :xml => discussion.to_xml(:dasherize => false)}
+     format.xml { render :xml => discussion.to_xml(:dasherize => false), :layout => false}
     end
 
   end
@@ -145,5 +146,13 @@ class DiscussionController < ApplicationController
       end
     end
     redirect_to :controller => 'assignment', :action => 'show', :id => @discussion.project_id
+  end
+
+  def discussion_show
+    discussion =  Discussion.find(session[:discussion_id])
+    discussion_xml = {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id}
+    respond_to do |format|
+     format.xml { render :xml => discussion_xml.to_xml(:dasherize => false), :layout => false}
+    end
   end
 end
