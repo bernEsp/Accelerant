@@ -21,7 +21,6 @@ ActionController::Routing::Routes.draw do |map|
   map.comment '/comment', :controller => 'comment', :action => 'show'
   map.importer '/importer', :controller => 'importer', :action => 'index'
   map.resources :users
-  map.user_service 'user_service', :controller => 'users', :action => 'show', :format => "xml"
   map.resources :themes, :belongs_to => :project
   map.resources :sortableitems, :collection => {:sort => :post}
   map.resources :groupableitems, :collection => {:group => :post}
