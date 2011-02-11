@@ -11,7 +11,8 @@
 <!--[if IE ]>
   <%= stylesheet_link_tag 'ie'%>
 <![endif]-->
-
+<%= stylesheet_link_tag 'picky_color' %>
+<%= stylesheet_link_tag 'zoombox'%>
 <%= javascript_include_tag  :defaults %>
 <%#= javascript_include_tag  'magicthumb' %>
 <%#= javascript_include_tag  'magiczoom' %>
@@ -20,8 +21,6 @@
 <%#= javascript_include_tag  :defaults %>
 <%#= javascript_include_tag  'zoombox/zoombox' %>
 <%= javascript_include_tag 'picky_color' %>
-<%= stylesheet_link_tag 'picky_color' %>
-<%= stylesheet_link_tag 'zoombox'%>
 <%= yield :scripts%>
 
 </head>

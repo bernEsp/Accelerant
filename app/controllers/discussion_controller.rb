@@ -112,9 +112,10 @@ class DiscussionController < ApplicationController
       end
     end
     end
+    discussion = {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => @discussion.media.url, :discussion_id => @discussion.id}
     respond_to do |format|
      format.html
-     format.xml { render :xml => {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => @discussion.media.url}.to_xml(:dasherize => false)  }
+     format.xml { render :xml => discussion.to_xml(:dasherize => false)}
     end
 
   end

@@ -1,6 +1,6 @@
 class Heatmap < ActiveRecord::Base
 
   belongs_to :user
-  belongs_to :discussion
-  has_many   :heatmap_coords
+  has_and_belongs_to_many :discussions
+
 end

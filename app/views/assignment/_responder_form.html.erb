@@ -28,7 +28,7 @@
 <%end%>
   <div style="padding-top:15px;clear:both;" id="responder_form" >
 
-    <% form_for :comments,:html => {:id => "my_form", :multipart => true}, :url =>{:controller => 'comments', :action => 'create' } do |f| -%>
+    <% form_for :comments,:html => {:id => "my_form", :multipart => true}, :url =>{:controller => 'comments', :action => 'create'} do |f| -%>
 
       <div class="avatar">
         <%= render_avatar(self.current_user) %>
@@ -53,10 +53,12 @@
     <%= f.check_box :hide_until_answered %>
   <% end %>
   <div class="postButton" style="margin-top:-20px;">
-    <%= submit_tag "Share", :style => "margin-right:10px;" %>
+    <%= submit_tag "Share", :onclick =>"onSubmit()", :style => "margin-right:10px;" %>
   </div>
 </div>
       </div>
-    <% end -%><!-- form for -->
+    <% end %><!-- form for -->
   </div>
-<%# end %>
+<% content_for :scripts do -%>
+  <%= javascript_include_tag "loadFlexapp"%>
+<%end%>

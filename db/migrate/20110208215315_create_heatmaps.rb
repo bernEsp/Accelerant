@@ -1,9 +1,12 @@
 class CreateHeatmaps < ActiveRecord::Migration
   def self.up
     create_table :heatmaps do |t|
-      t.column  :image_result,              :string
+      t.column  :image_result,              :binary
       t.column  :user_id,                   :integer
-      t.column  :discussion_id,              :integer
+      t.column  :discussion_id,             :integer
+      t.column :coord_x,                    :decimal
+      t.column :coord_y,                    :decimal
+      t.column :coord_radio,                :decimal
       t.timestamps
     end
   end

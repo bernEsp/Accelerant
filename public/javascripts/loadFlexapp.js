@@ -58,17 +58,21 @@ document.observe("dom:loaded", function() {
      	+ '<a href=http://www.adobe.com/go/getflash/>Get Flash</a>';
       document.write(alternateContent);  // insert non-flash content
     }
-    
-   function thisMovie(movieName) {
+});
+Event.observe('signinForm', 'submit', onSubmit);
+
+function thisMovie(movieName) {
       if (navigator.appName.indexOf("Microsoft") != -1) {
           return window[movieName];
+
       } else {
           return document[movieName];
       }
-   }
-    
-   function onSubmit()
-   {
-   	thisMovie("HeatMap").onSubmit();
- }
-});
+}
+
+function onSubmit()
+{
+
+ thisMovie("HeatMap").onSubmit();
+
+}

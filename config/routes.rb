@@ -14,11 +14,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :subcomments, :belongs_to => :comments
   map.resources :client, :has_many => :projects
   map.resources :project, :has_many => :assignments
+  #map.assignment_show '/assignment/show.:format', :controller => 'assignment', :action => "show"
   map.resources :assignment, :has_many => :participants
+  map.resources :discussion_services, :only => :index
   map.resources :discussion, :belongs_to => :projects
   map.comment '/comment', :controller => 'comment', :action => 'show'
   map.importer '/importer', :controller => 'importer', :action => 'index'
   map.resources :users
+  map.user_service 'user_service', :controller => 'users', :action => 'show', :format => "xml"
   map.resources :themes, :belongs_to => :project
   map.resources :sortableitems, :collection => {:sort => :post}
   map.resources :groupableitems, :collection => {:group => :post}
@@ -26,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sortables, :collection => {:sort => :post}
   map.online '/online', :controller => 'users', :action => 'showsessions'
   map.your_users '/your_users', :controller => 'users', :action => 'your_users'
-  map.resources  :heatmap
+  map.resources  :heatmap, :only => 'create'
 
   map.resource :session
   

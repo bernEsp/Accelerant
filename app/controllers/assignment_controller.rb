@@ -18,7 +18,6 @@ class AssignmentController < ApplicationController
     @new_assignment = Assignment.new(params[:assignments])
     @new_assignment.save
     redirect_to "/project"
-    #render :text => "Assignment Created!"
   end
   
   def edit
@@ -121,13 +120,14 @@ class AssignmentController < ApplicationController
     end
     end
 
+    discussion = {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => @discussions_desc.media.url, :discussion_id => @discussions_desc.id}
     respond_to do |format|
-      format.html
-      format.xml { render :xml => {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin , :image_path => @discussions_desc.media.url}.to_xml(:dasherize => false)  }
+     format.html
     end
 
   end
-
+  
+    
   def show_spec
     @project_members = UserAssignments.find(:all, :conditions => {:project_id => params[:id]}, :include => :user)
     #@project = Project.find(:all, :conditions => {:id => params[:id]})

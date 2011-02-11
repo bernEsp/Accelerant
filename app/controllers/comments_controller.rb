@@ -27,7 +27,10 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @discussion = Discussion.find(params[:comments][:discussion_id])
+    if params[:comments]
+      @discussion = Discussion.find(params[:comments][:discussion_id])
+    end
+
     if @discussion.character_minimum.nil?
       @discussion.character_minimum = 0
       @discussion.save
