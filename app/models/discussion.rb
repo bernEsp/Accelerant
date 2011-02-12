@@ -22,7 +22,7 @@ class Discussion < ActiveRecord::Base
       heatmaps = discussion.heatmaps
       xml_data = []
       heatmaps.each do |heatmap|
-        xml_data <<  heatmap.heatmaps_coords
+        xml_data <<  heatmap.heatmap_coords
       end
       xml_data
     end
