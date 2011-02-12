@@ -15,7 +15,9 @@
            <%= image_tag "not_active.png", :title => "Project is not currently active" %>
            <% end %>
         </strong><br/>
-	<%= link_to 'View', :controller => 'assignment', :action => 'show', :id => project.id %> | 
+<% discussion = Discussion.find(:first, :conditions => {:project_id => project.id}, :order => 'id DESC') %>
+
+	<%= link_to 'View', :controller => 'discussion', :action => 'show', :id => discussion.id, :project_id => project.id %> | 
 	<%= link_to "Edit", {:controller => "project", :action => "edit", :id => project.id} %> |
 	<%= link_to 'Assign Participants', :controller => 'assignment', :action => 'assign',:id => project.id %> | 
 	<%= link_to 'Delete', {:controller => 'project', :action => 'drop', :id => project.id}, :confirm => "Are you sure?" %>
