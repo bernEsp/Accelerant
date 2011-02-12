@@ -7,8 +7,10 @@ class HeatmapController < ApplicationController
       heatmap = Heatmap.new(:image_result => params[:image_data], :user_id => params[:user_id], :comment_id => last_comment.id)
       if heatmap.save
         discussion.heatmaps << heatmap
-        heatmap_coords =HeatmapCoords.new(:coord_x => coords[0], :coord_y => coords[1], :coord_radio => coords[2])
-        heatmap.heatmap_coords << heatmap_coords if heatmap_coords.save
+        coords.each do |coord|
+          heatmap_coords =HeatmapCoord.new(:coord_x => coord[0], :coord_y => coord[1], :coord_radio => coord[2])
+          heatmap.heatmap_coords << heatmap_coords if heatmap_coords.save
+        end
         respond_to do |format|
           format.html { render :nothing => true }
           format.xml { render :xml => 'success'}
