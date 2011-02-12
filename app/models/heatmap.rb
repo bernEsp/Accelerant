@@ -5,7 +5,7 @@ class Heatmap < ActiveRecord::Base
   belongs_to :comment
   has_many :heatmap_coords
 
-  def create_heatmap(image, coords.to_a, user_id, discussion_id){
+  def create_heatmap(image, coords, user_id, discussion_id){
     last_comment = Comment.find(:last, :conditions => { :user_id => user_id, \
                                 :discussion_id => discussion_id})
     discussion= Discussion.find(discussion_id)
@@ -14,7 +14,7 @@ class Heatmap < ActiveRecord::Base
     if heatmap.save
        discussion.heatmaps << heatmap
        image_coords = []
-       while coords.length >= 3
+       while coords.to_a.length >= 3
           image_coords == coords.slice!(0..2)
           image_coords.each do |coord|
             heatmap_coords = HeatmapCoord.new(:coord_x => coord[0], :coord_y => coord[1], \
