@@ -21,4 +21,5 @@ class Heatmap < ActiveRecord::Base
        end
        return true
     end
+  end
 end
