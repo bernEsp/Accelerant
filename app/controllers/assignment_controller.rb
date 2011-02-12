@@ -119,12 +119,6 @@ class AssignmentController < ApplicationController
       end
     end
     end
-
-    discussion = {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => @discussions_desc.media.url, :discussion_id => @discussions_desc.id}
-    respond_to do |format|
-     format.html
-    end
-
   end
   
     
