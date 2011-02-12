@@ -1,7 +1,7 @@
 class HeatmapController < ApplicationController
 
   def create
-    if create_heatmap(params[:image_data], params[:encodeData], params[:user_id], params[:discussion_id])
+    if Heatmap.create_heatmap(params[:image_data], params[:encodeData], params[:user_id], params[:discussion_id])
       respond_to do |format|
         format.html { render :nothing => true }
         format.xml { render :xml => 'success'}
