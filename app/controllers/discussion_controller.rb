@@ -45,7 +45,9 @@ class DiscussionController < ApplicationController
     unless params[:sort] == "by_user"
       @discussion = Discussion.find(params[:id])
     else
-      @discussion = Discussion.find(params[:id])
+      if @discussions
+        @discussion = Discussion.find(params[:id])
+      end
     end
     unless !@discussion || @discussion.sortable.nil?
     @sortable = Sortables.find(@discussion.sortable)
