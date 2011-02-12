@@ -1,9 +1,10 @@
 class HeatmapController < ApplicationController
 
   def create
+      last_comment = Comment.find(:last, :conditions => { :user_id => params[:user_id], :discussion_id => params[:discussion_id]})
       coords = params[:encodeData].to_a
       discussion= Discussion.find(params[:discussion_id])
-      heatmap = Heatmap.new(:image_result => params[:image_data], :user_id => 6)
+      heatmap = Heatmap.new(:image_result => params[:image_data], :user_id => params[:user_id], :comment_id => last_comment.id)
       if heatmap.save
         discussion.heatmaps << heatmap
         heatmap_coords =HeatmapCoords.new(:coord_x => coords[0], :coord_y => coords[1], :coord_radio => coords[2])
