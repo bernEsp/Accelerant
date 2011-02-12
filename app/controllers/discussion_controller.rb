@@ -152,7 +152,7 @@ class DiscussionController < ApplicationController
 
   def discussion_show
     discussion =  Discussion.find(session[:discussion_id])
-    discussion_xml = {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id}
+    discussion_xml = {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id, :heatmap_id => dicussion.heatmaps.last.id}
     respond_to do |format|
      format.xml { render :xml => discussion_xml.to_xml(:dasherize => false)}
     end
