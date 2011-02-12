@@ -14,4 +14,12 @@ class HeatmapController < ApplicationController
     end
   end
 
+  def show
+    heatmap = Heatmap.find(params[:heatmap_id])
+    heatmap.heatmap_coords
+    respond_to do |format|
+      format.xml {render :xml => heatmap.heatmap_coords}
+    end
+  end
+
 end
