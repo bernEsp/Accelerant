@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 group :development do
   gem "rails", "2.2.2"
+  gem "fastercsv"
   gem "rtf"
   gem "sqlite3"
   gem "json"

@@ -16,7 +16,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   #amazon s3
   #config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "fastercsv"
+
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
