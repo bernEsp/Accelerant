@@ -12,7 +12,8 @@ class Heatmap < ActiveRecord::Base
     if heatmap.save
        discussion.heatmaps << heatmap
        image_coords = []
-       while coords.to_a.length >= 3
+       coords = coords.split(",")
+       while coords.length >= 3
           image_coords == coords.slice!(0..2)
           image_coords.each do |coord|
             heatmap_coords = HeatmapCoord.new(:coord_x => coord[0], :coord_y => coord[1], :coord_radio => coord[2])
