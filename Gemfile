@@ -9,5 +9,5 @@ source "http://rubygems.org"
   gem "whenever"
   gem "comma"
   gem "paperclip", "~>2.3.1.1"
-end
+
 
