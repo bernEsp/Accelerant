@@ -14,11 +14,10 @@ class Heatmap < ActiveRecord::Base
        image_coords = []
        coords = coords.split(",")
        while coords.length >= 3
-          image_coords == coords.slice!(0..2)
-          image_coords.each do |coord|
-            heatmap_coords = HeatmapCoord.new(:coord_x => coord[0], :coord_y => coord[1], :coord_radio => coord[2])
-            heatmap.heatmap_coords << heatmap_coords  if heatmap_coords.save
-          end
+          coord = coords.slice!(0..2)
+          heatmap_coords = HeatmapCoord.new(:coord_x => coord[0], :coord_y => coord[1], :coord_radio => coord[2])
+          heatmap.heatmap_coords << heatmap_coords  if heatmap_coords.save
+
        end
        true
     end
