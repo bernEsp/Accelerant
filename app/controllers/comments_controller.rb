@@ -40,9 +40,6 @@ class CommentsController < ApplicationController
       
       @comment.heatmap = Heatmap.find(:last,:conditions => {:user_id => params[:user_id], :discussion_id => @discussion.id})
       @comment.save
- 
-
-      Heatmap.assign_comment(@comment, @discussion, param[:user_id])
       #redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}#bottom"
       redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}"
     else
