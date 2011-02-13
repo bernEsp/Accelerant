@@ -27,7 +27,7 @@
 </div>
 <%end%>
   <div style="padding-top:15px;clear:both;" id="responder_form" >
-
+<% unless self.current_user.client %>
     <% form_for :comments,:html => {:id => "my_form", :multipart => true}, :url =>{:controller => 'comments', :action => 'create'} do |f| -%>
 
       <div class="avatar">
@@ -59,6 +59,7 @@
       </div>
     <% end %><!-- form for -->
   </div>
+<%end%>
 <% content_for :scripts do -%>
   <%= javascript_include_tag "loadFlexapp"%>
 <%end%>
