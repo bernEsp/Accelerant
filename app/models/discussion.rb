@@ -16,8 +16,9 @@ class Discussion < ActiveRecord::Base
 
   def self.create_xml(user, discussion)
     unless user.admin 
-       xml_data = {:user_name => user.name, :user_id => user.id, :admin => user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id }
-      xml_data
+       xml_data = []
+       xml_data << {:user_name => user.name, :user_id => user.id, :admin => user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id }
+       xml_data
     else
       heatmaps = discussion.heatmaps
       xml_data = []
@@ -26,7 +27,6 @@ class Discussion < ActiveRecord::Base
       end
       xml_data.flatten!
       xml_data << {:user_name => user.name, :user_id => user.id, :admin => user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id }
-
     end
   end
 
