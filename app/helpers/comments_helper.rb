@@ -43,7 +43,7 @@ module CommentsHelper
 		out = out + "<br/>"
       unless comment.heatmap.nil?
         out = out + "<div class='heatmap_result'>"
-        out = out + image_tag (url_for(:controller => "heatmap", :action => "show_image", :id => comment.heatmap.id))
+        out = out + image_tag(url_for(:controller => "heatmap", :action => "show_image", :id => comment.heatmap.id))
         out = out + "<div/>"
       end
 		out = out + "<span>- Posted "
