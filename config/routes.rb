@@ -30,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   map.online '/online', :controller => 'users', :action => 'showsessions'
   map.your_users '/your_users', :controller => 'users', :action => 'your_users'
   map.resources  :heatmap, :only => "create"
+  map.show_image '/heatmap/show_image', :controller => "heatmap", :action => "show_image"
 
   map.resource :session
   
