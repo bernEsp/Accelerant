@@ -13,9 +13,4 @@ class HeatmapController < ApplicationController
       end
     end
   end
-
-  def show_image
-    @heatmap = Heatmap.find(params[:id])
-    send_data @heatmap.image_result, :type => 'image/jpg',:disposition => 'inline'
-  end
 end

@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :discussion, :belongs_to => :projects
   map.discussion_show 'discussion_show', :controller => "discussion", :action => "discussion_show"
+  map.show_image '/discussion/show_image', :controller => "discussion", :action => "show_image"
   map.comment '/comment', :controller => 'comment', :action => 'show'
   map.importer '/importer', :controller => 'importer', :action => 'index'
   map.resources :users
@@ -30,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.online '/online', :controller => 'users', :action => 'showsessions'
   map.your_users '/your_users', :controller => 'users', :action => 'your_users'
   map.resources  :heatmap, :only => "create"
-  map.show_image '/heatmap/show_image', :controller => "heatmap", :action => "show_image"
+
 
   map.resource :session
   

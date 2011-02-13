@@ -4,18 +4,19 @@
 @discussion_dis = Discussion.find(discussions.id)
 %>
 <% if @discussion_dis.has_heatmap%>
+<% size = size_helper(self.current_user)%>
   <!-- Heatmap -->
 <br/>
 <div class="heatmapContainer" id="heatmapContainer">
   <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-  id="HeatMap" width="585" height="465"
+  id="HeatMap" width="<%= size[0]%>" height="<%= size[1]%>"
   codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
     <param name="movie" value="HeatMap.swf" />
     <param name="quality" value="high" />
     <param name="bgcolor" value="#ffffff" />
     <param name="allowScriptAccess" value="sameDomain" />
     <embed src="/heatMap/HeatMap.swf" quality="high" bgcolor="#ffffff"
-    	width="585" height="465" name="HeatMap" align="middle"
+    	width="<%= size[0]%>" height="<%= size[1]%>" name="HeatMap" align="middle"
     	play="true"
     	loop="false"
     	quality="high"
