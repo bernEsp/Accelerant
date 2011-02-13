@@ -34,8 +34,17 @@ class PlainController < ApplicationController
   
   def drop_comment
     @comment = Comment.find(params[:id])
-    @comment.destroy
-    render :text => "Deleted"
+    if @comment.heatmap
+      if @comment.heatmap.heatmap_coords.destroy_all
+        if @comment.heatmap.destroy
+          @comment.destroy
+          render :text => "Deleted"
+        end
+      end
+    else
+      @comment.destroy
+      render :text => "Deleted"
+    end
   end
   
   def drop_reply
