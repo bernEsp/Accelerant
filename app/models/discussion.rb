@@ -15,15 +15,14 @@ class Discussion < ActiveRecord::Base
   :path => ":attachment/:id/:style/:filename"
 
   def self.create_xml(user, discussion)
-
-    unless user_criteria(user)
+    unless user.admin 
        xml_data = []
        xml_data << {:user_name => user.name, :user_id => user.id, :admin => user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id }
        xml_data
     else
       heatmaps = discussion.heatmaps
       xml_data = []
-      xml_data << {:user_name => user.name, :user_id => user.id, :admin => user_criteria(user), :image_path => discussion.media.url, :discussion_id => discussion.id }
+      xml_data << {:user_name => user.name, :user_id => user.id, :admin => user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id }
       heatmaps.each do |heatmap|
         xml_data <<  heatmap.heatmap_coords
       end
@@ -31,11 +30,4 @@ class Discussion < ActiveRecord::Base
     end
   end
 
-  def user_criteria(user)
-    if user.admin || user.moderator || user.client
-      true
-    else
-      false
-    end
-  end
 end
