@@ -30,6 +30,11 @@ class Comment < ActiveRecord::Base
       created_at
     end
   
+  def self.assign_heatmap(comment)
+    heatmap = Heatmap.find(:last,:conditions => {:user_id => comment.user_id, :discussion_id => comment.discussion_id})
+    comment.heatmap = heatmap
+    comment.save
+  end
   #validates_format_of :content_type,
    #                   :with => /^image/,
     #                  :message => "-- you can only upload pictures"

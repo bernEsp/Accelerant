@@ -37,9 +37,8 @@ class CommentsController < ApplicationController
     end
     if (@discussion.character_minimum == 0 || (@discussion.character_minimum != 0) && (params[:comments][:comment].length >= @discussion.character_minimum))
       @comment = Comment.new(params[:comments])
-      
-      @comment.heatmap = Heatmap.find(:last,:conditions => {:user_id => params[:user_id], :discussion_id => @discussion.id})
       @comment.save
+      Comment.assign_heatmap(@comment)
       #redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}#bottom"
       redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}"
     else
