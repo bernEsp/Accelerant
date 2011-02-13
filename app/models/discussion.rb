@@ -15,7 +15,7 @@ class Discussion < ActiveRecord::Base
   :path => ":attachment/:id/:style/:filename"
 
   def self.create_xml(user, discussion)
-    if user.client 
+    if user.participant 
        xml_data = []
        xml_data << {:user_name => user.name, :user_id => user.id, :admin => user_criteria(user), :image_path => discussion.media.url, :discussion_id => discussion.id }
        xml_data
