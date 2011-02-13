@@ -22,11 +22,11 @@ class Discussion < ActiveRecord::Base
     else
       heatmaps = discussion.heatmaps
       xml_data = []
+      xml_data << {:user_name => user.name, :user_id => user.id, :admin => user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id }
       heatmaps.each do |heatmap|
         xml_data <<  heatmap.heatmap_coords
       end
-      xml_data.flatten!
-      xml_data << {:user_name => user.name, :user_id => user.id, :admin => user.admin, :image_path => discussion.media.url, :discussion_id => discussion.id }
+      xml_data = xml_data.flatten
     end
   end
 
