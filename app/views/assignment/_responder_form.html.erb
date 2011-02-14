@@ -1,32 +1,51 @@
 <!-- Response form starts here -->
 <%# if !self.current_user.participant && !self.current_user.client %>
-<%
-@discussion_dis = Discussion.find(discussions.id)
-%>
-<% if @discussion_dis.has_heatmap%>
- <% if @discussion_dis.heatmaps.empty? && self.current_user.participant %>
-  <% size = size_helper(self.current_user)%>
+<% if discussions.has_heatmap%>
+  <% if discussions.heatmaps.empty?%>
+    <% size = size_helper(self.current_user)%>
     <!-- Heatmap -->
-  <br/>
-  <div class="heatmapContainer" id="heatmapContainer">
-    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-    id="HeatMap" width="<%= size[0]%>" height="<%= size[1]%>"
-    codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
-      <param name="movie" value="HeatMap.swf" />
-      <param name="quality" value="high" />
-      <param name="bgcolor" value="#ffffff" />
-      <param name="allowScriptAccess" value="sameDomain" />
-      <embed src="/heatMap/HeatMap.swf" quality="high" bgcolor="#ffffff"
-      	width="<%= size[0]%>" height="<%= size[1]%>" name="HeatMap" align="middle"
-      	play="true"
-      	loop="false"
-      	quality="high"
-      	allowScriptAccess="sameDomain"
-      	type="application/x-shockwave-flash"
-      	pluginspage="http://www.adobe.com/go/getflashplayer">
-      </embed>
-    </object>
-  </div>
+    <br/>
+    <div class="heatmapContainer" id="heatmapContainer">
+      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+      id="HeatMap" width="<%= size[0]%>" height="<%= size[1]%>"
+      codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+        <param name="movie" value="HeatMap.swf" />
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#ffffff" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <embed src="/heatMap/HeatMap.swf" quality="high" bgcolor="#ffffff"
+        	width="<%= size[0]%>" height="<%= size[1]%>" name="HeatMap" align="middle"
+        	play="true"
+        	loop="false"
+        	quality="high"
+        	allowScriptAccess="sameDomain"
+        	type="application/x-shockwave-flash"
+        	pluginspage="http://www.adobe.com/go/getflashplayer">
+        </embed>
+      </object>
+    </div>
+  <%elsif !self.current_user.participant%>
+    <!-- Heatmap -->
+    <br/>
+    <div class="heatmapContainer" id="heatmapContainer">
+      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+      id="HeatMap" width="<%= size[0]%>" height="<%= size[1]%>"
+      codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+        <param name="movie" value="HeatMap.swf" />
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#ffffff" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <embed src="/heatMap/HeatMap.swf" quality="high" bgcolor="#ffffff"
+        	width="<%= size[0]%>" height="<%= size[1]%>" name="HeatMap" align="middle"
+        	play="true"
+        	loop="false"
+        	quality="high"
+        	allowScriptAccess="sameDomain"
+        	type="application/x-shockwave-flash"
+        	pluginspage="http://www.adobe.com/go/getflashplayer">
+        </embed>
+      </object>
+    </div>
   <%end%>
 <%end%>
   <div style="padding-top:15px;clear:both;" id="responder_form" >
@@ -39,8 +58,8 @@
 
       <div class="topResponseBox">
         <h1>Post Your Response:</h1>
-<% if !@discussion_dis.character_minimum.nil? && @discussion_dis.character_minimum > 0 %>
-  <p><%=@discussion_dis.character_minimum%> characters MINIMUM</p>
+<% if !discussions.character_minimum.nil? && discussions.character_minimum > 0 %>
+  <p><%=discussions.character_minimum%> characters MINIMUM</p>
 <% end %>
 <div class="responseWidget">
   <%= f.text_area :comment, :size => "60 x 10", :class => 'rich_text_editor' %><br/>
