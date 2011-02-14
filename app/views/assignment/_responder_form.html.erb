@@ -1,30 +1,6 @@
 <!-- Response form starts here -->
 <%# if !self.current_user.participant && !self.current_user.client %>
 <% if discussions.has_heatmap%>
-  <% if !comment || comment.discussion_id.nil?%>
-    <% size = size_helper(self.current_user)%>
-    <!-- Heatmap -->
-    <br/>
-    <div class="heatmapContainer" id="heatmapContainer">
-      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-      id="HeatMap" width="<%= size[0]%>" height="<%= size[1]%>"
-      codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
-        <param name="movie" value="HeatMap.swf" />
-        <param name="quality" value="high" />
-        <param name="bgcolor" value="#ffffff" />
-        <param name="allowScriptAccess" value="sameDomain" />
-        <embed src="/heatMap/HeatMap.swf" quality="high" bgcolor="#ffffff"
-        	width="<%= size[0]%>" height="<%= size[1]%>" name="HeatMap" align="middle"
-        	play="true"
-        	loop="false"
-        	quality="high"
-        	allowScriptAccess="sameDomain"
-        	type="application/x-shockwave-flash"
-        	pluginspage="http://www.adobe.com/go/getflashplayer">
-        </embed>
-      </object>
-    </div>
-  <%elsif !self.current_user.participant%>
     <!-- Heatmap -->
     <% size = size_helper(self.current_user)%>
     <br/>
@@ -47,7 +23,6 @@
         </embed>
       </object>
     </div>
-  <%end%>
 <%end%>
   <div style="padding-top:15px;clear:both;" id="responder_form" >
 <% unless self.current_user.client %>

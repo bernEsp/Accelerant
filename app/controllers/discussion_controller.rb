@@ -42,7 +42,6 @@ class DiscussionController < ApplicationController
     #@project = Project.find(:all, :conditions => {:id => params[:project_id]})
     @project = Project.find(params[:project_id])
     @discussions = Discussion.find(:all, :conditions => {:project_id => params[:project_id]})
-    @comment = nil
     unless params[:sort] == "by_user"
       @discussion = Discussion.find(params[:id])
     else

@@ -40,8 +40,6 @@ class CommentsController < ApplicationController
       
       @comment = Comment.new(params[:comments])
       @comment.save
-      @comment.heatmap = heatmap
-      @comment.save
       #redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}#bottom"
       redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}"
     else
