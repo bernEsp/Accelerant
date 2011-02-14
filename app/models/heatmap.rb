@@ -7,7 +7,8 @@ class Heatmap < ActiveRecord::Base
 
   def self.create_heatmap(image, coords, user_id, discussion_id)
     discussion = Discussion.find(discussion_id)
-    heatmap = Heatmap.new(:image_result => image, :user_id => user_id)
+    last_comment = Comment.find(:last, :conditions{:discussion_id => discussion.id})
+    heatmap = Heatmap.new(:image_result => image, :user_id => user_id, :comment_id => last_comment.id)
     if heatmap.save
        discussion.heatmaps << heatmap
        image_coords = []
