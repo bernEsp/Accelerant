@@ -161,6 +161,6 @@ class DiscussionController < ApplicationController
 
     def show_image
     @heatmap = Heatmap.find(params[:id])
-    send_data(@heatmap.image_result, :type => 'image/jpg',:disposition => 'inline', :file_name => "#{@heatmap.id.jpg}")
+    send_data(@heatmap.image_result, :type => 'image/jpg',:disposition => 'inline', :file_name => "#{@heatmap.id}.jpg")
   end
 end
