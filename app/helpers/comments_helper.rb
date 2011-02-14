@@ -41,11 +41,6 @@ module CommentsHelper
       end
 		end
 		out = out + "<br/>"
-      unless comment.heatmap.nil?
-        out = out + "<div class='heatmap_result'>"
-        out = out + image_tag(url_for(:controller => "discussion", :action => "show_image", :id => comment.heatmap.id))
-        out = out + "<div/>"
-      end
 		out = out + "<span>- Posted "
     out = out + time_ago_in_words(comment.created_at)
     out = out + " ago </span> <!-- #{comment.created_at}  -->"
