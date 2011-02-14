@@ -4,7 +4,7 @@
 @discussion_dis = Discussion.find(discussions.id)
 %>
 <% if @discussion_dis.has_heatmap%>
- <% if @discussion_dis.heatmaps.empty? %>
+ <% if @discussion_dis.heatmaps.empty? && self.current_user.participant %>
   <% size = size_helper(self.current_user)%>
     <!-- Heatmap -->
   <br/>
