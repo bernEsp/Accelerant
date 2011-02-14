@@ -2,7 +2,7 @@
 <%# if !self.current_user.participant && !self.current_user.client %>
 <% if discussions.has_heatmap%>
     <!-- Heatmap -->
-    <% if discussions.heatmaps.empty? && self.current_user.particpant %>
+    <% if discussions.heatmaps.empty? && self.current_user.participant %>
       <% size = size_helper(self.current_user)%>
       <br/>
       <div class="heatmapContainer" id="heatmapContainer">
