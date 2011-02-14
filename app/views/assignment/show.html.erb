@@ -15,7 +15,11 @@
 
   <% if !@project.lock %>
     
-    <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
+    <%if @comment%>
+        <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id]}, :comment => @comment %>
+      <%else%>
+        <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id]}, :comment => @comment %>
+      <%end%>
 
   <% end  %>
 
