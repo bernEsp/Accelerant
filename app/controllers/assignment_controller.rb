@@ -54,6 +54,7 @@ class AssignmentController < ApplicationController
     @project_members = UserAssignments.find(:all, :conditions => {:project_id => params[:id]}, :include => :user)
     #@project = Project.find(:all, :conditions => {:id => params[:id]})
     @project = Project.find(params[:id])
+    @comment = nil
     @latest_postings = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user)
     @discussions = Discussion.find(:all, :conditions => {:project_id => params[:id]}, :include => :user)
     @discussions_desc = Discussion.find(:first, :conditions => {:project_id => params[:id]}, :order => 'id DESC')

@@ -13,10 +13,10 @@
 <% if !self.current_user.client && !@project.lock %>
   <%if @comment%>
     <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id]}, :comment => @comment %>
-  <%else>
-      <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id]}%>
+  <%else%>
+    <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id]}, :comment => @comment %>
   <%end%>
-  <% end  %>
+<% end  %>
 
 
 <%= render :partial => 'assignment/comments_replies', :locals => {:discussion => @discussion, :project_id => params[:project_id]} %>
