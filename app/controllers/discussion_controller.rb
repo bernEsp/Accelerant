@@ -34,7 +34,7 @@ class DiscussionController < ApplicationController
       end
       end
     end
-    
+    session[:discussion_id] = @discussion.id
     redirect_to "/assignment/#{@discussion.project_id}"
   end
 
