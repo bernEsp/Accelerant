@@ -26,6 +26,7 @@
     </div>
   <%elsif !self.current_user.participant%>
     <!-- Heatmap -->
+    <% size = size_helper(self.current_user)%>
     <br/>
     <div class="heatmapContainer" id="heatmapContainer">
       <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
