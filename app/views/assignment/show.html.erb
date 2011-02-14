@@ -14,12 +14,7 @@
   <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
 
   <% if !@project.lock %>
-    
-    <%if @comment%>
-        <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id], :comment => @comment} %>
-      <%else%>
-        <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id], :comment => @comment }%>
-      <%end%>
+    <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id], :comment => @comment} %>
 
   <% end  %>
 
