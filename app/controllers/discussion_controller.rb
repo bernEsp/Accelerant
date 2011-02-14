@@ -34,6 +34,7 @@ class DiscussionController < ApplicationController
       end
       end
     end
+    
     redirect_to "/assignment/#{@discussion.project_id}"
   end
 
