@@ -59,6 +59,7 @@ class AssignmentController < ApplicationController
     @discussions_desc = Discussion.find(:first, :conditions => {:project_id => params[:id]}, :order => 'id DESC')
     unless @discussions.nil?
       session[:discussion_id] = Discussion.find(:last)
+      session[:comment_id] = Comment.find(:last).id
     end
     unless !@discussions_desc || @discussions_desc.sortable.nil?
     @sortable = Sortables.find(@discussions_desc.sortable)
