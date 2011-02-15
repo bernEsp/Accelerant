@@ -32,6 +32,7 @@ class CommentController < ApplicationController
     puts "Updating..."
     @comment = Comment.new(params[:comment])
     @comment.save
+    session[:comment_id] = @comment.id
     #redirect_to  "/comment/new"
     render :text => @comment.comment
   end
