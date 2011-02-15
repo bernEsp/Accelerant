@@ -23,6 +23,9 @@
       </embed>
     </object>
   </div>
+<%else%>
+  <% size = size_helper(self.current_user)%>
+  <img src="<%= heatmap_screenshot(discussions)%>", width = "<%=size[0]%>", height = "<%=size[1]%>">
 
 <%end%>
   <div style="padding-top:15px;clear:both;" id="responder_form" >

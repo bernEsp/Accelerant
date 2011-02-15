@@ -15,6 +15,7 @@ module AssignmentHelper
         true
       end
     end
+    true
   end
 
 end
