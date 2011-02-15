@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
     if (@discussion.character_minimum == 0 || (@discussion.character_minimum != 0) && (params[:comments][:comment].length >= @discussion.character_minimum))
       @comment = Comment.new(params[:comments])
       @comment.save
-      #redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}#bottom"
+      session[:comment_id] = @comment.id
       redirect_to "/discussion/show/#{@comment.discussion_id}?project_id=#{@comment.project_id}"
     else
       render :text => "Response is too short.  Must be #{@discussion.character_minimum} characters minimum."
