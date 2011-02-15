@@ -115,7 +115,7 @@ class DiscussionController < ApplicationController
     end
     end
     if @discussion.has_heatmap
-      heatmap = Heatmap.find(:last, :conditions => {:disccussion_id => @discussion.id , :user_id => self.current_user.id)
+      heatmap = Heatmap.find(:last, :conditions => {:disccussion_id => @discussion.id , :user_id => self.current_user.id})
       heatmap.comment_id = session[:comment_id]
       
     end
