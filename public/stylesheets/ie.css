@@ -25,3 +25,18 @@
     line-height:30px;
     margin-left:15px;
 }
+
+.y-label {
+  /* rotate -90 deg, not sure if a negative number is supported so I used 270 */
+  -moz-transform: rotate(270deg);
+  -moz-transform-origin: 50% 50%;
+  -webkit-transform: rotate(270deg);
+  -webkit-transform-origin: 50% 50%;
+  /* IE support too convoluted for the time I've got on my hands... */
+  display:block;
+  float:right;
+  margin-top:150px;
+  margin-right:10px;
+}
+
+.x-label    {float:right;width:640px;display:block;clear:both;margin-top:10px;text-align:center;}

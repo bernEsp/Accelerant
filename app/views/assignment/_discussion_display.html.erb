@@ -39,17 +39,22 @@
                 <% end %>
 
 <% unless discussions.groupable.nil? %>
+  <%#= perception_map(discussions) %>
+  <p style="padding-right:100px;">
+<%= Groupables.find_by_id(discussions.groupable).instructions %></p>
 <% @usergroupables = Usergroupables.find_all_by_groupable(discussions.groupable, :conditions => {:user => self.current_user.id}) %>
 
   <% for usergroupable in @usergroupables %>
-
-  <% div_for usergroupable, :style => 'text-align:center;display:block;float:left;margin:5px;' do %>
+  <% unless usergroupable.position != NIL %>
+  <% div_for usergroupable, :style => 'text-align:center;display:block;float:left;margin:20px;' do %>
   
                     <%  unless Groupableitems.find(usergroupable.groupableitem).image.url == "" %>
                       <%= image_tag Groupableitems.find(usergroupable.groupableitem).image.url(:size50), :style => "vertical-align:middle;" %><br/>
+                    <% else %>
+                      <%= Groupableitems.find(usergroupable.groupableitem).description %>
                     <% end %>
-                    <%= Groupableitems.find(usergroupable.groupableitem).description %>
   
+  <% end %>
   <% end %>
 <%= draggable_element("usergroupables_#{usergroupable.id}", :revert => false) %>
   <% end %>
@@ -58,7 +63,13 @@
 
 <% i = 0 %>
 
-<% @groupabletargets = Groupabletargets.find_all_by_groupable(discussions.groupable, :order => "id DESC") %>
+<% @groupabletargets = Groupabletargets.find_all_by_groupable(discussions.groupable, :order => "id DESC")
+    @X = Groupableaxis.find(:last, :conditions => {:orientation => "X", :groupable => discussions.groupable})
+    @Y = Groupableaxis.find(:last, :conditions => {:orientation => "Y", :groupable => discussions.groupable})
+    %>
+<div class="targetFrame">
+<div style="clear:both"></div>
+<% i = 0 %>
 <% @groupabletargets.each do|groupabletarget| %>
 
 <%
@@ -71,7 +82,17 @@
 %>
 
   <% div_for groupabletarget, :class => "perceptiontargets" do %>
-      <%=  groupabletarget.description %>
+      <%#=  groupabletarget.description %>
+      <% @usergroupables = Usergroupables.find_all_by_groupable(discussions.groupable,
+        :conditions => {:position => groupabletarget.id, :user => self.current_user.id}) %>
+        <% @usergroupables.each do |ug| %>
+<%  unless Groupableitems.find(ug.groupableitem).image.url == "" %>
+                      <%= image_tag Groupableitems.find(ug.groupableitem).image.url(:size50), :style => "vertical-align:middle;" %><br/>
+                    <% else %>
+                      <%= Groupableitems.find(ug.groupableitem).description %>
+                    <% end %>
+          <br/>
+        <% end %>
    <% end %>
 
 <%= drop_receiving_element("groupabletargets_#{groupabletarget.id}",
@@ -84,13 +105,29 @@
 
 
 
+</div>
+<p class="y-label">
+  <% if @Y %>
+<%= @Y.description %>
+  <% end %>
+</p>
+<div style="clear:both"></div>
+
+
+
+
 
 
   <% end %>
   </div>
     <div style="clear:left;"></div>
           <% if self.current_user.admin || self.current_user.moderator %>
-  <%= link_to "Edit", {:controller => "discussion", :id => discussions.id, :action => 'edit'} %> |
+  <%= link_to "Edit", {:controller => "discussion", :id => discussions.id, :action => 'edit'} %> | 
   <%= link_to "Delete", {:controller => "discussion", :id => discussions.id, :action => 'delete'}, :confirm => "Are you sure? Once deleted this action cannot be undone." %>
   <% end  %>
+  <div class="x-label" style="margin-top:1px;">
+<% if @X %>
+<%= @X.description %>
+<% end %>
+  </div>
   </fieldset>

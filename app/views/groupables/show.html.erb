@@ -12,8 +12,9 @@ participants will be dragging and dropping.  Go ahead and try it!</p>
   <span class="handle2" >
         <%  unless groupableitems.image.url == "" %>
       <%= image_tag groupableitems.image.url(:size100), :style => "vertical-align:middle;" %>
-    <% end %>
+    <% else %>
     <span ><%= groupableitems.description %></span>
+    <% end %>
   </span>
   <% end %>
 <%= draggable_element("groupableitems_#{groupableitems.id}", :revert => false) %>

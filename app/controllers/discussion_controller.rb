@@ -80,7 +80,8 @@ class DiscussionController < ApplicationController
     end
     end
 
-    unless @discussion || @discussion.groupable.nil?
+    unless !@discussion || @discussion.groupable.nil?
+    puts "and we are IN"
     @groupable = Groupables.find(@discussion.groupable)
     @groupabletargets = Groupabletargets.find_all_by_groupable(@groupable.id, :order => "id DESC")
     unless @groupable.nil?
@@ -100,6 +101,7 @@ class DiscussionController < ApplicationController
           @newusergroupable.save
           @usergroupables = Usergroupables.find_all_by_groupable(@groupable.id, :conditions => {:user => self.current_user.id})
         end
+        puts "did not find groupable"
       else
         for usergroups in @usergroupables
           if self.current_user.participant
