@@ -13,9 +13,10 @@ module AssignmentHelper
       heatmap = Heatmap.find(:last, :conditions => {:discussion_id => @discussion.id , :user_id => self.current_user.id})
       unless heatmap && self.current_user.participant
         true
+      else
+        false
       end
     end
-    false
   end
 
   def heatmap_screenshot(discussion)
