@@ -58,4 +58,4 @@ ActionView::Base.class_eval do
   include ActionView::Helpers::SwfObjectHelper
 end
 
-#ActionView::Helpers::AssetTagHelper.register_javascript_include_default 'flashobject'
+ActionView::Helpers::AssetTagHelper.register_javascript_include_default 'flashobject'
