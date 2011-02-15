@@ -9,7 +9,7 @@ module AssignmentHelper
   end
 
   def show_heatmap(discussion)
-    if discussion.has_heatmap && user.participant
+    if discussion.has_heatmap && self.current_user.participant
       heatmap = Heatmap.find(:last, :conditions => {:discussion_id => @discussion.id , :user_id => self.current_user.id})
       unless heatmap 
         true
