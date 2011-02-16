@@ -1,0 +1,7 @@
+<h1>
+  Comments of discussion <%= @discussion.title%>
+</h1>
+<% @comments.each do |comment|-%>
+  <p><%="#{comment.user.name} says:"%></p>
+  <p><%= comment.comment %></p
+<%end%>
