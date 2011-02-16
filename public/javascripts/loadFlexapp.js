@@ -1,4 +1,3 @@
-document.observe("dom:loaded", function() {
 
 Event.observe('signinForm', 'submit', onSubmit);
 

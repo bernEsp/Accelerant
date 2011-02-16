@@ -165,9 +165,4 @@ class DiscussionController < ApplicationController
      format.xml { render :xml => xml_data.to_xml(:dasherize => false)}
     end
   end
-
-    def show_image
-    @heatmap = Heatmap.find(params[:id])
-    #send_data(@heatmap.image_result, :type => 'image/jpg',:disposition => 'inline', :file_name => "#{@heatmap.id}.jpg")
-  end
 end

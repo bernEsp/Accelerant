@@ -1,5 +1,5 @@
 class Heatmap < ActiveRecord::Base
-
+  require 'tmpdir'
   belongs_to :user
   belongs_to :discussion
   belongs_to :comment
@@ -21,5 +21,18 @@ class Heatmap < ActiveRecord::Base
        end
        true
     end
+  end
+
+  def self.create_tmp_image(discussion_id, user_id)
+
+    heatmap = Heatmap..find(:last, :conditions => {:user_id => self.current_user.id})
+    binaryData = Base64.decode64(heatmap.image_result)
+    f = Tempfile.new("#{discussion.id}_heatmap_image#{heatmap.id}.jpg")
+    f.open("#{discussion.id}_heatmap_image#{heatmap.id}.jpg"){ |a| a.write(binaryData) }
+    path =  f.path
+    f.close
+    return path
+#    File.open("#{RAILS_ROOT}/public/tmp/#{discussion.id}_heatmap_image#{heatmap.id}.jpg", "wb") { |f| f.write(binaryData) }
+#    render :text => "success"
   end
 end
