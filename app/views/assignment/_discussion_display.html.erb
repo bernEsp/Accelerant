@@ -9,7 +9,7 @@
             <%= image_tag "gravatar-40.png" %>
           <% end %>
   </div>
-  <div class="discussionWidget" style="padding-top:15px;"><p><%= discussions.content %></p>
+  <div class="discussionWidget"><%= discussions.content %>
   <% if discussions.media_content_type %>
 		<% if discussions.media_content_type =~ /image.*/  %>
 			<a href='<%=discussions.media.url%>' target="_blank">
