@@ -434,4 +434,7 @@ img {
 .heatmapContainer{
   margin-right: 10px;
 }
+.right{
+  float: right;
+}
 
