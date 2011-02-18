@@ -1,6 +1,6 @@
 module CommentsHelper
 
-  def show_comment(comment)
+  def show_comment(comment, report = false)
     if comment.hide_until_answered && self.current_user.participant
       @reply_test = Replies.find(:all, :conditions => {:comment_id => comment.id, :user_id => self.current_user.id}, :include => :user)
       if @reply_test.empty?
@@ -44,34 +44,50 @@ module CommentsHelper
 		out = out + "<span>- Posted "
     out = out + time_ago_in_words(comment.created_at)
     out = out + " ago </span> <!-- #{comment.created_at}  -->"
-		unless @project.lock
-      if !self.current_user.client
-        out = out + " | "
-        out = out + link_to_remote('Add Comment',
-          :url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
-          :complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
-          :update => "subCommentForm#{comment.id}")
-      end
-      if (comment.user.id == self.current_user.id) || self.current_user.admin
-				out = out + " | "
-        out = out + link_to_remote("Edit",
-          :url => {:controller => 'plain', :action => 'edit_comment', :id => comment.id},
-          #:complete => "new Effect.SlideDown('commentSub#{comment.id}', { duration: .2 })",
-          :complete => "new Effect.Parallel([new Effect.SlideDown('commentSub#{comment.id}', { duration: .2 }),
-          new Effect.SlideUp('responder_form', { duration: .2 })
-          ],{duration: 0.8,delay: 0.5})",
-          :update => "commentSub#{comment.id}")
-      end
-      if (comment.user.id == self.current_user.id) || self.current_user.admin  || self.current_user.moderator
-				out = out + " | "
-        out = out + link_to_remote("Delete",
-          :confirm => "Are you sure you want to delete this?",
-          :url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
-          :complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
-          :update => "commentSub#{comment.id}")
+    unless report
+  		unless @project.lock 
+        if !self.current_user.client
+          out = out + " | "
+          out = out + link_to_remote('Add Comment',
+            :url => { :controller => 'plain', :action => 'sub_form', :id => comment.id},
+            :complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })",
+            :update => "subCommentForm#{comment.id}")
+        end
+        if (comment.user.id == self.current_user.id) || self.current_user.admin
+  				out = out + " | "
+          out = out + link_to_remote("Edit",
+            :url => {:controller => 'plain', :action => 'edit_comment', :id => comment.id},
+            #:complete => "new Effect.SlideDown('commentSub#{comment.id}', { duration: .2 })",
+            :complete => "new Effect.Parallel([new Effect.SlideDown('commentSub#{comment.id}', { duration: .2 }),
+            new Effect.SlideUp('responder_form', { duration: .2 })
+            ],{duration: 0.8,delay: 0.5})",
+            :update => "commentSub#{comment.id}")
+        end
+        if (comment.user.id == self.current_user.id) || self.current_user.admin  || self.current_user.moderator
+  				out = out + " | "
+          out = out + link_to_remote("Delete",
+            :confirm => "Are you sure you want to delete this?",
+            :url => {:controller => 'plain', :action => 'drop_comment', :id => comment.id},
+            :complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
+            :update => "commentSub#{comment.id}")
+        end
+
+        if (self.current_user.admin || self.current_user.moderator)
+          if comment.for_report == 1
+            flag = true
+          else
+            flag = false
+          end
+  				out = out + " | Add to Report "
+          out = out + check_box_tag ("comment_#{comment.id}",comment.id, flag, 
+        :onclick => remote_function(
+        :update => "comment_#{comment.id}", 
+        :url => {:controller => "comments", :action => :update_report_flag }, 
+        :with => "'id='+$('comment_#{comment.id}').value", 
+        :complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })" ))
+        end
       end
     end
-
 		out = out + "<div id='subCommentForm#{comment.id}' class='replyStyle' style='display:none;'></div>"
 		out = out + "<div id='reclaimer#{comment.id}'></div>"
     if suppress

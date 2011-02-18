@@ -43,4 +43,7 @@
 <% if self.current_user.admin || self.current_user.moderator %>
 <%= link_to "CSV", :controller => 'comment', :action => 'export_to_csv', :id => params[:id], :format => 'csv' %> 
 <%= link_to "RTF", :controller => 'comment', :action => 'export_to_rtf', :id => params[:id], :format => 'rtf' %>
+<% content_for :menus do -%>
+ <li class = "last"><%= link_to "Reports", :controller => 'comments', :action => 'report_comments', :id => discussion.id %></li>
+<%end%>
 <% end %>  
