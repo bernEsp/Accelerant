@@ -50,7 +50,7 @@ class CommentsController < ApplicationController
   end
 
   def sort
-    @comments = Comment.find(:all, :conditions => {:discussion_id => params[:id] }, :order => :position , :include => :user)
+    @comments = Comment.find(:all, :conditions => {:discussion_id => params[:id] }, :order => :position)
   end
 
   def reorder

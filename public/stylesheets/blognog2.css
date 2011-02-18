@@ -431,6 +431,13 @@ img {
       display:block;
   }
 
+  li .commenthandle {
+     cursor:move;
+     margin:10px 0;
+     padding:10px 0;
+     line-height:1em;
+ }
+
   .targets  {width:100px;height:50px;border:1px dotted #000;margin:10px;display:inline-block;float:left;}
 
   .perceptiontargets  {width:200px;height:150px;display:inline-block;float:right;border:1px solid #ddd;}
