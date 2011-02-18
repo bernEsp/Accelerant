@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_filter :login_required
 
   if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :update, :new, :create, :get, :destroy
+    ssl_required :index, :show, :update, :new, :create, :get, :destroy, :sort, :reorder
   end
   
   def index
@@ -47,6 +47,18 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
     #render :text => "Removed"
+  end
+
+  def sort
+    @comments = Comment.find(:all, :conditions => {:discussion_id => params[:id] }, :order => :position , :include => :user)
+  end
+
+  def reorder
+    params[:sortables].each_with_index do |id, index|
+      Comment.update_all(['position=?', index+1], ['id=?', id])
+      # Update all Sortableitems to position=index+1 where id = id
+    end
+    render :nothing => true
   end
 
 end

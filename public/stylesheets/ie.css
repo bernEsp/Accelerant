@@ -26,6 +26,26 @@
     margin-left:15px;
 }
 
+.discussionText {
+    position:relative;
+    margin-top:20px;
+    border-top:none;
+}
+
+.discussionText legend {
+    position:absolute;
+    top: -.5em;
+    left: .2em;
+    margin-bottom:40px;
+    background-color:#f2f2f2;
+
+}
+
+.discussionText a {
+    line-height:30px;
+    margin-left:15px;
+}
+
 .y-label {
   /* rotate -90 deg, not sure if a negative number is supported so I used 270 */
   -moz-transform: rotate(270deg);

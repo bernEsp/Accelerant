@@ -5,11 +5,10 @@
     <legend>Jump to discussion topic:</legend>
     <p>&nbsp;</p>
   <% for discussion in discussions %>
-
     <% @disctest =  CommentAssignments.find(:all, :conditions => {:user_id => self.current_user.id, :discussion_id => discussion.id}) %>
     <% unless @disctest.empty? && self.current_user.participant %>
     <p>
-      <%= link_to discussion.title,
+    <%= link_to discussion.title,
     {:controller => "discussion", :id => discussion.id, :action => 'show', :sort => params[:sort], :project_id => discussion.project_id},
     :class => 'discussion_links'%>
   </p>

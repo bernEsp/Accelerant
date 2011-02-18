@@ -6,7 +6,8 @@
           if params[:sort] == "by_user"
             @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "user_id ASC, id DESC", :include => :user)
           else
-            @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "created_at DESC", :include => :user)
+            #@latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => "created_at DESC", :include => :user)
+            @latest_postings_redux = Comment.find(:all, :conditions => {:discussion_id => discussion.id }, :order => :position , :include => :user)
           end
 
             for comment in @latest_postings_redux

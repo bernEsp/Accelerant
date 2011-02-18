@@ -349,6 +349,24 @@ img {
     margin-left:10px;
 }
 
+.discussionText {
+    background-color:#f2f2f2;
+    border:#cbcbcb solid 1px;
+    border-top:#919191 solid 2px;
+    clear:left;
+}
+
+.discussionText legend {
+    font-size:14px;
+    color:#000;
+}
+
+.discussionText a {
+    line-height:25px;
+    margin-left:15px;
+}
+
+
 .adminFlyout {
     background-color:#f2f2f2;
     border:#cbcbcb solid 1px;

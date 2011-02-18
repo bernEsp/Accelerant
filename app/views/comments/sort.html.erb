@@ -1,0 +1,21 @@
+<h1 class="lower">Reorder questions/comments</h1>
+<br/>
+<p>Simply drag and drop the items into the desired order... </p>
+<br/>
+<div style="display:inline-block;">
+<ul id="sortables" style="list-style:none">
+  <% for comment in @comments %>
+
+  <% content_tag_for :li, comment do %>
+  <span class="handle" >
+    <span ><%= comment.comment %></span>
+  </span>
+  <% end %>
+
+  <% end %>
+
+</ul>
+<% @discussion = Discussion.find(params[:id]) %>
+  <%= link_to("All Done!", :controller => 'assignment', :action => 'show', :id => "#{@discussion.project_id}" )%>
+</div>
+<%= sortable_element("sortables", :url => reorder_comments_path, :handle => "handle") %>

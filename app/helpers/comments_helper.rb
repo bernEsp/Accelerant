@@ -71,6 +71,11 @@ module CommentsHelper
           :complete => "new Effect.Fade('commentSub#{comment.id}', { duration: 2 })",
           :update => "commentSub#{comment.id}")
       end
+      if self.current_user.admin  || self.current_user.moderator
+				out = out + " | "
+        out = out + link_to("Reorder",
+          :controller => 'comments', :action => 'sort', :id => comment.discussion_id)
+      end
     end
 
 		out = out + "<div id='subCommentForm#{comment.id}' class='replyStyle' style='display:none;'></div>"
