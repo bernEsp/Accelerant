@@ -87,6 +87,20 @@ module CommentsHelper
         :complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })" ))
         end
       end
+
+      if (self.current_user.admin || self.current_user.moderator)
+        if comment.for_report == 1
+          flag = true
+        else
+          flag = false
+        end
+        out = out + check_box_tag ("comment_#{comment.id}",comment.id, flag, 
+      :onclick => remote_function(
+      :update => "comment_#{comment.id}", 
+      :url => {:controller => "comments", :action => :update_report_flag }, 
+      :with => "'id='+$('comment_#{comment.id}').value", 
+      :complete => "new Effect.SlideDown('subCommentForm#{comment.id}', { duration: .5 })" ))
+      end
     end
 		out = out + "<div id='subCommentForm#{comment.id}' class='replyStyle' style='display:none;'></div>"
 		out = out + "<div id='reclaimer#{comment.id}'></div>"
