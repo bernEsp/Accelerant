@@ -7,8 +7,9 @@
   <% for comment in @comments %>
 
   <% content_tag_for :li, comment do %>
+  <% outgoing = comment.comment.gsub(/<\/?[^>]*>/,  "") %>
   <span class="commenthandle" >
-    <span ><%= comment.comment.gsub(/<\/?[^>]*>/,  "") %></span>
+    <span ><%= outgoing[0,50] %>...</span>
   </span>
   <% end %>
 
