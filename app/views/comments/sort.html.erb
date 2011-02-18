@@ -2,7 +2,7 @@
 <br/>
 <p>Simply drag and drop the items into the desired order... </p>
 <br/>
-<div style="display:inline-block;">
+<div style="display:inline-block;width:400px;">
 <ul id="sortables" style="list-style:none">
   <% for comment in @comments %>
 
@@ -16,7 +16,9 @@
   <% end %>
 
 </ul>
+  <p>
 <% @discussion = Discussion.find(params[:id]) %>
   <%= link_to("All Done!", :controller => 'assignment', :action => 'show', :id => "#{@discussion.project_id}" )%>
+  </p>
 </div>
 <%= sortable_element("sortables", :url => reorder_comments_path, :handle => "commenthandle") %>
