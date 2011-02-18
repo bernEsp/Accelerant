@@ -68,6 +68,7 @@ class CommentsController < ApplicationController
 
   def report_comments
     @discussion = Discussion.find(params[:id])
+    @project = Project.find(@discussion.project_id)
     @comments = Comment.find(:all, :conditions => {:discussion_id => params[:id], :for_report => 1 }, :order => "created_at DESC", :include => :user)
   end
 
