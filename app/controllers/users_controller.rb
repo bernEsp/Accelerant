@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   include AuthenticatedSystem
   #before_filter :login_required, :only => [:detail]
   before_filter :admin_required, :only => [ :index ]
-  before_filter :not_participant, :only => [:detail, :edit, :destroy, :new, :create, :your_users, :add]
+  before_filter :not_participant, :only => [:detail, :edit, :destroy, :create, :your_users, :add]
   #before_filter :client_required, :only => [ :detail ]
   #before_filter :moderator_required, :only => [ :detail ]
 
