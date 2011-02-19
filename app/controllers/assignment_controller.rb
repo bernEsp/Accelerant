@@ -128,12 +128,7 @@ class AssignmentController < ApplicationController
     end
     end
   end
-<<<<<<< HEAD
 
-=======
-  
-    
->>>>>>> 01338ef24515822ab28e24158bdbcad5d4dc024f
   def show_spec
     @project_members = UserAssignments.find(:all, :conditions => {:project_id => params[:id]}, :include => :user)
     #@project = Project.find(:all, :conditions => {:id => params[:id]})
