@@ -82,7 +82,7 @@ Rails::Initializer.run do |config|
   #config.active_record.observers = :user_observer
 
   
-  config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
+  #config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
   #config.gem 'rtf', :lib => false, :source => 'http://rubygems.org/gems/'
   #config.gem 'wysihat-engine', :source => 'http://gemcutter.org'
   require 'tmail_extensions'
