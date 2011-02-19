@@ -13,7 +13,7 @@ RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  amazon s3
+  #amazon s3
   #config.gem "aws-s3", :lib => "aws/s3"
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -82,7 +82,7 @@ Rails::Initializer.run do |config|
   #config.active_record.observers = :user_observer
 
   
-  #config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
+  config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
   #config.gem 'rtf', :lib => false, :source => 'http://rubygems.org/gems/'
   #config.gem 'wysihat-engine', :source => 'http://gemcutter.org'
   require 'tmail_extensions'
