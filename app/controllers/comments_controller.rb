@@ -65,8 +65,6 @@ class CommentsController < ApplicationController
     render :nothing => true
   end
 
-end
-
   def update_report_flag
     @comment = Comment.find(params[:id])
     if @comment.for_report == 1
