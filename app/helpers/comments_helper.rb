@@ -79,7 +79,7 @@ module CommentsHelper
             flag = false
           end
   				out = out + " | Add to Report "
-          out = out + check_box_tag ("comment_#{comment.id}",comment.id, flag, 
+          out = out + check_box_tag("comment_#{comment.id}",comment.id, flag, 
         :onclick => remote_function(
         :update => "comment_#{comment.id}", 
         :url => {:controller => "comments", :action => :update_report_flag }, 
