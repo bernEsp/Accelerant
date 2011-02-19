@@ -33,10 +33,8 @@ class CommentController < ApplicationController
     puts "Updating..."
     @comment = Comment.new(params[:comment])
     @comment.save
-<<<<<<< HEAD
-=======
+
    # session[:comment_id] = @comment.id
->>>>>>> 01338ef24515822ab28e24158bdbcad5d4dc024f
     #redirect_to  "/comment/new"
     render :text => @comment.comment
   end
