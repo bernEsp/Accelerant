@@ -61,12 +61,10 @@ class AssignmentController < ApplicationController
     @latest_postings = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user)
     @discussions = Discussion.find(:all, :conditions => {:project_id => params[:id]}, :include => :user)
     @discussions_desc = Discussion.find(:first, :conditions => {:project_id => params[:id]}, :order => 'id DESC')
-<<<<<<< HEAD
-=======
+
     unless @discussions.nil?
       session[:discussion_id] = Discussion.find(:last)
     end
->>>>>>> 01338ef24515822ab28e24158bdbcad5d4dc024f
     unless !@discussions_desc || @discussions_desc.sortable.nil?
     @sortable = Sortables.find(@discussions_desc.sortable)
     unless @sortable.nil?
