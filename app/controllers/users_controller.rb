@@ -7,10 +7,10 @@ class UsersController < ApplicationController
   #before_filter :client_required, :only => [ :detail ]
   #before_filter :moderator_required, :only => [ :detail ]
 
-  if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, 
-      :activate, :detail, :showsessions, :your_users, :add
-  end
+#  if ENV['RAILS_ENV'] == 'production'
+#    ssl_required :index, :show, :update, :edit, :new, :create, :destroy, :dump_this, 
+#      :activate, :detail, :showsessions, :your_users, :add
+#  end
 
   def index
     @users = User.find(:all)

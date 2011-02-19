@@ -1,9 +1,9 @@
 class GroupableitemsController < ApplicationController
 
   #before_filter :login_required
-  if ENV['RAILS_ENV'] == 'production'
-    ssl_required :new, :create, :group
-  end
+#  if ENV['RAILS_ENV'] == 'production'
+#    ssl_required :new, :create, :group
+#  end
 
   def new
     @previousitems = Groupableitems.find_all_by_groupables(params[:id])

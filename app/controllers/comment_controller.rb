@@ -5,11 +5,11 @@ class CommentController < ApplicationController
   require 'rtf'
 
 
-  if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :new, :create, :edit, :update,
-      :drop, :assign, :show, :destroy, :csv_dump, :export_to_csv, :export_to_rtf,
-      :by_user, :email_assign, :emailed, :comment_update
-  end
+#  if ENV['RAILS_ENV'] == 'production'
+#    ssl_required :index, :new, :create, :edit, :update,
+#      :drop, :assign, :show, :destroy, :csv_dump, :export_to_csv, :export_to_rtf,
+#      :by_user, :email_assign, :emailed, :comment_update
+#  end
 
   def index
     user_id = self.current_user.id

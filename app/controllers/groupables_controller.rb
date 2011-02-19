@@ -3,9 +3,9 @@ class GroupablesController < ApplicationController
   before_filter :login_required
   require 'csv'
   
-  if ENV['RAILS_ENV'] == 'production'
-    ssl_required :index, :new, :create, :edit, :update, :show, :destroy, :export_to_csv
-  end
+#  if ENV['RAILS_ENV'] == 'production'
+#    ssl_required :index, :new, :create, :edit, :update, :show, :destroy, :export_to_csv
+#  end
 
   def index
     @groupables = Groupables.find(:all)
