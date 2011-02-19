@@ -1,0 +1,28 @@
+<<<<<<< HEAD
+<div id="rightColumn">
+  <h1>
+    Comments of discussion: 
+  </h1>
+  <%= link_to "back",  :back %>
+  <br/>
+  <h2>
+    <%= @discussion.title.capitalize%>
+  </h2>
+  <hr>
+  <br/>
+  <div class = "comments">
+    <% @comments.each do |comment|-%>
+      <%report = true%>
+      <%= show_comment(comment, report) %>
+    <%end%>
+  </div>
+</div>
+=======
+<h1>
+  Comments of discussion <%= @discussion.title%>
+</h1>
+<% @comments.each do |comment|-%>
+  <p><%="#{comment.user.name} says:"%></p>
+  <p><%= comment.comment %></p
+<%end%>
+>>>>>>> 75002f5a2e794336d83730b0cd1895ba70787888

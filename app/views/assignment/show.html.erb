@@ -13,10 +13,8 @@
   <% unless @disctest.empty? && self.current_user.participant %>
   <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
 
-  <% if !self.current_user.client && !@project.lock %>
-    
+  <% if !@project.lock %>
     <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
-    
   <% end  %>
 
     <%= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
@@ -44,5 +42,7 @@
 <% if self.current_user.admin || self.current_user.moderator %>
 <%= link_to "CSV", :controller => 'comment', :action => 'export_to_csv', :id => params[:id], :format => 'csv' %> 
 <%= link_to "RTF", :controller => 'comment', :action => 'export_to_rtf', :id => params[:id], :format => 'rtf' %>
-<% end %>  
- 
+<% content_for :menus do -%>
+ <li class = "last"><%= link_to "Reports", :controller => 'comments', :action => 'report_comments', :id => discussion.id %></li>
+<%end%>
+<%end%>

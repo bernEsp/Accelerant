@@ -45,7 +45,9 @@ class DiscussionController < ApplicationController
     unless params[:sort] == "by_user"
       @discussion = Discussion.find(params[:id])
     else
-      @discussion = Discussion.find(params[:id])
+      if @discussions
+        @discussion = Discussion.find(params[:id])
+      end
     end
     unless !@discussion || @discussion.sortable.nil?
     @sortable = Sortables.find(@discussion.sortable)
@@ -114,6 +116,21 @@ class DiscussionController < ApplicationController
       end
     end
     end
+    if @discussion.has_heatmap
+      heatmap = Heatmap.find(:last, :conditions => {:discussion_id => @discussion.id , :user_id => self.current_user.id})
+      if heatmap && heatmap.comment_id.nil?
+        heatmap.comment_id = session[:comment_id]
+        heatmap.save
+      end
+      
+    end
+    session[:discussion_id] = params[:id]
+    discussion = {:user_name => self.current_user.name, :user_id => self.current_user.id, :admin => self.current_user.admin, :image_path => @discussion.media.url, :discussion_id => @discussion.id}
+    respond_to do |format|
+     format.html
+     format.xml { render :xml => discussion.to_xml(:dasherize => false), :layout => false}
+    end
+
   end
 
   def edit
@@ -143,4 +160,11 @@ class DiscussionController < ApplicationController
     redirect_to :controller => 'assignment', :action => 'show', :id => @discussion.project_id
   end
 
+  def discussion_show
+    discussion =  Discussion.find(session[:discussion_id])
+    xml_data =  Discussion.create_xml(self.current_user, discussion)
+    respond_to do |format|
+     format.xml { render :xml => xml_data.to_xml(:dasherize => false)}
+    end
+  end
 end

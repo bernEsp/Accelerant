@@ -85,9 +85,10 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    self.current_user = @user
   end
 
- def add
+  def add
     @user = User.new
   end
  
@@ -131,10 +132,12 @@ class UsersController < ApplicationController
         redirect_to '/users'
       end
       else
+        self.current_user = @user
         flash[:notice] = "New user successfully created."
         redirect_to '/users'
       end
     else
+      self.current_user = @user
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again."
       render :action => 'new'
     end

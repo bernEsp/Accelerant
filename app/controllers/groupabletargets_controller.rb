@@ -5,7 +5,6 @@ class GroupabletargetsController < ApplicationController
     ssl_required :new, :create, :createaxis
   end
 
-
   def create
     @groupabletargets = Groupabletargets.new(params[:groupabletargets])
     @groupabletargets.save

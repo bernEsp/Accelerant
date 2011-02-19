@@ -1,9 +1,11 @@
 class AssignmentController < ApplicationController
   before_filter :login_required
   
+
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index, :new, :create, :edit, :update, :drop, :assign, :show
   end
+
 
   def index
     @all_assignment = Project.find(:all)
@@ -19,6 +21,7 @@ class AssignmentController < ApplicationController
     @new_assignment.save
     redirect_to "/project"
     #render :text => "Assignment Created!"
+
   end
   
   def edit
@@ -58,6 +61,12 @@ class AssignmentController < ApplicationController
     @latest_postings = Comment.find(:all, :conditions => {:project_id => params[:id] }, :order => "id DESC", :include => :user)
     @discussions = Discussion.find(:all, :conditions => {:project_id => params[:id]}, :include => :user)
     @discussions_desc = Discussion.find(:first, :conditions => {:project_id => params[:id]}, :order => 'id DESC')
+<<<<<<< HEAD
+=======
+    unless @discussions.nil?
+      session[:discussion_id] = Discussion.find(:last)
+    end
+>>>>>>> 01338ef24515822ab28e24158bdbcad5d4dc024f
     unless !@discussions_desc || @discussions_desc.sortable.nil?
     @sortable = Sortables.find(@discussions_desc.sortable)
     unless @sortable.nil?
@@ -121,7 +130,12 @@ class AssignmentController < ApplicationController
     end
     end
   end
+<<<<<<< HEAD
 
+=======
+  
+    
+>>>>>>> 01338ef24515822ab28e24158bdbcad5d4dc024f
   def show_spec
     @project_members = UserAssignments.find(:all, :conditions => {:project_id => params[:id]}, :include => :user)
     #@project = Project.find(:all, :conditions => {:id => params[:id]})

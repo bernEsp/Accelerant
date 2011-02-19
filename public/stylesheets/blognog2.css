@@ -194,8 +194,8 @@ img {
 
 .discussionWidget {
 	margin:0 0 0 10px;
-        padding:0 10px 0 0;
-        width:520px;
+    padding:0 10px 0 0;
+    width:520px;
 }
 
 
@@ -277,7 +277,7 @@ img {
 .copyright {
 	float:right;
 	display:inline;
-	margin-right:30px;
+	margin:-13px 30px 0 0;
 	line-height:40px;
 	color:#4491c3;
         text-align:right;
@@ -365,8 +365,6 @@ img {
     line-height:25px;
     margin-left:15px;
 }
-
-
 .adminFlyout {
     background-color:#f2f2f2;
     border:#cbcbcb solid 1px;
@@ -489,3 +487,13 @@ filter: flipv fliph;
 }
 
 .x-label    {float:right;width:640px;display:block;clear:both;margin-top:-130px;text-align:center;}
+
+.heatmapLink{
+  float: right;
+}
+.heatmapContainer{
+  margin-right: 10px;
+}
+.right{
+  float: right;
+}

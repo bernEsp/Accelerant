@@ -34,8 +34,8 @@ class SessionsController < ApplicationController
       end
       if user.moderator?
         @last_ass = Project.find(:last, :conditions => {:moderator_id => self.current_user.id })
-        @ass = Project.find(@last_ass.id)
-        @theme = Themes.find(@ass.theme)
+        @ass = Project.find(@last_ass.id) unless @last_ass.nil?
+        @theme = Themes.find(@ass.theme) unless @ass.nil?
 
         unless @theme.nil?
           session[:theme] = @theme.id
@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
         redirect_to "/moderator"
       end
       if user.client?
-        @last_ass = Project.find(:last, :conditions => "client_id = #{self.current_user.id}")
+        @last_ass = Project.find(:last, :conditions => {:client_id => self.current_user.id})
         @ass = Project.find(@last_ass.id)
         @theme = Themes.find(@ass.theme)
 

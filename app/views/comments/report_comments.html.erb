@@ -1,0 +1,18 @@
+<div id="rightColumn">
+  <h1>
+    Comments of discussion: 
+  </h1>
+  <strong><%= link_to "Back",  :back, :class=> "right" %></strong>
+  <br/>
+  <h2>
+    <%= @discussion.title.capitalize%>
+  </h2>
+  <hr>
+  <br/>
+  <div class = "comments">
+    <% @comments.each do |comment|-%>
+      <%report = true%>
+      <%= show_comment(comment, report) %>
+    <%end%>
+  </div>
+</div>

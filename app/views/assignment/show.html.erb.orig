@@ -1,0 +1,53 @@
+
+<div id="rightColumn">
+  <% unless @project.lock %>
+  <%= render :partial => 'discussion_form' %>
+  <% end %>
+  <%= render :partial => 'discussion_links', :locals => {:discussions => @discussions, :id => params[:id]} %>
+
+  <% discussion = @discussions_desc %>
+  <% if discussion %>
+  <% cookies[:discussion_id] = {:value => "#{discussion.id}", :expires => Time.now + 3600} %>
+  <div id="discussion<%= discussion.id %>"  ><br/>
+  <% @disctest =  CommentAssignments.find(:all, :conditions => {:user_id => self.current_user.id, :discussion_id => discussion.id}) %>
+  <% unless @disctest.empty? && self.current_user.participant %>
+  <%= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
+
+  <% if !@project.lock %>
+    <%= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
+
+  <% end  %>
+
+    <%= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
+  <% else %>
+    <% #@disctester =  CommentAssignments.find(:last, :conditions => {:user_id => self.current_user.id}) %>
+    <% #unless @disctester.nil? %>
+    <% #discussion = Discussion.find(:last, :conditions => {:id => @disctester.discussion_id}) %>
+    <% #end %>
+    <%#= render :partial => 'discussion_display', :locals => {:discussions => discussion, :project_id => params[:id]} %>
+
+  <% #if !self.current_user.client && !@project.lock %>
+
+    <%#= render :partial => 'responder_form', :locals => {:discussions => discussion, :project_id => params[:id]} %>
+
+  <% #end  %>
+
+    <%#= render :partial => 'comments_replies', :locals => {:discussion => discussion, :project_id => params[:id]} %>
+  <% end %>
+
+</div>
+<% end  %>
+  
+
+</div> <!-- right column -->
+<% if self.current_user.admin || self.current_user.moderator %>
+<%= link_to "CSV", :controller => 'comment', :action => 'export_to_csv', :id => params[:id], :format => 'csv' %> 
+<%= link_to "RTF", :controller => 'comment', :action => 'export_to_rtf', :id => params[:id], :format => 'rtf' %>
+<<<<<<< HEAD
+<% content_for :menus do -%>
+ <li class = "last"><%= link_to "Reports", :controller => 'comments', :action => 'report_comments', :id => discussion.id %></li>
+<%end%>
+=======
+<%= link_to "Generate Report", :controller => 'comments', :action => 'report_comments', :id => discussion.id %>
+>>>>>>> 75002f5a2e794336d83730b0cd1895ba70787888
+<% end %>  

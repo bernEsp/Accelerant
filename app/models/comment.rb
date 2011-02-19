@@ -2,6 +2,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :discussion
   belongs_to :comment_assignment
+  has_one :heatmap
 
   # for paperclip (polymorphic)
   #acts_as_polymorphic_paperclip
@@ -14,15 +15,18 @@ class Comment < ActiveRecord::Base
   #has_many :attachings, :dependent => :destroy
   #has_many :attachments
 
-  has_attached_file :photo, 
+  has_attached_file :photo,
+  :storage => :s3,
   :whiny => false, 
   :whiny_thumbnails => false, 
-  :styles => { :medium => "300x300>", :thumb => "100x100>", :small => "50x50>", :tiny => "20x20>" }
-  
+  :styles => { :medium => "300x300>", :thumb => "100x100>", :small => "50x50>", :tiny => "20x20>" },
+  :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
+  :path => ":attachment/:id/:style/:filename"
+
   comma do
       project :title
       comment
-      user :name
+      user :nam
       created_at
     end
   

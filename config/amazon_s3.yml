@@ -1,14 +1,14 @@
 development:
-  bucket_name: appname_development
-  access_key_id: 
-  secret_access_key: 
+  access_key_id: 'AKIAJYKCWTZMXFO2YBNA'
+  secret_access_key: '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'
+  bucket: 'blognog'
 
 test:
-  bucket_name: appname_test
-  access_key_id: 
-  secret_access_key: 
+  access_key_id: 'AKIAJYKCWTZMXFO2YBNA'
+  secret_access_key: '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'
+  bucket: 'blognog'
 
 production:
-  bucket_name: appname
-  access_key_id: 
-  secret_access_key: 
+  access_key_id: 'AKIAJYKCWTZMXFO2YBNA'
+  secret_access_key: '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'
+  bucket: 'blognog'

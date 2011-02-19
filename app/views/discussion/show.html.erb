@@ -11,8 +11,8 @@
 
   <%= render :partial => 'assignment/discussion_display', :locals => {:discussions => @discussion} %>
 <% if !self.current_user.client && !@project.lock %>
-  <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id]} %>
-  <% end  %>
+    <%= render :partial => 'assignment/responder_form', :locals => {:discussions => @discussion, :project_id => params[:project_id]} %>
+<% end  %>
 
 
 <%= render :partial => 'assignment/comments_replies', :locals => {:discussion => @discussion, :project_id => params[:project_id]} %>

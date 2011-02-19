@@ -1,0 +1,2 @@
+aws-s3 --version '>= 0.6.2' 
+right_aws

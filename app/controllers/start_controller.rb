@@ -4,5 +4,5 @@ class StartController < ApplicationController
   if ENV['RAILS_ENV'] == 'production'
     ssl_required :index
   end
-  
+
 end

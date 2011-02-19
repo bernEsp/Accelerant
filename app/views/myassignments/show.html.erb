@@ -3,9 +3,10 @@
 <% for assignment in @your_assignments %>
 	<% if assignment %>
 	<% assignment_detail = Project.find(:last, :conditions => {:id => assignment.project_id, :active => true}, :limit => 1) %>
+  <% discussion = Discussion.find(:first, :conditions => {:project_id => assignment.project_id }, :order => 'id DESC')%>
 	<% if !assignment_detail %>
 	<% else %>
-	<%= link_to assignment_detail.title, {:controller => 'assignment', :action => 'show', :id => assignment.project_id }%><br/>
+	<%= link_to assignment_detail.title, {:controller => 'discussion', :action => 'show', :id => discussion.id,:project_id => assignment.project_id }%><br/>
 	<% end %>
 	<% end %>
 <% end %>

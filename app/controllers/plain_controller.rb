@@ -6,7 +6,7 @@ class PlainController < ApplicationController
       :sub_form, :show_comments, :drop_comment, :drop_reply, :follow_up, :follow_up_reply, :edit_comment,
       :comment_update, :update, :delete_probe
   end
-  
+
   def index
      @latest_postings = Comment.find(:all, :conditions => {:assignment_id => params[:id] }, :limit => 5, :order => "id DESC")
   end
@@ -82,4 +82,5 @@ class PlainController < ApplicationController
   end
 
   
+
 end

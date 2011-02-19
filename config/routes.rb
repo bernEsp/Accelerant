@@ -10,23 +10,30 @@ ActionController::Routing::Routes.draw do |map|
   map.plain '/plain', :controller => 'plain', :action => 'showlatest'
   map.resources :users, :has_many => :comments
   map.resources :comments, :belongs_to => :users, :has_many => :subcomments
+  map.update_report_flag '/comments/update_report_flag', :controller => "comments", :action => "update_report_flag", :method => :post
+  map.report_coments '/comments/report_comments/:id', :controller => "comments", :action => "report_comments"
   map.resources :replies, :belongs_to => :comments
   map.resources :subcomments, :belongs_to => :comments
   map.resources :client, :has_many => :projects
   map.resources :project, :has_many => :assignments
   map.resources :assignment, :has_many => :participants
   map.resources :discussion, :belongs_to => :projects
+  map.resources :discussion, :belongs_to => :projects
+  map.discussion_show 'discussion_show', :controller => "discussion", :action => "discussion_show"
+  map.show_image '/discussion/show_image', :controller => "discussion", :action => "show_image"
   map.comment '/comment', :controller => 'comment', :action => 'show'
   map.importer '/importer', :controller => 'importer', :action => 'index'
   map.resources :users
   map.resources :themes, :belongs_to => :project
   map.resources :sortableitems, :collection => {:sort => :post}
+
   map.resources :comments, :collection => {:reorder => :post}
   map.resources :groupableitems, :collection => {:group => :post}
   map.resources :usersortables, :collection => {:sort => :post}
   map.resources :sortables, :collection => {:sort => :post}
   map.online '/online', :controller => 'users', :action => 'showsessions'
   map.your_users '/your_users', :controller => 'users', :action => 'your_users'
+  map.resources  :heatmap, :only => "create"
 
   map.resource :session
   
