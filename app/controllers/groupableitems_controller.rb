@@ -39,9 +39,4 @@ class GroupableitemsController < ApplicationController
       usergroupable.save
     render :nothing => true
   end
-
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> 01338ef24515822ab28e24158bdbcad5d4dc024f
