@@ -1,4 +1,4 @@
-
+document.observe("dom:loaded", function() {
 Event.observe('signinForm', 'submit', onSubmit);
 
 function thisMovie(movieName) {
@@ -16,3 +16,4 @@ function onSubmit()
  thisMovie("HeatMap").onSubmit();
 
 }
+});
