@@ -1,6 +1,5 @@
 
-Event.observe('signinForm', 'submit', onSubmit);
-
+Event.observe('my_form', 'submit', onSubmit);
 function thisMovie(movieName) {
       if (navigator.appName.indexOf("Microsoft") != -1) {
           return window[movieName];
